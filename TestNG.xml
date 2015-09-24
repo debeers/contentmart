@@ -1,0 +1,76 @@
+
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Functional_Regression_0.2b" >
+
+
+    <!--Properties: -->
+
+        <parameter name = "URL"  value="https://dev.contentmart.in/"/>
+
+    <!--Properties: END -->
+
+
+
+
+
+
+
+
+        <test name="regress1.0">
+            <classes>
+
+
+
+
+                <class name = "Tests.UploadingFiles.UploadingFilesToOrderResult"/>
+
+
+    <!--
+<class name = "Tests.DownloadingFiles.DownloadingFilesFromMessages "/>
+<class name = "Tests.OrdersActions.StartWorking"/>
+
+<class name = "Tests.Balance.TransferMoney"/>
+
+            <class name = "Tests.OrdersActionsDeclineTextFromClientSide"/>
+                <class name = "Tests.OrdersActionsSetAsWinner"/>
+
+                <class name = "Tests.OrdersActionsSendResultToClient"/>
+                <class name = "Tests.OrdersActionsDeclineTextFromClientSide"/>
+                <class name = "Tests.OrdersActionsReassignOrder"/>
+
+<class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
+                <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
+
+                <class name = "Tests.CreateNewOrderActions.CloseNewOrderAfterPublish"/>
+                <class name = "Tests.CreateNewOrderActions.CreateNewOrderAndSaveAsDraft"/>
+
+                <class name = "Tests.OrdersActionsReassignOrder"/>
+
+
+
+
+
+
+
+
+
+
+     <class name = "Tests.OrdersActionsAcceptWriterText"/>
+     <class name = "Tests.RegistrationAndLogin.ClientAndWriterLoginLogOutTestLoginLogOutTest"/>
+     <class name = "Tests.OrdersActionsCreateNewOrderAndPublishAndPublish"/>
+
+     <class name = "Tests.OrdersActionsSendResultToClient"/>
+     <class name = "Tests.Messages.SendTextMessages"/>
+
+     <class name = "Tests.OrdersActionsSetAsWinner     <class name = "Tests.OrdersActionsStartWorking"/>
+
+     <class name = "Tests.UploadingFilesUploadingFilesToMessages"/>
+     <class name = "Tests.UploadingFilesUploadingFilesToOrder"/>
+     <class name = "Tests.UploadingFilesUploadingFilesToPortfolio"/>
+     -->
+ </classes>
+</test>
+
+
+</suite>

@@ -1,0 +1,56 @@
+package GeneralHelpers;
+
+import Entities.Order;
+import PageObjects.General.OrderInfoAndActions;
+import com.codeborne.selenide.Condition;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import static Tests.BaseTest.wait;
+import static com.codeborne.selenide.Selenide.$;
+
+
+/**
+ * Created by ilya on 28.08.2015.
+ */
+public class GeneralHelpers {
+
+
+    public static void findCreatedClientOrderAndClickOnIt(WebDriver driver, Order order) {
+
+        OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
+        String orderXPath = orderInfoAndActions.xOrder(order.getEntityOrderName());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(orderXPath))).click();
+
+    }
+
+
+    public static void jsDeleteClasses(String xpath, WebDriver driver) throws InterruptedException {
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        String script = "document.evaluate(\"" + xpath + "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)" +
+                ".singleNodeValue.setAttribute('class', '');";
+        js.executeScript(script);
+
+    }
+
+
+
+    public static void uploadFileToOrder(WebDriver driver, String filepath) throws InterruptedException {
+
+        String xPath = ".//*[@id='fileupload']";
+        jsDeleteClasses(xPath, driver);
+        $(By.xpath(xPath)).shouldBe(Condition.visible).sendKeys(filepath);
+
+    }
+
+
+    public static String getFileName(String path) {
+
+        String resultStr = path.substring(path.indexOf("Resources") + 10, path.lastIndexOf('.'));
+        System.out.println("You will upload file with name: " + resultStr);
+        return resultStr;
+    }
+}
