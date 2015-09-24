@@ -1,7 +1,6 @@
 package Tests.Balance;
 
 import Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage;
-import DataProviders.AcceptWriterTextDataProvider;
 import Entities.Balance;
 import Entities.LoginObject;
 import Entities.Order;
@@ -12,7 +11,7 @@ import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
 
-import static Actions.BalanceGeneralActions.getCurrentBallanceFromMenuButton;
+import static Actions.goToBalanceGeneralActions.getCurrentBallanceFromMenuButton;
 import static java.lang.Thread.sleep;
 import static org.testng.Assert.assertEquals;
 

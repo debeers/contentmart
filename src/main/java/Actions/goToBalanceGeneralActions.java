@@ -16,7 +16,7 @@ import static Actions.Client.ClientGoToMyOrders.clientGoToCreatedOrder;
 /**
  * Created by CMG_TEST on 07.09.2015.
  */
-public class BalanceGeneralActions {
+public class goToBalanceGeneralActions {
 
 
     public static void getCurrentBallanceFromMenuButton(WebDriver driver, Balance balance) {

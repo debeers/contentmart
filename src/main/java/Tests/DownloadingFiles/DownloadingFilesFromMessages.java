@@ -1,7 +1,6 @@
 package Tests.DownloadingFiles;
 
 import Actions.Writer.WriterGoToAllOrders;
-import DataProviders.AcceptWriterTextDataProvider;
 import Entities.LoginObject;
 import Entities.Order;
 import Entities.OrderObject;

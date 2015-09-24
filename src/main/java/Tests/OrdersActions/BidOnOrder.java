@@ -1,7 +1,6 @@
 package Tests.OrdersActions;
 
 import Actions.Writer.WriterGoToAllOrders;
-import DataProviders.WriterMakeAddBidForTheOrderDataProvider;
 import Entities.LoginObject;
 import Entities.Order;
 import Entities.OrderObject;

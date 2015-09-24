@@ -1,6 +1,6 @@
 package Tests.Balance;
 
-import Actions.BalanceGeneralActions;
+import Actions.goToBalanceGeneralActions;
 import DataProviders.BallanceCheckDataProvider;
 import Entities.Balance;
 import Entities.LoginObject;
@@ -34,7 +34,7 @@ public class BlockingMoney extends BaseTest{
         Order order = new Order();
         Balance balance = new Balance();
 
-        BalanceGeneralActions.andAwardOrderToWriterAndScanBallance(driver, clientLogin, orderObj, writerLogin, order, balance);
+        goToBalanceGeneralActions.andAwardOrderToWriterAndScanBallance(driver, clientLogin, orderObj, writerLogin, order, balance);
         BalanceGeneralPage balanceGeneral = new BalanceGeneralPage(driver);
 
         balanceGeneral.clickOnbalanceLeftMenu();
@@ -47,7 +47,7 @@ public class BlockingMoney extends BaseTest{
         assertEquals(blockingAmount, "- " + order.getEntityOrderValue());
 
         String bal = balanceGeneral.getBlockingMoneyBallance(order.getEntityOrderSystemID());
-        Boolean differenceCount = BalanceGeneralActions.blockingBallanceDifference(bal, order, balance);
+        Boolean differenceCount = goToBalanceGeneralActions.blockingBallanceDifference(bal, order, balance);
         Assert.assertTrue(differenceCount);
 
     }

@@ -1,7 +1,6 @@
 package Tests;
 
 import Actions.RegistrationAndLogin;
-import DataProviders.AcceptWriterTextDataProvider;
 import Entities.LoginObject;
 import Entities.OrderObject;
 import org.testng.annotations.Parameters;

@@ -150,6 +150,10 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(xpath = "//button[contains(text(), 'OK')]")
     public WebElement publishOrderOKSweet;
 
+    @FindBy(id="description")
+    public WebElement leaveAnOfferDetailsField;
+
+
 
     public OrderInfoAndActions(WebDriver driver) {
 
@@ -206,6 +210,18 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
         reassignTextFieldDecision.click();
     }
+
+
+    public void typeDetailsOfYourOfferField(String details){
+
+        $(leaveAnOfferDetailsField).shouldBe(visible).sendKeys(details);
+
+    }
+
+
+
+
+
 
     public ClientNewOrderPage andClickOnPublishOrderButtonTop() throws InterruptedException {
 

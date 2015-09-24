@@ -20,13 +20,17 @@
         <test name="regress1.0">
             <classes>
 
+                <class name = "Tests.Other.AmountOfOrdersCreate"/>
 
 
 
-                <class name = "Tests.UploadingFiles.UploadingFilesToOrderResult"/>
 
 
     <!--
+
+    <class name = "Tests.StopWords.StopWordsInOrderComposing"/>
+
+
 <class name = "Tests.DownloadingFiles.DownloadingFilesFromMessages "/>
 <class name = "Tests.OrdersActions.StartWorking"/>
 
@@ -42,7 +46,7 @@
 <class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
                 <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
 
-                <class name = "Tests.CreateNewOrderActions.CloseNewOrderAfterPublish"/>
+
                 <class name = "Tests.CreateNewOrderActions.CreateNewOrderAndSaveAsDraft"/>
 
                 <class name = "Tests.OrdersActionsReassignOrder"/>

@@ -54,6 +54,11 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
 
     @FindBy(id="d_ord_form")
     public  WebElement saveAsDraftButtonInNewOrder;
+
+    @FindBy(className="red banned_words_notice")
+    public  WebElement stopWordsAllert;
+
+
     /////////////////////  TOP
     //// drafted
 
@@ -149,6 +154,18 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
 
 
 
+
+    public Boolean waitForStopWordsAllertAppear(){
+
+        if($(stopWordsAllert).isDisplayed()){
+            return true;
+        }
+        System.out.println("Stop words allert did not appear!");
+        return false;
+    }
+
+
+
     public void uploadFileToOrder(String filepath){
 
         fileuploadInput.sendKeys(filepath);
@@ -159,7 +176,6 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
 
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOf(progressBar));
-        //String progress = wait.until(ExpectedConditions.visibilityOf(progressCounter)).getText();
         $(progressCounter).shouldHave(text("100%"));
     }
 

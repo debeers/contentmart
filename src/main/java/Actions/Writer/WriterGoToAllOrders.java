@@ -40,7 +40,18 @@ public class WriterGoToAllOrders {
 
 
 
+    public static OrderInfoAndActions createNewOrderAndBidOnIt(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin,
+                                                                           Order order) throws InterruptedException {
 
+        ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObject, order);
+        LeftMenuGeneralPage leftMenuGeneralPage = new LeftMenuGeneralPage(driver);
+        leftMenuGeneralPage.clickOnAllOrdersLeftMenu(driver, writerLogin);
+        OrderInfoAndActions orderInfoAndActions = bidOnCreatedOrderByBidButton(driver, order);
+        orderInfoAndActions.clickOnLeaveAnOfferButtonFromBidOnOrder(driver);
+
+        return orderInfoAndActions;
+
+    }
 
 
 

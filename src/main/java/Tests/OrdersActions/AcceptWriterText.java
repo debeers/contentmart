@@ -1,7 +1,6 @@
 package Tests.OrdersActions;
 
 import Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage;
-import DataProviders.AcceptWriterTextDataProvider;
 import Entities.LoginObject;
 import Entities.Order;
 import Entities.OrderObject;
