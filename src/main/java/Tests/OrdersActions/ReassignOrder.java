@@ -1,6 +1,7 @@
 package Tests.OrdersActions;
 
 import Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage;
+import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
 import Entities.Order;
 import Entities.OrderObject;
@@ -9,14 +10,12 @@ import Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static Actions.RegistrationAndLogin.logOut;
-
 /**
  * Created by CMG_TEST on 08.09.2015.
  */
 public class ReassignOrder extends BaseTest {
 
-    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderObjectsForDeclineText", dataProviderClass = ClientDeclineWritersTextDataProvider.class)
+    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderObjectsForDeclineText", dataProviderClass = ActionsWithOrdersDataProvider.class)
     public static void ReassignOrder(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object text, Object declineReasonObj) throws Exception {
 
         LoginObject clientLogin = (LoginObject) clientLoginObject;
@@ -30,7 +29,6 @@ public class ReassignOrder extends BaseTest {
 
         Assert.assertEquals(decisionPage.getorderStatus(), "Result sent");
         Assert.assertEquals(declineReason, decisionPage.getTextFromDeclineReasonOnDecisionPage());
-        logOut(driver);
 
     }
 }

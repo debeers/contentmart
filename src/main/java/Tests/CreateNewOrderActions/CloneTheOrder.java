@@ -10,7 +10,6 @@ import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
 
-import static Actions.RegistrationAndLogin.logOut;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalToIgnoringCase;
 import static org.hamcrest.Matchers.not;
@@ -37,6 +36,6 @@ public class CloneTheOrder extends BaseTest{
         assertEquals(orderInfoAndActions.getorderName(), order.getEntityOrderName());
         assertThat(orderInfoAndActions.getsystemOrderID(), not(equalToIgnoringCase(order.getEntityOrderSystemID())));
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Published", "ERROR: wrong status!");
-        logOut(driver);
+
     }
 }

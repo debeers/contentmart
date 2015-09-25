@@ -1,6 +1,7 @@
 package Tests.Balance;
 
 import Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage;
+import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.Balance;
 import Entities.LoginObject;
 import Entities.Order;
@@ -22,7 +23,7 @@ public class TransferMoney extends BaseTest{
 
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "AcceptWriterText", dataProviderClass = AcceptWriterTextDataProvider.class)
+    @Test(groups={"regress 1.0"}, dataProvider= "AcceptWriterText", dataProviderClass = ActionsWithOrdersDataProvider.class)
     public static void TransferMoney(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object text) throws InterruptedException {
 
         LoginObject clientLogin = (LoginObject) clientLoginObject;

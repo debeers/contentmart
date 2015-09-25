@@ -20,36 +20,34 @@
         <test name="regress1.0">
             <classes>
 
-                <class name = "Tests.Other.AmountOfOrdersCreate"/>
 
-
+                <class name = "Tests.StopWords.StopWordsInLeaveAnOffer"/>
+                <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
 
 
 
     <!--
 
-    <class name = "Tests.StopWords.StopWordsInOrderComposing"/>
-
-
-<class name = "Tests.DownloadingFiles.DownloadingFilesFromMessages "/>
-<class name = "Tests.OrdersActions.StartWorking"/>
-
-<class name = "Tests.Balance.TransferMoney"/>
-
-            <class name = "Tests.OrdersActionsDeclineTextFromClientSide"/>
-                <class name = "Tests.OrdersActionsSetAsWinner"/>
-
-                <class name = "Tests.OrdersActionsSendResultToClient"/>
-                <class name = "Tests.OrdersActionsDeclineTextFromClientSide"/>
-                <class name = "Tests.OrdersActionsReassignOrder"/>
-
-<class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
-                <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
-
-
+                <class name = "Tests.CreateNewOrderActions.CloseNewOrderAfterPublish"/>
                 <class name = "Tests.CreateNewOrderActions.CreateNewOrderAndSaveAsDraft"/>
+                <class name = "Tests.CreateNewOrderActions.CloneTheOrder"/>
+                <class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
+                <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
+                <class name = "Tests.Messages.SendTextMessages"/>
+                <class name = "Tests.UploadingFiles.UploadingFilesToMessages"/>
+                <class name = "Tests.UploadingFiles.UploadingFilesToOrder"/>
+                <class name = "Tests.UploadingFiles.UploadingFilesToOrderResult"/>
 
-                <class name = "Tests.OrdersActionsReassignOrder"/>
+                <class name = "Tests.OrdersActions.BidOnOrder"/>
+                <class name = "Tests.OrdersActions.SetAsWinner"/>
+                <class name = "Tests.OrdersActions.StartWorking"/>
+                <class name = "Tests.OrdersActions.SendResultToClient"/>
+                <class name = "Tests.OrdersActions.AcceptWriterText"/>
+                <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
+                <class name = "Tests.OrdersActions.ReassignOrder"/>
+
+                <class name = "Tests.Balance.BlockingMoney"/>
+                <class name = "Tests.Balance.TransferMoney"/>
 
 
 
@@ -60,17 +58,22 @@
 
 
 
+
+
+
+
+
+                <class name = "Tests.DownloadingFiles.DownloadingFilesFromMessages "/>
      <class name = "Tests.OrdersActionsAcceptWriterText"/>
      <class name = "Tests.RegistrationAndLogin.ClientAndWriterLoginLogOutTestLoginLogOutTest"/>
      <class name = "Tests.OrdersActionsCreateNewOrderAndPublishAndPublish"/>
 
      <class name = "Tests.OrdersActionsSendResultToClient"/>
-     <class name = "Tests.Messages.SendTextMessages"/>
+
 
      <class name = "Tests.OrdersActionsSetAsWinner     <class name = "Tests.OrdersActionsStartWorking"/>
 
-     <class name = "Tests.UploadingFilesUploadingFilesToMessages"/>
-     <class name = "Tests.UploadingFilesUploadingFilesToOrder"/>
+
      <class name = "Tests.UploadingFilesUploadingFilesToPortfolio"/>
      -->
  </classes>

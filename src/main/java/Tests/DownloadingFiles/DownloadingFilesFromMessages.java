@@ -1,6 +1,7 @@
 package Tests.DownloadingFiles;
 
 import Actions.Writer.WriterGoToAllOrders;
+import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
 import Entities.Order;
 import Entities.OrderObject;
@@ -24,7 +25,7 @@ public class DownloadingFilesFromMessages extends BaseTest{
 
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "ActionsWithOrderData", dataProviderClass = AcceptWriterTextDataProvider.class)
+    @Test(groups={"regress 1.0"}, dataProvider= "ActionsWithOrderData", dataProviderClass = ActionsWithOrdersDataProvider.class)
     public static void DownloadFilesToMessage(Object clientLoginObject, Object orderObject, Object writerLoginObj) throws Exception {
 
 

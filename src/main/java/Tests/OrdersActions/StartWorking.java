@@ -1,6 +1,7 @@
 package Tests.OrdersActions;
 
 import Actions.Writer.WriterGoToStartToWorking;
+import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
 import Entities.Order;
 import Entities.OrderObject;
@@ -8,7 +9,6 @@ import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
 
-import static Actions.RegistrationAndLogin.logOut;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -17,7 +17,7 @@ import static org.testng.Assert.assertEquals;
 public class StartWorking extends BaseTest {
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderObjectsForStartWorking", dataProviderClass = WriterStartToWorkingDataProvider.class)
+    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderObjectsForStartWorking", dataProviderClass = ActionsWithOrdersDataProvider.class)
     public static void WriterStartToWorking(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object message) throws InterruptedException {
 
         LoginObject clientLogin = (LoginObject) clientLoginObject;
@@ -30,7 +30,5 @@ public class StartWorking extends BaseTest {
 
         assertEquals(orderInfoWriter.getTextFromWarningTextAfterStartWorking(), msg, "ERROR: Something go wrong, it`s not My Orders page");
         assertEquals(orderInfoWriter.getTextFromOrderStatus(), "In Progress", "ERROR: wrong status!");
-        logOut(driver);
-
     }
 }

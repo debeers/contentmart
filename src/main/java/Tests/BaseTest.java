@@ -24,11 +24,10 @@ public class BaseTest {
 
 
     @Parameters({"URL"})
-    @BeforeSuite(alwaysRun = true)
+    @BeforeClass(alwaysRun = true)
     public void setUp(String URL) {
 
         baseUrl = URL;
-
 
         String path = System.getProperty("user.dir") + "\\src\\main\\java\\Downloaded_Files";
         File downloadDir = new File(path);
@@ -49,16 +48,21 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 10);
         driver.manage().window().maximize();
+        WebDriverRunner.setWebDriver(driver); // Selenide WebDriverRunner for my custom driver
 
-        WebDriverRunner.setWebDriver(driver);
 
 
     }
 
 
-    @AfterSuite(alwaysRun = true)
+    @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
-        //driver.manage().deleteAllCookies(); //try incognito
+
+        if(driver.getTitle() != "ContentMart") {
+            driver.get("https://contentmart.in/exit");
+        }
+
+        driver.manage().deleteAllCookies(); //try incognito
         Thread.sleep(5000);
         driver.quit();
 

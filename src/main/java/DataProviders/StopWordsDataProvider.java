@@ -47,7 +47,7 @@ public class StopWordsDataProvider {
                         new OrderObject("Automation test order ID:", "New automation test order description", "15", "1"),
                         new LoginObject("debeers@bigmir.net", "H9CC1vxG"),
                         new String("Hello master! I`m your Jinni! Now you`re have 3 wishes! But I`m very bussy for now, please call me for a 1000 year or write me on my email."),
-                        new String("You may not communicate with users directly or provide your email, Skype or phone number. Learn")
+                        new String("You may not communicate with users directly or provide your email, Skype or phone number. Learn why not to work outside ContentMart.")
                 }
 
         };

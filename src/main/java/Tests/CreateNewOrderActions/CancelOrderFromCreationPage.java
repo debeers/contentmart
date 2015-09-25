@@ -1,9 +1,7 @@
 package Tests.CreateNewOrderActions;
 
 import Actions.Client.ClientGoToCreateNewOrder;
-import Actions.RegistrationAndLogin;
 import DataProviders.CreateNewOrderActionsDataProvider;
-import Entities.Balance;
 import Entities.LoginObject;
 import Entities.Order;
 import Entities.OrderObject;
@@ -11,8 +9,6 @@ import PageObjects.Client.ClientNewOrderPage;
 import Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static Actions.RegistrationAndLogin.logOut;
 
 /**
  * Created by DeBeers on 17.09.2015.
@@ -31,7 +27,7 @@ public class CancelOrderFromCreationPage extends BaseTest{
         ClientNewOrderPage clientNewOrderPage = ClientGoToCreateNewOrder.andCreateTheNewOrder(driver, clientLogin, orderObj, order);
         clientNewOrderPage.clickOnCancelOrderButton();
         Assert.assertEquals(driver.getTitle(), "My Orders | ContentMart");
-        logOut(driver);
+
 
     }
 

@@ -157,7 +157,7 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
 
     public Boolean waitForStopWordsAllertAppear(){
 
-        if($(stopWordsAllert).isDisplayed()){
+        if($(stopWordsAllert).is(visible) ){
             return true;
         }
         System.out.println("Stop words allert did not appear!");

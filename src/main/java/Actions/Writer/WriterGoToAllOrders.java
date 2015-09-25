@@ -47,7 +47,7 @@ public class WriterGoToAllOrders {
         LeftMenuGeneralPage leftMenuGeneralPage = new LeftMenuGeneralPage(driver);
         leftMenuGeneralPage.clickOnAllOrdersLeftMenu(driver, writerLogin);
         OrderInfoAndActions orderInfoAndActions = bidOnCreatedOrderByBidButton(driver, order);
-        orderInfoAndActions.clickOnLeaveAnOfferButtonFromBidOnOrder(driver);
+
 
         return orderInfoAndActions;
 

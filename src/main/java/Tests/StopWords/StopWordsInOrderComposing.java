@@ -10,8 +10,6 @@ import Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static Actions.RegistrationAndLogin.logOut;
-
 /**
  * Created by CMG_TEST on 23.09.2015.
  */
@@ -33,7 +31,6 @@ public class StopWordsInOrderComposing extends BaseTest{
         Assert.assertTrue(clientNewOrderPage.waitForStopWordsAllertAppear());
         clientNewOrderPage.andClickOnPublishNewOrderButton(driver);
 
-        logOut(driver);
     }
 
 

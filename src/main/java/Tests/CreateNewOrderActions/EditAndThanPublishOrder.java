@@ -10,8 +10,6 @@ import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
 
-import static Actions.RegistrationAndLogin.logOut;
-
 /**
  * Created by DeBeers on 17.09.2015.
  */
@@ -32,7 +30,7 @@ public class EditAndThanPublishOrder extends BaseTest{
 
 //        Assert.assertEquals(orderInfoAndActions.getorderName(), order.getEntityOrderName());
 //        Assert.assertEquals(orderInfoAndActions.getorderStatus(), order.getEntityOrderStatus());
-        logOut(driver);
+
     }
 
 

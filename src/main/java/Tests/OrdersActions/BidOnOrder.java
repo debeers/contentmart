@@ -1,6 +1,7 @@
 package Tests.OrdersActions;
 
 import Actions.Writer.WriterGoToAllOrders;
+import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
 import Entities.Order;
 import Entities.OrderObject;
@@ -8,7 +9,6 @@ import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
 
-import static Actions.RegistrationAndLogin.logOut;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -20,7 +20,7 @@ public class BidOnOrder extends BaseTest {
 
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderForBidOnOrder", dataProviderClass = WriterMakeAddBidForTheOrderDataProvider.class)
+    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderForBidOnOrder", dataProviderClass = ActionsWithOrdersDataProvider.class)
     public void WriterBidOnOrder(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object msg) throws InterruptedException {
 
 
@@ -34,7 +34,7 @@ public class BidOnOrder extends BaseTest {
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Proposal sent", "ERROR: wrong status!");
         assertEquals(orderInfoAndActions.getTextFromOrderName(), order.getEntityOrderName(), "ERROR: There are different order name");
         assertEquals(orderInfoAndActions.getTextFromSuccessMessageTextAfterBid(), msg, "Error: no success message");
-        logOut(driver);
+
 
     }
 

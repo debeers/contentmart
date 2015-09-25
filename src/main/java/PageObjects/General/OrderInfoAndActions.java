@@ -153,6 +153,9 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(id="description")
     public WebElement leaveAnOfferDetailsField;
 
+    @FindBy(xpath="//form/div/div[1]")
+    public WebElement stopwordsAllert;
+
 
 
     public OrderInfoAndActions(WebDriver driver) {
@@ -214,13 +217,15 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     public void typeDetailsOfYourOfferField(String details){
 
-        $(leaveAnOfferDetailsField).shouldBe(visible).sendKeys(details);
+        wait.until(ExpectedConditions.visibilityOf(leaveAnOfferDetailsField)).sendKeys(details);
 
     }
 
+    public String stopwordsAllertMsg() {
 
-
-
+        String res = wait.until(ExpectedConditions.visibilityOf(stopwordsAllert)).getText();
+        return res;
+    }
 
 
     public ClientNewOrderPage andClickOnPublishOrderButtonTop() throws InterruptedException {
@@ -260,7 +265,6 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     }
 
 
-
     public void sendTextToTheClientTextArea(WebDriver driver, String textClassVar) {
         WebDriverWait wait = new WebDriverWait(driver, 15);
 
@@ -293,7 +297,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         waitForPageLoad(driver);
     }
 
-    public void clickOnstartWorkingButtonAndAcceptSweet() throws InterruptedException {
+    public void clickOnStartWorkingButtonAndAcceptSweet() throws InterruptedException {
 
         $(startWorkingButton).shouldBe(visible).click();
         sleep(2000);
@@ -336,16 +340,6 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         ClientNewOrderPage clientNewOrderPage = new ClientNewOrderPage(driver);
 
         return clientNewOrderPage;
-    }
-
-    public void findCreatedClientOrderAndClickOnIt(Order order){
-
-
-        OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
-        String orderXPath = orderInfoAndActions.xOrder(order.getEntityOrderName());
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(orderXPath))).click();
-
-
     }
 
     public void setReassignDate() throws InterruptedException {
@@ -451,12 +445,6 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         return str;
     }
 
-    public void clickOnsaveAsDraftSweetAllert() {
-
-        $(saveAsDraftSweetAllert).shouldBe(visible).click();
-        GeneralWaits.waitForPageLoad(driver);
-
-    }
 
     public void clickOndeclineButtonOnDecisionPage() {
 

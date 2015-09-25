@@ -1,9 +1,7 @@
 package Tests.CreateNewOrderActions;
 
 import Actions.Client.ClientGoToCreateNewOrder;
-import Actions.RegistrationAndLogin;
 import DataProviders.CreateNewOrderActionsDataProvider;
-import Entities.Balance;
 import Entities.LoginObject;
 import Entities.Order;
 import Entities.OrderObject;
@@ -11,7 +9,6 @@ import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
 
-import static Actions.RegistrationAndLogin.*;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -34,6 +31,6 @@ public class CloseNewOrderAfterPublish extends BaseTest{
 
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Drafted");
         assertEquals(orderInfoAndActions.getorderName(), order.getEntityOrderName());
-        logOut(driver);
+
     }
 }

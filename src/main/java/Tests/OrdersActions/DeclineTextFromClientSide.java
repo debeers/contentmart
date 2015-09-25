@@ -1,6 +1,7 @@
 package Tests.OrdersActions;
 
 import Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage;
+import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
 import Entities.Order;
 import Entities.OrderObject;
@@ -8,7 +9,6 @@ import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
 
-import static Actions.RegistrationAndLogin.logOut;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -18,7 +18,7 @@ public class DeclineTextFromClientSide extends BaseTest {
 
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderObjectsForDeclineText", dataProviderClass = ClientDeclineWritersTextDataProvider.class)
+    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderObjectsForDeclineText", dataProviderClass = ActionsWithOrdersDataProvider.class)
     public static void DeclineTextFromClientSide(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object text, Object declineReasonObj) throws InterruptedException {
 
         LoginObject clientLogin = (LoginObject) clientLoginObject;
@@ -40,7 +40,7 @@ public class DeclineTextFromClientSide extends BaseTest {
 
         assertEquals(decisionPage.getTextFromDeclineReasonOnDecisionPage(), declineReason, "Wrong decline reason!");
         assertEquals(decisionPage.getTextFromOrderStatus(), "Declined", "ERROR: wrong status!");
-        logOut(driver);
+
     }
 
 }

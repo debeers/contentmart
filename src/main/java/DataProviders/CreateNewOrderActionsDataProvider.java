@@ -10,10 +10,6 @@ import org.testng.annotations.DataProvider;
 public class CreateNewOrderActionsDataProvider {
 
 
-
-
-
-
     public static Object[][] dp2() {
         return new Object[][] {
                 new Object[] {

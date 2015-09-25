@@ -1,6 +1,7 @@
 package Tests;
 
 import Actions.RegistrationAndLogin;
+import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
 import Entities.OrderObject;
 import org.testng.annotations.Parameters;
@@ -16,7 +17,7 @@ public class DEBUG extends BaseTest{
 
 
     @Parameters({"clientLogin", "clientPassword", "writerLogin", "writerPassword"})
-    @Test(groups={"regress 1.0"}, dataProvider= "debug", dataProviderClass = AcceptWriterTextDataProvider.class)
+    @Test(groups={"regress 1.0"}, dataProvider= "debug", dataProviderClass = ActionsWithOrdersDataProvider.class)
     public static void NewOrder(Object clientLoginObject, Object orderObject) throws InterruptedException, IOException {
 
         LoginObject clientLogin = (LoginObject) clientLoginObject;

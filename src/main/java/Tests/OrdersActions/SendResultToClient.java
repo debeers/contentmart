@@ -1,6 +1,7 @@
 package Tests.OrdersActions;
 
 import Actions.Writer.WriterGoToOrderWorkflow;
+import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
 import Entities.Order;
 import Entities.OrderObject;
@@ -9,7 +10,6 @@ import Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static Actions.RegistrationAndLogin.logOut;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -18,7 +18,7 @@ import static org.testng.Assert.assertEquals;
 public class SendResultToClient extends BaseTest {
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderForSendResultTest", dataProviderClass = AcceptWriterTextDataProvider.class)
+    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderForSendResultTest", dataProviderClass = ActionsWithOrdersDataProvider.class)
     public static void SendResult(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object text, Object msg) throws InterruptedException {
 
 
@@ -33,7 +33,6 @@ public class SendResultToClient extends BaseTest {
 
         Assert.assertEquals(orderInfoWriter.getTextFromSuccessMessageAfterSendResult(), successMessage);
         assertEquals(orderInfoWriter.getTextFromOrderStatus(), "Result sent", "ERROR: wrong status!");
-        logOut(driver);
     }
 
 

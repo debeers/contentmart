@@ -23,12 +23,11 @@ public class UploadingFilesToOrder extends BaseTest {
         OrderObject orderObj = (OrderObject) orderObject;
 
         Order order = new Order();
-        String filepath = System.getProperty("user.dir")+"\\src\\main\\java\\Resources\\DMX.jpg";
+        String filepath = System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\DMX.jpg";
         ClientGoToCreateNewOrder.andUploadFilesToIt(driver, clientLogin, orderObj, order, filepath);
 
         Boolean uploadedFile = checkForFileUploadInNewOrder(filepath);
         Assert.assertTrue(uploadedFile);
-
 
     }
 

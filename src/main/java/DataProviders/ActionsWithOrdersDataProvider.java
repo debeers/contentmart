@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
 /**
  * Created by CMG_TEST on 22.09.2015.
  */
-public class ClientSetAsWinnerDataProvider {
+public class ActionsWithOrdersDataProvider {
 
 
     @DataProvider(name = "SetAsWinnerDataProvider")

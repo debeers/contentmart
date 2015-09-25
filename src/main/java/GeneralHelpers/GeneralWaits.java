@@ -1,6 +1,7 @@
 package GeneralHelpers;
 
 import Tests.BaseTest;
+import com.google.common.base.Function;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,12 +22,15 @@ public class GeneralWaits extends BaseTest {
     public static void waitForPageLoad(WebDriver driver) {
 
         Wait<WebDriver> wait = new WebDriverWait(driver, 30);
-        wait.until(driver1 -> {
-            System.out.println("Current Window State       : "
-                    + String.valueOf(((JavascriptExecutor) driver1).executeScript("return document.readyState")));
-            return String
-                    .valueOf(((JavascriptExecutor) driver1).executeScript("return document.readyState"))
-                    .equals("complete");
+        wait.until(new Function<WebDriver, Boolean>() {
+            @Override
+            public Boolean apply(WebDriver driver1) {
+                System.out.println("Current Window State       : "
+                        + String.valueOf(((JavascriptExecutor) driver1).executeScript("return document.readyState")));
+                return String
+                        .valueOf(((JavascriptExecutor) driver1).executeScript("return document.readyState"))
+                        .equals("complete");
+            }
         });
     }
 

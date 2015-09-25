@@ -24,7 +24,7 @@ public class WriterGoToStartToWorking {
         logOut(driver);
         MyOrdersPage myOrders = loginAs(driver, writerLogin);
         OrderInfoAndActions orderInfoWriter = myOrders.writerClickOnCreatedOrderByClientToStartToWorking(order);
-        orderInfoWriter.clickOnstartWorkingButtonAndAcceptSweet();
+        orderInfoWriter.clickOnStartWorkingButtonAndAcceptSweet();
 
         return orderInfoWriter;
 
