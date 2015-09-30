@@ -100,7 +100,7 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
         waitForPageLoad(driver);
 
         List<WebElement> tableDeals = driver.findElements(By.xpath("//table/tbody/tr"));
-        waitForTableLoad(driver, tableDeals);
+        waitForTableLoad(tableDeals);
 
     }
 

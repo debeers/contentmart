@@ -30,7 +30,6 @@ public class WriterGoToAllOrders {
     public static OrderInfoAndActions bidOnCreatedOrderByBidButton(WebDriver driver, Order order){
 
             OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
-
             orderInfoAndActions.clickOnAllOrdersLeftMenuMenu();
             orderInfoAndActions.clickOnBidButton(driver, order);
 

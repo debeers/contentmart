@@ -12,25 +12,6 @@ import java.util.List;
 public class CreateNewOrderHelper {
 
 
-
-
-
-        public static void check(WebDriver driver, String pub, String id) {
-
-
-        System.out.println("Total:  " + pub);
-        List<WebElement> ordersID = driver.findElements(By.xpath(".//td[1]"));
-        for (WebElement sp : ordersID) {
-            if (sp.getText().equalsIgnoreCase(id)  ) {
-                System.out.println("All ok, order created successfuly! STATUS: PUBLISHED ");
-            }
-        }
-
-
-    }
-
-
-
     public static String randomID(){
 
        int id = (int) (Math.random()*1000);

@@ -13,6 +13,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static GeneralHelpers.CustomWaits.$WaitAndGetTextFrom;
+import static GeneralHelpers.CustomWaits.$WaitFor;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 import static Tests.BaseTest.wait;
 import static com.codeborne.selenide.Condition.visible;
@@ -23,10 +25,11 @@ import static java.lang.Thread.sleep;
  * Created by test on 10.09.2015.
  */
 public class OrderInfoAndActions extends LeftMenuGeneralPage {
-
-
     @FindBy(xpath = "//button[contains(text(), 'Close order')]")
     public WebElement saveAsDraftSweetAllert;
+
+    @FindBy(css = "#new_results > div:nth-child(4) > span:nth-child(1)")
+    public WebElement yourResultHasBeenDeliveredMsg;
 
     @FindBy(xpath = "//a[contains(text(), 'Edit order')]")
     public WebElement editOrderButtonTop;
@@ -156,6 +159,13 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(xpath="//form/div/div[1]")
     public WebElement stopwordsAllert;
 
+    @FindBy(xpath="//*[@id=new_results]/div[4]/div[2]")
+    public WebElement stopWordsAllertInSendResult;
+
+    @FindBy(partialLinkText="why not to work outside ContentMart")
+    public WebElement stopWordsAllert;
+
+
 
 
     public OrderInfoAndActions(WebDriver driver) {
@@ -163,40 +173,55 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         super(driver);
     }
 
+    public String waitForStopWordsAllert(){
+       //String res = $(stopWordsAllert).shouldBe(visible).getText();
+        String res = $WaitAndGetTextFrom(stopWordsAllert);
+
+        return res;
+    }
+
     public String getTextFromLable() {
 
-        String res = $(contentRejectedLablenDecision).shouldBe(visible).getText();
+       // String res = $(contentRejectedLablenDecision).shouldBe(visible).getText();
+        String res = $WaitAndGetTextFrom(contentRejectedLablenDecision);
         return res;
     }
 
     public String getTextFromSuccessMessageAfterSendResult() {
 
-        String res = $(successMessageAfterSendResult).shouldBe(visible).getText();
+     //   String res = $(successMessageAfterSendResult).shouldBe(visible).getText();
+        String res = $WaitAndGetTextFrom(successMessageAfterSendResult);
         return res;
     }
 
     public String getTextFromDeclineReasonOnDecisionPage() {
 
-        String res = $(declineReasonFromClientDecision).shouldBe(visible).getText();
+     //   String res = $(declineReasonFromClientDecision).shouldBe(visible).getText();
+        String res = $WaitAndGetTextFrom(declineReasonFromClientDecision);
         return res;
     }
 
     public String getTextFromWarningTextAfterStartWorking() {
 
-        String res = $(warningText).shouldBe(visible).getText();
+     //   String res = $(warningText).shouldBe(visible).getText();
+        String res = $WaitAndGetTextFrom(warningText);
         return res;
     }
 
     public void clickOnReassingButtonDecision() {
 
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.visibilityOf(reassignButtonDecision)).click();
+        //WebDriverWait wait = new WebDriverWait(driver, 15);
+        //wait.until(ExpectedConditions.visibilityOf(reassignButtonDecision)).click();
+        $WaitFor(reassignButtonDecision).click();
+
+
     }
 
     public void clickOnReassignSendButton() {
 
         WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.visibilityOf(reassignSendButtonDecision)).click();
+      //  wait.until(ExpectedConditions.visibilityOf(reassignSendButtonDecision)).click();
+        $WaitFor(reassignSendButtonDecision).click();
     }
 
     public void clickOnreassignDateFieldOnDecisionPage() {
@@ -217,8 +242,8 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     public void typeDetailsOfYourOfferField(String details){
 
-        wait.until(ExpectedConditions.visibilityOf(leaveAnOfferDetailsField)).sendKeys(details);
-
+      //  wait.until(ExpectedConditions.visibilityOf(leaveAnOfferDetailsField)).sendKeys(details);
+        $WaitFor(leaveAnOfferDetailsField).sendKeys(details);
     }
 
     public String stopwordsAllertMsg() {
@@ -278,6 +303,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
         wait.until(ExpectedConditions.elementToBeClickable(sendCompletedOrderButton)).click();
         waitForPageLoad(driver);
+        wait.until(ExpectedConditions.visibilityOf(yourResultHasBeenDeliveredMsg));
 
     }
 

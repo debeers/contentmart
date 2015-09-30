@@ -31,7 +31,7 @@ public class SendTextMessages extends BaseTest {
 
 
         Order order = new Order();
-        String textMessage = Messages.randomMessageGeneratorLength(44);
+        String textMessage = Messages.randomMessageGeneratorLength(20);
         WriterGoToMessages.sendMessageToClient(driver, clientLogin, orderObj, writerLogin, order, textMessage);
 
         String msg = findMessage(driver, textMessage);

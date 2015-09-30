@@ -32,16 +32,19 @@ public class WriterGoToMessages {
 
 
 
-    public static OrderInfoAndActions sendMessageWithFileToClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin,
-                                                          Order order,  String path) throws InterruptedException {
-
+    public static String CreateOrderAddBidSendMessageWithFileToClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin,
+                                                                      Order order, String path) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 15);
         OrderInfoAndActions orderInfoWriter = WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, orderObject, writerLogin, order);
         orderInfoWriter.clickOnTheDropTheCustomerMessageButton(driver);
-
         MyMessagesPage message = new MyMessagesPage(driver);
-        message.inputFileToTheMessage(path);
 
-        return orderInfoWriter;
+        String filename = GeneralHelpers.getFileName(path);
+        message.inputFileToTheMessage(path);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("fileDownloadIcon")));
+        String href = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'" + filename + "')]"))).getAttribute("href");
+        System.out.println("File link is:  " + href);
+        return href;
 
     }
 

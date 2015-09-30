@@ -29,7 +29,7 @@ public class UploadingFilesToMessages extends BaseTest {
         String path = System.getProperty("user.dir")+"\\src\\main\\java\\Resources\\DMX.jpg";
 
         Order order = new Order();
-        WriterGoToMessages.sendMessageWithFileToClient(driver, clientLogin, orderObj, writerLogin, order, path);
+        WriterGoToMessages.CreateOrderAddBidSendMessageWithFileToClient(driver, clientLogin, orderObj, writerLogin, order, path);
         Boolean fileAppear = waitForFileAppearInDialogBox(driver, path);
         Assert.assertTrue(fileAppear);
 

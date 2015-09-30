@@ -115,7 +115,7 @@ public class ActionsWithOrdersDataProvider {
                         new LoginObject("debeers1989@gmail.com", "roottoor"),
                         new OrderObject("Automation test order ID:", "New automation test order description", "15", "1"),
                         new LoginObject("debeers@bigmir.net", "H9CC1vxG"),
-                        new String("hello world, java is super cool but really hard languege! TestNG is my favourite framework! Peace!)))"),
+                        new String("hello world, java is super cool but really hard languege! TestNG is my favourite framework! Peace!))) Skype, icq, telephone number"),
                         new String("Your result has been delivered to the order owner successfully! You will be notified as and when your result is accepted/rejected.")
 
                 }

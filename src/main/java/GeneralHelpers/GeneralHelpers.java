@@ -8,6 +8,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import static Tests.BaseTest.wait;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -37,8 +40,7 @@ public class GeneralHelpers {
     }
 
 
-
-    public static void uploadFileToOrder(WebDriver driver, String filepath) throws InterruptedException {
+    public static void uploadFileToHidenInput(WebDriver driver, String filepath) throws InterruptedException {
 
         String xPath = ".//*[@id='fileupload']";
         jsDeleteClasses(xPath, driver);
@@ -53,4 +55,32 @@ public class GeneralHelpers {
         System.out.println("You will upload file with name: " + resultStr);
         return resultStr;
     }
+
+
+
+
+
+
+
+    public static boolean isFileExists(String URLName){
+        try {
+            HttpURLConnection.setFollowRedirects(false);
+            // note : you may also need
+            //        HttpURLConnection.setInstanceFollowRedirects(false)
+            HttpURLConnection con =
+                    (HttpURLConnection) new URL(URLName).openConnection();
+            con.setRequestMethod("HEAD");
+            return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
+
+
+
 }

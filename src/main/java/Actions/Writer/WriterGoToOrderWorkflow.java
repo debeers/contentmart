@@ -29,7 +29,7 @@ public class WriterGoToOrderWorkflow {
 
         OrderInfoAndActions orderInfoAndActions = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObject, writerLogin, order);
         orderInfoAndActions.sendTextToTheClientTextArea(driver, text);
-        GeneralHelpers.uploadFileToOrder(driver, filepath);
+        GeneralHelpers.uploadFileToHidenInput(driver, filepath);
         ClientNewOrderPage clientNewOrderPage = new ClientNewOrderPage(driver);
         clientNewOrderPage.waitForProgressBarWhenUploadingFilesToNewOrder();
 

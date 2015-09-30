@@ -1,7 +1,7 @@
 
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Functional_Regression_0.2b" >
+<suite name="Contentmart.in smoke test suite" >
 
 
     <!--Properties: -->
@@ -21,35 +21,58 @@
             <classes>
 
 
-                <class name = "Tests.StopWords.StopWordsInLeaveAnOffer"/>
-                <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
+
+                <class name = "Tests.OrdersActions.ReassignOrder"/>
 
 
 
-    <!--
+
+
+
+                <!--
+
+<class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
+
+
+
+                <class name = "Tests.OrdersActions.SendResultToClient"/>
+                <class name = "Tests.OrdersActions.BidOnOrder"/>
+                <class name = "Tests.OrdersActions.SetAsWinner"/>
+                <class name = "Tests.OrdersActions.StartWorking"/>
+                <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
+                <class name = "Tests.OrdersActions.ReassignOrder"/>
+
 
                 <class name = "Tests.CreateNewOrderActions.CloseNewOrderAfterPublish"/>
                 <class name = "Tests.CreateNewOrderActions.CreateNewOrderAndSaveAsDraft"/>
                 <class name = "Tests.CreateNewOrderActions.CloneTheOrder"/>
                 <class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
                 <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
-                <class name = "Tests.Messages.SendTextMessages"/>
-                <class name = "Tests.UploadingFiles.UploadingFilesToMessages"/>
-                <class name = "Tests.UploadingFiles.UploadingFilesToOrder"/>
-                <class name = "Tests.UploadingFiles.UploadingFilesToOrderResult"/>
 
-                <class name = "Tests.OrdersActions.BidOnOrder"/>
-                <class name = "Tests.OrdersActions.SetAsWinner"/>
-                <class name = "Tests.OrdersActions.StartWorking"/>
-                <class name = "Tests.OrdersActions.SendResultToClient"/>
-                <class name = "Tests.OrdersActions.AcceptWriterText"/>
-                <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
-                <class name = "Tests.OrdersActions.ReassignOrder"/>
+
+                <class name = "Tests.StopWords.StopWordsInLeaveAnOffer"/>
+                <class name = "Tests.StopWords.StopWordsInOrderComposing"/>
+                <class name = "Tests.Messages.SendTextMessages"/>
+
 
                 <class name = "Tests.Balance.BlockingMoney"/>
                 <class name = "Tests.Balance.TransferMoney"/>
 
 
+                <class name = "Tests.ExsistOfFile.ExistFileInMessages"/>
+                <class name = "Tests.ExsistOfFile.ExsistFilesInOrder"/>
+
+
+
+
+
+
+
+
+
+
+
+                    <!-
 
 
 
@@ -63,19 +86,37 @@
 
 
 
-                <class name = "Tests.DownloadingFiles.DownloadingFilesFromMessages "/>
-     <class name = "Tests.OrdersActionsAcceptWriterText"/>
-     <class name = "Tests.RegistrationAndLogin.ClientAndWriterLoginLogOutTestLoginLogOutTest"/>
-     <class name = "Tests.OrdersActionsCreateNewOrderAndPublishAndPublish"/>
-
-     <class name = "Tests.OrdersActionsSendResultToClient"/>
 
 
-     <class name = "Tests.OrdersActionsSetAsWinner     <class name = "Tests.OrdersActionsStartWorking"/>
 
 
-     <class name = "Tests.UploadingFilesUploadingFilesToPortfolio"/>
-     -->
+
+
+
+
+
+
+                <class name = "Tests.StopWords.StopWordsInResultSend"/>
+                <class name = "Tests.CreateNewOrderActions.EditAndThanPublishOrder"/>
+
+
+
+
+
+
+                                <class name = "Tests.ExsistOfFilenloadingFilesFromMessages "/>
+                     <class name = "Tests.OrdersActionsAcceptWriterText"/>
+                     <class name = "Tests.RegistrationAndLogin.ClientAndWriterLoginLogOutTestLoginLogOutTest"/>
+                     <class name = "Tests.OrdersActionsCreateNewOrderAndPublishAndPublish"/>
+
+                     <class name = "Tests.OrdersActionsSendResultToClient"/>
+
+
+                     <class name = "Tests.OrdersActionsSetAsWinner     <class name = "Tests.OrdersActionsStartWorking"/>
+
+
+                     <class name = "Tests.UploadingFilesUploadingFilesToPortfolio"/>
+                     -->
  </classes>
 </test>
 

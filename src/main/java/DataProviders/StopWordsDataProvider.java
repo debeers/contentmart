@@ -62,5 +62,24 @@ public class StopWordsDataProvider {
 
 
 
+    public static Object[][] dataproviderObjectsForSendResult() {
+        return new Object[][]{
+                new Object[]{
+                        new LoginObject("debeers1989@gmail.com", "roottoor"),
+                        new OrderObject("Automation test order ID:", "New automation test order description", "15", "1"),
+                        new LoginObject("debeers@bigmir.net", "H9CC1vxG"),
+                        new String("Skype, icq, telephone number, give me a call, cuz I want to communicate directly, without site. Thank you very much and have a nice day!"),
+                        new String("why not to work outside ContentMart")
+                }
+
+        };
+    }
+
+    @DataProvider(name = "stopWordsForSendResultTest")
+    public static Object[][] dataproviderForSendResult() {
+
+        return dataproviderObjectsForSendResult();
+    }
+
 
 }

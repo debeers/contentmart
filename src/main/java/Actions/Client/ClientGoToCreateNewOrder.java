@@ -3,6 +3,7 @@ package Actions.Client;
 import Entities.LoginObject;
 import Entities.Order;
 import Entities.OrderObject;
+import GeneralHelpers.GeneralHelpers;
 import PageObjects.Client.ClientNewOrderPage;
 import PageObjects.General.LeftMenuGeneralPage;
 import PageObjects.General.OrderInfoAndActions;
@@ -14,7 +15,7 @@ import java.util.List;
 import static Actions.RegistrationAndLogin.loginAs;
 import static GeneralHelpers.GeneralHelpers.getFileName;
 import static GeneralHelpers.CustomWaits.createNewOrderWaits;
-import static GeneralHelpers.GeneralHelpers.uploadFileToOrder;
+import static GeneralHelpers.GeneralHelpers.uploadFileToHidenInput;
 import static Tests.BaseTest.driver;
 
 /**
@@ -71,7 +72,7 @@ public class ClientGoToCreateNewOrder {
     public static OrderInfoAndActions andUploadFilesToIt(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, Order order, String filepath) throws InterruptedException {
 
         ClientNewOrderPage newOrder = andCreateTheNewOrder(driver, clientLogin, orderObject, order);
-        uploadFileToOrder(driver, filepath);
+        uploadFileToHidenInput(driver, filepath);
         newOrder.waitForProgressBarWhenUploadingFilesToNewOrder();
 
         OrderInfoAndActions orderInfoAndActions = newOrder.andClickOnPublishNewOrderButton(driver);
@@ -104,13 +105,38 @@ public class ClientGoToCreateNewOrder {
     }
 
 
+
+
+    public static Boolean checkForFileExsistInNewOrder() {
+
+        ClientNewOrderPage newOrderPage = new ClientNewOrderPage(driver);
+        List<WebElement> attachedFiles = newOrderPage.attachedFiles;
+
+        for (WebElement el : attachedFiles) {
+
+            if (GeneralHelpers.isFileExists(el.getAttribute("href"))) {
+                System.out.println("File successfully found! " + el.getText());
+                return true;
+            } else {
+                System.out.println("File not found!!!");
+                return false;
+            }
+
+        }
+
+        return true;
+
+    }
+
+
+
     public static ClientNewOrderPage andCreateTheNewOrder(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, Order order) throws InterruptedException {
 
         loginAs(driver, clientLogin);
         LeftMenuGeneralPage leftMenuGeneralPage = new LeftMenuGeneralPage(driver);
 
         ClientNewOrderPage clientNewOrderPage = leftMenuGeneralPage.clickOnNewOrderFromLeftMenu();
-        createNewOrderWaits(driver, clientNewOrderPage);
+        createNewOrderWaits(clientNewOrderPage);
 
         clientNewOrderPage.setOrder(driver, clientNewOrderPage, orderObject, order);
         System.out.println(order.getEntityOrderValue());

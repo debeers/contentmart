@@ -152,7 +152,7 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
         return orderInfoAndActions;
     }
 
-
+//div[.//text()[contains(., 'READ MORE')]]  [(contains(@class, 'open_link'))]
 
 
     public Boolean waitForStopWordsAllertAppear(){
