@@ -3,7 +3,6 @@ package Tests.CreateNewOrderActions;
 import Actions.Client.ClientGoToCreateNewOrder;
 import DataProviders.CreateNewOrderActionsDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
@@ -24,13 +23,11 @@ public class CloseNewOrderAfterPublish extends BaseTest{
         LoginObject clientLogin = (LoginObject) clientLoginObject;
         OrderObject orderObj = (OrderObject) orderObject;
 
-
-        Order order = new Order();
-        OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObj, order);
+        OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObj);
         orderInfoAndActions.clickOnCloseOrderButtonTopAndAcceptSweet(driver);
 
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Drafted");
-        assertEquals(orderInfoAndActions.getorderName(), order.getEntityOrderName());
+        assertEquals(orderInfoAndActions.getorderName(), orderObj.getEntityOrderName());
 
     }
 }

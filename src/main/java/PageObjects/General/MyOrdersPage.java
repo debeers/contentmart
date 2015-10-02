@@ -1,6 +1,6 @@
 package PageObjects.General;
 
-import Entities.Order;
+import Entities.OrderObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -75,7 +75,7 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
     }
 
 
-    public OrderInfoAndActions writerClickOnCreatedOrderByClientToStartToWorking(Order order) {
+    public OrderInfoAndActions writerClickOnCreatedOrderByClientToStartToWorking(OrderObject order) {
         WebDriverWait wait = new WebDriverWait(driver, 15);
 
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.linkText(order.getEntityOrderName())))).click();

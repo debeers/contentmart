@@ -3,7 +3,6 @@ package Tests.StopWords;
 import Actions.Writer.WriterGoToAllOrders;
 import DataProviders.StopWordsDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
@@ -27,8 +26,8 @@ public class StopWordsInLeaveAnOffer extends BaseTest{
         String offerDetailsText = (String) offerDetails;
         String stopWordsAllert = (String) allert;
 
-        Order order = new Order();
-        OrderInfoAndActions orderInfoAndActions = WriterGoToAllOrders.createNewOrderAndBidOnIt(driver, clientLogin, orderObj, writerLogin, order);
+
+        OrderInfoAndActions orderInfoAndActions = WriterGoToAllOrders.createNewOrderAndBidOnIt(driver, clientLogin, orderObj, writerLogin);
         orderInfoAndActions.typeDetailsOfYourOfferField(offerDetailsText);
 
         assertEquals(orderInfoAndActions.stopwordsAllertMsg().trim(), stopWordsAllert);

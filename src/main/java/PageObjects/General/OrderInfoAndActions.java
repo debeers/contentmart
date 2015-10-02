@@ -1,11 +1,8 @@
 package PageObjects.General;
 
-import Entities.Order;
+import Entities.OrderObject;
 import GeneralHelpers.CreateNewOrderHelper;
-import GeneralHelpers.GeneralWaits;
 import PageObjects.Client.ClientNewOrderPage;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,6 +21,7 @@ import static java.lang.Thread.sleep;
 /**
  * Created by test on 10.09.2015.
  */
+@SuppressWarnings("ConstantConditions")
 public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(xpath = "//button[contains(text(), 'Close order')]")
     public WebElement saveAsDraftSweetAllert;
@@ -174,53 +172,43 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     }
 
     public String waitForStopWordsAllert(){
-       //String res = $(stopWordsAllert).shouldBe(visible).getText();
-        String res = $WaitAndGetTextFrom(stopWordsAllert);
 
+        String res = $WaitAndGetTextFrom(stopWordsAllert);
         return res;
     }
 
     public String getTextFromLable() {
 
-       // String res = $(contentRejectedLablenDecision).shouldBe(visible).getText();
         String res = $WaitAndGetTextFrom(contentRejectedLablenDecision);
         return res;
     }
 
     public String getTextFromSuccessMessageAfterSendResult() {
 
-     //   String res = $(successMessageAfterSendResult).shouldBe(visible).getText();
         String res = $WaitAndGetTextFrom(successMessageAfterSendResult);
         return res;
     }
 
     public String getTextFromDeclineReasonOnDecisionPage() {
 
-     //   String res = $(declineReasonFromClientDecision).shouldBe(visible).getText();
         String res = $WaitAndGetTextFrom(declineReasonFromClientDecision);
         return res;
     }
 
     public String getTextFromWarningTextAfterStartWorking() {
 
-     //   String res = $(warningText).shouldBe(visible).getText();
         String res = $WaitAndGetTextFrom(warningText);
         return res;
     }
 
+
     public void clickOnReassingButtonDecision() {
 
-        //WebDriverWait wait = new WebDriverWait(driver, 15);
-        //wait.until(ExpectedConditions.visibilityOf(reassignButtonDecision)).click();
         $WaitFor(reassignButtonDecision).click();
-
-
     }
 
     public void clickOnReassignSendButton() {
 
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-      //  wait.until(ExpectedConditions.visibilityOf(reassignSendButtonDecision)).click();
         $WaitFor(reassignSendButtonDecision).click();
     }
 
@@ -242,7 +230,6 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     public void typeDetailsOfYourOfferField(String details){
 
-      //  wait.until(ExpectedConditions.visibilityOf(leaveAnOfferDetailsField)).sendKeys(details);
         $WaitFor(leaveAnOfferDetailsField).sendKeys(details);
     }
 
@@ -255,77 +242,75 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     public ClientNewOrderPage andClickOnPublishOrderButtonTop() throws InterruptedException {
 
-        Selenide.$(publishOrderButtonTop).shouldBe(visible).click();
+        $WaitFor(publishOrderButtonTop).click();
         sleep(2000);
-        Selenide.$(publishOrderQuestionSweet).shouldBe(visible).click();
+        $WaitFor(publishOrderQuestionSweet).click();
         sleep(2000);
-        Selenide.$(publishOrderOKSweet).shouldBe(visible).click();
+        $WaitFor(publishOrderOKSweet).click();
         waitForPageLoad(driver);
         ClientNewOrderPage clientNewOrderPage = new ClientNewOrderPage(driver);
         return clientNewOrderPage;
     }
 
-    public OrderInfoAndActions clickOnBidButton(WebDriver driver, Order order) {
+    public OrderInfoAndActions clickOnBidButton(WebDriver driver, OrderObject order) {
 
         String myOrderBidButton = xBidButton(order.getEntityOrderName());
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(myOrderBidButton)))).click();
+        $(driver.findElement(By.xpath(myOrderBidButton))).shouldBe(visible).click();
         OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
-        GeneralWaits.waitForPageLoad(driver);
+        waitForPageLoad(driver);
 
         return orderInfoAndActions;
     }
 
     public String xBidButton(String orderName) {
+
         String xpath = "//*[contains(text(),'";
         String t = orderName + "')]/following::div[13]/button";
-
         return xpath + t;
     }
 
     public WebElement waitForUploadingFilesToOrder(String filename) {
 
-        WebElement el = wait.until(ExpectedConditions.visibilityOf
-                (driver.findElement(By.xpath("//form//span[2][.//text()[contains(., '" + filename + "')]]"))));
+        WebElement el = $WaitFor(
+                driver.findElement(By.xpath("//form//span[2][.//text()[contains(., '" + filename + "')]]")));
         return el;
     }
 
 
     public void sendTextToTheClientTextArea(WebDriver driver, String textClassVar) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
 
-        wait.until(ExpectedConditions.visibilityOf(sendTextToTheClientTextArea)).sendKeys(textClassVar);
+       $WaitFor(sendTextToTheClientTextArea).sendKeys(textClassVar);
+
         waitForPageLoad(driver);
-        wait.until(ExpectedConditions.visibilityOf(orderStatus)); //страховка
+        $WaitFor(orderStatus); //страховка
     }
 
     public void clickOnTheSendCompletedOrderButton(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
 
-        wait.until(ExpectedConditions.elementToBeClickable(sendCompletedOrderButton)).click();
+        $WaitFor(sendCompletedOrderButton).click();
         waitForPageLoad(driver);
-        wait.until(ExpectedConditions.visibilityOf(yourResultHasBeenDeliveredMsg));
+        $WaitFor(yourResultHasBeenDeliveredMsg);
 
     }
 
     public MyMessagesPage clickOnTheDropTheCustomerMessageButton(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
 
-        $(dropTheCustomerMessage).shouldBe(visible).click();
+        $WaitFor(dropTheCustomerMessage).click();
         waitForPageLoad(driver);
         MyMessagesPage myMessagesPage = new MyMessagesPage(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(myMessagesPage.sendMessageButton));
+        $WaitFor(myMessagesPage.sendMessageButton);
         return myMessagesPage;
     }
 
     public void clickOnLeaveAnOfferButtonFromBidOnOrder(WebDriver driver) {
 
-        $(leaveAnOfferButton).shouldBe(visible).click();
+        $WaitFor(leaveAnOfferButton).click();
         waitForPageLoad(driver);
     }
 
     public void clickOnStartWorkingButtonAndAcceptSweet() throws InterruptedException {
 
-        $(startWorkingButton).shouldBe(visible).click();
+        $WaitFor(startWorkingButton).click();
         sleep(2000);
         driver.findElement(By.xpath("html/body/div[3]/div[7]/button[2]")).click();
         waitForPageLoad(driver);
@@ -333,36 +318,36 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     public MyOrdersPage clickOnDeleteOrderButton() {
 
-        Selenide.$(deleteOrderButtonTop).shouldBe(visible).click();
-        GeneralWaits.waitForPageLoad(driver);
+        $WaitFor(deleteOrderButtonTop).click();
+        waitForPageLoad(driver);
         MyOrdersPage myOrders = new MyOrdersPage(driver);
         return myOrders;
     }
 
     public ClientNewOrderPage clickOnCloneOrderButton() {
 
-        Selenide.$(cloneOrderButtonTop).shouldBe(visible).click();
-        GeneralWaits.waitForPageLoad(driver);
+        $WaitFor(cloneOrderButtonTop).click();
+        waitForPageLoad(driver);
         ClientNewOrderPage clientNewOrderPage = new ClientNewOrderPage(driver);
         return clientNewOrderPage;
     }
 
     public ClientNewOrderPage andClickOnEditOrderButton() {
 
-        Selenide.$(editOrderButtonTop).shouldBe(visible).click();
-        GeneralWaits.waitForPageLoad(driver);
+        $WaitFor(editOrderButtonTop).click();
+        waitForPageLoad(driver);
         ClientNewOrderPage clientNewOrderPage = new ClientNewOrderPage(driver);
         return clientNewOrderPage;
     }
 
     public ClientNewOrderPage andClickOnCloseOrderButton() throws InterruptedException {
 
-        $(closeOrderButton).shouldBe(visible).click();
+        $WaitFor(closeOrderButton).click();
         sleep(2000);
-        Selenide.$(closeOrderSweet).shouldBe(visible).click();
+        $WaitFor(closeOrderSweet).click();
         sleep(2000);
-        Selenide.$(closeOrderOKSweet).shouldBe(visible).click();
-        GeneralWaits.waitForPageLoad(driver);
+        $WaitFor(closeOrderOKSweet).click();
+        waitForPageLoad(driver);
         ClientNewOrderPage clientNewOrderPage = new ClientNewOrderPage(driver);
 
         return clientNewOrderPage;
@@ -375,7 +360,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         clickOnreassignDateFieldOnDecisionPage();
         sleep(2000);
 
-        WebElement setDate = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(path))));
+        WebElement setDate = driver.findElement(By.xpath(path));
         System.out.println(setDate);
         setDate.click();
 
@@ -407,97 +392,95 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     public String getorderName() {
 
-        String param = wait.until(ExpectedConditions.visibilityOf(orderName)).getText();
+        String param = $WaitAndGetTextFrom(orderName);
         return param;
     }
 
     public String getsystemOrderID() {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        String param = wait.until(ExpectedConditions.visibilityOf(systemOrderID)).getText();
+
+        String param = $WaitAndGetTextFrom(systemOrderID);
         return param;
     }
 
     public String gettypeOfSharing() {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        String param = wait.until(ExpectedConditions.visibilityOf(typeOfSharing)).getText();
+
+        String param = $WaitAndGetTextFrom(typeOfSharing);
         return param;
     }
     public String getorderStatus() {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        String param = wait.until(ExpectedConditions.visibilityOf(orderStatus)).getText();
+
+        String param = $WaitAndGetTextFrom(orderStatus);
         return param;
     }
 
     public String getorderDescription() {
-        String param = orderDescription.getText();
+        String param = $WaitAndGetTextFrom(orderDescription);
         return param;
     }
 
     public String getorderPublicationDate() {
-        String param = orderPublicationDate.getText();
+        String param = $WaitAndGetTextFrom(orderPublicationDate);
         return param;
     }
 
     public String getorderDeadline() {
-        String param = orderDeadline.getText();
+        String param = $WaitAndGetTextFrom(orderDeadline);
         return param;
     }
 
     public String getTextFromOrderStatus() {
-        String res = $(orderStatus).shouldBe(visible).getText();
+        String res = $WaitAndGetTextFrom(orderStatus);
         return res;
     }
+
     public String getTextFromSuccessMessageTextAfterBid() {
-        String res = $(successMessageTextAfterBid).shouldBe(visible).getText();
+        String res = $WaitAndGetTextFrom(successMessageTextAfterBid);
         return res;
     }
+
     public void clickOnAcceptButtonOnDecisionPage() {
 
-        $(acceptButtonDecision).shouldBe(Condition.present).click();
-        wait.until(ExpectedConditions.visibilityOf(textAcceptedLablenDecision));
+        $WaitFor(acceptButtonDecision).click();
+        $WaitFor(textAcceptedLablenDecision);
     }
 
     public String acceptTextLableOnDecisionPage() {
 
-        String str = $(textAcceptedLablenDecision).shouldBe(Condition.visible).getText();
-
+        String str = $WaitAndGetTextFrom(textAcceptedLablenDecision);
         return str;
     }
 
     public String getTextFromOrderName() {
 
-        String str = $(orderName).shouldBe(Condition.visible).getText();
-
+        String str = $WaitAndGetTextFrom(orderName);
         return str;
     }
 
 
     public void clickOndeclineButtonOnDecisionPage() {
 
-        $(declineButtonDecision).shouldBe(visible).click();
-        GeneralWaits.waitForPageLoad(driver);
-
+        $WaitFor(declineButtonDecision).click();
+        waitForPageLoad(driver);
     }
 
 
     public void sendReasonOfRefusalTextAreaDecision(WebDriver driver, String declineReason) {
 
-        wait.until(ExpectedConditions.visibilityOf(reasonOfRefusalTextAreaDecision)).sendKeys(declineReason);
-        GeneralWaits.waitForPageLoad(driver);
-
+        $WaitFor(reasonOfRefusalTextAreaDecision).sendKeys(declineReason);
+        waitForPageLoad(driver);
     }
 
 
     public void clickOnDeclineButtonAfterRefusalDecision(WebDriver driver) {
 
-        $(reasonOfRefusalDeclineButtonDecision).shouldBe(visible).click();
-        GeneralWaits.waitForPageLoad(driver);
-
+        $WaitFor(reasonOfRefusalDeclineButtonDecision).click();
+        waitForPageLoad(driver);
     }
+
 
     public OrderInfoAndActions clickOnCloseOrderButtonTopAndAcceptSweet(WebDriver driver) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.elementToBeClickable(closeOrderButton)).click();
+        $WaitFor(closeOrderButton).click();
         sleep(1500);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("html/body/div[3]/div[7]/button[2]"))).click();
 

@@ -1,7 +1,6 @@
 package PageObjects.Client;
 
 
-import Entities.Order;
 import Entities.OrderObject;
 import GeneralHelpers.CreateNewOrderHelper;
 import PageObjects.General.LeftMenuGeneralPage;
@@ -215,7 +214,7 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     }
 
 
-    public void setOrder(WebDriver driver, ClientNewOrderPage newOrder, OrderObject orderObject, Order order) throws InterruptedException {
+    public void setOrder(WebDriver driver, ClientNewOrderPage newOrder, OrderObject orderObject) throws InterruptedException {
 
         String id = CreateNewOrderHelper.randomID();
 
@@ -225,7 +224,7 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
         newOrder.setPriceField(orderObject.getPrice());
         $(newOrder.deadlineField).shouldBe(visible).click();
 
-        order.setEntityOrderValue($(newOrder.orderValue).shouldBe(visible).getText());
+        orderObject.setEntityOrderValue($(newOrder.orderValue).shouldBe(visible).getText());
 
         sleep(3000);
 

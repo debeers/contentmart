@@ -1,7 +1,7 @@
 package Actions.Client;
 
 import Entities.LoginObject;
-import Entities.Order;
+import Entities.OrderObject;
 import GeneralHelpers.GeneralHelpers;
 import GeneralHelpers.GeneralWaits;
 import PageObjects.General.MyOrdersPage;
@@ -37,7 +37,7 @@ public class ClientGoToMyOrders {
     }
 
 
-    public static MyOrdersPage clientGoToCreatedOrder(WebDriver driver, LoginObject clientLogin, Order order) throws InterruptedException {
+    public static MyOrdersPage clientGoToCreatedOrder(WebDriver driver, LoginObject clientLogin, OrderObject order) throws InterruptedException {
 
         if (driver.getTitle() == order.getEntityOrderName() + " | ContentMart") {
 

@@ -3,7 +3,6 @@ package Tests.OrdersActions;
 import Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage;
 import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
@@ -24,8 +23,7 @@ public class ReassignOrder extends BaseTest {
         String writerText = text.toString();
         String declineReason = declineReasonObj.toString();
 
-        Order order = new Order();
-        OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andReassignOrder(driver, clientLogin, orderObj, writerLogin, order, writerText, declineReason);
+        OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andReassignOrder(driver, clientLogin, orderObj, writerLogin, writerText, declineReason);
 
         Assert.assertEquals(decisionPage.getorderStatus(), "Result sent");
         Assert.assertEquals(declineReason, decisionPage.getTextFromDeclineReasonOnDecisionPage());

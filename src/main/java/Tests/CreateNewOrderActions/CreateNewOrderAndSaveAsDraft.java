@@ -3,7 +3,6 @@ package Tests.CreateNewOrderActions;
 import Actions.Client.ClientGoToCreateNewOrder;
 import DataProviders.CreateNewOrderActionsDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.Client.ClientNewOrderPage;
 import PageObjects.General.OrderInfoAndActions;
@@ -24,8 +23,7 @@ public class CreateNewOrderAndSaveAsDraft extends BaseTest{
         LoginObject clientLogin = (LoginObject) clientLoginObject;
         OrderObject orderObj = (OrderObject) orderObject;
 
-        Order order = new Order();
-        ClientNewOrderPage clientNewOrderPage = ClientGoToCreateNewOrder.andCreateTheNewOrder(driver, clientLogin, orderObj, order);
+        ClientNewOrderPage clientNewOrderPage = ClientGoToCreateNewOrder.andCreateTheNewOrder(driver, clientLogin, orderObj);
         OrderInfoAndActions orderInfoAndActions = clientNewOrderPage.andClickOnSaveAsDraftButton(driver);
 
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Drafted");

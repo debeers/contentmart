@@ -3,7 +3,6 @@ package Tests.StopWords;
 import Actions.Client.ClientGoToCreateNewOrder;
 import DataProviders.StopWordsDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.Client.ClientNewOrderPage;
 import Tests.BaseTest;
@@ -25,8 +24,7 @@ public class StopWordsInOrderComposing extends BaseTest{
         LoginObject clientLogin = (LoginObject) clientLoginObject;
         OrderObject orderObj = (OrderObject) orderObject;
 
-        Order order = new Order();
-        ClientNewOrderPage clientNewOrderPage = ClientGoToCreateNewOrder.andCreateTheNewOrder(driver, clientLogin, orderObj, order);
+        ClientNewOrderPage clientNewOrderPage = ClientGoToCreateNewOrder.andCreateTheNewOrder(driver, clientLogin, orderObj);
 
         Assert.assertTrue(clientNewOrderPage.waitForStopWordsAllertAppear());
         clientNewOrderPage.andClickOnPublishNewOrderButton(driver);

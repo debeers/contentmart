@@ -2,7 +2,6 @@ package Actions.Client;
 
 import Actions.Writer.WriterGoToStartToWorking;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.General.OrderInfoAndActions;
@@ -20,16 +19,16 @@ import static com.codeborne.selenide.Selenide.$;
 public class CreateOrderAddBidSetWinnerGoToDecisionPage {
 
 
-    public static OrderInfoAndActions andMakeAChoice(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin, Order order, String text) throws InterruptedException {
+    public static OrderInfoAndActions andMakeAChoice(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin, String text) throws InterruptedException {
 
-        OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObject, writerLogin, order);
+        OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObject, writerLogin);
         orderInfoWriter.sendTextToTheClientTextArea(driver, text);
         orderInfoWriter.clickOnTheSendCompletedOrderButton(driver);
 
         logOut(driver);
         MyOrdersPage myOrders = loginAs(driver, clientLogin);
         myOrders.clickOnInProgressLinkMyOrdersClient();
-        findCreatedClientOrderAndClickOnIt(driver, order);
+        findCreatedClientOrderAndClickOnIt(driver, orderObject);
 
         OrderInfoAndActions orderInfoClient = new OrderInfoAndActions(driver);
         $(orderInfoClient.acceptButtonDecision).shouldBe(present);  //нужные ожидания, без них не все успевают в дом
@@ -41,9 +40,9 @@ public class CreateOrderAddBidSetWinnerGoToDecisionPage {
 
 
     public static OrderInfoAndActions andReassignOrder(WebDriver driver, LoginObject clientLogin, OrderObject orderObject,
-                                                       LoginObject writerLogin, Order order, String text, String reason) throws InterruptedException {
+                                                       LoginObject writerLogin, String text, String reason) throws InterruptedException {
 
-        OrderInfoAndActions orderInfoAndActions = andMakeAChoice(driver, clientLogin, orderObject, writerLogin, order, text);
+        OrderInfoAndActions orderInfoAndActions = andMakeAChoice(driver, clientLogin, orderObject, writerLogin, text);
         orderInfoAndActions.clickOnReassingButtonDecision();
         orderInfoAndActions.sendReasonOfRefusalTextAreaDecision(driver, reason);
         orderInfoAndActions.setReassignDate();

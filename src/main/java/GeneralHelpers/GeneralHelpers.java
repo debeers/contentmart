@@ -1,6 +1,6 @@
 package GeneralHelpers;
 
-import Entities.Order;
+import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
@@ -21,7 +21,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class GeneralHelpers {
 
 
-    public static void findCreatedClientOrderAndClickOnIt(WebDriver driver, Order order) {
+    public static void findCreatedClientOrderAndClickOnIt(WebDriver driver, OrderObject order) {
 
         OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
         String orderXPath = orderInfoAndActions.xOrder(order.getEntityOrderName());

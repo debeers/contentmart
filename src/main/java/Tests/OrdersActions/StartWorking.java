@@ -3,7 +3,6 @@ package Tests.OrdersActions;
 import Actions.Writer.WriterGoToStartToWorking;
 import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
@@ -25,8 +24,7 @@ public class StartWorking extends BaseTest {
         LoginObject writerLogin = (LoginObject) writerLoginObj;
         String msg = message.toString();
 
-        Order order = new Order();
-        OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObj, writerLogin, order);
+        OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObj, writerLogin);
 
         assertEquals(orderInfoWriter.getTextFromWarningTextAfterStartWorking(), msg, "ERROR: Something go wrong, it`s not My Orders page");
         assertEquals(orderInfoWriter.getTextFromOrderStatus(), "In Progress", "ERROR: wrong status!");

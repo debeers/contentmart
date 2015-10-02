@@ -34,10 +34,10 @@ public class Proxy {
         WebDriver driver = new FirefoxDriver(capabilities);
 
         // создание HAR с меткой "yandex.ru"
-        server.newHar("yandex.ru");
+        server.newHar("dev.contentmart.in");
 
         // открытие страницы
-        driver.get("http://yandex.ru");
+        driver.get("http://dev.contentmart.in");
 
         // получение данных HAR
         Har har = server.getHar();

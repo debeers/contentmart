@@ -2,9 +2,7 @@ package Tests.Balance;
 
 import Actions.goToBalanceGeneralActions;
 import DataProviders.BallanceCheckDataProvider;
-import Entities.Balance;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import GeneralHelpers.GeneralWaits;
 import PageObjects.General.BalanceGeneralPage;
@@ -31,23 +29,20 @@ public class BlockingMoney extends BaseTest{
         OrderObject orderObj = (OrderObject) orderObject;
         LoginObject writerLogin = (LoginObject) writerLoginObj;
 
-        Order order = new Order();
-        Balance balance = new Balance();
-
-        goToBalanceGeneralActions.andAwardOrderToWriterAndScanBallance(driver, clientLogin, orderObj, writerLogin, order, balance);
+        goToBalanceGeneralActions.andAwardOrderToWriterAndScanBallance(driver, clientLogin, orderObj, writerLogin);
         BalanceGeneralPage balanceGeneral = new BalanceGeneralPage(driver);
 
         balanceGeneral.clickOnbalanceLeftMenu();
         GeneralWaits.waitForPageLoad(driver);
 
-        String blocking = balanceGeneral.getBlokingMoneyByOrderId(order.getEntityOrderSystemID());
+        String blocking = balanceGeneral.getBlokingMoneyByOrderId(orderObj.getEntityOrderSystemID());
         assertEquals(blocking, "Blocking");
 
-        String blockingAmount = balanceGeneral.getBlokingAmountMoneyByOrderId(order.getEntityOrderSystemID());
-        assertEquals(blockingAmount, "- " + order.getEntityOrderValue());
+        String blockingAmount = balanceGeneral.getBlokingAmountMoneyByOrderId(orderObj.getEntityOrderSystemID());
+        assertEquals(blockingAmount, "- " + orderObj.getEntityOrderValue());
 
-        String bal = balanceGeneral.getBlockingMoneyBallance(order.getEntityOrderSystemID());
-        Boolean differenceCount = goToBalanceGeneralActions.blockingBallanceDifference(bal, order, balance);
+        String bal = balanceGeneral.getBlockingMoneyBallance(orderObj.getEntityOrderSystemID());
+        Boolean differenceCount = goToBalanceGeneralActions.blockingBallanceDifference(bal, orderObj);
         Assert.assertTrue(differenceCount);
 
     }

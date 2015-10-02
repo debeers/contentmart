@@ -3,7 +3,6 @@ package Tests.OrdersActions;
 import Actions.Client.CreateOrderAddBidAndSetAsWinner;
 import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
@@ -25,8 +24,7 @@ public class SetAsWinner extends BaseTest {
         OrderObject orderObj = (OrderObject) orderObject;
         LoginObject writerLogin = (LoginObject) writerLoginObj;
 
-        Order order = new Order();
-        OrderInfoAndActions orderInfoClientPage = CreateOrderAddBidAndSetAsWinner.andAwardOrderToWriter(driver, clientLogin, orderObj, writerLogin, order);
+        OrderInfoAndActions orderInfoClientPage = CreateOrderAddBidAndSetAsWinner.andAwardOrderToWriter(driver, clientLogin, orderObj, writerLogin);
 
         assertEquals(orderInfoClientPage.getTextFromOrderStatus(), "Awarded", "ERROR: wrong status!");
 

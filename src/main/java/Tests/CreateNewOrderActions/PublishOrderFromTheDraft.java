@@ -3,7 +3,6 @@ package Tests.CreateNewOrderActions;
 import Actions.Client.ClientGoToCreateNewOrder;
 import DataProviders.CreateNewOrderActionsDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
@@ -26,9 +25,7 @@ public class PublishOrderFromTheDraft extends BaseTest{
         LoginObject clientLogin = (LoginObject) clientLoginObject;
         OrderObject orderObj = (OrderObject) orderObject;
 
-
-        Order order = new Order();
-        OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andSaveAsDraft(driver, clientLogin, orderObj, order);
+        OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andSaveAsDraft(driver, clientLogin, orderObj);
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Drafted");
         orderInfoAndActions.andClickOnPublishOrderButtonTop();
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Published");

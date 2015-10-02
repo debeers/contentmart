@@ -8,7 +8,9 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import ru.stqa.selenium.factory.WebDriverFactory;
 
 import java.io.File;
@@ -28,6 +30,7 @@ public class BaseTest {
     public void setUp(String URL) {
 
         baseUrl = URL;
+
 
         String path = System.getProperty("user.dir") + "\\src\\main\\java\\Downloaded_Files";
         File downloadDir = new File(path);
@@ -53,6 +56,9 @@ public class BaseTest {
 
 
     }
+
+
+
 
 
     @AfterClass(alwaysRun = true)

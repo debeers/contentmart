@@ -3,7 +3,6 @@ package Tests.OrdersActions;
 import Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage;
 import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
@@ -28,8 +27,7 @@ public class AcceptWriterText extends BaseTest {
         LoginObject writerLogin = (LoginObject) writerLoginObj;
         String writerText = text.toString();
 
-        Order order = new Order();
-        OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andMakeAChoice(driver, clientLogin, orderObj, writerLogin, order, writerText);
+        OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andMakeAChoice(driver, clientLogin, orderObj, writerLogin, writerText);
         decisionPage.clickOnAcceptButtonOnDecisionPage();
 
         assertEquals(decisionPage.acceptTextLableOnDecisionPage(), "TEXT ACCEPTED");

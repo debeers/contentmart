@@ -3,7 +3,6 @@ package Tests.UploadingFiles;
 import Actions.Writer.WriterGoToOrderWorkflow;
 import DataProviders.WriterUploadingFilesForSendResult;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import GeneralHelpers.GeneralHelpers;
 import PageObjects.General.OrderInfoAndActions;
@@ -26,9 +25,8 @@ public class UploadingFilesToOrderResult extends BaseTest{
         LoginObject writerLogin = (LoginObject) writerLoginObj;
         String writerText = text.toString();
 
-        Order order = new Order();
         String filepath = System.getProperty("user.dir")+"\\src\\main\\java\\Resources\\BigByte.doc";
-        OrderInfoAndActions orderInfoAndActions = WriterGoToOrderWorkflow.uploadFilesAndSendResultToTheClient(driver, clientLogin, orderObj, writerLogin, order, writerText, filepath);
+        OrderInfoAndActions orderInfoAndActions = WriterGoToOrderWorkflow.uploadFilesAndSendResultToTheClient(driver, clientLogin, orderObj, writerLogin, writerText, filepath);
         String filename = GeneralHelpers.getFileName(filepath);
 
         assertTrue($(orderInfoAndActions.waitForUploadingFilesToOrder(filename)).isDisplayed());

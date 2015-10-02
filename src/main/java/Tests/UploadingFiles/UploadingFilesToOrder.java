@@ -3,7 +3,6 @@ package Tests.UploadingFiles;
 import Actions.Client.ClientGoToCreateNewOrder;
 import DataProviders.CreateNewOrderActionsDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import Tests.BaseTest;
 import org.testng.Assert;
@@ -22,9 +21,9 @@ public class UploadingFilesToOrder extends BaseTest {
         LoginObject clientLogin = (LoginObject) clientLoginObject;
         OrderObject orderObj = (OrderObject) orderObject;
 
-        Order order = new Order();
+
         String filepath = System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\DMX.jpg";
-        ClientGoToCreateNewOrder.andUploadFilesToIt(driver, clientLogin, orderObj, order, filepath);
+        ClientGoToCreateNewOrder.andUploadFilesToIt(driver, clientLogin, orderObj, filepath);
 
         Boolean uploadedFile = checkForFileUploadInNewOrder(filepath);
         Assert.assertTrue(uploadedFile);

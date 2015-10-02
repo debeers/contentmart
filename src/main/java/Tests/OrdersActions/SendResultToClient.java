@@ -3,7 +3,6 @@ package Tests.OrdersActions;
 import Actions.Writer.WriterGoToOrderWorkflow;
 import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
@@ -28,8 +27,7 @@ public class SendResultToClient extends BaseTest {
         String writerText = text.toString();
         String successMessage = msg.toString();
 
-        Order order = new Order();
-        OrderInfoAndActions orderInfoWriter = WriterGoToOrderWorkflow.andSendResultToTheClient(driver, clientLogin, orderObj, writerLogin, order, writerText);
+        OrderInfoAndActions orderInfoWriter = WriterGoToOrderWorkflow.andSendResultToTheClient(driver, clientLogin, orderObj, writerLogin, writerText);
 
         Assert.assertEquals(orderInfoWriter.getTextFromSuccessMessageAfterSendResult(), successMessage);
         assertEquals(orderInfoWriter.getTextFromOrderStatus(), "Result sent", "ERROR: wrong status!");

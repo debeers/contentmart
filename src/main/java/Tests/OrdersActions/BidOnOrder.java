@@ -3,7 +3,6 @@ package Tests.OrdersActions;
 import Actions.Writer.WriterGoToAllOrders;
 import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
@@ -28,11 +27,10 @@ public class BidOnOrder extends BaseTest {
         OrderObject orderObj = (OrderObject) orderObject;
         LoginObject writerLogin = (LoginObject) writerLoginObj;
 
-        Order order = new Order();
-        OrderInfoAndActions orderInfoAndActions = WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, orderObj, writerLogin, order);
+        OrderInfoAndActions orderInfoAndActions = WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, orderObj, writerLogin);
 
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Proposal sent", "ERROR: wrong status!");
-        assertEquals(orderInfoAndActions.getTextFromOrderName(), order.getEntityOrderName(), "ERROR: There are different order name");
+        assertEquals(orderInfoAndActions.getTextFromOrderName(), orderObj.getEntityOrderName(), "ERROR: There are different order name");
         assertEquals(orderInfoAndActions.getTextFromSuccessMessageTextAfterBid(), msg, "Error: no success message");
 
 

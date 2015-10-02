@@ -1,7 +1,6 @@
 package Actions.Client;
 
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import GeneralHelpers.GeneralHelpers;
 import PageObjects.Client.ClientNewOrderPage;
@@ -24,7 +23,7 @@ import static Tests.BaseTest.driver;
 public class ClientGoToCreateNewOrder {
 
 
-    public static Order setOrderObject(Order order){
+    public static OrderObject setOrderObject(OrderObject order){
 
         OrderInfoAndActions orderInfoPage = new OrderInfoAndActions(driver);
 
@@ -51,27 +50,27 @@ public class ClientGoToCreateNewOrder {
         return order;
     }
 
-    public static OrderInfoAndActions andPublish(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, Order order) throws InterruptedException {
+    public static OrderInfoAndActions andPublish(WebDriver driver, LoginObject clientLogin, OrderObject orderObject) throws InterruptedException {
 
-        ClientNewOrderPage newOrder = andCreateTheNewOrder(driver, clientLogin, orderObject, order);
+        ClientNewOrderPage newOrder = andCreateTheNewOrder(driver, clientLogin, orderObject);
         OrderInfoAndActions orderInfoAndActions = newOrder.andClickOnPublishNewOrderButton(driver);
-        setOrderObject(order);
+        setOrderObject(orderObject);
 
         return orderInfoAndActions;
     }
 
-    public static OrderInfoAndActions andSaveAsDraft(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, Order order) throws InterruptedException {
+    public static OrderInfoAndActions andSaveAsDraft(WebDriver driver, LoginObject clientLogin, OrderObject orderObject ) throws InterruptedException {
 
-        ClientNewOrderPage newOrder = andCreateTheNewOrder(driver, clientLogin, orderObject, order);
+        ClientNewOrderPage newOrder = andCreateTheNewOrder(driver, clientLogin, orderObject);
         OrderInfoAndActions orderInfoAndActions = newOrder.andClickOnSaveAsDraftButton(driver);
 
         return orderInfoAndActions;
     }
 
 
-    public static OrderInfoAndActions andUploadFilesToIt(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, Order order, String filepath) throws InterruptedException {
+    public static OrderInfoAndActions andUploadFilesToIt(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, String filepath) throws InterruptedException {
 
-        ClientNewOrderPage newOrder = andCreateTheNewOrder(driver, clientLogin, orderObject, order);
+        ClientNewOrderPage newOrder = andCreateTheNewOrder(driver, clientLogin, orderObject);
         uploadFileToHidenInput(driver, filepath);
         newOrder.waitForProgressBarWhenUploadingFilesToNewOrder();
 
@@ -130,7 +129,7 @@ public class ClientGoToCreateNewOrder {
 
 
 
-    public static ClientNewOrderPage andCreateTheNewOrder(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, Order order) throws InterruptedException {
+    public static ClientNewOrderPage andCreateTheNewOrder(WebDriver driver, LoginObject clientLogin, OrderObject orderObject) throws InterruptedException {
 
         loginAs(driver, clientLogin);
         LeftMenuGeneralPage leftMenuGeneralPage = new LeftMenuGeneralPage(driver);
@@ -138,8 +137,8 @@ public class ClientGoToCreateNewOrder {
         ClientNewOrderPage clientNewOrderPage = leftMenuGeneralPage.clickOnNewOrderFromLeftMenu();
         createNewOrderWaits(clientNewOrderPage);
 
-        clientNewOrderPage.setOrder(driver, clientNewOrderPage, orderObject, order);
-        System.out.println(order.getEntityOrderValue());
+        clientNewOrderPage.setOrder(driver, clientNewOrderPage, orderObject);
+        System.out.println(orderObject.getEntityOrderValue());
 
 
         return clientNewOrderPage;
@@ -147,10 +146,10 @@ public class ClientGoToCreateNewOrder {
 
 
 
-    public static ClientNewOrderPage publishAndGoToEditOrder(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, Order order ) throws InterruptedException {
+    public static ClientNewOrderPage publishAndGoToEditOrder(WebDriver driver, LoginObject clientLogin, OrderObject orderObject ) throws InterruptedException {
 
 
-        OrderInfoAndActions fillTheOrderFields = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObject, order);
+        OrderInfoAndActions fillTheOrderFields = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObject);
         ClientNewOrderPage clientNewOrderPage = fillTheOrderFields.andClickOnEditOrderButton();
 
         return clientNewOrderPage;

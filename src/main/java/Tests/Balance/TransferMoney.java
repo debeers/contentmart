@@ -2,9 +2,7 @@ package Tests.Balance;
 
 import Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage;
 import DataProviders.ActionsWithOrdersDataProvider;
-import Entities.Balance;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import GeneralHelpers.GeneralWaits;
 import PageObjects.General.BalanceGeneralPage;
@@ -31,25 +29,23 @@ public class TransferMoney extends BaseTest{
         LoginObject writerLogin = (LoginObject) writerLoginObj;
         String writerText = text.toString();
 
-        Order order = new Order();
-        Balance balance = new Balance();
 
-        OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andMakeAChoice(driver, clientLogin, orderObj, writerLogin, order, writerText);
-        getCurrentBallanceFromMenuButton(driver, balance);
+        OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andMakeAChoice(driver, clientLogin, orderObj, writerLogin, writerText);
+        getCurrentBallanceFromMenuButton(driver, orderObj);
         decisionPage.clickOnAcceptButtonOnDecisionPage();
 
         BalanceGeneralPage balanceGeneral = new BalanceGeneralPage(driver);
         balanceGeneral.clickOnbalanceLeftMenu();
         GeneralWaits.waitForPageLoad(driver);
 
-        String transferAmount = balanceGeneral.getMoneyTransferAmount(order.getEntityOrderSystemID());
+        String transferAmount = balanceGeneral.getMoneyTransferAmount(orderObj.getEntityOrderSystemID());
         System.out.println("transfer money " + transferAmount);
         sleep(5000);
         driver.navigate().refresh();
 
-        assertEquals(balanceGeneral.getBlokingAmountMoneyByOrderId(order.getEntityOrderSystemID()), "- " + order.getEntityOrderValue());
-        assertEquals(balanceGeneral.getMoneyTransferAmount(order.getEntityOrderSystemID()).trim(), order.getEntityOrderValue());
-        assertEquals(balanceGeneral.getBlockingMoneyBallance(order.getEntityOrderSystemID()), balanceGeneral.getTransferBalance(order.getEntityOrderSystemID()));
+        assertEquals(balanceGeneral.getBlokingAmountMoneyByOrderId(orderObj.getEntityOrderSystemID()), "- " + orderObj.getEntityOrderValue());
+        assertEquals(balanceGeneral.getMoneyTransferAmount(orderObj.getEntityOrderSystemID()).trim(), orderObj.getEntityOrderValue());
+        assertEquals(balanceGeneral.getBlockingMoneyBallance(orderObj.getEntityOrderSystemID()), balanceGeneral.getTransferBalance(orderObj.getEntityOrderSystemID()));
 
     }
 

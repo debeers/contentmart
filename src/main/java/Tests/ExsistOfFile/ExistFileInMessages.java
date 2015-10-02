@@ -3,14 +3,11 @@ package Tests.ExsistOfFile;
 import Actions.Writer.WriterGoToMessages;
 import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import GeneralHelpers.GeneralHelpers;
 import Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import static com.codeborne.selenide.Selenide.$;
 
 /**
  * Created by CMG_TEST on 02.09.2015.
@@ -27,10 +24,9 @@ public class ExistFileInMessages extends BaseTest{
         OrderObject orderObj = (OrderObject) orderObject;
         LoginObject writerLogin = (LoginObject) writerLoginObj;
 
-        Order order = new Order();
         String path = System.getProperty("user.dir")+"\\src\\main\\java\\Resources\\DMX.jpg";
 
-        String href =  WriterGoToMessages.CreateOrderAddBidSendMessageWithFileToClient(driver, clientLogin, orderObj, writerLogin, order, path);
+        String href =  WriterGoToMessages.CreateOrderAddBidSendMessageWithFileToClient(driver, clientLogin, orderObj, writerLogin, path);
         Assert.assertTrue(GeneralHelpers.isFileExists(href));
 
     }

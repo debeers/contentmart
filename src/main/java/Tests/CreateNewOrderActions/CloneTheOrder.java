@@ -3,7 +3,6 @@ package Tests.CreateNewOrderActions;
 import Actions.Client.ClientGoToCreateNewOrder;
 import DataProviders.CreateNewOrderActionsDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.Client.ClientNewOrderPage;
 import PageObjects.General.OrderInfoAndActions;
@@ -27,14 +26,13 @@ public class CloneTheOrder extends BaseTest{
         OrderObject orderObj = (OrderObject) orderObject;
 
 
-        Order order = new Order();
-        OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObj, order);
+        OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObj);
         ClientNewOrderPage clientNewOrderPage = orderInfoAndActions.clickOnCloneOrderButton();
         clientNewOrderPage.andClickOnPublishNewOrderButton(driver);
         
 
-        assertEquals(orderInfoAndActions.getorderName(), order.getEntityOrderName());
-        assertThat(orderInfoAndActions.getsystemOrderID(), not(equalToIgnoringCase(order.getEntityOrderSystemID())));
+        assertEquals(orderInfoAndActions.getorderName(), orderObj.getEntityOrderName());
+        assertThat(orderInfoAndActions.getsystemOrderID(), not(equalToIgnoringCase(orderObj.getEntityOrderSystemID())));
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Published", "ERROR: wrong status!");
 
     }

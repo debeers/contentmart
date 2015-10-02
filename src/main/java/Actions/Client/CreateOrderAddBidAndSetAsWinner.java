@@ -2,7 +2,6 @@ package Actions.Client;
 
 import Actions.Writer.WriterGoToAllOrders;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.General.OrderInfoAndActions;
@@ -16,12 +15,12 @@ import static Actions.Client.ClientGoToMyOrders.clientGoToCreatedOrder;
 public class CreateOrderAddBidAndSetAsWinner {
 
 
-    public static OrderInfoAndActions andAwardOrderToWriter(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin, Order order) throws InterruptedException {
+    public static OrderInfoAndActions andAwardOrderToWriter(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin) throws InterruptedException {
 
 
-        WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, orderObject, writerLogin, order);
+        WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, orderObject, writerLogin);
 
-        MyOrdersPage offersToOrder = clientGoToCreatedOrder(driver, clientLogin, order);
+        MyOrdersPage offersToOrder = clientGoToCreatedOrder(driver, clientLogin, orderObject);
         OrderInfoAndActions orderInfoClientPage = offersToOrder.clickOnSetAsWinnerButtonAndAprooveMoneyBlocking();
 
         return orderInfoClientPage;

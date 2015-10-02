@@ -1,7 +1,6 @@
 package Actions.Writer;
 
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import GeneralHelpers.GeneralHelpers;
 import PageObjects.General.MyMessagesPage;
@@ -18,9 +17,9 @@ public class WriterGoToMessages {
 
 
     public static OrderInfoAndActions sendMessageToClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin,
-                                           Order order, String textMessage) throws InterruptedException {
+                                            String textMessage) throws InterruptedException {
 
-        OrderInfoAndActions orderInfoWriter = WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, orderObject, writerLogin, order);
+        OrderInfoAndActions orderInfoWriter = WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, orderObject, writerLogin);
         orderInfoWriter.clickOnTheDropTheCustomerMessageButton(driver);
 
         MyMessagesPage message = new MyMessagesPage(driver);
@@ -32,10 +31,10 @@ public class WriterGoToMessages {
 
 
 
-    public static String CreateOrderAddBidSendMessageWithFileToClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin,
-                                                                      Order order, String path) throws InterruptedException {
+    public static String CreateOrderAddBidSendMessageWithFileToClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject,
+                                                                      LoginObject writerLogin, String path) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 15);
-        OrderInfoAndActions orderInfoWriter = WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, orderObject, writerLogin, order);
+        OrderInfoAndActions orderInfoWriter = WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, orderObject, writerLogin);
         orderInfoWriter.clickOnTheDropTheCustomerMessageButton(driver);
         MyMessagesPage message = new MyMessagesPage(driver);
 

@@ -4,7 +4,6 @@ import Actions.Client.ClientGoToMessages;
 import Actions.Writer.WriterGoToMessages;
 import DataProviders.MessagesDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import GeneralHelpers.Messages;
 import Tests.BaseTest;
@@ -30,14 +29,13 @@ public class SendTextMessages extends BaseTest {
         LoginObject writerLogin = (LoginObject) writerLoginObj;
 
 
-        Order order = new Order();
         String textMessage = Messages.randomMessageGeneratorLength(20);
-        WriterGoToMessages.sendMessageToClient(driver, clientLogin, orderObj, writerLogin, order, textMessage);
+        WriterGoToMessages.sendMessageToClient(driver, clientLogin, orderObj, writerLogin, textMessage);
 
         String msg = findMessage(driver, textMessage);
         Assert.assertEquals(msg, textMessage);
 
-        String clientMessage = ClientGoToMessages.checkDeliveryMessageFromWriter(driver, clientLogin, order, textMessage);
+        String clientMessage = ClientGoToMessages.checkDeliveryMessageFromWriter(driver, clientLogin, orderObj, textMessage);
         Assert.assertEquals(clientMessage, textMessage);
 
 

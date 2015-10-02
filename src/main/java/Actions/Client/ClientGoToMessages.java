@@ -2,7 +2,7 @@ package Actions.Client;
 
 
 import Entities.LoginObject;
-import Entities.Order;
+import Entities.OrderObject;
 import GeneralHelpers.Messages;
 import PageObjects.General.MyMessagesPage;
 import PageObjects.General.MyOrdersPage;
@@ -19,7 +19,7 @@ public class ClientGoToMessages {
 
 
     public static String checkDeliveryMessageFromWriter(WebDriver driver, LoginObject clientLogin,
-                                                        Order order, String textMessage) {
+                                                        OrderObject order, String textMessage) {
         if(driver.getTitle() != "ContentMart") {
             logOut(driver);
         }

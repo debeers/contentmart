@@ -3,7 +3,6 @@ package Tests.StopWords;
 import Actions.Writer.WriterGoToStartToWorking;
 import DataProviders.StopWordsDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
@@ -29,8 +28,7 @@ public class StopWordsInResultSend extends BaseTest {
         String msg = (String)stopMsg;
         String writerText = text.toString();
 
-        Order order = new Order();
-        OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObj, writerLogin, order);
+        OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObj, writerLogin);
         orderInfoWriter.sendTextToTheClientTextArea(driver, writerText);
         Assert.assertEquals(orderInfoWriter.waitForStopWordsAllert(), msg);
 

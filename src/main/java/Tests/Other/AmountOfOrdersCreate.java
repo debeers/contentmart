@@ -4,7 +4,6 @@ import Actions.Client.ClientGoToCreateNewOrder;
 import Actions.RegistrationAndLogin;
 import DataProviders.CreateNewOrderActionsDataProvider;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.Client.ClientNewOrderPage;
 import PageObjects.General.OrderInfoAndActions;
@@ -22,10 +21,9 @@ public class AmountOfOrdersCreate extends BaseTest{
 
         LoginObject clientLogin = (LoginObject) clientLoginObject;
         OrderObject orderObj = (OrderObject) orderObject;
-        Order order = new Order();
 
         for (int i = 0; i<=20; i++) {
-            OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObj, order);
+            OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObj);
             ClientNewOrderPage clientNewOrderPage = orderInfoAndActions.clickOnCloneOrderButton();
             clientNewOrderPage.andClickOnPublishNewOrderButton(driver);
             RegistrationAndLogin.logOut(driver);
