@@ -20,6 +20,7 @@ public class CustomWaits extends BaseTest{
 
 
     public static HashSet<String> getVisibilityOfElement() {
+
         return visibilityOfElement;
     }
 
@@ -28,6 +29,7 @@ public class CustomWaits extends BaseTest{
     }
 
     public static HashSet<String> getElementToBeClickable() {
+
         return elementToBeClickable;
     }
 
@@ -78,7 +80,7 @@ public class CustomWaits extends BaseTest{
                     out.println("Waiting for visibility of: " + "Tag name: " + j.getTagName() + " " + "with text: " + j.getText());
                     return j;
 
-                } else if (j.getTagName().equalsIgnoreCase("button")) {
+                } else if (elementToBeClickable.contains(j.getTagName())) {
 
                     wait.until(ExpectedConditions.elementToBeClickable(j));
                     out.println("Waiting for visibility of Button: " + j.getText());
@@ -111,22 +113,14 @@ public class CustomWaits extends BaseTest{
 
             for (WebElement j : elements) {
 
-                if (j.getTagName().equalsIgnoreCase("input") ||
-                        j.getTagName().equalsIgnoreCase("div") ||
-                        j.getTagName().equalsIgnoreCase("p") ||
-                        j.getTagName().equalsIgnoreCase("a") ||
-                        j.getTagName().equalsIgnoreCase("span") ||
-                        j.getTagName().equalsIgnoreCase("h3") ||
-                        j.getTagName().equalsIgnoreCase("h2") ||
-                        j.getTagName().equalsIgnoreCase("h1") ||
-                        j.getTagName().equalsIgnoreCase("textarea")){
+                if (visibilityOfElement.contains(j.getTagName())){
 
 
                     String str = wait.until(ExpectedConditions.visibilityOf(j)).getText();
                     out.println("Waiting for visibility of: " + "Tag name: " + j.getTagName() + " " + "with text: " + j.getText());
                     return str;
 
-                } else if (j.getTagName().equalsIgnoreCase("button")) {
+                } else if (elementToBeClickable.contains(j.getTagName())) {
 
                     String str = wait.until(ExpectedConditions.elementToBeClickable(j)).getText();
                     out.println("Waiting for visibility of BUTTON: " + "Tag name: " + j.getTagName() + " " + "with text: " + j.getText());
