@@ -18,29 +18,25 @@ public class JDBCutil {
     private static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521:MKYONG";
     private static final String DB_USER = "user";
     private static final String DB_PASSWORD = "password";
-    private static final DateFormat dateFormat = new SimpleDateFormat(
-            "yyyy/MM/dd HH:mm:ss");
+    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+
+    protected String insertTableSQL = "INSERT INTO DBUSER"
+            + "(USER_ID, USERNAME, CREATED_BY, CREATED_DATE) " + "VALUES"
+            + "(1,'mkyong','system', " + "to_date('"
+            + getCurrentTimeStamp() + "', 'yyyy/mm/dd hh24:mi:ss'))";
 
 
-
-
-    private static void insertRecordIntoDbUserTable() throws SQLException {
+    private static void insertRecordIntoDbUserTable(String insertTableSQL) throws SQLException {
 
         Connection dbConnection = null;
         Statement statement = null;
 
-        String insertTableSQL = "INSERT INTO DBUSER"
-                + "(USER_ID, USERNAME, CREATED_BY, CREATED_DATE) " + "VALUES"
-                + "(1,'mkyong','system', " + "to_date('"
-                + getCurrentTimeStamp() + "', 'yyyy/mm/dd hh24:mi:ss'))";
 
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
 
             System.out.println(insertTableSQL);
-
-            // execute insert SQL stetement
             statement.executeUpdate(insertTableSQL);
 
             System.out.println("Record is inserted into DBUSER table!");
@@ -80,7 +76,7 @@ public class JDBCutil {
         try {
 
             dbConnection = DriverManager.getConnection(
-                    DB_CONNECTION, DB_USER,DB_PASSWORD);
+                    DB_CONNECTION, DB_USER, DB_PASSWORD);
             return dbConnection;
 
         } catch (SQLException e) {
@@ -101,11 +97,7 @@ public class JDBCutil {
     }
 
 
-
-
-
-
-    public static void getJDBC(String query, String column){
+    public static void getJDBC(String query, String column) {
 
 
         String user = "root";
@@ -119,20 +111,19 @@ public class JDBCutil {
             e.printStackTrace();
         }
         Connection c = null;
-        try{
+        try {
             c = DriverManager.getConnection(url, user, password);
             Statement st = c.createStatement();
             ResultSet rs = st.executeQuery(query);
-            while(rs.next()){
+            while (rs.next()) {
                 System.out.println(rs.getString(column));
             }
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally{
+        } finally {
 
             try {
-                if(c != null)
+                if (c != null)
                     c.close();
             } catch (SQLException e) {
 
@@ -140,8 +131,6 @@ public class JDBCutil {
             }
         }
     }
-
-
 
 
 }

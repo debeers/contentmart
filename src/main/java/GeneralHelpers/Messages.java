@@ -1,10 +1,5 @@
 package GeneralHelpers;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.Random;
 
 /**
@@ -13,15 +8,15 @@ import java.util.Random;
 public class Messages {
 
 
-    public static String randomMessageGeneratorLength(int length){
+    public static String randomMessageGeneratorLength(int length) {
 
         Random ran = new Random();
         int top = length;
         char data = ' ';
         String dat = "";
 
-        for (int i=0; i<=top; i++) {
-            data = (char)(ran.nextInt(25)+97);
+        for (int i = 0; i <= top; i++) {
+            data = (char) (ran.nextInt(25) + 97);
             dat = data + dat;
         }
 

@@ -20,10 +20,7 @@ public class ClientGoToMessages {
 
     public static String checkDeliveryMessageFromWriter(WebDriver driver, LoginObject clientLogin,
                                                         OrderObject order, String textMessage) {
-        if(driver.getTitle() != "ContentMart") {
-            logOut(driver);
-        }
-
+        logOut(driver);
         MyMessagesPage clientMessages = ClientGoToMessages.goToClientMessages(driver, clientLogin);
 
         findCreatedOrderAndClickOnIt(driver, order);

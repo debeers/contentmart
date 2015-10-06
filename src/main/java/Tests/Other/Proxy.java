@@ -57,7 +57,7 @@ public class Proxy {
         }
 
 
-        File file = new File(System.getProperty("user.dir")+"\\src\\main\\java\\HAResults\\"
+        File file = new File(System.getProperty("user.dir") + "\\src\\main\\java\\HAResults\\"
                 + har.getLog().getBrowser().getName() + ".har");
         if (!file.exists()) {
             file.createNewFile();
@@ -65,8 +65,7 @@ public class Proxy {
         FileOutputStream fos = new FileOutputStream(file);
         try {
             har.writeTo(fos);
-        }
-        finally {
+        } finally {
             fos.close();
         }
 
@@ -75,12 +74,6 @@ public class Proxy {
         driver.quit();
         server.stop();
     }
-
-
-
-
-
-
 
 
 }

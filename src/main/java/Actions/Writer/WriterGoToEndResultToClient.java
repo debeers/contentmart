@@ -13,7 +13,6 @@ import org.openqa.selenium.WebDriver;
 public class WriterGoToEndResultToClient {
 
 
-
     public static OrderInfoAndActions andSendResultToTheClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin, String text) throws InterruptedException {
 
         OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObject, writerLogin);
@@ -34,7 +33,6 @@ public class WriterGoToEndResultToClient {
 
         return orderInfoAndActions;
     }
-
 
 
 }

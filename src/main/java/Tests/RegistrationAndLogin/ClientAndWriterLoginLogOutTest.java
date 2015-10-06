@@ -1,7 +1,6 @@
 package Tests.RegistrationAndLogin;
 
 import Actions.General.RegistrationAndLogin;
-import Entities.LoginObject;
 import PageObjects.General.LoginPage;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
@@ -15,9 +14,6 @@ public class ClientAndWriterLoginLogOutTest extends BaseTest {
 
     @Test(groups = {"regress2.2"})
     public void positive_Client_LoginLogOut() throws InterruptedException {
-
-        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
-
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage(driver);
@@ -39,9 +35,6 @@ public class ClientAndWriterLoginLogOutTest extends BaseTest {
     @Test(groups = {"regress2.2"})
     public void positive_Writer_LoginLogOut() throws InterruptedException {
 
-
-        LoginObject writerLogin = new LoginObject("debeers@bigmir.net", "H9CC1vxG");
-
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage(driver);
         loginPage.loginLinkClick();
@@ -57,17 +50,5 @@ public class ClientAndWriterLoginLogOutTest extends BaseTest {
         RegistrationAndLogin.logOut(driver);
         assertEquals(driver.getCurrentUrl(), baseUrl);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

@@ -1,7 +1,6 @@
 package GeneralHelpers;
 
 import Tests.BaseTest;
-import com.google.common.base.Function;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,7 +15,6 @@ import java.util.List;
  * Created by CMG_TEST on 27.08.2015.
  */
 public class GeneralWaits extends BaseTest {
-
 
 
     public static void waitForPageLoad(WebDriver driver) {
@@ -35,7 +33,7 @@ public class GeneralWaits extends BaseTest {
     public static void waitForTableLoad(List<WebElement> table) {
 
         wait.until(ExpectedConditions.visibilityOfAllElements(table));
-        for (WebElement tr: table){
+        for (WebElement tr : table) {
 
             System.out.println(tr.toString());
 

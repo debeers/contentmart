@@ -3,6 +3,16 @@
 
 <suite name="Contentmart.in smoke test suite" >
 
+    <!--Credentials: -->
+
+    <parameter name="clientLoginParam" value="debeers1989@gmail.com"/>
+    <parameter name="clientPasswordParam" value="roottoor"/>
+    <parameter name="writerLoginParam" value="debeers@bigmir.net"/>
+    <parameter name="writerPasswordParam" value="H9CC1vxG"/>
+
+    <!--Credentials: END -->
+
+
 
     <!--Properties: -->
 
@@ -11,42 +21,33 @@
     <!--Properties: END -->
 
 
-
-
-
-
-
-
         <test name="regress1.0">
             <classes>
 
 
-
-                <class name = "Tests.Balance.UnblockingMoneyAfterClientDecline"/>
-
-
-
-
+                <class name = "Tests.Balance.TransferMoney"/>
 
                 <!--
 
+                <class name = "Tests.MyProfile.AddPortfolioItem"/>
+                <class name = "Tests.Messages.SendTextMessages"/>
 
+
+                <class name = "Tests.OrdersActions.SetAsWinner"/>
+                <class name = "Tests.MyProfile.EmailNotificationsSaving"/>
 
                 <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
                 <class name = "Tests.OrdersActions.BidOnOrder"/>
                 <class name = "Tests.MyProfile.AddPortfolioItem"/>
                 <class name = "Tests.MyProfile.EmailNotificationsSaving"/>
 
-
                 <class name = "Tests.OrdersActions.ReassignOrder"/>
-
                 <class name = "Tests.OrdersActions.SendResultToClient"/>
                 <class name = "Tests.OrdersActions.BidOnOrder"/>
-                <class name = "Tests.OrdersActions.SetAsWinner"/>
+
                 <class name = "Tests.OrdersActions.StartWorking"/>
                 <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
                 <class name = "Tests.OrdersActions.ReassignOrder"/>
-
 
                 <class name = "Tests.CreateNewOrderActions.CloseNewOrderAfterPublish"/>
                 <class name = "Tests.CreateNewOrderActions.CreateNewOrderAndSaveAsDraft"/>
@@ -54,11 +55,8 @@
                 <class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
                 <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
 
-
                 <class name = "Tests.StopWords.StopWordsInLeaveAnOffer"/>
                 <class name = "Tests.StopWords.StopWordsInOrderComposing"/>
-                <class name = "Tests.Messages.SendTextMessages"/>
-
 
                 <class name = "Tests.Balance.BlockingMoney"/>
                 <class name = "Tests.Balance.TransferMoney"/>
@@ -69,58 +67,6 @@
 
 
 
-
-
-
-
-
-
-
-
-                    <!-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <class name = "Tests.StopWords.StopWordsInResultSend"/>
-                <class name = "Tests.CreateNewOrderActions.EditAndThanPublishOrder"/>
-
-
-
-
-
-
-                                <class name = "Tests.ExsistOfFilenloadingFilesFromMessages "/>
-                     <class name = "Tests.OrdersActionsAcceptWriterText"/>
-                     <class name = "Tests.RegistrationAndLogin.ClientAndWriterLoginLogOutTestLoginLogOutTest"/>
-                     <class name = "Tests.OrdersActionsCreateNewOrderAndPublishAndPublish"/>
-
-                     <class name = "Tests.OrdersActionsSendResultToClient"/>
-
-
-                     <class name = "Tests.OrdersActionsSetAsWinner     <class name = "Tests.OrdersActionsStartWorking"/>
-
-
-                     <class name = "Tests.UploadingFilesUploadingFilesToPortfolio"/>
                      -->
  </classes>
 </test>

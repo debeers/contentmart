@@ -2,7 +2,6 @@ package Tests.MyProfile;
 
 
 import Actions.Writer.GoToWriterProfile;
-import Entities.LoginObject;
 import PageObjects.Writer.WriterProfilePage;
 import Tests.BaseTest;
 import org.testng.Assert;
@@ -21,7 +20,6 @@ public class AddPortfolioItem extends BaseTest {
     @Test(groups = {"regress2.2"})
     public void AddPortfolioItemTest() throws InterruptedException {
 
-        LoginObject writerLogin = new LoginObject("debeers@bigmir.net", "H9CC1vxG");
         String title = "New automation item: " + randomID();
 
         WriterProfilePage writerProfilePage = GoToWriterProfile.goToMyProfile(driver, writerLogin);

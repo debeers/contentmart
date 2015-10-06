@@ -1,29 +1,19 @@
 package PageObjects.General;
 
-import GeneralHelpers.GeneralHelpers;
-import com.codeborne.selenide.Condition;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 import static GeneralHelpers.CustomWaits.$WaitFor;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
-import static com.codeborne.selenide.Condition.hasClass;
-import static com.codeborne.selenide.Condition.present;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
 public class EditProfilePage extends LeftMenuGeneralPage {
 
 
-
-
-                                //For All
+    //For All
 
     @FindBy(xpath = "//button[contains(text(), 'Save Changes)]")
     public WebElement saveChangesButton;
@@ -43,7 +33,7 @@ public class EditProfilePage extends LeftMenuGeneralPage {
     ////////////////////////////////////////////////////////////////////////////////////////////
 
 
-                                   //Account details
+    //Account details
 
 
     @FindBy(id = "nick_name")
@@ -77,10 +67,9 @@ public class EditProfilePage extends LeftMenuGeneralPage {
     public WebElement viewSingatureInInvoiceLink;
 
 
-
     //////////////////////////////////////////////////////////////////////////////////////
 
-                                     //Password change
+    //Password change
 
     @FindBy(id = "old_password")
     public WebElement oldPasswordInput;
@@ -97,7 +86,7 @@ public class EditProfilePage extends LeftMenuGeneralPage {
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-                                    //Email notifications
+    //Email notifications
 
     @FindBy(xpath = ".//div[contains(@class, 'switch toggle-on')]")
     public List<WebElement> triggersON;
@@ -111,29 +100,27 @@ public class EditProfilePage extends LeftMenuGeneralPage {
     //////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
-    public void clickOnEmailNotificationsLink(){
+    public void clickOnEmailNotificationsLink() {
 
         $WaitFor(emailNotificationsLink).click();
         waitForPageLoad(driver);
     }
 
-    public void clickOnChangePasswordLinkLink(){
+    public void clickOnChangePasswordLinkLink() {
 
         $WaitFor(changePasswordLink).click();
 
     }
 
-    public void clickOnAccountDetailsLinkLinkLink(){
+    public void clickOnAccountDetailsLinkLinkLink() {
 
         $WaitFor(accountDetailsLink).click();
 
     }
 
-    public void switchTriggersOFF(){
+    public void switchTriggersOFF() {
 
-        if(triggers.size() != 0) {
+        if (triggers.size() != 0) {
             for (WebElement r : triggers) {
 
                 if ($(r).getAttribute("class").contains("switch toggle-on")) {
@@ -145,9 +132,9 @@ public class EditProfilePage extends LeftMenuGeneralPage {
         }
     }
 
-    public void switchTriggersON(){
+    public void switchTriggersON() {
 
-        if(triggers.size() != 0) {
+        if (triggers.size() != 0) {
             for (WebElement r : triggers) {
 
                 if ($(r).getAttribute("class").contains("switch toggle-off")) {
@@ -158,8 +145,6 @@ public class EditProfilePage extends LeftMenuGeneralPage {
             }
         }
     }
-
-
 
 
     public EditProfilePage(WebDriver driver) {

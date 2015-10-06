@@ -14,8 +14,7 @@ import static GeneralHelpers.Messages.randomMessageGeneratorLength;
 public class GoToWriterProfile {
 
 
-
-    public static WriterProfilePage goToMyProfile(WebDriver driver, LoginObject writerLogin){
+    public static WriterProfilePage goToMyProfile(WebDriver driver, LoginObject writerLogin) {
 
         MyOrdersPage myOrdersPage = RegistrationAndLogin.loginAs(driver, writerLogin);
         myOrdersPage.clickOnProfileLeftMenu();
@@ -34,16 +33,10 @@ public class GoToWriterProfile {
         String text = randomMessageGeneratorLength(textLength);
 
         writerProfilePage.setPortfolioTextField(text);
-        writerProfilePage.clickOnaAdWorkButton();
+        writerProfilePage.clickOnaAddWorkButton();
         Thread.sleep(3000);
 
     }
-
-
-
-
-
-
 
 
 }

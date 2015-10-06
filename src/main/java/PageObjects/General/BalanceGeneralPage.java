@@ -1,11 +1,10 @@
 package PageObjects.General;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -16,19 +15,23 @@ import static com.codeborne.selenide.Selenide.$;
 public class BalanceGeneralPage extends LeftMenuGeneralPage {
 
 
-
     @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[2]/p")
     public WebElement availebleBalance;
 
 
-    @FindBy(xpath = "//div/div[3]/ul/li[7]/a/span")
-    public  WebElement clientBallanceFromLeftMenu;
-
-
-
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[7]/a/span")
+    public WebElement clientBallanceFromLeftMenu;
 
 
 //////////////////////////////////////////////    Blocking
+
+
+    public String scanBalanceFromMenu() {
+
+        String scan = $(clientBallanceFromLeftMenu).shouldBe(Condition.present).getText();
+        String balance = scan.substring(scan.indexOf(' ') + 1);
+        return balance;
+    }
 
 
     public String xBlockingStatus(String ID) {
@@ -54,7 +57,6 @@ public class BalanceGeneralPage extends LeftMenuGeneralPage {
 
         return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
     }
-
 
 
     ///////////////////////////////////////////    Unblocking
@@ -85,9 +87,7 @@ public class BalanceGeneralPage extends LeftMenuGeneralPage {
     }
 
 
-
 ///////////////////////////////////////   Transfer
-
 
 
     public String xTransferStatus(String ID) {
@@ -113,10 +113,6 @@ public class BalanceGeneralPage extends LeftMenuGeneralPage {
 
         return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
     }
-
-
-
-
 
 
     public BalanceGeneralPage(WebDriver driver) {

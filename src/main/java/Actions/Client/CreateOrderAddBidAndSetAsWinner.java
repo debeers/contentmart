@@ -16,18 +16,16 @@ import static Actions.General.GoToBalanceGeneralActions.getCurrentBallanceFromMe
 public class CreateOrderAddBidAndSetAsWinner {
 
 
-    public static OrderInfoAndActions andAwardOrderToWriter(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin) throws InterruptedException {
+    public static OrderInfoAndActions andAwardOrderToWriter(WebDriver driver, LoginObject clientLogin, OrderObject order, LoginObject writerLogin) throws InterruptedException {
 
+        WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, order, writerLogin);
 
-        WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, orderObject, writerLogin);
-
-        MyOrdersPage offersToOrder = clientGoToCreatedOrder(driver, clientLogin, orderObject);
+        MyOrdersPage offersToOrder = clientGoToCreatedOrder(driver, clientLogin, order);
         OrderInfoAndActions orderInfoClientPage = offersToOrder.clickOnSetAsWinnerButtonAndAprooveMoneyBlocking();
-        orderObject.setTotalBalanceAfterBlocking(getCurrentBallanceFromMenuButton(driver));
+        order.setTotalBalanceAfterBlocking(getCurrentBallanceFromMenuButton(driver));
 
         return orderInfoClientPage;
     }
-
 
 
 }

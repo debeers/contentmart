@@ -57,12 +57,7 @@ public class GeneralHelpers {
     }
 
 
-
-
-
-
-
-    public static boolean isFileExists(String URLName){
+    public static boolean isFileExists(String URLName) {
         try {
             HttpURLConnection.setFollowRedirects(false);
             // note : you may also need
@@ -71,16 +66,21 @@ public class GeneralHelpers {
                     (HttpURLConnection) new URL(URLName).openConnection();
             con.setRequestMethod("HEAD");
             return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
+    public static Boolean entityAppear(String name){
 
+    if(wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//*[contains(text(),'" + name + "')]"))).isDisplayed()){
+        return true;
+    }
+        return false;
 
-
+    }
 
 
 }

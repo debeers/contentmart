@@ -1,14 +1,12 @@
 package Tests.MyProfile;
 
 import Actions.General.GoToEditProfile;
-import Entities.LoginObject;
 import PageObjects.General.EditProfilePage;
 import Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static Actions.General.GoToEditProfile.checkForOFFTriggersStatus;
-import static Actions.General.GoToEditProfile.checkForONTriggersStatus;
+import static Actions.General.GoToEditProfile.checkForTriggersStatus;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 
 /**
@@ -17,15 +15,8 @@ import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 public class EmailNotificationsSaving extends BaseTest{
 
 
-
-
-
-
     @Test(groups = {"regress2.2"})
     public void Notifications() throws InterruptedException {
-
-        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
-
 
         EditProfilePage editProfilePage = GoToEditProfile.goToEditProfile(driver, clientLogin);
         editProfilePage.clickOnEmailNotificationsLink();
@@ -34,17 +25,14 @@ public class EmailNotificationsSaving extends BaseTest{
         Thread.sleep(4000);
         driver.navigate().refresh();
         waitForPageLoad(driver);
-        Assert.assertTrue(checkForOFFTriggersStatus());
+        Assert.assertTrue(checkForTriggersStatus("OFF"));
 
         editProfilePage.switchTriggersON();
-        Thread.sleep(4000);
+        Thread.sleep(4000); // need to save changes, waits for server side...
         driver.navigate().refresh();
         waitForPageLoad(driver);
 
-        Assert.assertTrue(checkForONTriggersStatus());
-
-
-
+        Assert.assertTrue(checkForTriggersStatus("ON"));
 
     }
 

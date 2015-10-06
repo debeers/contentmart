@@ -20,12 +20,12 @@ public class ExistFileInMessages extends BaseTest{
     public static void DownloadFilesToMessage() throws Exception {
 
         LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
-        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
         LoginObject writerLogin = new LoginObject("debeers@bigmir.net", "H9CC1vxG");
 
         String path = System.getProperty("user.dir")+"\\src\\main\\java\\Resources\\DMX.jpg";
 
-        String href =  WriterGoToMessages.CreateOrderAddBidSendMessageWithFileToClient(driver, clientLogin, orderObj, writerLogin, path);
+        String href =  WriterGoToMessages.CreateOrderAddBidSendMessageWithFileToClient(driver, clientLogin, order, writerLogin, path);
         Assert.assertTrue(GeneralHelpers.isFileExists(href));
 
     }

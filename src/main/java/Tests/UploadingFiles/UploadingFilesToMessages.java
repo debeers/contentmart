@@ -1,7 +1,6 @@
 package Tests.UploadingFiles;
 
 import Actions.Writer.WriterGoToMessages;
-import Entities.LoginObject;
 import Entities.OrderObject;
 import Tests.BaseTest;
 import org.testng.Assert;
@@ -15,21 +14,14 @@ import static Actions.Writer.WriterGoToMessages.waitForFileAppearInDialogBox;
 public class UploadingFilesToMessages extends BaseTest {
 
 
-
-
     @Test(groups={"regress 1.0"})
     public static void AttachFilesToMessage() throws Exception {
 
-        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
-        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
-        LoginObject writerLogin = new LoginObject("debeers@bigmir.net", "H9CC1vxG");
-
+        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
         String path = System.getProperty("user.dir")+"\\src\\main\\java\\Resources\\DMX.jpg";
 
-        WriterGoToMessages.CreateOrderAddBidSendMessageWithFileToClient(driver, clientLogin, orderObj, writerLogin, path);
-        Boolean fileAppear = waitForFileAppearInDialogBox(driver, path);
+        WriterGoToMessages.CreateOrderAddBidSendMessageWithFileToClient(driver, clientLogin, order, writerLogin, path);
+        Boolean fileAppear = waitForFileAppearInDialogBox(path);
         Assert.assertTrue(fileAppear);
-
     }
-
 }

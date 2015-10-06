@@ -9,8 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 import static Actions.General.RegistrationAndLogin.logOut;
 import static Actions.General.RegistrationAndLogin.loginAs;
-import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
+import static GeneralHelpers.CustomWaits.$WaitFor;
 
 /**
  * Created by CMG_TEST on 09.09.2015.
@@ -20,18 +19,16 @@ public class ClientGoToMyOrders {
 
     public static MyOrdersPage clientGoToMyOrders(WebDriver driver, LoginObject clientLogin) {
 
-        if (driver.getTitle() != "My Orders | ContentMart") {
-            logOut(driver);
-            loginAs(driver, clientLogin);
-        }
-
+        loginAs(driver, clientLogin);
         MyOrdersPage myOrders = new MyOrdersPage(driver);
         GeneralWaits.waitForPageLoad(driver);
 
-        $(myOrders.draftLinkMyOrderClient).shouldBe(visible);       // метод ждёт и готовит мне страницу для следующего метода, ожидания нужны, часто не всё в дом заходит
-        $(myOrders.inProgressLinkMyOrdersClient).shouldBe(visible);
-        $(myOrders.finishedLinkMyOrdersClient).shouldBe(visible);
-        $(myOrders.publishedLinkMyOrdersClient).shouldBe(visible);
+        $WaitFor(
+                myOrders.draftLinkMyOrderClient,
+                myOrders.inProgressLinkMyOrdersClient,
+                myOrders.finishedLinkMyOrdersClient,
+                myOrders.publishedLinkMyOrdersClient
+        );
 
         return myOrders;
     }
@@ -39,11 +36,7 @@ public class ClientGoToMyOrders {
 
     public static MyOrdersPage clientGoToCreatedOrder(WebDriver driver, LoginObject clientLogin, OrderObject order) throws InterruptedException {
 
-        if (driver.getTitle() == order.getEntityOrderName() + " | ContentMart") {
-
-            logOut(driver);
-        }
-
+        logOut(driver);
         MyOrdersPage myOrders = ClientGoToMyOrders.clientGoToMyOrders(driver, clientLogin);
 
         myOrders.clickOnPublishedLinkMyOrdersClient();

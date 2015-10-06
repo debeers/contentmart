@@ -9,10 +9,10 @@ public class OrderObject {
 
     private String orderValue = "";
 
-    private String ordName ="";
-    private String desc ="";
-    private String wordsReq ="";
-    private String price ="";
+    private String ordName = "";
+    private String desc = "";
+    private String wordsReq = "";
+    private String price = "";
 
     private String entityOrderName = "";
     private String entityOrderSystemID = "";
@@ -24,8 +24,7 @@ public class OrderObject {
     private String entityOrderValue = "";
 
 
-
-    public OrderObject(){
+    public OrderObject() {
 
     }
 
@@ -37,7 +36,6 @@ public class OrderObject {
         this.price = price;
 
     }
-
 
 
     public OrderObject(String totalBalanceBefore, String totalBalanceAfterBlocking, String totalBalanceAfterUnBlocking,
@@ -68,7 +66,6 @@ public class OrderObject {
     }
 
 
-
     public String getTotalBalanceBefore() {
 
         return totalBalanceBefore;
@@ -91,10 +88,6 @@ public class OrderObject {
     }
 
 
-
-
-
-
     public String getOrdName() {
 
         return ordName;
@@ -114,7 +107,6 @@ public class OrderObject {
 
         return price;
     }
-
 
 
     public String getEntityOrderName() {
@@ -154,9 +146,6 @@ public class OrderObject {
     }
 
 
-
-
-
     public void setEntityOrderName(String entityOrderName) {
 
         this.entityOrderName = entityOrderName;
@@ -190,7 +179,7 @@ public class OrderObject {
         this.entityOrderVisibility = entityOrderVisibility;
     }
 
-    public void  setEntityOrderValue(String entityOrderValue) {
+    public void setEntityOrderValue(String entityOrderValue) {
 
         this.entityOrderValue = entityOrderValue;
     }

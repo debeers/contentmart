@@ -17,18 +17,17 @@ import static Actions.General.RegistrationAndLogin.loginAs;
 public class WriterGoToStartToWorking {
 
 
-    public static OrderInfoAndActions andPressStartWorkingButton(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin) throws InterruptedException {
+    public static OrderInfoAndActions andPressStartWorkingButton(WebDriver driver, LoginObject clientLogin, OrderObject order, LoginObject writerLogin) throws InterruptedException {
 
-        CreateOrderAddBidAndSetAsWinner.andAwardOrderToWriter(driver, clientLogin, orderObject, writerLogin);
+        CreateOrderAddBidAndSetAsWinner.andAwardOrderToWriter(driver, clientLogin, order, writerLogin);
         logOut(driver);
         MyOrdersPage myOrders = loginAs(driver, writerLogin);
-        OrderInfoAndActions orderInfoWriter = myOrders.writerClickOnCreatedOrderByClientToStartToWorking(orderObject);
+        OrderInfoAndActions orderInfoWriter = myOrders.writerClickOnCreatedOrderByClientToStartToWorking(order);
         orderInfoWriter.clickOnStartWorkingButtonAndAcceptSweet();
 
         return orderInfoWriter;
 
     }
-
 
 
 }

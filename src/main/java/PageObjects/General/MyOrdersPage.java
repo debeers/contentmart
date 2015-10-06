@@ -29,7 +29,7 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
     public WebElement inProgressClient;
 
     @FindBy(xpath = "//div/div[3]/div//div/div[3]/ul/li[3]")
-    public  WebElement inProgressWriter;
+    public WebElement inProgressWriter;
 
     @FindBy(xpath = ".//*[@id='order_status']/li[3]")
     public WebElement finished;
@@ -50,16 +50,13 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
     public WebElement draftLinkMyOrderClient;
 
     @FindBy(xpath = ".//*[@id='order_status']/li[2]")
-    public  WebElement publishedLinkMyOrdersClient;
+    public WebElement publishedLinkMyOrdersClient;
 
     @FindBy(xpath = ".//*[@id='order_status']/li[3]")
-    public  WebElement inProgressLinkMyOrdersClient;
+    public WebElement inProgressLinkMyOrdersClient;
 
     @FindBy(xpath = ".//*[@id='order_status']/li[4]")
     public WebElement finishedLinkMyOrdersClient;
-
-
-
 
 
     public OrderInfoAndActions clickOnSetAsWinnerButtonAndAprooveMoneyBlocking() throws InterruptedException {
@@ -80,7 +77,7 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
 
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.linkText(order.getEntityOrderName())))).click();
         waitForPageLoad(driver);
-        OrderInfoAndActions orderInfoAndActions= new OrderInfoAndActions(driver);
+        OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
 
         wait.until(ExpectedConditions.visibilityOf(orderInfoAndActions.orderName));
         wait.until(ExpectedConditions.visibilityOf(orderInfoAndActions.orderStatus));
@@ -88,13 +85,13 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
         return orderInfoAndActions;
     }
 
-    public  void clickOnPublishedLinkMyOrdersClient() {
+    public void clickOnPublishedLinkMyOrdersClient() {
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOf(publishedLinkMyOrdersClient)).click();
     }
 
 
-    public  void clickOnInProgressLinkMyOrdersClient() {
+    public void clickOnInProgressLinkMyOrdersClient() {
 
         inProgressWriter.click();
         waitForPageLoad(driver);
@@ -105,7 +102,7 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
     }
 
 
-    public  void searchBySearchEngineMyOrdersWriter(MyOrdersPage myOrders, OrderObject orderObject){
+    public void searchBySearchEngineMyOrdersWriter(MyOrdersPage myOrders, OrderObject orderObject) {
         WebDriverWait wait = new WebDriverWait(driver, 15);
 
         wait.until(ExpectedConditions.visibilityOf(myOrders.searchFieldMyOrders)).sendKeys(orderObject.getEntityOrderName());
@@ -114,8 +111,6 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
         waitForPageLoad(driver);
 
     }
-
-
 
 
     public MyOrdersPage(WebDriver driver) {

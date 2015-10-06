@@ -13,44 +13,41 @@ import org.openqa.selenium.WebDriver;
 public class WriterGoToAllOrders {
 
 
-    public static OrderInfoAndActions CreateNewOrderBidOnItAndLeaveAnOffer(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin
-                                                                            ) throws InterruptedException {
+    public static OrderInfoAndActions CreateNewOrderBidOnItAndLeaveAnOffer(WebDriver driver, LoginObject clientLogin, OrderObject order, LoginObject writerLogin
+    ) throws InterruptedException {
 
-        ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObject);
+        ClientGoToCreateNewOrder.andPublish(driver, clientLogin, order);
         LeftMenuGeneralPage leftMenuGeneralPage = new LeftMenuGeneralPage(driver);
         leftMenuGeneralPage.clickOnAllOrdersLeftMenu(driver, writerLogin);
-        OrderInfoAndActions orderInfoAndActions = bidOnCreatedOrderByBidButton(driver, orderObject);
+        OrderInfoAndActions orderInfoAndActions = bidOnCreatedOrderByBidButton(driver, order);
         orderInfoAndActions.clickOnLeaveAnOfferButtonFromBidOnOrder(driver);
 
-    return orderInfoAndActions;
+        return orderInfoAndActions;
 
-}
+    }
 
-    public static OrderInfoAndActions bidOnCreatedOrderByBidButton(WebDriver driver, OrderObject orderObject){
+    public static OrderInfoAndActions bidOnCreatedOrderByBidButton(WebDriver driver, OrderObject order) {
 
-            OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
-            orderInfoAndActions.clickOnAllOrdersLeftMenuMenu();
-            orderInfoAndActions.clickOnBidButton(driver, orderObject);
+        OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
+        orderInfoAndActions.clickOnAllOrdersLeftMenuMenu();
+        orderInfoAndActions.clickOnBidButton(driver, order);
 
         return orderInfoAndActions;
 
     }
 
 
+    public static OrderInfoAndActions createNewOrderAndBidOnIt(WebDriver driver, LoginObject clientLogin, OrderObject order, LoginObject writerLogin) throws InterruptedException {
 
-    public static OrderInfoAndActions createNewOrderAndBidOnIt(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin) throws InterruptedException {
-
-        ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObject);
+        ClientGoToCreateNewOrder.andPublish(driver, clientLogin, order);
         LeftMenuGeneralPage leftMenuGeneralPage = new LeftMenuGeneralPage(driver);
         leftMenuGeneralPage.clickOnAllOrdersLeftMenu(driver, writerLogin);
-        OrderInfoAndActions orderInfoAndActions = bidOnCreatedOrderByBidButton(driver, orderObject);
+        OrderInfoAndActions orderInfoAndActions = bidOnCreatedOrderByBidButton(driver, order);
 
 
         return orderInfoAndActions;
 
     }
-
-
 
 
 }

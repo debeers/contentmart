@@ -1,7 +1,6 @@
 package PageObjects.Writer;
 
 import PageObjects.General.LeftMenuGeneralPage;
-import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -59,16 +58,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
                                      // Languages and Expertises block
-
-
-
-
-
-
-
 
 
     public WriterProfilePage(WebDriver driver) {
@@ -117,7 +107,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
     }
 
-    public void clickOnaAdWorkButton() {
+    public void clickOnaAddWorkButton() {
 
         $(addWorkButton).click();
 

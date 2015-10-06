@@ -1,7 +1,6 @@
 package Tests.CreateNewOrderActions;
 
 import Actions.Client.ClientGoToCreateNewOrder;
-import Entities.LoginObject;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
@@ -18,15 +17,12 @@ public class CloseNewOrderAfterPublish extends BaseTest{
     @Test(groups={"regress 1.0"})
     public  void CloseNewOrderAfterPublish() throws Exception {
 
+        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
 
-        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
-        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
-
-        OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObj);
+        OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, order);
         orderInfoAndActions.clickOnCloseOrderButtonTopAndAcceptSweet(driver);
 
         assertEquals(driver.getTitle(), "My Orders | ContentMart");
-       // assertEquals(orderInfoAndActions.getorderName(), orderObj.getEntityOrderName());
 
     }
 }

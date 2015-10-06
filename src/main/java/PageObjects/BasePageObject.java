@@ -11,7 +11,7 @@ public abstract class BasePageObject {
 
     protected static WebDriver driver;
 
-    public BasePageObject(WebDriver driver){
+    public BasePageObject(WebDriver driver) {
         this.driver = driver;
         this.init(driver);
     }

@@ -25,8 +25,6 @@ import static java.lang.Thread.sleep;
 public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
 
-
-
     @FindBy(xpath = "//button[contains(text(), 'Close order')]")
     public WebElement saveAsDraftSweetAllert;
 
@@ -83,7 +81,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(xpath = "//div[@title='Status']")
     public WebElement orderStatus;
 
-    @FindBy(id="order_name")
+    @FindBy(id = "order_name")
     public WebElement orderName;
 
     @FindBy(xpath = "//div[@class='grey']")
@@ -97,7 +95,6 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[1]/div[2]/div[2]/div[2]/div[2]/div[3]/div[2]")
     public WebElement typeOfSharing;
-
 
 
     @FindBy(xpath = ".//*[@id='new_results']/div[1]/span")
@@ -155,27 +152,24 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(xpath = "//button[contains(text(), 'OK')]")
     public WebElement publishOrderOKSweet;
 
-    @FindBy(id="description")
+    @FindBy(id = "description")
     public WebElement leaveAnOfferDetailsField;
 
-    @FindBy(xpath="//form/div/div[1]")
+    @FindBy(xpath = "//form/div/div[1]")
     public WebElement stopwordsAllert;
 
-    @FindBy(xpath="//*[@id=new_results]/div[4]/div[2]")
+    @FindBy(xpath = "//*[@id=new_results]/div[4]/div[2]")
     public WebElement stopWordsAllertInSendResult;
 
-    @FindBy(partialLinkText="why not to work outside ContentMart")
+    @FindBy(partialLinkText = "why not to work outside ContentMart")
     public WebElement stopWordsAllert;
 
-    @FindBy(xpath="//a[contains(text(), 'Accept decline')]")
+    @FindBy(xpath = "//a[contains(text(), 'Accept decline')]")
     public WebElement acceptDeclineButtonWriter;
 
 
-    @FindBy(xpath=".//*[@id='new_results']/p")
+    @FindBy(xpath = ".//*[@id='new_results']/p")
     public WebElement yourResultHaveBeenDeclined;
-
-
-
 
 
     public OrderInfoAndActions(WebDriver driver) {
@@ -184,9 +178,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     }
 
 
-
-
-    public MyOrdersPage clickOnAcceptDeclineButton(){
+    public MyOrdersPage clickOnAcceptDeclineButton() {
 
         $WaitFor(acceptDeclineButtonWriter).click();
         MyOrdersPage myOrdersPage = new MyOrdersPage(driver);
@@ -194,7 +186,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     }
 
 
-    public String waitForStopWordsAllert(){
+    public String waitForStopWordsAllert() {
 
         String res = $(stopWordsAllert).shouldBe(visible).getText();
         return res;
@@ -251,7 +243,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     }
 
 
-    public void typeDetailsOfYourOfferField(String details){
+    public void typeDetailsOfYourOfferField(String details) {
 
         $WaitFor(leaveAnOfferDetailsField).sendKeys(details);
     }
@@ -302,7 +294,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     public void sendTextToTheClientTextArea(WebDriver driver, String textClassVar) {
 
-       $WaitFor(sendTextToTheClientTextArea).sendKeys(textClassVar);
+        $WaitFor(sendTextToTheClientTextArea).sendKeys(textClassVar);
 
         waitForPageLoad(driver);
         $WaitFor(orderStatus); //страховка
@@ -430,6 +422,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         String param = $(typeOfSharing).shouldBe(visible).getText();
         return param;
     }
+
     public String getorderStatus() {
 
         String param = $(orderStatus).shouldBe(visible).getText();

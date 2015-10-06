@@ -1,7 +1,6 @@
 package Tests.CreateNewOrderActions;
 
 import Actions.Client.ClientGoToCreateNewOrder;
-import Entities.LoginObject;
 import Entities.OrderObject;
 import PageObjects.Client.ClientNewOrderPage;
 import PageObjects.General.OrderInfoAndActions;
@@ -19,14 +18,13 @@ public class EditAndThanPublishOrder extends BaseTest{
     @Test(groups={"regress 1.0"})
     public  void EditAndThanPublishOrder() throws Exception {
 
-        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
-        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
 
-        ClientNewOrderPage clientNewOrderPage = ClientGoToCreateNewOrder.publishAndGoToEditOrder(driver, clientLogin, orderObj);
+        ClientNewOrderPage clientNewOrderPage = ClientGoToCreateNewOrder.publishAndGoToEditOrder(driver, clientLogin, order);
         OrderInfoAndActions orderInfoAndActions = clientNewOrderPage.andClickOnPublishNewOrderButton(driver);
 
 //        Assert.assertEquals(orderInfoAndActions.getorderName(), order.getEntityOrderName());
-//        Assert.assertEquals(orderInfoAndActions.getorderStatus(), order.getEntityOrderStatus());
+//        Assert.assertEquals(orderInfoAndActions.getorderStatus(), order.getEntityOrderStatus());  // incorrect redirection! Need to fix, task in jira CMI-1110
 
     }
 

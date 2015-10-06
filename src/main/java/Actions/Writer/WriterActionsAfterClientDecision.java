@@ -17,13 +17,10 @@ import static com.codeborne.selenide.Selenide.$;
 public class WriterActionsAfterClientDecision {
 
 
-
-
-
-    public static void writerAcceptDeclineAfterClientNegativeDecision(WebDriver driver, LoginObject writerLogin, OrderObject orderObj){
+    public static void writerAcceptDeclineAfterClientNegativeDecision(WebDriver driver, LoginObject writerLogin, OrderObject order) {
 
         MyOrdersPage myOrdersPage = loginAs(driver, writerLogin);
-        myOrdersPage.searchBySearchEngineMyOrdersWriter(myOrdersPage, orderObj);
+        myOrdersPage.searchBySearchEngineMyOrdersWriter(myOrdersPage, order);
         OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
         orderInfoAndActions.clickOnAcceptDeclineButton();
         $(myOrdersPage.searchFieldMyOrders).shouldBe(Condition.visible);
@@ -31,12 +28,6 @@ public class WriterActionsAfterClientDecision {
         logOut(driver);
 
     }
-
-
-
-
-
-
 
 
 }

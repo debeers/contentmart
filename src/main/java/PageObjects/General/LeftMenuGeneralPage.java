@@ -5,7 +5,6 @@ import GeneralHelpers.GeneralWaits;
 import PageObjects.BasePageObject;
 import PageObjects.Client.ClientNewOrderPage;
 import PageObjects.Writer.WriterAllOrdersPage;
-import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,45 +23,43 @@ import static com.codeborne.selenide.Selenide.$;
 public class LeftMenuGeneralPage extends BasePageObject {
 
 
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[2]/div[1]/div/p")
+    public WebElement profileLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[2]/div[1]/div/p")
-    public  WebElement profileLeftMenu;
-
-    @FindBy(xpath="//span[contains(text(), 'My profile')]")
-    public  WebElement myProfileLeftMenu;
-
+    @FindBy(xpath = "//span[contains(text(), 'My profile')]")
+    public WebElement myProfileLeftMenu;
 
 
     @FindBy(xpath = "/html/body/div[1]/div[3]/ul/li[3]/a")
-    public  WebElement newOrderLeftMenu;
+    public WebElement newOrderLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[2]/div[2]/ul/li[2]/a")
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[2]/div[2]/ul/li[2]/a")
     public WebElement editProfileLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[2]/div[2]/ul/li[3]/a")
-    public  WebElement myMessagesLeftMenu;
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[2]/div[2]/ul/li[3]/a")
+    public WebElement myMessagesLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[2]/div[2]/ul/li[4]/a")
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[2]/div[2]/ul/li[4]/a")
     public WebElement logOutLeftMenuWriter;
 
     ///////////////////////////////// Static menu links
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[3]/a")
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[3]/a")
     public WebElement myOrdersLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[4]/a")
-    public  WebElement allOrdersLeftMenu;
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[4]/a")
+    public WebElement allOrdersLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[5]/a")
-    public  WebElement customersLeftMenu;
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[5]/a")
+    public WebElement customersLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[6]/a")
-    public  WebElement notificationsLeftMenu;
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[6]/a")
+    public WebElement notificationsLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[7]/a")
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[7]/a")
     public WebElement balanceLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[8]/p/a")
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[8]/p/a")
     public WebElement helpCenterLeft;
 
 
@@ -121,8 +118,6 @@ public class LeftMenuGeneralPage extends BasePageObject {
     }
 
 
-
-
     public void clickOnAllOrdersLeftMenuMenu() {
 
         wait.until(ExpectedConditions.visibilityOf(allOrdersLeftMenu)).click();
@@ -167,9 +162,6 @@ public class LeftMenuGeneralPage extends BasePageObject {
 
         PageFactory.initElements(driver, this);
     }
-
-
-
 
 
 }

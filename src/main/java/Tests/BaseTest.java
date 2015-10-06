@@ -1,6 +1,7 @@
 package Tests;
 
 
+import Entities.LoginObject;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -23,14 +24,17 @@ public class BaseTest {
     public static WebDriverWait wait;
     public static String baseUrl;
     public static StringBuffer verificationErrors = new StringBuffer();
+    public static LoginObject clientLogin;
+    public static LoginObject writerLogin;
 
-
-    @Parameters({"URL"})
+    @Parameters({"URL", "clientLoginParam", "clientPasswordParam", "writerLoginParam", "writerPasswordParam"})
     @BeforeClass(alwaysRun = true)
-    public void setUp(String URL) {
+    public void setUp(String URL, String clientLoginParam, String clientPasswordParam, String writerLoginParam, String writerPasswordParam) {
+
+        clientLogin = new LoginObject(clientLoginParam, clientPasswordParam);
+        writerLogin = new LoginObject(writerLoginParam, writerPasswordParam);
 
         baseUrl = URL;
-
 
         String path = System.getProperty("user.dir") + "\\src\\main\\java\\Downloaded_Files";
         File downloadDir = new File(path);
@@ -53,18 +57,13 @@ public class BaseTest {
         driver.manage().window().maximize();
         WebDriverRunner.setWebDriver(driver); // Selenide WebDriverRunner for my custom driver
 
-
-
     }
-
-
-
 
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
 
-        if(driver.getTitle() != "ContentMart") {
+        if (driver.getTitle() != "ContentMart") {
             driver.get("https://contentmart.in/exit");
         }
 

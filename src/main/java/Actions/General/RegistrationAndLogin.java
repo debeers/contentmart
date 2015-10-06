@@ -5,7 +5,6 @@ import PageObjects.General.LeftMenuGeneralPage;
 import PageObjects.General.LoginPage;
 import PageObjects.General.MyOrdersPage;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 
 import static org.testng.Assert.assertEquals;
 
@@ -21,7 +20,7 @@ public class RegistrationAndLogin {
         loginPage.goToLoginPage(driver);
         loginPage.loginLinkClick();
         String header = loginPage.welcomeLoginHeader();
-        Assert.assertEquals(header, "Welcome to ContentMart.in");
+        assertEquals(header, "Welcome to ContentMart.in");
 
         loginPage.setLoginField(clientLogin.getLogin());
         loginPage.setPasswordField(clientLogin.getPassword());

@@ -16,16 +16,16 @@ import static java.lang.System.out;
 /**
  * Created by ilya on 09.09.2015.
  */
-public class CustomWaits extends BaseTest{
+public class CustomWaits extends BaseTest {
 
 
-    public static HashSet<String> getVisibilityOfElement() {
+    public static HashSet<String> getElementsShouldBeVisible() {
 
-        return visibilityOfElement;
+        return elementsShouldBeVisible;
     }
 
-    public static void setVisibilityOfElement(HashSet<String> visibilityOfElement) {
-        CustomWaits.visibilityOfElement = visibilityOfElement;
+    public static void setElementsShouldBeVisible(HashSet<String> elementsShouldBeVisible) {
+        CustomWaits.elementsShouldBeVisible = elementsShouldBeVisible;
     }
 
     public static HashSet<String> getElementToBeClickable() {
@@ -37,7 +37,7 @@ public class CustomWaits extends BaseTest{
         CustomWaits.elementToBeClickable = elementToBeClickable;
     }
 
-    protected static HashSet<String> visibilityOfElement =
+    protected static HashSet<String> elementsShouldBeVisible =
             Sets.newHashSet(
                     "a", "p", "div", "span",
                     "href", "input", "textarea"
@@ -50,17 +50,15 @@ public class CustomWaits extends BaseTest{
             );
 
 
+    public static void createNewOrderWaits(ClientNewOrderPage newOrder) {
 
-
-
-
-
-    public static void createNewOrderWaits(ClientNewOrderPage newOrder){
-        $WaitFor(newOrder.orderNameField,
+        $WaitFor(
+                newOrder.orderNameField,
                 newOrder.descriptionField,
                 newOrder.wordsRequiredField,
                 newOrder.priceField,
-                newOrder.publishButton);
+                newOrder.publishButton
+        );
         out.println("HAPPY HOUR`S in McDonald`s! All elements had been loaded successfully! Yuuuuuuupppiiiiii!)))))");
 
     }
@@ -71,71 +69,68 @@ public class CustomWaits extends BaseTest{
 
         if (elements != null) {
 
-            for (WebElement j : elements) {
+            for (WebElement webElement : elements) {
 
 
-               if (visibilityOfElement.contains(j.getTagName())) {
+                if (elementsShouldBeVisible.contains(webElement.getTagName())) {
 
-                    wait.until(ExpectedConditions.visibilityOf(j));
-                    out.println("Waiting for visibility of: " + "Tag name: " + j.getTagName() + " " + "with text: " + j.getText());
-                    return j;
+                    wait.until(ExpectedConditions.visibilityOf(webElement));
+                    out.println("Waiting for visibility of: " + "Tag name: " + webElement.getTagName() + " " + "with text: " + webElement.getText());
+                    return webElement;
 
-                } else if (elementToBeClickable.contains(j.getTagName())) {
+                } else if (elementToBeClickable.contains(webElement.getTagName())) {
 
-                    wait.until(ExpectedConditions.elementToBeClickable(j));
-                    out.println("Waiting for visibility of Button: " + j.getText());
-                    return j;
+                    wait.until(ExpectedConditions.elementToBeClickable(webElement));
+                    out.println("Waiting for visibility of Button: " + webElement.getText());
+                    return webElement;
 
-                } else if (j.getTagName().equalsIgnoreCase("a")) {
-                    wait.until(ExpectedConditions.visibilityOf(j));
-                    out.println("Waiting for visibility of Link: " + j.getText() + j.getAttribute("href"));
+                } else if (webElement.getTagName().equalsIgnoreCase("a")) {
+                    wait.until(ExpectedConditions.visibilityOf(webElement));
+                    out.println("Waiting for visibility of Link: " + webElement.getText() + webElement.getAttribute("href"));
 
-                    if (isFileExists(j.getAttribute("href"))) {
+                    if (isFileExists(webElement.getAttribute("href"))) {
                         out.println("Link responce is 200, link is OK ");
                     } else out.println("Link is broken, check it please");
 
-                    return j;
+                    return webElement;
                 }
 
             }
-        }else out.print("No args=...");
-
+        } else out.print("No args=...");
 
 
         return null;
     }
 
 
-    public static String $WaitAndGetTextFrom(WebElement... elements){
+    public static String $WaitAndGetTextFrom(WebElement... elements) {
         WebDriverWait wait = new WebDriverWait(driver, 15);
 
         if (elements != null) {
 
-            for (WebElement j : elements) {
+            for (WebElement webElement : elements) {
 
-                if (visibilityOfElement.contains(j.getTagName())){
+                if (elementsShouldBeVisible.contains(webElement.getTagName())) {
 
 
-                    String str = wait.until(ExpectedConditions.visibilityOf(j)).getText();
-                    out.println("Waiting for visibility of: " + "Tag name: " + j.getTagName() + " " + "with text: " + j.getText());
+                    String str = wait.until(ExpectedConditions.visibilityOf(webElement)).getText();
+                    out.println("Waiting for visibility of: " + "Tag name: " + webElement.getTagName() + " " + "with text: " + webElement.getText());
                     return str;
 
-                } else if (elementToBeClickable.contains(j.getTagName())) {
+                } else if (elementToBeClickable.contains(webElement.getTagName())) {
 
-                    String str = wait.until(ExpectedConditions.elementToBeClickable(j)).getText();
-                    out.println("Waiting for visibility of BUTTON: " + "Tag name: " + j.getTagName() + " " + "with text: " + j.getText());
+                    String str = wait.until(ExpectedConditions.elementToBeClickable(webElement)).getText();
+                    out.println("Waiting for visibility of BUTTON: " + "Tag name: " + webElement.getTagName() + " " + "with text: " + webElement.getText());
                     return str;
                 } else return
                         "..:::Can`t get text from element:::..";
 
             }
 
-        }else out.print("No args=...");
+        } else out.print("No args=...");
 
         return null;
     }
-
-
 
 
 }

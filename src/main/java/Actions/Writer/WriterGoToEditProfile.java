@@ -9,9 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -24,7 +22,7 @@ public class WriterGoToEditProfile {
 
     protected static HashSet<String> languages =
             Sets.newHashSet(
-                     "Kannada", "Gujarati",
+                    "Kannada", "Gujarati",
                     "Marathi", "Bengali", "Malayalam",
                     "Telugu", "Hindi", "Tamil"
             );
@@ -49,12 +47,7 @@ public class WriterGoToEditProfile {
             );
 
 
-
-
-
-
-
-     // .//div[contains(text(), 'Languages')]/following-sibling::div[1]/ul/li    // � ����������� �������
+    // .//div[contains(text(), 'Languages')]/following-sibling::div[1]/ul/li    // � ����������� �������
     //  .//div[contains(text(), 'Languages')]/following-sibling::div[2]/ul/li    //  ����������� �����
     //  .//div[contains(text(), 'Languages')]/following-sibling::div[3]/ul/li  //�� ����������� �����
 
@@ -69,7 +62,6 @@ public class WriterGoToEditProfile {
     //  .//div[contains(text(), 'Categories')]/following-sibling::div[3]/ul/li  //�� ����������� ���������
 
 
-
     public static void compare(WebDriver driver) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 15);
 
@@ -78,14 +70,13 @@ public class WriterGoToEditProfile {
         List<WebElement> notAddedLanguegesList = wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(".//div[contains(text(), 'Languages')]/following-sibling::div[3]/ul/li")));
 
 
-
         List<String> text = null;
-       // List<WebElement> addedLanguegesList = driver.findElements(By.xpath(".//div[contains(text(), 'Languages')]/following-sibling::div[2]/ul/li/text()"));
+        // List<WebElement> addedLanguegesList = driver.findElements(By.xpath(".//div[contains(text(), 'Languages')]/following-sibling::div[2]/ul/li/text()"));
 
 
-        for(String r : languages){
+        for (String r : languages) {
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//li[contains(text(), '" + r + "')]/span[contains(@class, 'close_test move-next-skill-btn')]"))).click();
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(".//li[contains(text(), '" + r + "')]/span[contains(@class, 'close_test move-next-skill-btn')]"))).click();
 
             System.out.println("Element found... clicking");
 
@@ -93,19 +84,11 @@ public class WriterGoToEditProfile {
             $(driver.findElement(By.xpath(".//span[contains(text(), '" + r + "')]/span[contains(@class, 'test_plus')] "))).should(Condition.appear);
 
 
-
-
-
         }
 
 
     }
 }
-
-
-
-
-
 
 
 //        for (WebElement el : addedLanguegesList){
@@ -122,9 +105,6 @@ public class WriterGoToEditProfile {
 //                System.out.println("wrong");
 //            }
 //        }
-
-
-
 
 
 //        for(WebElement el : addedLanguegesList){

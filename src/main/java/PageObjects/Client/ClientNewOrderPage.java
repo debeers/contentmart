@@ -46,16 +46,16 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     public WebElement priceField;
 
     @FindBy(xpath = ".//*[@id='fileupload']")
-    public  WebElement fileuploadInput;
+    public WebElement fileuploadInput;
 
     @FindBy(id = "max_count")
     public WebElement orderValue;
 
-    @FindBy(id="d_ord_form")
-    public  WebElement saveAsDraftButtonInNewOrder;
+    @FindBy(id = "d_ord_form")
+    public WebElement saveAsDraftButtonInNewOrder;
 
-    @FindBy(className="red banned_words_notice")
-    public  WebElement stopWordsAllert;
+    @FindBy(className = "red banned_words_notice")
+    public WebElement stopWordsAllert;
 
 
     /////////////////////  TOP
@@ -87,29 +87,30 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     @FindBy(xpath = "html//div[2]/div[6]/ul/li/a")
     public List<WebElement> attachedFiles;
 
-    @FindBy(xpath="html//td[contains(@class, 'xdsoft_current')]")          //   /following-sibling::td[1]   next   html//td[.//text()[contains(., '29')]]  [not(contains(@class, 'xdsoft_disabled'))]
+    @FindBy(xpath = "html//td[contains(@class, 'xdsoft_current')]")
+    //   /following-sibling::td[1]   next   html//td[.//text()[contains(., '29')]]  [not(contains(@class, 'xdsoft_disabled'))]
     public WebElement currentOrderDay;
 
-    @FindBy(xpath="html/body/div[2]/div[2]/div/div[1]/div[contains(@class, 'xdsoft_current')]")
+    @FindBy(xpath = "html/body/div[2]/div[2]/div/div[1]/div[contains(@class, 'xdsoft_current')]")
     public WebElement currentOrderTime;
 
 
 ///////////////////////////////////////////////////   BUTTONS   ////////////////////////////////////////////////////////
 
-    @FindBy(id="c_ord_form")
-    public  WebElement publishButton;
+    @FindBy(id = "c_ord_form")
+    public WebElement publishButton;
 
     @FindBy(className = "item")
-    public  List<WebElement> uploadedFilesUnderTextField;
+    public List<WebElement> uploadedFilesUnderTextField;
 
     @FindBy(xpath = "//button[contains(text(), 'Save as draft')]")
-    public  WebElement saveAsDraftButtonBottom;
+    public WebElement saveAsDraftButtonBottom;
 
     @FindBy(className = "progress-bar")
-    public  WebElement progressBar;
+    public WebElement progressBar;
 
-    @FindBy(id="progress")
-    public  WebElement progressCounter;
+    @FindBy(id = "progress")
+    public WebElement progressCounter;
 
 
     public OrderInfoAndActions andClickOnSaveAsDraftButton(WebDriver driver) throws InterruptedException {
@@ -154,9 +155,9 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
 //div[.//text()[contains(., 'READ MORE')]]  [(contains(@class, 'open_link'))]
 
 
-    public Boolean waitForStopWordsAllertAppear(){
+    public Boolean waitForStopWordsAllertAppear() {
 
-        if($(stopWordsAllert).is(visible) ){
+        if ($(stopWordsAllert).is(visible)) {
             return true;
         }
         System.out.println("Stop words allert did not appear!");
@@ -164,14 +165,13 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     }
 
 
-
-    public void uploadFileToOrder(String filepath){
+    public void uploadFileToOrder(String filepath) {
 
         fileuploadInput.sendKeys(filepath);
 
     }
 
-    public void waitForProgressBarWhenUploadingFilesToNewOrder(){
+    public void waitForProgressBarWhenUploadingFilesToNewOrder() {
 
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOf(progressBar));
@@ -243,7 +243,6 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
 
         super(driver);
     }
-
 
 
 }
