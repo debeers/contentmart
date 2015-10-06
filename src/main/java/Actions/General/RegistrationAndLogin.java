@@ -1,4 +1,4 @@
-package Actions;
+package Actions.General;
 
 import Entities.LoginObject;
 import PageObjects.General.LeftMenuGeneralPage;

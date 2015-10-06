@@ -3,7 +3,10 @@ package Entities;
 public class OrderObject {
 
 
-    private String totalBalance = "";
+    private String totalBalanceBefore = "";
+    private String totalBalanceAfterBlocking = "";
+    private String totalBalanceAfterUnBlocking = "";
+
     private String orderValue = "";
 
     private String ordName ="";
@@ -37,13 +40,15 @@ public class OrderObject {
 
 
 
-    public OrderObject(String totalBalance, String orderValue, String ordName, String desc, String wordsReq,
-                       String price, String entityOrderName, String entityOrderSystemID, String entityOrderStatus,
-                       String entityOrderDescription, String entityOrderPublicDate, String entityOrderDeadLine,
-                       String entityOrderVisibility, String entityOrderValue) {
+    public OrderObject(String totalBalanceBefore, String totalBalanceAfterBlocking, String totalBalanceAfterUnBlocking,
+                       String orderValue, String ordName, String desc, String wordsReq, String price, String entityOrderName,
+                       String entityOrderSystemID, String entityOrderStatus, String entityOrderDescription, String entityOrderPublicDate,
+                       String entityOrderDeadLine, String entityOrderVisibility, String entityOrderValue) {
 
 
-        this.totalBalance = totalBalance;
+        this.totalBalanceBefore = totalBalanceBefore;
+        this.totalBalanceAfterBlocking = totalBalanceAfterBlocking;
+        this.totalBalanceAfterUnBlocking = totalBalanceAfterUnBlocking;
         this.orderValue = orderValue;
 
         this.ordName = ordName;
@@ -64,9 +69,9 @@ public class OrderObject {
 
 
 
-    public String getTotalBalance() {
+    public String getTotalBalanceBefore() {
 
-        return totalBalance;
+        return totalBalanceBefore;
     }
 
     public String getOrderValue() {
@@ -75,9 +80,9 @@ public class OrderObject {
     }
 
 
-    public void setTotalBalance(String totalBalance) {
+    public void setTotalBalanceBefore(String totalBalanceBefore) {
 
-        this.totalBalance = totalBalance;
+        this.totalBalanceBefore = totalBalanceBefore;
     }
 
     public void setOrderValue(String orderValue) {
@@ -197,6 +202,19 @@ public class OrderObject {
     }
 
 
+    public String getTotalBalanceAfterBlocking() {
+        return totalBalanceAfterBlocking;
+    }
 
+    public void setTotalBalanceAfterBlocking(String totalBalanceAfterBlocking) {
+        this.totalBalanceAfterBlocking = totalBalanceAfterBlocking;
+    }
 
+    public String getTotalBalanceAfterUnBlocking() {
+        return totalBalanceAfterUnBlocking;
+    }
+
+    public void setTotalBalanceAfterUnBlocking(String totalBalanceAfterUnBlocking) {
+        this.totalBalanceAfterUnBlocking = totalBalanceAfterUnBlocking;
+    }
 }

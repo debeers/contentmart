@@ -1,10 +1,5 @@
 package Tests;
 
-import Actions.RegistrationAndLogin;
-import DataProviders.ActionsWithOrdersDataProvider;
-import Entities.LoginObject;
-import Entities.OrderObject;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -16,15 +11,15 @@ public class DEBUG extends BaseTest{
 
 
 
-    @Parameters({"clientLogin", "clientPassword", "writerLogin", "writerPassword"})
-    @Test(groups={"regress 1.0"}, dataProvider= "debug", dataProviderClass = ActionsWithOrdersDataProvider.class)
-    public static void NewOrder(Object clientLoginObject, Object orderObject) throws InterruptedException, IOException {
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject order = (OrderObject) orderObject;
-
-        RegistrationAndLogin.loginAs(driver, clientLogin);
-        System.out.println(order.getDesc() + order.getWordsReq());
+    @Test(groups={"regress 1.0"})
+    public static void NewOrder() throws InterruptedException, IOException {
+//
+//        LoginObject clientLogin = (LoginObject) clientLoginObject;
+//        OrderObject order = (OrderObject) orderObject;
+//
+//        RegistrationAndLogin.loginAs(driver, clientLogin);
+//        System.out.println(order.getDesc() + order.getWordsReq());
 
 
 //        OrderInfoAndActions order = ClientGoToCreateNewOrder___OLD.andPublish(driver, clientLogin, orderObject);

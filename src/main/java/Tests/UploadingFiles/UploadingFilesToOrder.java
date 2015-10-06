@@ -1,7 +1,6 @@
 package Tests.UploadingFiles;
 
 import Actions.Client.ClientGoToCreateNewOrder;
-import DataProviders.CreateNewOrderActionsDataProvider;
 import Entities.LoginObject;
 import Entities.OrderObject;
 import Tests.BaseTest;
@@ -15,11 +14,12 @@ import static Actions.Client.ClientGoToCreateNewOrder.checkForFileUploadInNewOrd
  */
 public class UploadingFilesToOrder extends BaseTest {
 
-    @Test(groups={"regress 1.0"}, dataProvider= "CreateNewOrderActions", dataProviderClass = CreateNewOrderActionsDataProvider.class)
-    public static void AttachFileToOrder(Object clientLoginObject, Object orderObject) throws Exception {
+    @Test(groups={"regress 1.0"})
+    public static void AttachFileToOrder() throws Exception {
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
+        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
+        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+
 
 
         String filepath = System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\DMX.jpg";

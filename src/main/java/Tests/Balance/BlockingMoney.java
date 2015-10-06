@@ -1,15 +1,15 @@
 package Tests.Balance;
 
-import Actions.goToBalanceGeneralActions;
-import DataProviders.BallanceCheckDataProvider;
+import Actions.Client.CreateOrderAddBidAndSetAsWinner;
+import Actions.General.GoToBalanceGeneralActions;
 import Entities.LoginObject;
 import Entities.OrderObject;
-import GeneralHelpers.GeneralWaits;
 import PageObjects.General.BalanceGeneralPage;
 import Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import static Actions.General.GoToBalanceGeneralActions.clientGoToCheckForBalance;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -22,27 +22,21 @@ public class BlockingMoney extends BaseTest{
 
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderForBallance", dataProviderClass = BallanceCheckDataProvider.class)
-    public static void BlockingMoney(Object clientLoginObject, Object orderObject, Object writerLoginObj) throws InterruptedException {
+    @Test(groups={"regress 1.0"})
+    public static void BlockingMoney() throws InterruptedException {
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
+        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
+        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        LoginObject writerLogin = new LoginObject("debeers@bigmir.net", "H9CC1vxG");
 
-        goToBalanceGeneralActions.andAwardOrderToWriterAndScanBallance(driver, clientLogin, orderObj, writerLogin);
-        BalanceGeneralPage balanceGeneral = new BalanceGeneralPage(driver);
+        CreateOrderAddBidAndSetAsWinner.andAwardOrderToWriter(driver, clientLogin, orderObj, writerLogin);
+        BalanceGeneralPage balanceGeneral =
+                clientGoToCheckForBalance(driver, clientLogin, orderObj);
 
-        balanceGeneral.clickOnbalanceLeftMenu();
-        GeneralWaits.waitForPageLoad(driver);
+        assertEquals(balanceGeneral.xBlockingStatus(orderObj.getEntityOrderSystemID()), "Blocking");
+        assertEquals(balanceGeneral.xBlockingAmount(orderObj.getEntityOrderSystemID()), "- " + orderObj.getEntityOrderValue());
 
-        String blocking = balanceGeneral.getBlokingMoneyByOrderId(orderObj.getEntityOrderSystemID());
-        assertEquals(blocking, "Blocking");
-
-        String blockingAmount = balanceGeneral.getBlokingAmountMoneyByOrderId(orderObj.getEntityOrderSystemID());
-        assertEquals(blockingAmount, "- " + orderObj.getEntityOrderValue());
-
-        String bal = balanceGeneral.getBlockingMoneyBallance(orderObj.getEntityOrderSystemID());
-        Boolean differenceCount = goToBalanceGeneralActions.blockingBallanceDifference(bal, orderObj);
+        Boolean differenceCount = GoToBalanceGeneralActions.blockingBallanceDifference(orderObj);
         Assert.assertTrue(differenceCount);
 
     }

@@ -1,7 +1,6 @@
 package Tests.StopWords;
 
 import Actions.Writer.WriterGoToStartToWorking;
-import DataProviders.StopWordsDataProvider;
 import Entities.LoginObject;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
@@ -19,14 +18,14 @@ public class StopWordsInResultSend extends BaseTest {
 
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "stopWordsForSendResultTest", dataProviderClass = StopWordsDataProvider.class)
-    public static void StopWordsInResultSend(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object text, Object stopMsg) throws InterruptedException {
+    @Test(groups={"regress 1.0"})
+    public static void StopWordsInResultSend() throws InterruptedException {
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
-        String msg = (String)stopMsg;
-        String writerText = text.toString();
+        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
+        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        LoginObject writerLogin = new LoginObject("debeers@bigmir.net", "H9CC1vxG");
+        String msg = "why not to work outside ContentMart";
+        String writerText = "Skype, icq, telephone number, give me a call, cuz I want to communicate directly, without site. Thank you very much and have a nice day!";
 
         OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObj, writerLogin);
         orderInfoWriter.sendTextToTheClientTextArea(driver, writerText);

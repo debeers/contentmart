@@ -1,7 +1,6 @@
 package Tests.StopWords;
 
 import Actions.Writer.WriterGoToAllOrders;
-import DataProviders.StopWordsDataProvider;
 import Entities.LoginObject;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
@@ -17,14 +16,14 @@ public class StopWordsInLeaveAnOffer extends BaseTest{
 
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "StopWordsInLeaveAnOffer", dataProviderClass = StopWordsDataProvider.class)
-    public void StopWordsInLeaveAnOffer(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object offerDetails, Object allert) throws InterruptedException {
+    @Test(groups={"regress 1.0"})
+    public void StopWordsInLeaveAnOffer() throws InterruptedException {
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
-        String offerDetailsText = (String) offerDetails;
-        String stopWordsAllert = (String) allert;
+        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
+        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        LoginObject writerLogin = new LoginObject("debeers@bigmir.net", "H9CC1vxG");
+        String offerDetailsText = "Hello master! I`m your Jinni! Now you`re have 3 wishes! But I`m very bussy for now, please call me for a 1000 year or write me on my email.";
+        String stopWordsAllert = "You may not communicate with users directly or provide your email, Skype or phone number. Learn why not to work outside ContentMart.";
 
 
         OrderInfoAndActions orderInfoAndActions = WriterGoToAllOrders.createNewOrderAndBidOnIt(driver, clientLogin, orderObj, writerLogin);

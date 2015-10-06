@@ -1,7 +1,6 @@
 package Tests.OrdersActions;
 
 import Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage;
-import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
@@ -17,19 +16,17 @@ public class DeclineTextFromClientSide extends BaseTest {
 
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderObjectsForDeclineText", dataProviderClass = ActionsWithOrdersDataProvider.class)
-    public static void DeclineTextFromClientSide(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object text, Object declineReasonObj) throws InterruptedException {
+    @Test(groups={"regress 1.0"})
+    public static void DeclineTextFromClientSide() throws InterruptedException {
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
-        String writerText = text.toString();
-        String declineReason = declineReasonObj.toString();
-        System.out.println(declineReason);
+        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
+        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        LoginObject writerLogin = new LoginObject("debeers@bigmir.net", "H9CC1vxG");
+        String writerText = "hello world, java is super cool but really hard languege! TestNG is my favourite framework! Peace!)))";
+        String declineReason = "Nothing pearsonal, just test!";
 
 
         OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andMakeAChoice(driver, clientLogin, orderObj, writerLogin, writerText);
-
         decisionPage.clickOndeclineButtonOnDecisionPage();
         assertEquals(decisionPage.getTextFromLable(), "CONTENT REJECTED");
 

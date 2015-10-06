@@ -23,6 +23,10 @@ import static java.lang.Thread.sleep;
  */
 @SuppressWarnings("ConstantConditions")
 public class OrderInfoAndActions extends LeftMenuGeneralPage {
+
+
+
+
     @FindBy(xpath = "//button[contains(text(), 'Close order')]")
     public WebElement saveAsDraftSweetAllert;
 
@@ -79,7 +83,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(xpath = "//div[@title='Status']")
     public WebElement orderStatus;
 
-    @FindBy(xpath = "//*[@id='order_name']")
+    @FindBy(id="order_name")
     public WebElement orderName;
 
     @FindBy(xpath = "//div[@class='grey']")
@@ -163,6 +167,14 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(partialLinkText="why not to work outside ContentMart")
     public WebElement stopWordsAllert;
 
+    @FindBy(xpath="//a[contains(text(), 'Accept decline')]")
+    public WebElement acceptDeclineButtonWriter;
+
+
+    @FindBy(xpath=".//*[@id='new_results']/p")
+    public WebElement yourResultHaveBeenDeclined;
+
+
 
 
 
@@ -171,33 +183,44 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         super(driver);
     }
 
+
+
+
+    public MyOrdersPage clickOnAcceptDeclineButton(){
+
+        $WaitFor(acceptDeclineButtonWriter).click();
+        MyOrdersPage myOrdersPage = new MyOrdersPage(driver);
+        return myOrdersPage;
+    }
+
+
     public String waitForStopWordsAllert(){
 
-        String res = $WaitAndGetTextFrom(stopWordsAllert);
+        String res = $(stopWordsAllert).shouldBe(visible).getText();
         return res;
     }
 
     public String getTextFromLable() {
 
-        String res = $WaitAndGetTextFrom(contentRejectedLablenDecision);
+        String res = $(contentRejectedLablenDecision).shouldBe(visible).getText();
         return res;
     }
 
     public String getTextFromSuccessMessageAfterSendResult() {
 
-        String res = $WaitAndGetTextFrom(successMessageAfterSendResult);
+        String res = $(successMessageAfterSendResult).shouldBe(visible).getText();
         return res;
     }
 
     public String getTextFromDeclineReasonOnDecisionPage() {
 
-        String res = $WaitAndGetTextFrom(declineReasonFromClientDecision);
+        String res = $(declineReasonFromClientDecision).shouldBe(visible).getText();
         return res;
     }
 
     public String getTextFromWarningTextAfterStartWorking() {
 
-        String res = $WaitAndGetTextFrom(warningText);
+        String res = $(warningText).shouldBe(visible).getText();
         return res;
     }
 
@@ -392,49 +415,49 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     public String getorderName() {
 
-        String param = $WaitAndGetTextFrom(orderName);
+        String param = $(orderName).shouldBe(visible).getText();
         return param;
     }
 
     public String getsystemOrderID() {
 
-        String param = $WaitAndGetTextFrom(systemOrderID);
+        String param = $(systemOrderID).shouldBe(visible).getText();
         return param;
     }
 
     public String gettypeOfSharing() {
 
-        String param = $WaitAndGetTextFrom(typeOfSharing);
+        String param = $(typeOfSharing).shouldBe(visible).getText();
         return param;
     }
     public String getorderStatus() {
 
-        String param = $WaitAndGetTextFrom(orderStatus);
+        String param = $(orderStatus).shouldBe(visible).getText();
         return param;
     }
 
     public String getorderDescription() {
-        String param = $WaitAndGetTextFrom(orderDescription);
+        String param = $(orderDescription).shouldBe(visible).getText();
         return param;
     }
 
     public String getorderPublicationDate() {
-        String param = $WaitAndGetTextFrom(orderPublicationDate);
+        String param = $(orderPublicationDate).shouldBe(visible).getText();
         return param;
     }
 
     public String getorderDeadline() {
-        String param = $WaitAndGetTextFrom(orderDeadline);
+        String param = $(orderDeadline).shouldBe(visible).getText();
         return param;
     }
 
     public String getTextFromOrderStatus() {
-        String res = $WaitAndGetTextFrom(orderStatus);
+        String res = $(orderStatus).shouldBe(visible).getText();
         return res;
     }
 
     public String getTextFromSuccessMessageTextAfterBid() {
-        String res = $WaitAndGetTextFrom(successMessageTextAfterBid);
+        String res = $(successMessageTextAfterBid).shouldBe(visible).getText();
         return res;
     }
 
@@ -452,7 +475,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     public String getTextFromOrderName() {
 
-        String str = $WaitAndGetTextFrom(orderName);
+        String str = $(orderName).shouldBe(visible).getText();
         return str;
     }
 

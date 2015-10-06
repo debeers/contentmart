@@ -1,146 +1,165 @@
 package PageObjects.General;
 
+import GeneralHelpers.GeneralHelpers;
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
+import static GeneralHelpers.CustomWaits.$WaitFor;
+import static GeneralHelpers.GeneralWaits.waitForPageLoad;
+import static com.codeborne.selenide.Condition.hasClass;
 import static com.codeborne.selenide.Condition.present;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class EditProfilePage extends LeftMenuGeneralPage {
 
 
 
 
-    @FindBy(id = "signature_image")
-    public WebElement signatureImage;
+                                //For All
 
-    @FindBy(id = "avatar_photo")
-    public WebElement photoLink;
-
-    @FindBy(xpath = "//div[2]//form/div[2]/input")
-    public WebElement saveCropedAvatarButton;
-
-    @FindBy(xpath = "//form/div[2]/input")
-    public WebElement saveCropedSignButton;
-
-    @FindBy(xpath = "//form/div[1]/div[1]/div[2]/div[2]/div[1]")
-    public WebElement avatarProgressBar;
-
-    @FindBy(xpath = "//form/div[1]/div[15]/div[1]")
-    public WebElement signProgressBar;
-
-    @FindBy(xpath = "//form/div[1]/div[1]/div[2]/div[2]/div[2]")
-    public WebElement avatarProgressBarStatus;
-
-    @FindBy(xpath = "//form/div[1]/div[15]/div[2]")
-    public WebElement signProgressBarStatus;
+    @FindBy(xpath = "//button[contains(text(), 'Save Changes)]")
+    public WebElement saveChangesButton;
 
 
-    @FindBy(id = "first_name")
-    public WebElement firstNameField;
+    /////////////////////////////////// LINKS BLOCK /////////////////////////////////////////////
 
-    @FindBy(id = "last_name")
-    public WebElement lastNameField;
+    @FindBy(xpath = "//a[contains(text(), 'Account details')]")
+    public WebElement accountDetailsLink;
 
-    @FindBy(xpath = ".//*[@id='birthday']/fieldset/select[1]")
-    public WebElement monthBirthDateSelect;
+    @FindBy(xpath = "//a[contains(text(), 'Change password')]")
+    public WebElement changePasswordLink;
 
-    @FindBy(xpath = ".//*[@id='birthday']/fieldset/select[2]")
-    public WebElement dayBirthDateSelect;
+    @FindBy(xpath = "//a[contains(text(), 'Email Notifications')]")
+    public WebElement emailNotificationsLink;
 
-    @FindBy(xpath = ".//*[@id='birthday']/fieldset/select[3]")
-    public WebElement yearBirthDateSelect;
+    ////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                                   //Account details
+
+
+    @FindBy(id = "nick_name")
+    public WebElement nickNameField;
 
     @FindBy(id = "phone")
-    public WebElement phoneNumberField;
+    public WebElement phoneField;
 
     @FindBy(id = "pan")
     public WebElement panField;
 
     @FindBy(id = "region")
-    public WebElement stateRegionSelect;
+    public WebElement stateSelect;
 
     @FindBy(id = "city")
-    public WebElement cityRegionSelect;
+    public WebElement citySelect;
 
     @FindBy(id = "address")
-    public WebElement adressField;
+    public WebElement adressTextArea;
 
     @FindBy(id = "zip")
     public WebElement zipField;
 
-    @FindBy(xpath = "//form/div[1]/div[13]/div[2]/span")
-    public WebElement signatureImageWrapper;
+    @FindBy(id = "biography")
+    public WebElement biographyTextArea;
 
-    @FindBy(xpath = "//form/div[2]/button")
-    public WebElement saveButton;
+    @FindBy(id = "signature_image")
+    public WebElement signatureInput;
 
-    @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[2]/div[2]/form/div[2]/span")
-    public WebElement messageAfterSaving;// Settings successfully saved
+    @FindBy(xpath = ".//*[@id='copywriter_details']/div[10]/div[2]/div[3]/a")
+    public WebElement viewSingatureInInvoiceLink;
 
 
-    public void uploadSign(String path) throws InterruptedException {
 
-        signatureImage.sendKeys(path);
-        Thread.sleep(2000);
+    //////////////////////////////////////////////////////////////////////////////////////
+
+                                     //Password change
+
+    @FindBy(id = "old_password")
+    public WebElement oldPasswordInput;
+
+    @FindBy(id = "new_password")
+    public WebElement newPasswordInput;
+
+    @FindBy(id = "repeat_password")
+    public WebElement repeatPasswordInput;
+
+    @FindBy(xpath = "//div[contains(text(), 'field is required.')]")
+    public WebElement allerFieldIsRequired;
+
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+                                    //Email notifications
+
+    @FindBy(xpath = ".//div[contains(@class, 'switch toggle-on')]")
+    public List<WebElement> triggersON;
+
+    @FindBy(xpath = ".//div[contains(@class, 'switch toggle-off')]")
+    public List<WebElement> triggersOFF;
+
+    @FindBy(xpath = ".//*[@id='email_notifications']/div[1]/div/div/div/div")
+    public List<WebElement> triggers;
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+    public void clickOnEmailNotificationsLink(){
+
+        $WaitFor(emailNotificationsLink).click();
+        waitForPageLoad(driver);
     }
 
-    public void waitForSignProgressBarAppear() {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.visibilityOf(signProgressBar));
+    public void clickOnChangePasswordLinkLink(){
 
-
-    }
-
-
-
-    public void clickOnsaveCropedSignButton() {
-
-        $(saveCropedSignButton).shouldBe(present).click();
-    }
-
-
-    public void setNewProfilePhoto(String path) throws InterruptedException {
-
-        $(photoLink).sendKeys(path);
-        Thread.sleep(2000);
-    }
-
-    public void clickOnSaveCropedAvatarButton() {
-
-        $(saveCropedAvatarButton).shouldBe(visible).click();
-
-    }
-
-
-    public void waitForAvatarProgressBar() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.visibilityOf(avatarProgressBar));
-
-    }
-
-
-    public void clickOnSaveProfileButton() {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.visibilityOf(saveButton)).click();
-
-    }
-
-    public void waitForSettingsSuccessfullysavedAppear() {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.visibilityOf(messageAfterSaving));
+        $WaitFor(changePasswordLink).click();
 
     }
 
-    public String getAvatarProgressBarStatus() {
+    public void clickOnAccountDetailsLinkLinkLink(){
 
-        String res = $(avatarProgressBarStatus).shouldBe(visible).getText();
-        return res;
+        $WaitFor(accountDetailsLink).click();
+
     }
+
+    public void switchTriggersOFF(){
+
+        if(triggers.size() != 0) {
+            for (WebElement r : triggers) {
+
+                if ($(r).getAttribute("class").contains("switch toggle-on")) {
+                    $(r).click();
+
+                }
+
+            }
+        }
+    }
+
+    public void switchTriggersON(){
+
+        if(triggers.size() != 0) {
+            for (WebElement r : triggers) {
+
+                if ($(r).getAttribute("class").contains("switch toggle-off")) {
+                    $(r).click();
+
+                }
+
+            }
+        }
+    }
+
+
 
 
     public EditProfilePage(WebDriver driver) {

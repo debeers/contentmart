@@ -5,6 +5,7 @@ import GeneralHelpers.GeneralWaits;
 import PageObjects.BasePageObject;
 import PageObjects.Client.ClientNewOrderPage;
 import PageObjects.Writer.WriterAllOrdersPage;
+import com.thoughtworks.selenium.webdriven.commands.WaitForPageToLoad;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,8 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static Actions.RegistrationAndLogin.logOut;
-import static Actions.RegistrationAndLogin.loginAs;
+import static Actions.General.RegistrationAndLogin.logOut;
+import static Actions.General.RegistrationAndLogin.loginAs;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 import static Tests.BaseTest.wait;
 import static com.codeborne.selenide.Condition.present;
@@ -26,6 +27,11 @@ public class LeftMenuGeneralPage extends BasePageObject {
 
     @FindBy(xpath="html/body/div/div[3]/ul/li[2]/div[1]/div/p")
     public  WebElement profileLeftMenu;
+
+    @FindBy(xpath="//span[contains(text(), 'My profile')]")
+    public  WebElement myProfileLeftMenu;
+
+
 
     @FindBy(xpath = "/html/body/div[1]/div[3]/ul/li[3]/a")
     public  WebElement newOrderLeftMenu;
@@ -106,6 +112,16 @@ public class LeftMenuGeneralPage extends BasePageObject {
 
         $(profileLeftMenu).shouldBe(visible).click();
     }
+
+
+    public void clickOnMyProfileLeftMenuLeftMenu() {
+
+        $(myProfileLeftMenu).shouldBe(visible).click();
+
+    }
+
+
+
 
     public void clickOnAllOrdersLeftMenuMenu() {
 

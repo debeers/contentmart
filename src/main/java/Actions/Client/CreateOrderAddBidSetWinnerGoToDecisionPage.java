@@ -3,13 +3,16 @@ package Actions.Client;
 import Actions.Writer.WriterGoToStartToWorking;
 import Entities.LoginObject;
 import Entities.OrderObject;
+import GeneralHelpers.GeneralWaits;
+import PageObjects.General.BalanceGeneralPage;
+import PageObjects.General.LoginPage;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.General.OrderInfoAndActions;
 import org.openqa.selenium.WebDriver;
 
-import static Actions.RegistrationAndLogin.logOut;
-import static Actions.RegistrationAndLogin.loginAs;
-import static GeneralHelpers.GeneralHelpers.findCreatedClientOrderAndClickOnIt;
+import static Actions.General.RegistrationAndLogin.logOut;
+import static Actions.General.RegistrationAndLogin.loginAs;
+import static GeneralHelpers.GeneralHelpers.findCreatedOrderAndClickOnIt;
 import static com.codeborne.selenide.Condition.present;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -28,7 +31,7 @@ public class CreateOrderAddBidSetWinnerGoToDecisionPage {
         logOut(driver);
         MyOrdersPage myOrders = loginAs(driver, clientLogin);
         myOrders.clickOnInProgressLinkMyOrdersClient();
-        findCreatedClientOrderAndClickOnIt(driver, orderObject);
+        findCreatedOrderAndClickOnIt(driver, orderObject);
 
         OrderInfoAndActions orderInfoClient = new OrderInfoAndActions(driver);
         $(orderInfoClient.acceptButtonDecision).shouldBe(present);  //нужные ожидания, без них не все успевают в дом
@@ -53,6 +56,25 @@ public class CreateOrderAddBidSetWinnerGoToDecisionPage {
 
 
 
+    public static LoginPage declineWriterTextAction(WebDriver driver, OrderInfoAndActions decisionPage, String declineReason){
+
+        decisionPage.clickOndeclineButtonOnDecisionPage();
+        decisionPage.sendReasonOfRefusalTextAreaDecision(driver, declineReason);
+        decisionPage.clickOnDeclineButtonAfterRefusalDecision(driver);
+        logOut(driver);
+
+        LoginPage loginPage = new LoginPage(driver);
+        return loginPage;
+    }
+
+
+
+
+    public static void acceptWriterText(OrderInfoAndActions decisionPage){
+
+        decisionPage.clickOnAcceptButtonOnDecisionPage();
+
+    }
 
 
 

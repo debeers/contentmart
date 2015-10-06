@@ -22,8 +22,7 @@
 
 
 
-                <class name = "Tests.OrdersActions.ReassignOrder"/>
-
+                <class name = "Tests.Balance.UnblockingMoneyAfterClientDecline"/>
 
 
 
@@ -31,9 +30,15 @@
 
                 <!--
 
-<class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
 
 
+                <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
+                <class name = "Tests.OrdersActions.BidOnOrder"/>
+                <class name = "Tests.MyProfile.AddPortfolioItem"/>
+                <class name = "Tests.MyProfile.EmailNotificationsSaving"/>
+
+
+                <class name = "Tests.OrdersActions.ReassignOrder"/>
 
                 <class name = "Tests.OrdersActions.SendResultToClient"/>
                 <class name = "Tests.OrdersActions.BidOnOrder"/>
@@ -57,7 +62,7 @@
 
                 <class name = "Tests.Balance.BlockingMoney"/>
                 <class name = "Tests.Balance.TransferMoney"/>
-
+                <class name = "Tests.Balance.UnblockingMoneyAfterClientDecline"/>
 
                 <class name = "Tests.ExsistOfFile.ExistFileInMessages"/>
                 <class name = "Tests.ExsistOfFile.ExsistFilesInOrder"/>

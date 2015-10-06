@@ -7,8 +7,8 @@ import PageObjects.General.MyOrdersPage;
 import PageObjects.General.OrderInfoAndActions;
 import org.openqa.selenium.WebDriver;
 
-import static Actions.RegistrationAndLogin.logOut;
-import static Actions.RegistrationAndLogin.loginAs;
+import static Actions.General.RegistrationAndLogin.logOut;
+import static Actions.General.RegistrationAndLogin.loginAs;
 
 
 /**

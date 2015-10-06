@@ -1,7 +1,6 @@
 package Tests.CreateNewOrderActions;
 
 import Actions.Client.ClientGoToCreateNewOrder;
-import DataProviders.CreateNewOrderActionsDataProvider;
 import Entities.LoginObject;
 import Entities.OrderObject;
 import PageObjects.Client.ClientNewOrderPage;
@@ -15,12 +14,12 @@ import org.testng.annotations.Test;
 public class CancelOrderFromCreationPage extends BaseTest{
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "CreateNewOrderActions", dataProviderClass = CreateNewOrderActionsDataProvider.class)
-    public void EditAndThanPublishOrder(Object clientLoginObject, Object orderObject) throws Exception {
+    @Test(groups={"regress 1.0"})
+    public void EditAndThanPublishOrder() throws Exception {
 
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
+        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
+        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
 
         ClientNewOrderPage clientNewOrderPage = ClientGoToCreateNewOrder.andCreateTheNewOrder(driver, clientLogin, orderObj);
         clientNewOrderPage.clickOnCancelOrderButton();

@@ -1,7 +1,6 @@
 package Tests.UploadingFiles;
 
 import Actions.Writer.WriterGoToMessages;
-import DataProviders.MessagesDataProvider;
 import Entities.LoginObject;
 import Entities.OrderObject;
 import Tests.BaseTest;
@@ -18,12 +17,12 @@ public class UploadingFilesToMessages extends BaseTest {
 
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderForMessages", dataProviderClass = MessagesDataProvider.class)
-    public static void AttachFilesToMessage(Object clientLoginObject, Object orderObject, Object writerLoginObj) throws Exception {
+    @Test(groups={"regress 1.0"})
+    public static void AttachFilesToMessage() throws Exception {
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
+        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
+        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        LoginObject writerLogin = new LoginObject("debeers@bigmir.net", "H9CC1vxG");
 
         String path = System.getProperty("user.dir")+"\\src\\main\\java\\Resources\\DMX.jpg";
 

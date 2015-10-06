@@ -11,7 +11,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static Actions.RegistrationAndLogin.loginAs;
+import static Actions.General.GoToBalanceGeneralActions.getCurrentBallanceFromMenuButton;
+import static Actions.General.RegistrationAndLogin.loginAs;
 import static GeneralHelpers.GeneralHelpers.getFileName;
 import static GeneralHelpers.CustomWaits.createNewOrderWaits;
 import static GeneralHelpers.GeneralHelpers.uploadFileToHidenInput;
@@ -35,13 +36,10 @@ public class ClientGoToCreateNewOrder {
         order.setEntityOrderSystemID(orderInfoPage.getsystemOrderID());
         order.setEntityOrderVisibility(orderInfoPage.gettypeOfSharing());
 
-
-
-
         System.out.println("\n" +
-                "Balance name: " + orderInfoPage.getorderName() + "\n" +
-                "Balance System ID: " + orderInfoPage.getsystemOrderID() + "\n" +
-                "Balance description: " + orderInfoPage.getorderDescription() + "\n" +
+                "Order name: " + orderInfoPage.getorderName() + "\n" +
+                "Order System ID: " + orderInfoPage.getsystemOrderID() + "\n" +
+                "Order description: " + orderInfoPage.getorderDescription() + "\n" +
                 "Public date: " + orderInfoPage.getorderPublicationDate() + "\n" +
                 "Deadline: " + orderInfoPage.getorderDeadline() + "\n" +
                 "Visible for: " + orderInfoPage.gettypeOfSharing() + "\n" +
@@ -80,7 +78,6 @@ public class ClientGoToCreateNewOrder {
     }
 
 
-
     public static Boolean checkForFileUploadInNewOrder(String filePath) {
         String fileName = getFileName(filePath);
         ClientNewOrderPage newOrderPage = new ClientNewOrderPage(driver);
@@ -102,8 +99,6 @@ public class ClientGoToCreateNewOrder {
         return true;
 
     }
-
-
 
 
     public static Boolean checkForFileExsistInNewOrder() {
@@ -128,7 +123,6 @@ public class ClientGoToCreateNewOrder {
     }
 
 
-
     public static ClientNewOrderPage andCreateTheNewOrder(WebDriver driver, LoginObject clientLogin, OrderObject orderObject) throws InterruptedException {
 
         loginAs(driver, clientLogin);
@@ -138,8 +132,11 @@ public class ClientGoToCreateNewOrder {
         createNewOrderWaits(clientNewOrderPage);
 
         clientNewOrderPage.setOrder(driver, clientNewOrderPage, orderObject);
-        System.out.println(orderObject.getEntityOrderValue());
+        orderObject.setEntityOrderValue(orderObject.getEntityOrderValue());
+        orderObject.setTotalBalanceBefore(getCurrentBallanceFromMenuButton(driver));
 
+        System.out.println("Order value: " + orderObject.getEntityOrderValue());
+        System.out.println("Total balance before: " + orderObject.getTotalBalanceBefore());
 
         return clientNewOrderPage;
     }

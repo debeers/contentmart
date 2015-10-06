@@ -1,7 +1,6 @@
 package Tests.OrdersActions;
 
 import Actions.Writer.WriterGoToStartToWorking;
-import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
@@ -16,13 +15,13 @@ import static org.testng.Assert.assertEquals;
 public class StartWorking extends BaseTest {
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderObjectsForStartWorking", dataProviderClass = ActionsWithOrdersDataProvider.class)
-    public static void WriterStartToWorking(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object message) throws InterruptedException {
+    @Test(groups={"regress 1.0"})
+    public static void WriterStartToWorking() throws InterruptedException {
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
-        String msg = message.toString();
+        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
+        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        LoginObject writerLogin = new LoginObject("debeers@bigmir.net", "H9CC1vxG");
+        String msg = "* Warning - Project owner might cancel the order if it's not delivered before the deadline! Submit in time!";
 
         OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObj, writerLogin);
 

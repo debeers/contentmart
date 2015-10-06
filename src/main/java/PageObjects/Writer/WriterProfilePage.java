@@ -1,11 +1,16 @@
 package PageObjects.Writer;
 
 import PageObjects.General.LeftMenuGeneralPage;
+import com.codeborne.selenide.Condition;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static GeneralHelpers.CustomWaits.$WaitFor;
+import static com.codeborne.selenide.Selenide.$;
 
 /**
  * Created by CMG_TEST on 30.09.2015.
@@ -14,9 +19,18 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
 
 
+    @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[2]/div[3]/a")
+    public WebElement editProfileButton;
 
-    @FindBy(xpath = "//div/svg")
-    public WebElement addPortfolioButton;
+
+
+
+
+
+                        // Portfolio
+
+    @FindBy(xpath = "/html/body/div/div[3]/div/div/div/div[5]/div[1]/div")
+    public WebElement addPortfolioItemButton;
 
     @FindBy(className="fancybox-wrap fancybox-default fancybox-opened")
     public WebElement portfolioFrame;
@@ -42,30 +56,79 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     @FindBy(xpath = "//div [(contains(@class, 'document_block profile_added_block'))]//h4")
     public WebElement h4PortfolioBlockHeaders;
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+                                     // Languages and Expertises block
+
+
+
+
+
+
+
+
+
     public WriterProfilePage(WebDriver driver) {
         super(driver);
 
     }
 
 
+    public Boolean newPortfolioAppear(WebDriver driver, String head) {
 
-
-    public Boolean newPortfolioAppear(WebDriver driver, String head){
         WebDriverWait wait = new WebDriverWait(driver, 15);
-        Boolean res = wait.until(ExpectedConditions.visibilityOf(h4PortfolioBlockHeaders)).getText().contains(head);
+        WebElement el = wait.until(ExpectedConditions.visibilityOf(
+                driver.findElement(By.xpath(
+                        "//div[contains(@class, 'document_block profile_added_block')]/h4[contains(text(),'" +
+                                head + "')]"))));
+        if (el != null) {
 
-        return res;
+            return true;
+        }
+
+        return false;
     }
 
 
-    public void clickOnAddPortfolioButton(){
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-        wait.until(ExpectedConditions.visibilityOf(addPortfolioButton)).click();
-        wait.until(ExpectedConditions.visibilityOf(enterPortfolioTitleField));
-        wait.until(ExpectedConditions.visibilityOf(enterPortfolioTextField));
-        wait.until(ExpectedConditions.visibilityOf(addWorkButton));
+    public void clickOnAddPortfolioButton() {
+
+        $(addPortfolioItemButton).click();
+        $WaitFor(
+                enterPortfolioTitleField,
+                enterPortfolioTextField,
+                addWorkButton
+        );
+
     }
 
+
+    public void setPortfolioTitleField(String text) {
+
+        $(enterPortfolioTitleField).sendKeys(text);
+
+    }
+
+    public void setPortfolioTextField(String text) {
+
+        $(enterPortfolioTextField).sendKeys(text);
+
+    }
+
+    public void clickOnaAdWorkButton() {
+
+        $(addWorkButton).click();
+
+    }
+
+
+    public void clickOnEditProfileButtonkButton() {
+
+        editProfileButton.click();
+
+    }
 
 
 }

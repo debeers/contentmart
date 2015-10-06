@@ -1,7 +1,6 @@
 package Tests.OrdersActions;
 
 import Actions.Writer.WriterGoToAllOrders;
-import DataProviders.ActionsWithOrdersDataProvider;
 import Entities.LoginObject;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
@@ -19,18 +18,20 @@ public class BidOnOrder extends BaseTest {
 
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderForBidOnOrder", dataProviderClass = ActionsWithOrdersDataProvider.class)
-    public void WriterBidOnOrder(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object msg) throws InterruptedException {
+    @Test(groups={"regress 1.0"})
+    public void WriterBidOnOrder() throws InterruptedException {
 
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
+        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
+        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        LoginObject writerLogin = new LoginObject("debeers@bigmir.net", "H9CC1vxG");
+        String msg = "Thanks! Your proposal has been sent to the order owner.";
+
 
         OrderInfoAndActions orderInfoAndActions = WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, orderObj, writerLogin);
 
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Proposal sent", "ERROR: wrong status!");
-        assertEquals(orderInfoAndActions.getTextFromOrderName(), orderObj.getEntityOrderName(), "ERROR: There are different order name");
+        assertEquals(orderInfoAndActions.getTextFromOrderName(), orderObj.getEntityOrderName());
         assertEquals(orderInfoAndActions.getTextFromSuccessMessageTextAfterBid(), msg, "Error: no success message");
 
 

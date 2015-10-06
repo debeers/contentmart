@@ -21,7 +21,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class GeneralHelpers {
 
 
-    public static void findCreatedClientOrderAndClickOnIt(WebDriver driver, OrderObject order) {
+    public static void findCreatedOrderAndClickOnIt(WebDriver driver, OrderObject order) {
 
         OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
         String orderXPath = orderInfoAndActions.xOrder(order.getEntityOrderName());

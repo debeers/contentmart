@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by DeBeers on 18.09.2015.
  */
-public class WriterGoToOrderWorkflow {
+public class WriterGoToEndResultToClient {
 
 
 

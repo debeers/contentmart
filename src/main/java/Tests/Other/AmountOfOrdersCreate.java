@@ -1,8 +1,7 @@
 package Tests.Other;
 
 import Actions.Client.ClientGoToCreateNewOrder;
-import Actions.RegistrationAndLogin;
-import DataProviders.CreateNewOrderActionsDataProvider;
+import Actions.General.RegistrationAndLogin;
 import Entities.LoginObject;
 import Entities.OrderObject;
 import PageObjects.Client.ClientNewOrderPage;
@@ -16,11 +15,12 @@ import org.testng.annotations.Test;
 public class AmountOfOrdersCreate extends BaseTest{
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "CreateNewOrderActions", dataProviderClass = CreateNewOrderActionsDataProvider.class)
-    public  void AmountOfOrdersCreate(Object clientLoginObject, Object orderObject) throws Exception {
+    @Test(groups={"regress 1.0"})
+    public  void AmountOfOrdersCreate() throws Exception {
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
+        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
+        OrderObject orderObj = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+
 
         for (int i = 0; i<=20; i++) {
             OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObj);

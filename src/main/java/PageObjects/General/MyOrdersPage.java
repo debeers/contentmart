@@ -105,11 +105,12 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
     }
 
 
-    public  void searchBySearchEngineMyOrdersWriter(MyOrdersPage myOrders, String createdOrderName){
+    public  void searchBySearchEngineMyOrdersWriter(MyOrdersPage myOrders, OrderObject orderObject){
         WebDriverWait wait = new WebDriverWait(driver, 15);
 
-        wait.until(ExpectedConditions.visibilityOf(myOrders.searchFieldMyOrders)).sendKeys(createdOrderName);
+        wait.until(ExpectedConditions.visibilityOf(myOrders.searchFieldMyOrders)).sendKeys(orderObject.getEntityOrderName());
         wait.until(ExpectedConditions.elementToBeClickable(myOrders.searchButtonMyOrders)).click();
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("html//a[.//text()[contains(., '" + orderObject.getEntityOrderName() + "')]]")))).click();
         waitForPageLoad(driver);
 
     }

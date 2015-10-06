@@ -1,7 +1,6 @@
 package Tests.RegistrationAndLogin;
 
-import Actions.RegistrationAndLogin;
-import DataProviders.LoginDataProvider;
+import Actions.General.RegistrationAndLogin;
 import Entities.LoginObject;
 import PageObjects.General.LoginPage;
 import Tests.BaseTest;
@@ -14,10 +13,11 @@ import static org.testng.Assert.assertEquals;
 public class ClientAndWriterLoginLogOutTest extends BaseTest {
 
 
-    @Test(groups = {"regress2.2"}, dataProvider = "ClientLoginData", dataProviderClass = LoginDataProvider.class)
-    public void positive_Client_LoginLogOut(Object clientLoginObject) throws InterruptedException {
+    @Test(groups = {"regress2.2"})
+    public void positive_Client_LoginLogOut() throws InterruptedException {
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
+        LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
+
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage(driver);
@@ -36,10 +36,11 @@ public class ClientAndWriterLoginLogOutTest extends BaseTest {
     }
 
 
-    @Test(groups = {"regress2.2"}, dataProvider = "WriterLoginData", dataProviderClass = LoginDataProvider.class)
-    public void positive_Writer_LoginLogOut(Object writerLoginObj) throws InterruptedException {
+    @Test(groups = {"regress2.2"})
+    public void positive_Writer_LoginLogOut() throws InterruptedException {
 
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
+
+        LoginObject writerLogin = new LoginObject("debeers@bigmir.net", "H9CC1vxG");
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage(driver);

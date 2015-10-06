@@ -7,8 +7,8 @@ import GeneralHelpers.GeneralWaits;
 import PageObjects.General.MyOrdersPage;
 import org.openqa.selenium.WebDriver;
 
-import static Actions.RegistrationAndLogin.logOut;
-import static Actions.RegistrationAndLogin.loginAs;
+import static Actions.General.RegistrationAndLogin.logOut;
+import static Actions.General.RegistrationAndLogin.loginAs;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -47,7 +47,7 @@ public class ClientGoToMyOrders {
         MyOrdersPage myOrders = ClientGoToMyOrders.clientGoToMyOrders(driver, clientLogin);
 
         myOrders.clickOnPublishedLinkMyOrdersClient();
-        GeneralHelpers.findCreatedClientOrderAndClickOnIt(driver, order);
+        GeneralHelpers.findCreatedOrderAndClickOnIt(driver, order);
         System.out.println("Balance successfully found!");
         return myOrders;
     }
