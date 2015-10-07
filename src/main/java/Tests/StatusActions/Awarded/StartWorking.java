@@ -1,4 +1,4 @@
-package Tests.OrdersActions;
+package Tests.StatusActions.Awarded;
 
 import Actions.Writer.WriterGoToStartToWorking;
 import Entities.OrderObject;

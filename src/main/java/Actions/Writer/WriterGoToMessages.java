@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static GeneralHelpers.GeneralHelpers.entityAppear;
+import static GeneralHelpers.GeneralHelpers.getFileName;
 import static com.codeborne.selenide.Selenide.$;
 
 /**
@@ -41,7 +42,7 @@ public class WriterGoToMessages {
         orderInfoWriter.clickOnTheDropTheCustomerMessageButton(driver);
         MyMessagesPage message = new MyMessagesPage(driver);
 
-        String filename = GeneralHelpers.getFileName(path);
+        String filename = getFileName(path);
         message.inputFileToTheMessage(path);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("fileDownloadIcon")));
         String href = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'" + filename + "')]"))).getAttribute("href");
@@ -54,7 +55,7 @@ public class WriterGoToMessages {
 
     public static Boolean waitForFileAppearInDialogBox(String path) {
 
-        String file = GeneralHelpers.getFileName(path);
+        String file = getFileName(path);
         entityAppear(file);
         $(By.className("fileDownloadIcon")).should(Condition.appear);
 

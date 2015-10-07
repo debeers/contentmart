@@ -1,4 +1,4 @@
-package Tests.OrdersActions;
+package Tests.StatusActions.ProposalSent;
 
 import Actions.Client.CreateOrderAddBidAndSetAsWinner;
 import Entities.OrderObject;

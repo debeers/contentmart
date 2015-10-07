@@ -7,6 +7,9 @@ import PageObjects.General.LeftMenuGeneralPage;
 import PageObjects.General.OrderInfoAndActions;
 import org.openqa.selenium.WebDriver;
 
+import static Actions.General.RegistrationAndLogin.logOut;
+import static Actions.General.RegistrationAndLogin.loginAs;
+
 /**
  * Created by CMG_TEST on 17.09.2015.
  */
@@ -18,7 +21,9 @@ public class WriterGoToAllOrders {
 
         ClientGoToCreateNewOrder.andPublish(driver, clientLogin, order);
         LeftMenuGeneralPage leftMenuGeneralPage = new LeftMenuGeneralPage(driver);
-        leftMenuGeneralPage.clickOnAllOrdersLeftMenu(driver, writerLogin);
+        logOut(driver);
+        loginAs(driver, writerLogin);
+        leftMenuGeneralPage.clickOnAllOrdersLeftMenu(driver);
         OrderInfoAndActions orderInfoAndActions = bidOnCreatedOrderByBidButton(driver, order);
         orderInfoAndActions.clickOnLeaveAnOfferButtonFromBidOnOrder(driver);
 
@@ -41,7 +46,9 @@ public class WriterGoToAllOrders {
 
         ClientGoToCreateNewOrder.andPublish(driver, clientLogin, order);
         LeftMenuGeneralPage leftMenuGeneralPage = new LeftMenuGeneralPage(driver);
-        leftMenuGeneralPage.clickOnAllOrdersLeftMenu(driver, writerLogin);
+        logOut(driver);
+        loginAs(driver, writerLogin);
+        leftMenuGeneralPage.clickOnAllOrdersLeftMenu(driver);
         OrderInfoAndActions orderInfoAndActions = bidOnCreatedOrderByBidButton(driver, order);
 
 

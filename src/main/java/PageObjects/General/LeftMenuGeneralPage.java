@@ -90,12 +90,7 @@ public class LeftMenuGeneralPage extends BasePageObject {
     }
 
 
-    public WriterAllOrdersPage clickOnAllOrdersLeftMenu(WebDriver driver, LoginObject writerLogin) {
-        if (driver.getTitle() != "My Orders | ContentMart") {
-            logOut(driver);
-            loginAs(driver, writerLogin);
-        }
-
+    public WriterAllOrdersPage clickOnAllOrdersLeftMenu(WebDriver driver ) {
 
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.elementToBeClickable(allOrdersLeftMenu)).click();

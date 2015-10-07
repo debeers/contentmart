@@ -1,4 +1,4 @@
-package Tests.CreateNewOrderActions;
+package Tests.StatusActions.Published;
 
 import Actions.Client.ClientGoToCreateNewOrder;
 import Entities.OrderObject;

@@ -3,6 +3,7 @@ package PageObjects.General;
 import Entities.OrderObject;
 import GeneralHelpers.CreateNewOrderHelper;
 import PageObjects.Client.ClientNewOrderPage;
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,8 @@ import static GeneralHelpers.CustomWaits.$WaitAndGetTextFrom;
 import static GeneralHelpers.CustomWaits.$WaitFor;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 import static Tests.BaseTest.wait;
+import static com.codeborne.selenide.Condition.appear;
+import static com.codeborne.selenide.Condition.present;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static java.lang.Thread.sleep;
@@ -27,6 +30,15 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     @FindBy(xpath = "//button[contains(text(), 'Close order')]")
     public WebElement saveAsDraftSweetAllert;
+
+    @FindBy(xpath = "//a[contains(text(), 'Save as Draft')]")
+    public WebElement saveAsDraftButton;
+
+    @FindBy(xpath = "//*[contains(text(), 'Plagiarism check in progress...')]")
+    public WebElement plagiatorCheck;
+
+    @FindBy(xpath = "//button[contains(text(), 'Cancel your offer')]")
+    public WebElement cancelYourOfferAfterBid;
 
     @FindBy(css = "#new_results > div:nth-child(4) > span:nth-child(1)")
     public WebElement yourResultHasBeenDeliveredMsg;
@@ -61,6 +73,8 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(xpath = ".//*[@id='new_results']/div[4]/span")
     public WebElement successMessageAfterSendResult;
 
+    @FindBy(className = "js_confirm_action cancel-link")
+    public WebElement cancelChosenWorsmith;
 
     @FindBy(xpath = "//button[contains(text(),'Drop the Client a Message')]")
     public WebElement dropTheCustomerMessage;
@@ -74,6 +88,8 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(xpath = "//div[3]//div[3]//div[2]/div[4]/span")
     public WebElement warningText;
 
+    @FindBy(className = "info40")
+    public WebElement infoMsgAfterCancelChosenWorsmith;
 
     @FindBy(xpath = "//div[@title='#ID']")
     public WebElement systemOrderID;
@@ -177,6 +193,19 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         super(driver);
     }
 
+    public String getTextFromSavedAsDraftTextArea() {
+
+        String text = $WaitFor(sendTextToTheClientTextArea).getAttribute("value");
+        return text;
+    }
+
+    public Boolean waitForPlagiatorCheckAppear(){
+
+       if($(plagiatorCheck).should(appear).isDisplayed()){
+           return true;
+       }
+        return false;
+    }
 
     public MyOrdersPage clickOnAcceptDeclineButton() {
 
@@ -185,11 +214,30 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         return myOrdersPage;
     }
 
+    public String infoMsgText() {
+
+        String str = $(infoMsgAfterCancelChosenWorsmith).shouldBe(visible).getText();
+        return str;
+    }
+
+    public void clickOnCancelYourOfferAfterBid() throws InterruptedException {
+
+        $(cancelYourOfferAfterBid).shouldBe(visible).click();
+        sleep(2000);
+        $(publishOrderQuestionSweet).shouldBe(Condition.present).click();
+        $(leaveAnOfferButton).should(appear);
+    }
 
     public String waitForStopWordsAllert() {
 
         String res = $(stopWordsAllert).shouldBe(visible).getText();
         return res;
+    }
+
+
+    public void clickOnSaveAsDraftButton() {
+
+        $WaitFor(saveAsDraftButton).click();
     }
 
     public String getTextFromLable() {
@@ -216,6 +264,12 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         return res;
     }
 
+    public void clickOnCancelChosenWorsmith() {
+
+        $(cancelChosenWorsmith).shouldBe(present).click();
+        $(publishOrderQuestionSweet).should(appear).click();
+        getorderStatus();
+    }
 
     public void clickOnReassingButtonDecision() {
 
@@ -242,7 +296,6 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         reassignTextFieldDecision.click();
     }
 
-
     public void typeDetailsOfYourOfferField(String details) {
 
         $WaitFor(leaveAnOfferDetailsField).sendKeys(details);
@@ -253,7 +306,6 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         String res = wait.until(ExpectedConditions.visibilityOf(stopwordsAllert)).getText();
         return res;
     }
-
 
     public ClientNewOrderPage andClickOnPublishOrderButtonTop() throws InterruptedException {
 

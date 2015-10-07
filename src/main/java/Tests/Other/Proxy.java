@@ -20,7 +20,7 @@ public class Proxy {
 
     @Test
     public void testMobProxyServer() throws Exception {
-        // запуск прокси сервера
+        // запуск прокси сервера                     // I need comment`s on russian for better understanding of proxy work, I`ll delete it in future not now
         ProxyServer server = new ProxyServer(4444);
         server.start();
 

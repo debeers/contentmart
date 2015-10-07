@@ -1,4 +1,4 @@
-package Tests.OrdersActions;
+package Tests.StatusActions.Published;
 
 import Actions.Writer.WriterGoToAllOrders;
 import Entities.OrderObject;

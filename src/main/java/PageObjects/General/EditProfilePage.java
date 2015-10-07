@@ -121,10 +121,10 @@ public class EditProfilePage extends LeftMenuGeneralPage {
     public void switchTriggersOFF() {
 
         if (triggers.size() != 0) {
-            for (WebElement r : triggers) {
+            for (WebElement webElement : triggers) {
 
-                if ($(r).getAttribute("class").contains("switch toggle-on")) {
-                    $(r).click();
+                if ($(webElement).getAttribute("class").contains("switch toggle-on")) {
+                    $(webElement).click();
 
                 }
 
@@ -135,10 +135,10 @@ public class EditProfilePage extends LeftMenuGeneralPage {
     public void switchTriggersON() {
 
         if (triggers.size() != 0) {
-            for (WebElement r : triggers) {
+            for (WebElement webElement : triggers) {
 
-                if ($(r).getAttribute("class").contains("switch toggle-off")) {
-                    $(r).click();
+                if ($(webElement).getAttribute("class").contains("switch toggle-off")) {
+                    $(webElement).click();
 
                 }
 

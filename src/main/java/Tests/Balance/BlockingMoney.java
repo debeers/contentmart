@@ -26,10 +26,8 @@ public class BlockingMoney extends BaseTest{
 
         OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
 
-        CreateOrderAddBidAndSetAsWinner.
-                andAwardOrderToWriter(driver, clientLogin, order, writerLogin);
-        BalanceGeneralPage balanceGeneral =
-                clientGoToCheckForBlockingBalance(driver, order);
+        CreateOrderAddBidAndSetAsWinner.andAwardOrderToWriter(driver, clientLogin, order, writerLogin);
+        BalanceGeneralPage balanceGeneral = clientGoToCheckForBlockingBalance(driver, order);
 
         assertEquals(balanceGeneral.xBlockingStatus(order.getEntityOrderSystemID()), "Blocking");
         assertEquals(balanceGeneral.xBlockingAmount(order.getEntityOrderSystemID()), "- " + order.getEntityOrderValue());

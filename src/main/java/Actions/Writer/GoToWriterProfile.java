@@ -34,7 +34,6 @@ public class GoToWriterProfile {
 
         writerProfilePage.setPortfolioTextField(text);
         writerProfilePage.clickOnaAddWorkButton();
-        Thread.sleep(3000);
 
     }
 

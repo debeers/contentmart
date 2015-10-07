@@ -152,8 +152,6 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
         return orderInfoAndActions;
     }
 
-//div[.//text()[contains(., 'READ MORE')]]  [(contains(@class, 'open_link'))]
-
 
     public Boolean waitForStopWordsAllertAppear() {
 
@@ -214,17 +212,20 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     }
 
 
-    public void setOrder(WebDriver driver, ClientNewOrderPage newOrder, OrderObject orderObject) throws InterruptedException {
+    public void setOrder(WebDriver driver, ClientNewOrderPage newOrder, OrderObject order) throws InterruptedException {
 
         String id = CreateNewOrderHelper.randomID();
-
-        newOrder.setOrderNameField(orderObject.getOrdName(), id);
-        newOrder.setDescriptionField(orderObject.getDesc());
-        newOrder.setWordsRequiredField(orderObject.getWordsReq());
-        newOrder.setPriceField(orderObject.getPrice());
+        newOrder.orderNameField.clear();
+        newOrder.descriptionField.clear();
+        newOrder.wordsRequiredField.clear();
+        newOrder.priceField.clear();
+        newOrder.setOrderNameField(order.getOrdName(), id);
+        newOrder.setDescriptionField(order.getDesc());
+        newOrder.setWordsRequiredField(order.getWordsReq());
+        newOrder.setPriceField(order.getPrice());
         $(newOrder.deadlineField).shouldBe(visible).click();
 
-        orderObject.setEntityOrderValue($(newOrder.orderValue).shouldBe(visible).getText());
+        order.setEntityOrderValue($(newOrder.orderValue).shouldBe(visible).getText());
 
         sleep(3000);
 
