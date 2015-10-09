@@ -28,7 +28,6 @@ public class WriterGoToAllOrders {
         orderInfoAndActions.clickOnLeaveAnOfferButtonFromBidOnOrder(driver);
 
         return orderInfoAndActions;
-
     }
 
     public static OrderInfoAndActions bidOnCreatedOrderByBidButton(WebDriver driver, OrderObject order) {
@@ -38,7 +37,6 @@ public class WriterGoToAllOrders {
         orderInfoAndActions.clickOnBidButton(driver, order);
 
         return orderInfoAndActions;
-
     }
 
 
@@ -51,10 +49,6 @@ public class WriterGoToAllOrders {
         leftMenuGeneralPage.clickOnAllOrdersLeftMenu(driver);
         OrderInfoAndActions orderInfoAndActions = bidOnCreatedOrderByBidButton(driver, order);
 
-
         return orderInfoAndActions;
-
     }
-
-
 }

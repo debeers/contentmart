@@ -25,12 +25,12 @@
             <classes>
 
 
-                <class name = "Tests.StatusActions.Awarded.CancelChosenWordsmith"/>
+                <class name = "Tests.EditProfile.LanguagesExpertisesCategoriesAdd"/>
                 <!--
 
 
 
-                              <class name = "Tests.MyProfile.AddPortfolioItem"/>
+                <class name = "Tests.MyProfile.AddPortfolioItem"/>
                 <class name = "Tests.Messages.SendTextMessages"/>
 
                 <class name = "Tests.StatusActions.ProposalSent.SetAsWinner"/>
@@ -73,7 +73,7 @@
 
                 <class name = "Tests.ExsistOfFile.ExistFileInMessages"/>
                 <class name = "Tests.ExsistOfFile.ExsistFilesInOrder"/>
-                <class name = "Tests.StatusActions.InProgress.SaveAsDraft"/>
+                <class name = "Tests.StatusActions.InProgress.SendResultFromSaveAsDraftromSaveAsDraft"/>
 
 
 

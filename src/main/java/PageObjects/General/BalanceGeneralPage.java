@@ -18,13 +18,10 @@ public class BalanceGeneralPage extends LeftMenuGeneralPage {
     @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[2]/p")
     public WebElement availebleBalance;
 
-
     @FindBy(xpath = "html/body/div/div[3]/ul/li[7]/a/span")
     public WebElement clientBallanceFromLeftMenu;
 
-
 //////////////////////////////////////////////    Blocking
-
 
     public String scanBalanceFromMenu() {
 
@@ -32,7 +29,6 @@ public class BalanceGeneralPage extends LeftMenuGeneralPage {
         String balance = scan.substring(scan.indexOf(' ') + 1);
         return balance;
     }
-
 
     public String xBlockingStatus(String ID) {
 
@@ -58,9 +54,7 @@ public class BalanceGeneralPage extends LeftMenuGeneralPage {
         return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
     }
 
-
     ///////////////////////////////////////////    Unblocking
-
 
     public String xUnBlockingStatus(String ID) {
 
@@ -88,8 +82,6 @@ public class BalanceGeneralPage extends LeftMenuGeneralPage {
 
 
 ///////////////////////////////////////   Transfer
-
-
     public String xTransferStatus(String ID) {
 
         String xpath = "html/body//td[.//text()[contains(., ' #";

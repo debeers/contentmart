@@ -25,6 +25,5 @@ public class AddPortfolioItem extends BaseTest {
         WriterProfilePage writerProfilePage = GoToWriterProfile.goToMyProfile(driver, writerLogin);
         addNewPortfolioItem(writerProfilePage, title, 55);
         Assert.assertTrue(writerProfilePage.newPortfolioAppear(driver, title));
-
     }
 }

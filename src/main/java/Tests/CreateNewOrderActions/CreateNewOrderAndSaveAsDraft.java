@@ -24,6 +24,5 @@ public class CreateNewOrderAndSaveAsDraft extends BaseTest{
         OrderInfoAndActions orderInfoAndActions = clientNewOrderPage.andClickOnSaveAsDraftButton(driver);
 
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Drafted");
-
     }
 }

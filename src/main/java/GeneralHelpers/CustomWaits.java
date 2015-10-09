@@ -6,7 +6,6 @@ import Tests.BaseTest;
 import com.google.common.collect.Sets;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.HashSet;
 
@@ -60,77 +59,60 @@ public class CustomWaits extends BaseTest {
                 newOrder.publishButton
         );
         out.println("HAPPY HOUR`S in McDonald`s! All elements had been loaded successfully! Yuuuuuuupppiiiiii!)))))");
-
     }
 
 
     public static WebElement $WaitFor(WebElement... elements) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
 
         if (elements != null) {
 
             for (WebElement webElement : elements) {
 
-
                 if (elementsShouldBeVisible.contains(webElement.getTagName())) {
 
-                    wait.until(ExpectedConditions.visibilityOf(webElement));
-                    out.println("Waiting for visibility of: " + "Tag name: " + webElement.getTagName() + " " + "with text: " + webElement.getText());
-                    return webElement;
+                    WebElement existedElement = $waitForVisibilityOfElement(webElement);
+                    return existedElement;
 
                 } else if (elementToBeClickable.contains(webElement.getTagName())) {
 
-                    wait.until(ExpectedConditions.elementToBeClickable(webElement));
-                    out.println("Waiting for visibility of Button: " + webElement.getText());
-                    return webElement;
+                    WebElement existedElement = $waitForElementToBeClickable(webElement);
+                    return existedElement;
 
                 } else if (webElement.getTagName().equalsIgnoreCase("a")) {
-                    wait.until(ExpectedConditions.visibilityOf(webElement));
-                    out.println("Waiting for visibility of Link: " + webElement.getText() + webElement.getAttribute("href"));
 
-                    if (isFileExists(webElement.getAttribute("href"))) {
-                        out.println("Link responce is 200, link is OK ");
-                    } else out.println("Link is broken, check it please");
-
-                    return webElement;
+                    WebElement existedElement = $waitForLink(webElement);
+                    return existedElement;
                 }
-
             }
-        } else out.print("No args=...");
-
-
-        return null;
-    }
-
-
-    public static String $WaitAndGetTextFrom(WebElement... elements) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-
-        if (elements != null) {
-
-            for (WebElement webElement : elements) {
-
-                if (elementsShouldBeVisible.contains(webElement.getTagName())) {
-
-
-                    String str = wait.until(ExpectedConditions.visibilityOf(webElement)).getText();
-                    out.println("Waiting for visibility of: " + "Tag name: " + webElement.getTagName() + " " + "with text: " + webElement.getText());
-                    return str;
-
-                } else if (elementToBeClickable.contains(webElement.getTagName())) {
-
-                    String str = wait.until(ExpectedConditions.elementToBeClickable(webElement)).getText();
-                    out.println("Waiting for visibility of BUTTON: " + "Tag name: " + webElement.getTagName() + " " + "with text: " + webElement.getText());
-                    return str;
-                } else return
-                        "..:::Can`t get text from element:::..";
-
-            }
-
         } else out.print("No args=...");
 
         return null;
     }
 
 
+    public static WebElement $waitForVisibilityOfElement(WebElement webElement) {
+
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+        out.println("Waiting for visibility of: " + "Tag name: " + webElement.getTagName() + " " + "with text: " + webElement.getText());
+        return webElement;
+    }
+
+    public static WebElement $waitForElementToBeClickable(WebElement webElement) {
+
+        wait.until(ExpectedConditions.elementToBeClickable(webElement));
+        out.println("Waiting for visibility of Button: " + webElement.getText());
+        return webElement;
+    }
+
+    public static WebElement $waitForLink(WebElement webElement) {
+
+        wait.until(ExpectedConditions.visibilityOf(webElement));
+        out.println("Waiting for visibility of Link: " + webElement.getText() + webElement.getAttribute("href"));
+
+        if (isFileExists(webElement.getAttribute("href"))) {
+            out.println("Link responce is 200, link is OK ");
+        }
+
+        return webElement;
+    }
 }

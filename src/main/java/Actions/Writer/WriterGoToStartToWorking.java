@@ -26,8 +26,5 @@ public class WriterGoToStartToWorking {
         orderInfoWriter.clickOnStartWorkingButtonAndAcceptSweet();
 
         return orderInfoWriter;
-
     }
-
-
 }

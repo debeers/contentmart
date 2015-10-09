@@ -13,8 +13,6 @@ import static org.testng.Assert.assertEquals;
  */
 public class SetAsWinner extends BaseTest {
 
-
-
     @Test(groups={"regress 1.0"})
     public static void SetAsWinner() throws InterruptedException {
 
@@ -22,7 +20,5 @@ public class SetAsWinner extends BaseTest {
 
         OrderInfoAndActions orderInfoClientPage = CreateOrderAddBidAndSetAsWinner.andAwardOrderToWriter(driver, clientLogin, order, writerLogin);
         assertEquals(orderInfoClientPage.getTextFromOrderStatus(), "Awarded");
-
     }
-
 }

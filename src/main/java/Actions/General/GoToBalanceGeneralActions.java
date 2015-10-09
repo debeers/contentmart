@@ -25,7 +25,7 @@ public class GoToBalanceGeneralActions {
     }
 
 
-    public static Boolean blockingBallanceDifference(OrderObject order) {
+    public static Boolean checkForCorrectBlockingMoneyOperation(OrderObject order) {
 
         double balanceBefore = Double.parseDouble(order.getTotalBalanceBefore());
         double orderPrice = Double.parseDouble(order.getEntityOrderValue());
@@ -44,11 +44,10 @@ public class GoToBalanceGeneralActions {
             System.out.println("!!!!!!! Wrong balance man!!!!!!!!!");
             return false;
         }
-
     }
 
 
-    public static Boolean unBlockingBallanceDifference(OrderObject order) {
+    public static Boolean checkForCorrectUnblockingMoneyOperation(OrderObject order) {
 
         double orderPrice = Double.parseDouble(order.getEntityOrderValue());
         double balanceAfterBlocking = Double.parseDouble(order.getTotalBalanceAfterBlocking());
@@ -71,12 +70,11 @@ public class GoToBalanceGeneralActions {
     }
 
 
-    public static Boolean transferBallanceDifference(OrderObject order) {
+    public static Boolean checkForCorrectBalanceTransferOperation(OrderObject order) {
 
         double balanceBefore = Double.parseDouble(order.getTotalBalanceBefore());
         double orderPrice = Double.parseDouble(order.getEntityOrderValue());
         double balanceAfterBlocking = Double.parseDouble(order.getTotalBalanceAfterBlocking());
-
 
         double res = balanceBefore - balanceAfterBlocking;
 
@@ -118,6 +116,4 @@ public class GoToBalanceGeneralActions {
         return balanceGeneral;
 
     }
-
-
 }

@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class Search {
 
-
     public static String findMessage(WebDriver driver, String toFind) {
 
         WebDriverWait wait = new WebDriverWait(driver, 15);

@@ -43,20 +43,17 @@ public class MyMessagesPage extends LeftMenuGeneralPage {
 
     }
 
-
     public void inputFileToTheMessage(String filePath) {
 
         $(attachFileInput).shouldBe(present).sendKeys(filePath);
         $(sendMessageButton).shouldBe(visible).click();
     }
 
-
     public void sendMessageButtonClick() {
 
         $(sendMessageButton).shouldBe(present).click();
 
     }
-
 
     public void sendTextMessage(String message) {
 
@@ -72,11 +69,8 @@ public class MyMessagesPage extends LeftMenuGeneralPage {
 
     }
 
-
     public MyMessagesPage(WebDriver driver) {
 
         super(driver);
     }
-
-
 }

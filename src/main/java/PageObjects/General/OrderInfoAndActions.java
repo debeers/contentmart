@@ -11,13 +11,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static GeneralHelpers.CustomWaits.$WaitAndGetTextFrom;
 import static GeneralHelpers.CustomWaits.$WaitFor;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 import static Tests.BaseTest.wait;
-import static com.codeborne.selenide.Condition.appear;
-import static com.codeborne.selenide.Condition.present;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static java.lang.Thread.sleep;
 
@@ -27,9 +24,21 @@ import static java.lang.Thread.sleep;
 @SuppressWarnings("ConstantConditions")
 public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
+    @FindBy(className = "progress-bar")
+    public WebElement fileUploadProgressBar;
+
+    @FindBy(id = "progress")
+    public WebElement fileUploadProgressCounter;
+
+    @FindBy(xpath = "//a[contains(text(), 'Cancel')]")
+    public WebElement cancelButtonInOrder;
 
     @FindBy(xpath = "//button[contains(text(), 'Close order')]")
     public WebElement saveAsDraftSweetAllert;
+
+    @FindBy(className = "well cell")
+    public WebElement sendedByWriterText;
+
 
     @FindBy(xpath = "//a[contains(text(), 'Save as Draft')]")
     public WebElement saveAsDraftButton;
@@ -91,6 +100,9 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(className = "info40")
     public WebElement infoMsgAfterCancelChosenWorsmith;
 
+    @FindBy(xpath = "//div[@title='Publication Date']")
+    public WebElement publicationDate;
+
     @FindBy(xpath = "//div[@title='#ID']")
     public WebElement systemOrderID;
 
@@ -102,6 +114,9 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     @FindBy(xpath = "//div[@class='grey']")
     public WebElement orderDescription;
+
+    @FindBy(xpath = "//div[@title='Count words']/span")
+    public WebElement wordsReq;
 
     @FindBy(xpath = "//div[@title='Publication Date']")
     public WebElement orderPublicationDate;
@@ -163,10 +178,10 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     public WebElement publishOrderButtonTop;
 
     @FindBy(xpath = "//button[contains(text(), 'Yes')]")
-    public WebElement publishOrderQuestionSweet;
+    public WebElement yesSweetAllert;
 
     @FindBy(xpath = "//button[contains(text(), 'OK')]")
-    public WebElement publishOrderOKSweet;
+    public WebElement okSweetAllert;
 
     @FindBy(id = "description")
     public WebElement leaveAnOfferDetailsField;
@@ -199,6 +214,13 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         return text;
     }
 
+    public void clickOnCancelButtonInOrderComposingWS() throws InterruptedException {
+
+        $WaitFor(cancelButtonInOrder).click();
+        sleep(2000);
+        $(yesSweetAllert).shouldBe(visible).click();
+    }
+
     public Boolean waitForPlagiatorCheckAppear(){
 
        if($(plagiatorCheck).should(appear).isDisplayed()){
@@ -220,11 +242,24 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         return str;
     }
 
+    public String getSendedWriterText() {
+
+        String str = $(sendedByWriterText).shouldBe(visible).getText();
+        return str;
+    }
+
+    public String waitForSuccessMessageAfterSendResult() {
+
+        String str = $(successMessageAfterSendResult).shouldBe(visible).getText();
+        return str;
+    }
+
+
     public void clickOnCancelYourOfferAfterBid() throws InterruptedException {
 
         $(cancelYourOfferAfterBid).shouldBe(visible).click();
         sleep(2000);
-        $(publishOrderQuestionSweet).shouldBe(Condition.present).click();
+        $(yesSweetAllert).shouldBe(Condition.present).click();
         $(leaveAnOfferButton).should(appear);
     }
 
@@ -234,6 +269,11 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         return res;
     }
 
+    public String getWordsRequire() {
+
+        String res = $(wordsReq).shouldBe(visible).getText();
+        return res;
+    }
 
     public void clickOnSaveAsDraftButton() {
 
@@ -258,6 +298,13 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         return res;
     }
 
+    public void waitForProgressBarWhenUploadingFiles() {
+
+        WebDriverWait wait = new WebDriverWait(driver, 15);
+        wait.until(ExpectedConditions.visibilityOf(fileUploadProgressBar));
+        $(fileUploadProgressCounter).shouldHave(text("100%"));
+    }
+
     public String getTextFromWarningTextAfterStartWorking() {
 
         String res = $(warningText).shouldBe(visible).getText();
@@ -267,7 +314,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     public void clickOnCancelChosenWorsmith() {
 
         $(cancelChosenWorsmith).shouldBe(present).click();
-        $(publishOrderQuestionSweet).should(appear).click();
+        $(yesSweetAllert).should(appear).click();
         getorderStatus();
     }
 
@@ -311,11 +358,12 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
         $WaitFor(publishOrderButtonTop).click();
         sleep(2000);
-        $WaitFor(publishOrderQuestionSweet).click();
+        $WaitFor(yesSweetAllert).click();
         sleep(2000);
-        $WaitFor(publishOrderOKSweet).click();
+        $WaitFor(okSweetAllert).click();
         waitForPageLoad(driver);
         ClientNewOrderPage clientNewOrderPage = new ClientNewOrderPage(driver);
+
         return clientNewOrderPage;
     }
 
@@ -357,7 +405,6 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         $WaitFor(sendCompletedOrderButton).click();
         waitForPageLoad(driver);
         $WaitFor(yourResultHasBeenDeliveredMsg);
-
     }
 
     public MyMessagesPage clickOnTheDropTheCustomerMessageButton(WebDriver driver) {
@@ -514,7 +561,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
 
     public String acceptTextLableOnDecisionPage() {
 
-        String str = $WaitAndGetTextFrom(textAcceptedLablenDecision);
+        String str = $(textAcceptedLablenDecision).shouldBe(visible).getText();
         return str;
     }
 
@@ -559,6 +606,4 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         waitForPageLoad(driver);
         return orderInfoAndActions;
     }
-
-
 }

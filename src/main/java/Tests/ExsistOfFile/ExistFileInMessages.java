@@ -13,9 +13,6 @@ import org.testng.annotations.Test;
  */
 public class ExistFileInMessages extends BaseTest{
 
-
-
-
     @Test(groups={"regress 1.0"})
     public static void DownloadFilesToMessage() throws Exception {
 
@@ -27,6 +24,5 @@ public class ExistFileInMessages extends BaseTest{
 
         String href =  WriterGoToMessages.CreateOrderAddBidSendMessageWithFileToClient(driver, clientLogin, order, writerLogin, path);
         Assert.assertTrue(GeneralHelpers.isFileExists(href));
-
     }
 }

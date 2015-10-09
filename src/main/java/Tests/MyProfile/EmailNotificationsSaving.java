@@ -33,7 +33,5 @@ public class EmailNotificationsSaving extends BaseTest{
         waitForPageLoad(driver);
 
         Assert.assertTrue(checkForTriggersStatus("ON"));
-
     }
-
 }

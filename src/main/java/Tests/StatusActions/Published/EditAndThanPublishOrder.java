@@ -12,9 +12,6 @@ import org.testng.annotations.Test;
  */
 public class EditAndThanPublishOrder extends BaseTest{
 
-
-
-
     @Test(groups={"regress 1.0"})
     public  void EditAndThanPublishOrder() throws Exception {
 
@@ -25,14 +22,5 @@ public class EditAndThanPublishOrder extends BaseTest{
 
 //        Assert.assertEquals(orderInfoAndActions.getorderName(), order.getEntityOrderName());
 //        Assert.assertEquals(orderInfoAndActions.getorderStatus(), order.getEntityOrderStatus());  // incorrect redirection! Need to fix, task in jira CMI-1110
-
     }
-
-
-
-
-
-
-
-
 }

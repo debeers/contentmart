@@ -15,8 +15,6 @@ import static org.testng.Assert.assertNotEquals;
  */
 public class CloneOrderFromAwardedAndPublishIt extends BaseTest{
 
-
-
     @Test(groups={"regress 1.0"})
     public static void CloneOrderFromAwarded() throws InterruptedException {
 
@@ -31,6 +29,4 @@ public class CloneOrderFromAwardedAndPublishIt extends BaseTest{
         assertEquals(orderInfoAndActions.getorderStatus(), "Published");
         assertNotEquals(orderInfoAndActions.getsystemOrderID(), order.getEntityOrderSystemID());
     }
-
-
 }

@@ -13,7 +13,6 @@ public class CreateNewOrderHelper {
         return str;
     }
 
-
     public static String getDay() {
 
         java.util.Calendar calendar = java.util.Calendar.getInstance();
@@ -24,7 +23,6 @@ public class CreateNewOrderHelper {
             i += 1;
         }
         String day = Integer.toString(i);
-
         System.out.println(day);
 
         return day;

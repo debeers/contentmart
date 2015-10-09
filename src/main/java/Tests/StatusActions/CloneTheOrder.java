@@ -29,6 +29,5 @@ public class CloneTheOrder extends BaseTest{
         assertEquals(orderInfoAndActions.getorderName(), order.getEntityOrderName());
         assertThat(orderInfoAndActions.getsystemOrderID(), not(equalToIgnoringCase(order.getEntityOrderSystemID())));
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Published");
-
     }
 }

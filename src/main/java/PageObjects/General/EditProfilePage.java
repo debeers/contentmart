@@ -18,7 +18,6 @@ public class EditProfilePage extends LeftMenuGeneralPage {
     @FindBy(xpath = "//button[contains(text(), 'Save Changes)]")
     public WebElement saveChangesButton;
 
-
     /////////////////////////////////// LINKS BLOCK /////////////////////////////////////////////
 
     @FindBy(xpath = "//a[contains(text(), 'Account details')]")
@@ -32,10 +31,7 @@ public class EditProfilePage extends LeftMenuGeneralPage {
 
     ////////////////////////////////////////////////////////////////////////////////////////////
 
-
     //Account details
-
-
     @FindBy(id = "nick_name")
     public WebElement nickNameField;
 
@@ -66,9 +62,6 @@ public class EditProfilePage extends LeftMenuGeneralPage {
     @FindBy(xpath = ".//*[@id='copywriter_details']/div[10]/div[2]/div[3]/a")
     public WebElement viewSingatureInInvoiceLink;
 
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
     //Password change
 
     @FindBy(id = "old_password")
@@ -82,9 +75,6 @@ public class EditProfilePage extends LeftMenuGeneralPage {
 
     @FindBy(xpath = "//div[contains(text(), 'field is required.')]")
     public WebElement allerFieldIsRequired;
-
-
-    //////////////////////////////////////////////////////////////////////////////////////
 
     //Email notifications
 
@@ -127,7 +117,6 @@ public class EditProfilePage extends LeftMenuGeneralPage {
                     $(webElement).click();
 
                 }
-
             }
         }
     }
@@ -141,7 +130,6 @@ public class EditProfilePage extends LeftMenuGeneralPage {
                     $(webElement).click();
 
                 }
-
             }
         }
     }
@@ -151,6 +139,4 @@ public class EditProfilePage extends LeftMenuGeneralPage {
 
         super(driver);
     }
-
-
 }

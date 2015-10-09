@@ -22,7 +22,5 @@ public class PublishOrderFromTheDraft extends BaseTest{
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Drafted");
         orderInfoAndActions.andClickOnPublishOrderButtonTop();
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Published");
-        
     }
-
 }

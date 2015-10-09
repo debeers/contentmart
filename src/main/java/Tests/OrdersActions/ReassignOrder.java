@@ -23,6 +23,5 @@ public class ReassignOrder extends BaseTest {
 
         Assert.assertEquals(decisionPage.getorderStatus(), "Result sent");
         Assert.assertEquals(declineReason, decisionPage.getTextFromDeclineReasonOnDecisionPage());
-
     }
 }

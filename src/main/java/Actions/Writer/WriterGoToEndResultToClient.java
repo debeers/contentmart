@@ -13,11 +13,12 @@ import org.openqa.selenium.WebDriver;
 public class WriterGoToEndResultToClient {
 
 
-    public static OrderInfoAndActions andSendResultToTheClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin, String text) throws InterruptedException {
+    public static OrderInfoAndActions andSendResultToTheClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin, String text, String filepath) throws InterruptedException {
 
         OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObject, writerLogin);
         orderInfoWriter.sendTextToTheClientTextArea(driver, text);
         orderInfoWriter.clickOnTheSendCompletedOrderButton(driver);
+        GeneralHelpers.uploadFileToHidenInput(driver, filepath);
 
         return orderInfoWriter;
     }
@@ -33,6 +34,4 @@ public class WriterGoToEndResultToClient {
 
         return orderInfoAndActions;
     }
-
-
 }

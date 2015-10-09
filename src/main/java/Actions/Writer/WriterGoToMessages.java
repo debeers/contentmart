@@ -2,7 +2,6 @@ package Actions.Writer;
 
 import Entities.LoginObject;
 import Entities.OrderObject;
-import GeneralHelpers.GeneralHelpers;
 import PageObjects.General.MyMessagesPage;
 import PageObjects.General.OrderInfoAndActions;
 import com.codeborne.selenide.Condition;
@@ -31,7 +30,6 @@ public class WriterGoToMessages {
         message.sendTextMessage(textMessage);
 
         return orderInfoWriter;
-
     }
 
 
@@ -49,7 +47,6 @@ public class WriterGoToMessages {
         System.out.println("File link is:  " + href);
 
         return href;
-
     }
 
 
@@ -61,6 +58,4 @@ public class WriterGoToMessages {
 
         return true;
     }
-
-
 }

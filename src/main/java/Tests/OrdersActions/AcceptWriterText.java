@@ -13,9 +13,6 @@ import static org.testng.Assert.assertEquals;
  */
 public class AcceptWriterText extends BaseTest {
 
-
-
-
     @Test(groups={"regress 1.0"})
     public static void AcceptWriterText() throws InterruptedException {
 
@@ -26,7 +23,5 @@ public class AcceptWriterText extends BaseTest {
         decisionPage.clickOnAcceptButtonOnDecisionPage();
 
         assertEquals(decisionPage.acceptTextLableOnDecisionPage(), "TEXT ACCEPTED");
-
     }
-
 }

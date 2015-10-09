@@ -70,8 +70,5 @@ public class CreateOrderAddBidSetWinnerGoToDecisionPage {
     public static void acceptWriterText(OrderInfoAndActions decisionPage) {
 
         decisionPage.clickOnAcceptButtonOnDecisionPage();
-
     }
-
-
 }

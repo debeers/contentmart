@@ -35,13 +35,16 @@ public class ClientGoToCreateNewOrder {
         order.setEntityOrderStatus(orderInfoPage.getorderStatus());
         order.setEntityOrderSystemID(orderInfoPage.getsystemOrderID());
         order.setEntityOrderVisibility(orderInfoPage.gettypeOfSharing());
+        order.setWordsReq(orderInfoPage.getWordsRequire());
 
         System.out.println("\n" +
+
                 "Order name: " + orderInfoPage.getorderName() + "\n" +
                 "Order System ID: " + orderInfoPage.getsystemOrderID() + "\n" +
                 "Order description: " + orderInfoPage.getorderDescription() + "\n" +
                 "Public date: " + orderInfoPage.getorderPublicationDate() + "\n" +
                 "Deadline: " + orderInfoPage.getorderDeadline() + "\n" +
+                "Words Require: " + orderInfoPage.getWordsRequire() + "\n" +
                 "Visible for: " + orderInfoPage.gettypeOfSharing() + "\n" +
                 "Status: " + orderInfoPage.getorderStatus() + "\n");
 
@@ -87,17 +90,17 @@ public class ClientGoToCreateNewOrder {
         for (WebElement el : attachedFiles) {
 
             if (el.getText().contains(fileName)) {
+
                 System.out.println("File successfully found! " + el);
                 return true;
+
             } else {
+
                 System.out.println("File not found!!!");
                 return false;
             }
-
         }
-
         return true;
-
     }
 
 
@@ -115,11 +118,9 @@ public class ClientGoToCreateNewOrder {
                 System.out.println("File not found!!!");
                 return false;
             }
-
         }
 
         return true;
-
     }
 
 
@@ -144,12 +145,9 @@ public class ClientGoToCreateNewOrder {
 
     public static ClientNewOrderPage publishAndGoToEditOrder(WebDriver driver, LoginObject clientLogin, OrderObject order) throws InterruptedException {
 
-
         OrderInfoAndActions fillTheOrderFields = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, order);
         ClientNewOrderPage clientNewOrderPage = fillTheOrderFields.andClickOnEditOrderButton();
 
         return clientNewOrderPage;
     }
-
-
 }

@@ -17,14 +17,8 @@ import static com.codeborne.selenide.Selenide.$;
 public class WriterProfilePage extends LeftMenuGeneralPage {
 
 
-
     @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[2]/div[3]/a")
     public WebElement editProfileButton;
-
-
-
-
-
 
                         // Portfolio
 
@@ -56,16 +50,11 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     public WebElement h4PortfolioBlockHeaders;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
                                      // Languages and Expertises block
-
 
     public WriterProfilePage(WebDriver driver) {
         super(driver);
-
     }
-
 
     public Boolean newPortfolioAppear(WebDriver driver, String head) {
 
@@ -91,7 +80,6 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
                 enterPortfolioTextField,
                 addWorkButton
         );
-
     }
 
 
@@ -113,12 +101,9 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
     }
 
-
     public void clickOnEditProfileButtonkButton() {
 
         editProfileButton.click();
 
     }
-
-
 }

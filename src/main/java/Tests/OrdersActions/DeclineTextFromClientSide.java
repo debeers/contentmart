@@ -13,8 +13,6 @@ import static org.testng.Assert.assertEquals;
  */
 public class DeclineTextFromClientSide extends BaseTest {
 
-
-
     @Test(groups={"regress 1.0"})
     public static void DeclineTextFromClientSide() throws InterruptedException {
 
@@ -31,9 +29,7 @@ public class DeclineTextFromClientSide extends BaseTest {
 
         assertEquals(decisionPage.getTextFromDeclineReasonOnDecisionPage(), declineReason);
         assertEquals(decisionPage.getTextFromOrderStatus(), "Declined");
-
     }
-
 }
 
 

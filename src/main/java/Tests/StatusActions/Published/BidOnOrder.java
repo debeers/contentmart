@@ -13,10 +13,6 @@ import static org.testng.Assert.assertEquals;
  */
 public class BidOnOrder extends BaseTest {
 
-
-
-
-
     @Test(groups={"regress 1.0"})
     public void WriterBidOnOrder() throws InterruptedException {
 
@@ -28,6 +24,5 @@ public class BidOnOrder extends BaseTest {
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Proposal sent");
         assertEquals(orderInfoAndActions.getTextFromOrderName(), order.getEntityOrderName());
         assertEquals(orderInfoAndActions.getTextFromSuccessMessageTextAfterBid(), msg);
-
     }
 }

@@ -21,7 +21,5 @@ public class CancelOrderFromCreationPage extends BaseTest{
         ClientNewOrderPage clientNewOrderPage = ClientGoToCreateNewOrder.andCreateTheNewOrder(driver, clientLogin, order);
         clientNewOrderPage.clickOnCancelOrderButton();
         Assert.assertEquals(driver.getTitle(), "My Orders | ContentMart");
-
     }
-
 }

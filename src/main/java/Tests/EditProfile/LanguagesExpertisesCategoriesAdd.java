@@ -1,11 +1,16 @@
 package Tests.EditProfile;
 
 import Actions.Writer.GoToWriterProfile;
+import PageObjects.Writer.WriterEditProfilePage;
 import PageObjects.Writer.WriterProfilePage;
 import Tests.BaseTest;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static Actions.Writer.WriterGoToEditProfile.compare;
+import java.util.List;
+
+import static Actions.Writer.GoToWriterProfile.checkForMadeCategoriesChanges;
+import static Actions.Writer.WriterGoToEditProfile.setupSkills;
 
 /**
  * Created by DeBeers on 04.10.2015.
@@ -18,10 +23,15 @@ public class LanguagesExpertisesCategoriesAdd extends BaseTest {
 
         WriterProfilePage writerProfilePage = GoToWriterProfile.goToMyProfile(driver, writerLogin);
         writerProfilePage.clickOnEditProfileButtonkButton();
-        compare(driver);
 
+        WriterEditProfilePage writerEditProfilePage = new WriterEditProfilePage(driver);
 
+        List<String> madeChanges = setupSkills(driver, "Expertises", "add");
+        writerEditProfilePage.clickOnSaveChangesButton();
+
+        Assert.assertTrue(checkForMadeCategoriesChanges(driver, "Languages", madeChanges));
+
+        writerProfilePage.clickOnEditProfileButtonkButton();
+        setupSkills(driver, "Expertises", "remove");
     }
-
-
 }

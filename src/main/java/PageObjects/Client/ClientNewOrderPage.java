@@ -23,9 +23,7 @@ import static java.lang.Thread.sleep;
 
 public class ClientNewOrderPage extends LeftMenuGeneralPage {
 
-
 ///////////////////////////////////////////////////   ORDER FIELD`S   //////////////////////////////////////////////////
-
 
     @FindBy(xpath = ".//*[@id='title']")
     public WebElement orderNameField;
@@ -57,11 +55,8 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     @FindBy(className = "red banned_words_notice")
     public WebElement stopWordsAllert;
 
-
     /////////////////////  TOP
     //// drafted
-
-
     @FindBy(xpath = "//a[contains(text(), 'Publish order')]")
     public WebElement publishOrderButtonTop;
 
@@ -71,12 +66,9 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     @FindBy(xpath = "//button[contains(text(), 'OK')]")
     public WebElement publishOrderOKSweet;
 
-
     /// after publish
 
-
     //// edit order BOTTOM
-
 
     @FindBy(xpath = "//button[contains(text(), 'Publish')]")
     public WebElement publishNewOrderButton;
@@ -93,7 +85,6 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
 
     @FindBy(xpath = "html/body/div[2]/div[2]/div/div[1]/div[contains(@class, 'xdsoft_current')]")
     public WebElement currentOrderTime;
-
 
 ///////////////////////////////////////////////////   BUTTONS   ////////////////////////////////////////////////////////
 
@@ -244,6 +235,5 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
 
         super(driver);
     }
-
 
 }

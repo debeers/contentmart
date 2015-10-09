@@ -76,8 +76,6 @@ public class BaseTest {
             Assert.fail(verificationErrorString);
         }
     }
-
-
 }
 
 

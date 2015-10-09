@@ -13,8 +13,6 @@ import static org.testng.Assert.assertEquals;
  */
 public class StopWordsInLeaveAnOffer extends BaseTest{
 
-
-
     @Test(groups={"regress 1.0"})
     public void StopWordsInLeaveAnOffer() throws InterruptedException {
 
@@ -27,9 +25,5 @@ public class StopWordsInLeaveAnOffer extends BaseTest{
 
         assertEquals(orderInfoAndActions.stopwordsAllertMsg().trim(), stopWordsAllert);
         orderInfoAndActions.clickOnLeaveAnOfferButtonFromBidOnOrder(driver);
-
     }
-
-
-
 }

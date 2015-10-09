@@ -35,7 +35,6 @@ public class GoToEditProfile {
 
         );
         return editProfilePage;
-
     }
 
 
@@ -51,11 +50,10 @@ public class GoToEditProfile {
                 return false;
 
             }else if(status == "ON" && $(trigger).getAttribute("class").contains("switch toggle-off")) {
+
                 System.out.println("Some elements did not save changes: " + trigger.getAttribute("class"));
                 return false;
-
             }
-
         }
         return true;
     }

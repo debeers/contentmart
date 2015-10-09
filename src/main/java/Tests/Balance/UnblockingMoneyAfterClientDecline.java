@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 import static Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage.declineWriterTextAction;
 import static Actions.General.GoToBalanceGeneralActions.clientGoToCheckForUnBlockingBalance;
-import static Actions.General.GoToBalanceGeneralActions.unBlockingBallanceDifference;
+import static Actions.General.GoToBalanceGeneralActions.checkForCorrectUnblockingMoneyOperation;
 import static Actions.Writer.WriterActionsAfterClientDecision.writerAcceptDeclineAfterClientNegativeDecision;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -18,10 +18,6 @@ import static org.testng.Assert.assertTrue;
  * Created by DeBeers on 04.10.2015.
  */
 public class UnblockingMoneyAfterClientDecline extends BaseTest{
-
-
-
-
 
     @Test(groups={"regress 1.0"})
     public static void UnblockingMoneyAfterClientDecline() throws InterruptedException {
@@ -46,7 +42,7 @@ public class UnblockingMoneyAfterClientDecline extends BaseTest{
         assertEquals(balanceGeneral.xUnBlockingAmount(order.getEntityOrderSystemID()).trim(), "+ " + order.getEntityOrderValue());
         assertEquals(balanceGeneral.xUnBlockingBallance(order.getEntityOrderSystemID()).trim(), order.getTotalBalanceBefore());
 
-        assertTrue(unBlockingBallanceDifference(order));
+        assertTrue(checkForCorrectUnblockingMoneyOperation(order));
 
 
     }

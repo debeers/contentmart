@@ -9,9 +9,6 @@ import java.io.IOException;
  */
 public class DEBUG extends BaseTest{
 
-
-
-
     @Test(groups={"regress 1.0"})
     public static void NewOrder() throws InterruptedException, IOException {
 //
@@ -26,11 +23,5 @@ public class DEBUG extends BaseTest{
 //        LoginPage.logOut(driver);
 //        WriterGoToLogin.loginAsWriter(driver, writerLogin);
 
-
-
-
     }
-
-
-
 }

@@ -16,7 +16,6 @@ import static GeneralHelpers.CustomWaits.$WaitFor;
  */
 public class ClientGoToMyOrders {
 
-
     public static MyOrdersPage clientGoToMyOrders(WebDriver driver, LoginObject clientLogin) {
 
         loginAs(driver, clientLogin);
@@ -44,6 +43,4 @@ public class ClientGoToMyOrders {
         System.out.println("Balance successfully found!");
         return myOrders;
     }
-
-
 }

@@ -6,14 +6,11 @@ public class OrderObject {
     private String totalBalanceBefore = "";
     private String totalBalanceAfterBlocking = "";
     private String totalBalanceAfterUnBlocking = "";
-
     private String orderValue = "";
-
     private String ordName = "";
     private String desc = "";
     private String wordsReq = "";
     private String price = "";
-
     private String entityOrderName = "";
     private String entityOrderSystemID = "";
     private String entityOrderStatus = "";
@@ -34,9 +31,7 @@ public class OrderObject {
         this.desc = desc;
         this.wordsReq = wordsReq;
         this.price = price;
-
     }
-
 
     public OrderObject(String totalBalanceBefore, String totalBalanceAfterBlocking, String totalBalanceAfterUnBlocking,
                        String orderValue, String ordName, String desc, String wordsReq, String price, String entityOrderName,
@@ -62,9 +57,7 @@ public class OrderObject {
         this.entityOrderDeadLine = entityOrderDeadLine;
         this.entityOrderVisibility = entityOrderVisibility;
         this.entityOrderValue = entityOrderValue;
-
     }
-
 
     public String getTotalBalanceBefore() {
 
@@ -76,7 +69,6 @@ public class OrderObject {
         return orderValue;
     }
 
-
     public void setTotalBalanceBefore(String totalBalanceBefore) {
 
         this.totalBalanceBefore = totalBalanceBefore;
@@ -87,7 +79,9 @@ public class OrderObject {
         this.orderValue = orderValue;
     }
 
-
+    public void setWordsReq(String wordsReq) {
+        this.wordsReq = wordsReq;
+    }
     public String getOrdName() {
 
         return ordName;
@@ -108,7 +102,6 @@ public class OrderObject {
         return price;
     }
 
-
     public String getEntityOrderName() {
 
         return entityOrderName;
@@ -118,7 +111,6 @@ public class OrderObject {
 
         return entityOrderSystemID;
     }
-
 
     public String getEntityOrderStatus() {
 
@@ -145,7 +137,6 @@ public class OrderObject {
         return entityOrderValue;
     }
 
-
     public void setEntityOrderName(String entityOrderName) {
 
         this.entityOrderName = entityOrderName;
@@ -155,7 +146,6 @@ public class OrderObject {
 
         this.entityOrderSystemID = entityOrderSystemID;
     }
-
 
     public void setEntityOrderStatus(String entityOrderStatus) {
 
@@ -176,6 +166,7 @@ public class OrderObject {
     }
 
     public void setEntityOrderVisibility(String entityOrderVisibility) {
+
         this.entityOrderVisibility = entityOrderVisibility;
     }
 
@@ -190,8 +181,8 @@ public class OrderObject {
         return entityOrderVisibility;
     }
 
-
     public String getTotalBalanceAfterBlocking() {
+
         return totalBalanceAfterBlocking;
     }
 

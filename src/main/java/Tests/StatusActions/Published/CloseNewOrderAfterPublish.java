@@ -23,6 +23,5 @@ public class CloseNewOrderAfterPublish extends BaseTest{
         orderInfoAndActions.clickOnCloseOrderButtonTopAndAcceptSweet(driver);
 
         assertEquals(driver.getTitle(), "My Orders | ContentMart");
-
     }
 }

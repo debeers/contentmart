@@ -50,5 +50,4 @@ public class ClientAndWriterLoginLogOutTest extends BaseTest {
         RegistrationAndLogin.logOut(driver);
         assertEquals(driver.getCurrentUrl(), baseUrl);
     }
-
 }

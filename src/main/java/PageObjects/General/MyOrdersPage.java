@@ -43,7 +43,6 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
     @FindBy(className = "but_search")
     public WebElement searchButton;
 
-
 ///////////////////////////////////////   Orders WriterCheckVisibility   //////////////////////////////////////
 
     @FindBy(xpath = ".//*[@id='order_status']/li[1]")
@@ -85,6 +84,7 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
         return orderInfoAndActions;
     }
 
+
     public void clickOnPublishedLinkMyOrdersClient() {
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOf(publishedLinkMyOrdersClient)).click();
@@ -98,7 +98,6 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
 
         List<WebElement> tableDeals = driver.findElements(By.xpath("//table/tbody/tr"));
         waitForTableLoad(tableDeals);
-
     }
 
 
@@ -109,7 +108,6 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
         wait.until(ExpectedConditions.elementToBeClickable(myOrders.searchButtonMyOrders)).click();
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("html//a[.//text()[contains(., '" + orderObject.getEntityOrderName() + "')]]")))).click();
         waitForPageLoad(driver);
-
     }
 
 
@@ -117,8 +115,6 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
 
         super(driver);
     }
-
-
 }
 
 

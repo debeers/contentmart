@@ -26,6 +26,4 @@ public class CreateOrderAddBidAndSetAsWinner {
 
         return orderInfoClientPage;
     }
-
-
 }

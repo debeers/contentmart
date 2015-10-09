@@ -16,11 +16,6 @@ import static org.testng.Assert.assertTrue;
  */
 public class BlockingMoney extends BaseTest{
 
-
-
-
-
-
     @Test(groups={"regress 1.0"})
     public static void BlockingMoney() throws InterruptedException {
 
@@ -31,19 +26,7 @@ public class BlockingMoney extends BaseTest{
 
         assertEquals(balanceGeneral.xBlockingStatus(order.getEntityOrderSystemID()), "Blocking");
         assertEquals(balanceGeneral.xBlockingAmount(order.getEntityOrderSystemID()), "- " + order.getEntityOrderValue());
-        assertTrue(GoToBalanceGeneralActions.blockingBallanceDifference(order));
+        assertTrue(GoToBalanceGeneralActions.checkForCorrectBlockingMoneyOperation(order));
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -1,6 +1,5 @@
 package PageObjects.General;
 
-import Entities.LoginObject;
 import GeneralHelpers.GeneralWaits;
 import PageObjects.BasePageObject;
 import PageObjects.Client.ClientNewOrderPage;
@@ -12,8 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static Actions.General.RegistrationAndLogin.logOut;
-import static Actions.General.RegistrationAndLogin.loginAs;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 import static Tests.BaseTest.wait;
 import static com.codeborne.selenide.Condition.present;
@@ -28,7 +25,6 @@ public class LeftMenuGeneralPage extends BasePageObject {
 
     @FindBy(xpath = "//span[contains(text(), 'My profile')]")
     public WebElement myProfileLeftMenu;
-
 
     @FindBy(xpath = "/html/body/div[1]/div[3]/ul/li[3]/a")
     public WebElement newOrderLeftMenu;
@@ -62,9 +58,7 @@ public class LeftMenuGeneralPage extends BasePageObject {
     @FindBy(xpath = "html/body/div/div[3]/ul/li[8]/p/a")
     public WebElement helpCenterLeft;
 
-
 ///////////////////////////////////   Left Template_Client Links END   ////////////////////////////////////////////////////////////
-
 
     public EditProfilePage clickOnEditProfileLeftMenu() {
 
@@ -157,8 +151,6 @@ public class LeftMenuGeneralPage extends BasePageObject {
 
         PageFactory.initElements(driver, this);
     }
-
-
 }
 
 

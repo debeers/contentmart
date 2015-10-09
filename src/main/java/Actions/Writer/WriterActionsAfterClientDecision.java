@@ -26,8 +26,5 @@ public class WriterActionsAfterClientDecision {
         $(myOrdersPage.searchFieldMyOrders).shouldBe(Condition.visible);
 
         logOut(driver);
-
     }
-
-
 }

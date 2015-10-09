@@ -14,9 +14,6 @@ import static org.testng.Assert.assertTrue;
  */
 public class CancelFromWriterSideAfterBid extends BaseTest{
 
-
-
-
     @Test(groups={"regress 1.0"})
     public void WriterBidOnOrder() throws InterruptedException {
 
@@ -30,6 +27,4 @@ public class CancelFromWriterSideAfterBid extends BaseTest{
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Published");
         assertTrue(orderInfoAndActions.leaveAnOfferDetailsField.isDisplayed());
     }
-
-
 }

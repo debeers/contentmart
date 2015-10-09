@@ -15,10 +15,6 @@ import static GeneralHelpers.Search.findMessage;
  */
 public class SendTextMessages extends BaseTest {
 
-
-
-
-
     @Test(groups={"regress 1.0"})
     public static void SendTextMessageToClient() throws Exception {
 
@@ -32,6 +28,5 @@ public class SendTextMessages extends BaseTest {
 
         String clientMessage = ClientGoToMessages.checkDeliveryMessageFromWriter(driver, clientLogin, order, textMessage);
         Assert.assertEquals(clientMessage, textMessage);
-
     }
 }
