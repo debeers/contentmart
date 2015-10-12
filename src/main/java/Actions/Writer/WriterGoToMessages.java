@@ -20,8 +20,8 @@ import static com.codeborne.selenide.Selenide.$;
 public class WriterGoToMessages {
 
 
-    public static OrderInfoAndActions sendMessageToClient(WebDriver driver, LoginObject clientLogin, OrderObject order, LoginObject writerLogin,
-                                                          String textMessage) throws InterruptedException {
+    public static OrderInfoAndActions sendMessageToClient(WebDriver driver, LoginObject clientLogin, OrderObject order,
+                                                          LoginObject writerLogin, String textMessage) throws InterruptedException {
 
         OrderInfoAndActions orderInfoWriter = WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, order, writerLogin);
         orderInfoWriter.clickOnTheDropTheCustomerMessageButton(driver);
@@ -43,7 +43,7 @@ public class WriterGoToMessages {
         String filename = getFileName(path);
         message.inputFileToTheMessage(path);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("fileDownloadIcon")));
-        String href = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'" + filename + "')]"))).getAttribute("href");
+        String href = message.getFileHref(filename);
         System.out.println("File link is:  " + href);
 
         return href;
@@ -58,4 +58,5 @@ public class WriterGoToMessages {
 
         return true;
     }
+
 }

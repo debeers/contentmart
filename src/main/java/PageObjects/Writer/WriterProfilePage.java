@@ -1,6 +1,8 @@
 package PageObjects.Writer;
 
 import PageObjects.General.LeftMenuGeneralPage;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,8 +10,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static GeneralHelpers.CustomWaits.$WaitFor;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 /**
  * Created by CMG_TEST on 30.09.2015.
@@ -22,7 +28,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
                         // Portfolio
 
-    @FindBy(xpath = "/html/body/div/div[3]/div/div/div/div[5]/div[1]/div")
+    @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[4]/div[1]/div/svg/circle")
     public WebElement addPortfolioItemButton;
 
     @FindBy(className="fancybox-wrap fancybox-default fancybox-opened")
@@ -46,24 +52,43 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     @FindBy(xpath = "//a[.//text()[contains(., 'READ MORE')]]  [(contains(@class, 'read_more_link'))]")
     public WebElement readMoreAboutLink;
 
-    @FindBy(xpath = "//div [(contains(@class, 'document_block profile_added_block'))]//h4")
+    @FindBy(xpath = "//div[(contains(@class, 'document_block profile_added_block'))]//h4")
     public WebElement h4PortfolioBlockHeaders;
 
+    @FindBy(xpath = ".//a[contains(text(), 'EDIT')]")
+    public WebElement editPortfolioItemButton;
+
+    @FindBy(xpath = ".//a[contains(text(), 'BACK TO PORTFOLIO')]")
+    public WebElement backToPortfolioButton;
+
+    @FindBy(xpath = ".//p[contains(@class, 'portfolio-item-text')]")
+    public WebElement portfolioItemText;
+
+    @FindBy(xpath = ".//h2[contains(@class, 'portfolio-item-title')]")
+    public WebElement portfolioItemTitle;
+
+    @FindBy(xpath = ".//a[contains(text(), 'SAVE')]")
+    public WebElement portfolioItemSaveButton;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                      // Languages and Expertises block
+
+    public String settetExpertisesClassName = "cell expertises m_b-20";
+    public String settetLanguagesClassName = "cell languages m_b-20";
+    public String settetCategoriesOfWritingClassName = "cell m_b-20";
+
 
     public WriterProfilePage(WebDriver driver) {
         super(driver);
     }
 
-    public Boolean newPortfolioAppear(WebDriver driver, String head) {
+    public Boolean addedPortfolioItem(WebDriver driver, String header) {
 
         WebDriverWait wait = new WebDriverWait(driver, 15);
-        WebElement el = wait.until(ExpectedConditions.visibilityOf(
+        WebElement portfolioHeader = wait.until(ExpectedConditions.visibilityOf(
                 driver.findElement(By.xpath(
                         "//div[contains(@class, 'document_block profile_added_block')]/h4[contains(text(),'" +
-                                head + "')]"))));
-        if (el != null) {
+                                header + "')]"))));
+        if (portfolioHeader != null) {
 
             return true;
         }
@@ -71,6 +96,42 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
         return false;
     }
 
+
+    public void openAddedPortfolioItem(WebDriver driver, String header){
+
+        if(addedPortfolioItem(driver, header)){
+
+            $(driver.findElement(By.xpath(".//h4[contains (text(), '" + header + "')]/following-sibling::a[contains (text(), 'READ MORE')]"))).click();
+            $WaitFor(
+                    portfolioItemTitle,
+                    portfolioItemText,
+                    backToPortfolioButton,
+                    editPortfolioItemButton
+            );
+        }
+    }
+
+
+    public String getPortfolioItemTitle(){
+
+        return $(portfolioItemTitle).shouldBe(Condition.visible).getText();
+    }
+
+    public String getPortfolioItemText(){
+
+        return $(portfolioItemText).shouldBe(Condition.visible).getText();
+    }
+
+    public void clickOnEditPortfolioItemButton(){
+
+        $(editPortfolioItemButton).click();
+        $(portfolioItemSaveButton).should(Condition.appear);
+    }
+
+    public void clickOnSavePortfolioItemButton(){
+
+        $(portfolioItemSaveButton).click();
+    }
 
     public void clickOnAddPortfolioButton() {
 
@@ -86,13 +147,21 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     public void setPortfolioTitleField(String text) {
 
         $(enterPortfolioTitleField).sendKeys(text);
+    }
 
+    public void clearPortfolioTitleField() {
+
+        $(enterPortfolioTitleField).clear();
     }
 
     public void setPortfolioTextField(String text) {
 
         $(enterPortfolioTextField).sendKeys(text);
+    }
 
+    public void clearPortfolioTextField() {
+
+        $(enterPortfolioTextField).clear();
     }
 
     public void clickOnaAddWorkButton() {
@@ -101,9 +170,65 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
     }
 
-    public void clickOnEditProfileButtonkButton() {
+    public void clickOnEditProfileButton() {
 
-        editProfileButton.click();
+        $(editProfileButton).click();
+    }
+
+    public void clickOnBackToPortfolioButton() {
+
+        $(backToPortfolioButton).click();
+        $(backToPortfolioButton).should(Condition.disappear);
+    }
+
+    public String setCategoryBox(String category){
+
+        String categoryBox = "";
+
+        if(category == "Languages"){
+            categoryBox = settetLanguagesClassName;
+            return categoryBox;
+        }
+        else if(category == "Expertises"){
+            categoryBox = settetExpertisesClassName;
+            return categoryBox;
+        }
+        else if(category == "Categories"){
+            categoryBox = settetCategoriesOfWritingClassName;
+            return categoryBox;
+
+        }else return null;
+    }
+
+
+    public List<String> getSettetCategoriesNames(String category) {
+        String skillBox = setCategoryBox(category);
+        ElementsCollection addedCategoriesList =
+                $$(driver.findElements(By.xpath(".//div[contains(@class,'" + skillBox + "')]//following-sibling::ul/li//span[contains(@class,'skill-name')][not (contains (text(), 'English'))]")));
+
+        List<String> addedSkillsList = new ArrayList<>();
+
+        for (WebElement skillName : addedCategoriesList) {
+            System.out.println(skillName.getText());
+            addedSkillsList.add(skillName.getText());
+        }
+        return addedSkillsList;
+    }
+
+
+    public void editPortfolioItem(WebDriver driver, String title, String editTitle, String editText){
+
+        openAddedPortfolioItem(driver, title);
+        clickOnEditPortfolioItemButton();
+        clearPortfolioTitleField();
+        clearPortfolioTextField();
+        setPortfolioTitleField(editTitle);
+        setPortfolioTextField(editText);
+        clickOnSavePortfolioItemButton();
 
     }
+
+
+
+
 }

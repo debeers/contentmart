@@ -33,8 +33,8 @@ public class ClientGoToMessages {
     public static MyMessagesPage goToClientMessages(WebDriver driver, LoginObject clientLogin) {
 
         MyOrdersPage myOrdersPage = loginAs(driver, clientLogin);
-        myOrdersPage.clickOnProfileLeftMenu();
-        MyMessagesPage myMessages = myOrdersPage.clickOnMyMessagesLeftMenu(driver);
+        myOrdersPage.clickOnProfileFromLeftMenu();
+        MyMessagesPage myMessages = myOrdersPage.clickOnMyMessagesFromLeftMenu(driver);
 
         return myMessages;
 

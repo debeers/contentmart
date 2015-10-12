@@ -33,7 +33,8 @@ public class ClientGoToMyOrders {
     }
 
 
-    public static MyOrdersPage clientGoToCreatedOrder(WebDriver driver, LoginObject clientLogin, OrderObject order) throws InterruptedException {
+    public static MyOrdersPage clientGoToCreatedOrder(WebDriver driver, LoginObject clientLogin,
+                                                      OrderObject order) throws InterruptedException {
 
         logOut(driver);
         MyOrdersPage myOrders = ClientGoToMyOrders.clientGoToMyOrders(driver, clientLogin);
@@ -43,4 +44,5 @@ public class ClientGoToMyOrders {
         System.out.println("Balance successfully found!");
         return myOrders;
     }
+
 }

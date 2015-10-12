@@ -14,20 +14,18 @@ public class WriterGoToEditProfile {
     public static List<String> setupSkills(WebDriver driver, String category, String action) throws InterruptedException {
 
         WriterEditProfilePage writerEditProfilePage = new WriterEditProfilePage(driver);
-        List<String> categoryArray = writerEditProfilePage.getCategoriesNames(category, action);
+        List<String> skillBox = writerEditProfilePage.getCategoriesNames(category, action);
 
-        for (String categoryName : categoryArray) {
+        for (String skillName : skillBox) {
 
             if (action == "remove") {
-
-                writerEditProfilePage.clickOnRemoveSkill(categoryName);
+                writerEditProfilePage.clickOnRemoveSkill(category, skillName);
 
             } else if (action == "add") {
-
-                writerEditProfilePage.clickOnAddSkill(categoryName);
-
+                writerEditProfilePage.clickOnAddSkill(category, skillName);
             }
         }
-        return categoryArray;
+        return skillBox;
     }
+
 }

@@ -7,12 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.*;
 
 /**
  * Created by CMG_TEST on 08.10.2015.
@@ -30,88 +31,114 @@ public class WriterEditProfilePage extends LeftMenuGeneralPage {
     public WebElement aboutTextArea;
 
 
+
+    public String languagesId = "language-box";
+    public String expertisesId = "expertise-box";
+    public String categoriesId = "category-box";
+
+
+    public String notAddedSkillsArray(String skillBox){
+
+        String str = ".//div[@id = '" + skillBox + "']/following-sibling::div[contains(@class,'cell without_test_block skill-box')]" +
+                "/ul/li[not (contains(@class,'none'))]//span[contains(@class,'skill-name')]";
+        return str;
+    }
+
+
+    public String addedSkillsArray(String skillBox){
+
+        String str = ".//div[@id = '" + skillBox + "']/following-sibling::div[contains(@class,'cell test_not_passed_block skill-box')]" +
+                "/ul/li[not (contains(@class,'none'))]//span[contains(@class,'skill-name')]";
+        return str;
+    }
+
+
     public WriterProfilePage clickOnSaveChangesButton() {
 
-        $(saveChangesButton).shouldBe(Condition.visible).click();
+        $(saveChangesButton).shouldBe(visible).click();
         WriterProfilePage writerProfilePage = new WriterProfilePage(driver);
         return writerProfilePage;
     }
 
 
-    public void clickOnRemoveSkill(String categoryName) {
+    public void clickOnRemoveSkill(String category, String skillName) {
+        String skillBox = setCategoryBox(category);
 
-        $(driver.findElement(By.xpath(".//div[contains(@class, 'cell test_not_passed_block skill-box')]//span[1][contains(text(), '" + categoryName + "')][not(contains(text(), 'English'))]/following-sibling::span"))).click(); // xxx remove
+        $(driver.findElement(By.xpath(".//div[@id = '" + skillBox + "']/following-sibling::div[contains(@class,'cell test_not_passed_block skill-box')]" +
+                "/ul/li[not (contains(@class,'none'))]//span[contains(@class,'skill-name') and (contains (text(), '" + skillName + "'))]//following-sibling::span[contains(@class,'close_test move-next-skill-btn')]")))
+                .shouldBe(visible).click(); // xxx remove
         System.out.println("Element found! Removing element from added list ====<");
 
     }
 
 
-    public void clickOnAddSkill(String categoryName) {
+    public void clickOnAddSkill(String category, String skillName) {
+        String skillBox = setCategoryBox(category);
 
-        $(driver.findElement(By.xpath(".//div[contains(@class, 'cell without_test_block skill-box')]//span[contains(@class, 'add-skill move-next-skill-btn')]/span[contains(text(), '" + categoryName + "')][not(contains(text(), 'English'))]/preceding-sibling::span"))).shouldBe(Condition.visible).click(); // +++ add
+        $(driver.findElement(By.xpath(".//div[@id = '" + skillBox + "']/following-sibling::div[contains(@class,'cell without_test_block skill-box')]" +
+                "/ul/li[not (contains(@class,'none'))]//span[contains(@class,'skill-name') and (contains (text(), '" + skillName + "'))]//preceding-sibling::span[contains(@class,'test_plus')]")))
+                .shouldBe(visible).click(); // +++ add
         System.out.println("Element found! Adding element to added list ====>");
 
+    }
+
+
+    public String setCategoryBox(String category){
+
+        String categoryBox = "";
+
+        if(category == "Languages"){
+            categoryBox = languagesId;
+            return categoryBox;
+        }
+        else if(category == "Expertises"){
+            categoryBox = expertisesId;
+            return categoryBox;
+        }
+        else if(category == "Categories"){
+            categoryBox = categoriesId;
+            return categoryBox;
+
+        }else return null;
     }
 
 
     public List<String> getCategoriesNames(String category, String state) {
 
         String xStatePath = null;
+        String categoryBox = setCategoryBox(category);
 
         if (state == "add") {
-            xStatePath = "/following-sibling::div[3]/ul/li/span/span[2][not(contains(text(), 'English'))]";
+
+            xStatePath = notAddedSkillsArray(categoryBox);
 
         } else if (state == "remove") {
-            xStatePath = "/following-sibling::div[2]/ul/li/span[1][not(contains(text(), 'English'))]";
 
+            xStatePath = addedSkillsArray(categoryBox);
         }
 
         List<String> categoriesNamesArray = new ArrayList<>();
+        ElementsCollection addedCategoriesList = $$(driver.findElements(By.xpath(xStatePath)));
 
-        ElementsCollection addedCategoriesList = $$(driver.findElements(By.xpath(
-                ".//div[contains(text(), '" + category + "')]" + xStatePath)));  // .//div[contains(text(), 'Categories')]/following-sibling::div[3]/ul/li/span/span[2] for add
         for (WebElement element : addedCategoriesList) {
-
-            if (element.getText() != null && !element.isDisplayed()) {
                 System.out.println(element.getText());
                 categoriesNamesArray.add(element.getText());
-            }
         }
         return categoriesNamesArray;
     }
 
 
-    public List<String> getCategoriesNames2(String category, String state) {
+    public void clear() {
 
-        String xStatePath = null;
+        ElementsCollection removeList = $$(driver.findElements(By.xpath(".//li[not (contains(@class,'none'))]//span[contains(@class,'close_test move-next-skill-btn')]")));
 
-        if (state == "add") {
-            xStatePath = "/following-sibling::div[3]/ul/li";        // /span/span[2][not(contains(text(), 'English'))]";
+        if (removeList != null) {
+            for (WebElement remove : removeList) {
 
-        } else if (state == "remove") {
-            xStatePath = "/following-sibling::div[2]/ul/li/span[1][not(contains(text(), 'English'))]";
-
-        }
-
-        List<String> categoriesNamesArray = new ArrayList<>();
-
-        ElementsCollection addedCategoriesList = $$(driver.findElements(By.xpath(
-                ".//div[contains(text(), '" + category + "')]" + xStatePath)));  // .//div[contains(text(), 'Categories')]/following-sibling::div[3]/ul/li/span/span[2] for add
-        for (WebElement element : addedCategoriesList) {
-
-            if (element.getText() != null && !element.isDisplayed()) {
-                System.out.println(element.getText());
-                categoriesNamesArray.add(element.getText());
+                $(remove).shouldBe(visible).click();
             }
-        }
-
-        return categoriesNamesArray;
-    }
-
-
-    public void getSettetCategoriesNames() {
-        ElementsCollection addedCategoriesList = $$(driver.findElements(By.xpath("" +
-                ".//p[contains(text(), 'Ex pertises')]/following-sibling::ul/li/span[2]")));
+            sleep(3000); //server side wait
+        }else System.out.println("All list`s of skills are empty, we`re begin!");
     }
 
     public WriterEditProfilePage(WebDriver driver) {

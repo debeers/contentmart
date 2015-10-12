@@ -39,4 +39,5 @@ public class GeneralWaits extends BaseTest {
 
         }
     }
+
 }

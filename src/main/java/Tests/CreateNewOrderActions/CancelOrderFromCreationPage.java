@@ -14,7 +14,7 @@ public class CancelOrderFromCreationPage extends BaseTest{
 
 
     @Test(groups={"regress 1.0"})
-    public void EditAndThanPublishOrder() throws Exception {
+    public void CancelOrderFromCreationPage() throws Exception {
 
         OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
 

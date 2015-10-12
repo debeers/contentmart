@@ -51,7 +51,8 @@ public class ClientGoToCreateNewOrder {
         return order;
     }
 
-    public static OrderInfoAndActions andPublish(WebDriver driver, LoginObject clientLogin, OrderObject order) throws InterruptedException {
+    public static OrderInfoAndActions andPublish(WebDriver driver, LoginObject clientLogin,
+                                                 OrderObject order) throws InterruptedException {
 
         ClientNewOrderPage newOrder = andCreateTheNewOrder(driver, clientLogin, order);
         OrderInfoAndActions orderInfoAndActions = newOrder.andClickOnPublishNewOrderButton(driver);
@@ -60,7 +61,9 @@ public class ClientGoToCreateNewOrder {
         return orderInfoAndActions;
     }
 
-    public static OrderInfoAndActions andSaveAsDraft(WebDriver driver, LoginObject clientLogin, OrderObject order) throws InterruptedException {
+
+    public static OrderInfoAndActions andSaveAsDraft(WebDriver driver, LoginObject clientLogin,
+                                                     OrderObject order) throws InterruptedException {
 
         ClientNewOrderPage newOrder = andCreateTheNewOrder(driver, clientLogin, order);
         OrderInfoAndActions orderInfoAndActions = newOrder.andClickOnSaveAsDraftButton(driver);
@@ -69,7 +72,8 @@ public class ClientGoToCreateNewOrder {
     }
 
 
-    public static OrderInfoAndActions andUploadFilesToIt(WebDriver driver, LoginObject clientLogin, OrderObject order, String filepath) throws InterruptedException {
+    public static OrderInfoAndActions andUploadFilesToIt(WebDriver driver, LoginObject clientLogin,
+                                                         OrderObject order, String filepath) throws InterruptedException {
 
         ClientNewOrderPage newOrder = andCreateTheNewOrder(driver, clientLogin, order);
         uploadFileToHidenInput(driver, filepath);
@@ -109,10 +113,10 @@ public class ClientGoToCreateNewOrder {
         ClientNewOrderPage newOrderPage = new ClientNewOrderPage(driver);
         List<WebElement> attachedFiles = newOrderPage.attachedFiles;
 
-        for (WebElement el : attachedFiles) {
+        for (WebElement fileItem : attachedFiles) {
 
-            if (GeneralHelpers.isFileExists(el.getAttribute("href"))) {
-                System.out.println("File successfully found! " + el.getText());
+            if (GeneralHelpers.isFileExists(fileItem.getAttribute("href"))) {
+                System.out.println("File successfully found! " + fileItem.getText());
                 return true;
             } else {
                 System.out.println("File not found!!!");
@@ -124,7 +128,8 @@ public class ClientGoToCreateNewOrder {
     }
 
 
-    public static ClientNewOrderPage andCreateTheNewOrder(WebDriver driver, LoginObject clientLogin, OrderObject order) throws InterruptedException {
+    public static ClientNewOrderPage andCreateTheNewOrder(WebDriver driver, LoginObject clientLogin,
+                                                          OrderObject order) throws InterruptedException {
 
         loginAs(driver, clientLogin);
         LeftMenuGeneralPage leftMenuGeneralPage = new LeftMenuGeneralPage(driver);
@@ -143,11 +148,13 @@ public class ClientGoToCreateNewOrder {
     }
 
 
-    public static ClientNewOrderPage publishAndGoToEditOrder(WebDriver driver, LoginObject clientLogin, OrderObject order) throws InterruptedException {
+    public static ClientNewOrderPage publishAndGoToEditOrder(WebDriver driver, LoginObject clientLogin,
+                                                             OrderObject order) throws InterruptedException {
 
         OrderInfoAndActions fillTheOrderFields = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, order);
         ClientNewOrderPage clientNewOrderPage = fillTheOrderFields.andClickOnEditOrderButton();
 
         return clientNewOrderPage;
     }
+
 }

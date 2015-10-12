@@ -16,14 +16,18 @@ import static Actions.General.GoToBalanceGeneralActions.getCurrentBallanceFromMe
 public class CreateOrderAddBidAndSetAsWinner {
 
 
-    public static OrderInfoAndActions andAwardOrderToWriter(WebDriver driver, LoginObject clientLogin, OrderObject order, LoginObject writerLogin) throws InterruptedException {
+    public static OrderInfoAndActions andAwardOrderToWriter(WebDriver driver, LoginObject clientLogin, OrderObject order,
+                                                            LoginObject writerLogin) throws InterruptedException {
 
         WriterGoToAllOrders.CreateNewOrderBidOnItAndLeaveAnOffer(driver, clientLogin, order, writerLogin);
 
         MyOrdersPage offersToOrder = clientGoToCreatedOrder(driver, clientLogin, order);
         OrderInfoAndActions orderInfoClientPage = offersToOrder.clickOnSetAsWinnerButtonAndAprooveMoneyBlocking();
+        Thread.sleep(3000);
         order.setTotalBalanceAfterBlocking(getCurrentBallanceFromMenuButton(driver));
+        System.out.println(order.getTotalBalanceAfterBlocking() + "Balance scan in awward order to writer");
 
         return orderInfoClientPage;
     }
+
 }

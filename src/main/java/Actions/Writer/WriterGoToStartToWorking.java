@@ -17,7 +17,8 @@ import static Actions.General.RegistrationAndLogin.loginAs;
 public class WriterGoToStartToWorking {
 
 
-    public static OrderInfoAndActions andPressStartWorkingButton(WebDriver driver, LoginObject clientLogin, OrderObject order, LoginObject writerLogin) throws InterruptedException {
+    public static OrderInfoAndActions andPressStartWorkingButton(WebDriver driver, LoginObject clientLogin, OrderObject order,
+                                                                 LoginObject writerLogin) throws InterruptedException {
 
         CreateOrderAddBidAndSetAsWinner.andAwardOrderToWriter(driver, clientLogin, order, writerLogin);
         logOut(driver);
@@ -27,4 +28,5 @@ public class WriterGoToStartToWorking {
 
         return orderInfoWriter;
     }
+
 }

@@ -25,7 +25,7 @@
             <classes>
 
 
-                <class name = "Tests.EditProfile.LanguagesExpertisesCategoriesAdd"/>
+                <class name = "Tests.Balance.UnblockingMoneyAfterClientDecline"/>
                 <!--
 
 

@@ -115,4 +115,5 @@ public class CustomWaits extends BaseTest {
 
         return webElement;
     }
+
 }

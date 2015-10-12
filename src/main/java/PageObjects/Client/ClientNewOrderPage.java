@@ -67,7 +67,6 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     public WebElement publishOrderOKSweet;
 
     /// after publish
-
     //// edit order BOTTOM
 
     @FindBy(xpath = "//button[contains(text(), 'Publish')]")
@@ -87,7 +86,6 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     public WebElement currentOrderTime;
 
 ///////////////////////////////////////////////////   BUTTONS   ////////////////////////////////////////////////////////
-
     @FindBy(id = "c_ord_form")
     public WebElement publishButton;
 

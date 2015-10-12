@@ -15,7 +15,6 @@ public class Search {
         WebDriverWait wait = new WebDriverWait(driver, 15);
         String str = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'" + toFind + "')]"))).getText();
         return str;
-
     }
 
 }

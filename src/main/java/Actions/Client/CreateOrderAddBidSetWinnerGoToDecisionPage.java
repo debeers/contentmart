@@ -19,7 +19,8 @@ import static GeneralHelpers.GeneralHelpers.findCreatedOrderAndClickOnIt;
 public class CreateOrderAddBidSetWinnerGoToDecisionPage {
 
 
-    public static OrderInfoAndActions andMakeAChoice(WebDriver driver, LoginObject clientLogin, OrderObject order, LoginObject writerLogin, String text) throws InterruptedException {
+    public static OrderInfoAndActions andMakeAChoice(WebDriver driver, LoginObject clientLogin, OrderObject order,
+                                                     LoginObject writerLogin, String text) throws InterruptedException {
 
         OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, order, writerLogin);
         orderInfoWriter.sendTextToTheClientTextArea(driver, text);

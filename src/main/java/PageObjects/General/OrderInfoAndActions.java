@@ -497,13 +497,6 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         return xpath + t;
     }
 
-    public String xContains(String createdOrderName) {
-
-        String xpath = "//*[contains(text(),'";
-        String t = createdOrderName + "')]";
-        return xpath + t;
-    }
-
     public String getorderName() {
 
         String param = $(orderName).shouldBe(visible).getText();

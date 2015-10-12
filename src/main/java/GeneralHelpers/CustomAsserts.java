@@ -9,7 +9,6 @@ import org.testng.Assert;
  */
 public class CustomAsserts {
 
-
     public static void orderParametersCheck(OrderObject order, OrderInfoAndActions orderInfoAndActions, String status){
 
         Assert.assertEquals(order.getEntityOrderSystemID(), orderInfoAndActions.getsystemOrderID());
@@ -19,4 +18,5 @@ public class CustomAsserts {
         Assert.assertEquals(order.getWordsReq(), orderInfoAndActions.getWordsRequire());
         Assert.assertEquals(orderInfoAndActions.getorderStatus(), status);
     }
+
 }

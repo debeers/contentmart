@@ -51,7 +51,6 @@ public class PartnersPage extends LeftMenuGeneralPage {
         $(searchFieldPartners).shouldBe(visible).sendKeys(searchText);
         $(searchButtonPartners).shouldBe(present).click();
         GeneralWaits.waitForPageLoad(driver);
-
     }
 
 

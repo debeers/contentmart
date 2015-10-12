@@ -12,14 +12,11 @@ import static com.codeborne.selenide.Selenide.$;
 
 public class EditProfilePage extends LeftMenuGeneralPage {
 
-
     //For All
 
     @FindBy(xpath = "//button[contains(text(), 'Save Changes)]")
     public WebElement saveChangesButton;
-
     /////////////////////////////////// LINKS BLOCK /////////////////////////////////////////////
-
     @FindBy(xpath = "//a[contains(text(), 'Account details')]")
     public WebElement accountDetailsLink;
 
@@ -28,9 +25,7 @@ public class EditProfilePage extends LeftMenuGeneralPage {
 
     @FindBy(xpath = "//a[contains(text(), 'Email Notifications')]")
     public WebElement emailNotificationsLink;
-
     ////////////////////////////////////////////////////////////////////////////////////////////
-
     //Account details
     @FindBy(id = "nick_name")
     public WebElement nickNameField;
@@ -86,9 +81,7 @@ public class EditProfilePage extends LeftMenuGeneralPage {
 
     @FindBy(xpath = ".//*[@id='email_notifications']/div[1]/div/div/div/div")
     public List<WebElement> triggers;
-
     //////////////////////////////////////////////////////////////////////////////////////
-
 
     public void clickOnEmailNotificationsLink() {
 

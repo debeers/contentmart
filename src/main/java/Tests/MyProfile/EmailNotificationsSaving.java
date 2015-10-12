@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import static Actions.General.GoToEditProfile.checkForTriggersStatus;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Created by DeBeers on 03.10.2015.
@@ -25,13 +26,13 @@ public class EmailNotificationsSaving extends BaseTest{
         Thread.sleep(4000);
         driver.navigate().refresh();
         waitForPageLoad(driver);
-        Assert.assertTrue(checkForTriggersStatus("OFF"));
+        assertTrue(checkForTriggersStatus("OFF"));
 
         editProfilePage.switchTriggersON();
         Thread.sleep(4000); // need to save changes, waits for server side...
         driver.navigate().refresh();
         waitForPageLoad(driver);
 
-        Assert.assertTrue(checkForTriggersStatus("ON"));
+        assertTrue(checkForTriggersStatus("ON"));
     }
 }

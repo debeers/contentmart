@@ -5,7 +5,6 @@ package GeneralHelpers;
  */
 public class CreateNewOrderHelper {
 
-
     public static String randomID() {
 
         int id = (int) (Math.random() * 1000);
@@ -27,4 +26,5 @@ public class CreateNewOrderHelper {
 
         return day;
     }
+
 }

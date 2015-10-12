@@ -19,19 +19,18 @@ public class LanguagesExpertisesCategoriesAdd extends BaseTest {
 
 
     @Test(groups = {"regress2.2"})
-    public void AddPortfolioItemTest() throws InterruptedException {
+    public void LanguagesExpertisesCategoriesAdd() throws InterruptedException {
 
         WriterProfilePage writerProfilePage = GoToWriterProfile.goToMyProfile(driver, writerLogin);
-        writerProfilePage.clickOnEditProfileButtonkButton();
+        writerProfilePage.clickOnEditProfileButton();
 
         WriterEditProfilePage writerEditProfilePage = new WriterEditProfilePage(driver);
+        writerEditProfilePage.clear();
 
-        List<String> madeChanges = setupSkills(driver, "Expertises", "add");
+        List<String> madeChangesFor = setupSkills(driver, "Languages", "add");
         writerEditProfilePage.clickOnSaveChangesButton();
 
-        Assert.assertTrue(checkForMadeCategoriesChanges(driver, "Languages", madeChanges));
+        Assert.assertTrue(checkForMadeCategoriesChanges(writerProfilePage, madeChangesFor, "Languages"));
 
-        writerProfilePage.clickOnEditProfileButtonkButton();
-        setupSkills(driver, "Expertises", "remove");
     }
 }

@@ -27,4 +27,5 @@ public class WriterActionsAfterClientDecision {
 
         logOut(driver);
     }
+
 }

@@ -34,9 +34,10 @@ public class RegistrationAndLogin {
     public static LoginPage logOut(WebDriver driver) {
 
         LeftMenuGeneralPage leftMenuGeneralPage = new LeftMenuGeneralPage(driver);
-        leftMenuGeneralPage.clickOnProfileLeftMenu();
-        LoginPage loginPage = leftMenuGeneralPage.clickOnLoOutLeftMenu(driver);
+        leftMenuGeneralPage.clickOnProfileFromLeftMenu();
+        LoginPage loginPage = leftMenuGeneralPage.clickOnLoOutFromLeftMenu(driver);
 
         return loginPage;
     }
+
 }

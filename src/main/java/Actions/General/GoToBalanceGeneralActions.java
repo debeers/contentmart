@@ -66,7 +66,6 @@ public class GoToBalanceGeneralActions {
             System.out.println("!!!!!!! Wrong balance man!!!!!!!!!");
             return false;
         }
-
     }
 
 
@@ -89,7 +88,6 @@ public class GoToBalanceGeneralActions {
             System.out.println("!!!!!!! Wrong balance man!!!!!!!!!");
             return false;
         }
-
     }
 
 
@@ -97,23 +95,22 @@ public class GoToBalanceGeneralActions {
 
         orderObj.setTotalBalanceAfterUnBlocking(getCurrentBallanceFromMenuButton(driver));
         BalanceGeneralPage balanceGeneral = new BalanceGeneralPage(driver);
-        balanceGeneral.clickOnbalanceLeftMenu();
+        balanceGeneral.clickOnbalanceFromLeftMenu();
         GeneralWaits.waitForPageLoad(driver);
 
         return balanceGeneral;
-
     }
 
 
     public static BalanceGeneralPage clientGoToCheckForUnBlockingBalance(WebDriver driver, OrderObject orderObj, LoginObject clientLogin) {
 
         loginAs(driver, clientLogin);
-        orderObj.setTotalBalanceAfterBlocking(getCurrentBallanceFromMenuButton(driver));
+        orderObj.setTotalBalanceAfterUnBlocking(getCurrentBallanceFromMenuButton(driver));
         BalanceGeneralPage balanceGeneral = new BalanceGeneralPage(driver);
-        balanceGeneral.clickOnbalanceLeftMenu();
+        balanceGeneral.clickOnbalanceFromLeftMenu();
         GeneralWaits.waitForPageLoad(driver);
 
         return balanceGeneral;
-
     }
+
 }

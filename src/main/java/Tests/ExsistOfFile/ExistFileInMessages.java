@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 public class ExistFileInMessages extends BaseTest{
 
     @Test(groups={"regress 1.0"})
-    public static void DownloadFilesToMessage() throws Exception {
+    public static void ExistFileInMessages() throws Exception {
 
         LoginObject clientLogin = new LoginObject("debeers1989@gmail.com", "roottoor");
         OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");

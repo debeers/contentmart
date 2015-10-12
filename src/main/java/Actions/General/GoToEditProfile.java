@@ -19,8 +19,8 @@ public class GoToEditProfile {
     public static EditProfilePage goToEditProfile(WebDriver driver, LoginObject clientLogin) throws InterruptedException {
 
         MyOrdersPage defaultClientPage = RegistrationAndLogin.loginAs(driver, clientLogin);
-        defaultClientPage.clickOnProfileLeftMenu();
-        EditProfilePage editProfilePage = defaultClientPage.clickOnEditProfileLeftMenu();
+        defaultClientPage.clickOnProfileFromLeftMenu();
+        EditProfilePage editProfilePage = defaultClientPage.clickOnAccountSettingsFromLeftMenu();
 
         $WaitFor(
 
@@ -57,4 +57,5 @@ public class GoToEditProfile {
         }
         return true;
     }
+
 }

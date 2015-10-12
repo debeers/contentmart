@@ -37,13 +37,12 @@ public class UnblockingMoneyAfterClientDecline extends BaseTest{
         assertEquals(balanceGeneral.xUnBlockingStatus(order.getEntityOrderSystemID()), "Unblocking");
 
         assertEquals(balanceGeneral.xBlockingAmount(order.getEntityOrderSystemID()), "- " + order.getEntityOrderValue());
-       // assertEquals(balanceGeneral.xBlockingBalance(order.getEntityOrderSystemID()).trim(),  order.getTotalBalanceAfterBlocking()); // have some problem for now with this assert (fixing)
+        assertEquals(balanceGeneral.xBlockingBalance(order.getEntityOrderSystemID()).trim(),  order.getTotalBalanceAfterBlocking());
 
         assertEquals(balanceGeneral.xUnBlockingAmount(order.getEntityOrderSystemID()).trim(), "+ " + order.getEntityOrderValue());
         assertEquals(balanceGeneral.xUnBlockingBallance(order.getEntityOrderSystemID()).trim(), order.getTotalBalanceBefore());
 
         assertTrue(checkForCorrectUnblockingMoneyOperation(order));
-
 
     }
 }

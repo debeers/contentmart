@@ -80,7 +80,6 @@ public class BalanceGeneralPage extends LeftMenuGeneralPage {
         return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
     }
 
-
 ///////////////////////////////////////   Transfer
     public String xTransferStatus(String ID) {
 
@@ -111,4 +110,5 @@ public class BalanceGeneralPage extends LeftMenuGeneralPage {
 
         super(driver);
     }
+
 }

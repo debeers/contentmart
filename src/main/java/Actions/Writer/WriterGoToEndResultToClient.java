@@ -13,7 +13,8 @@ import org.openqa.selenium.WebDriver;
 public class WriterGoToEndResultToClient {
 
 
-    public static OrderInfoAndActions andSendResultToTheClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin, String text, String filepath) throws InterruptedException {
+    public static OrderInfoAndActions andSendResultToTheClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject,
+                                                               LoginObject writerLogin, String text, String filepath) throws InterruptedException {
 
         OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObject, writerLogin);
         orderInfoWriter.sendTextToTheClientTextArea(driver, text);
@@ -24,7 +25,8 @@ public class WriterGoToEndResultToClient {
     }
 
 
-    public static OrderInfoAndActions uploadFilesAndSendResultToTheClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin, String text, String filepath) throws InterruptedException {
+    public static OrderInfoAndActions uploadFilesAndSendResultToTheClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject,
+                                                                          LoginObject writerLogin, String text, String filepath) throws InterruptedException {
 
         OrderInfoAndActions orderInfoAndActions = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObject, writerLogin);
         orderInfoAndActions.sendTextToTheClientTextArea(driver, text);
@@ -34,4 +36,5 @@ public class WriterGoToEndResultToClient {
 
         return orderInfoAndActions;
     }
+
 }
