@@ -1,13 +1,11 @@
 package PageObjects.Writer;
 
 import PageObjects.General.LeftMenuGeneralPage;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class WriterEditProfilePage extends LeftMenuGeneralPage {
 
 
-    @FindBy(xpath = "//button[contains(text(), 'SAVE CHANGES')]")
+    @FindBy(xpath = ".//button[contains(@class, 'new_blue_but m_r-10')]")
     public WebElement saveChangesButton;
 
     @FindBy(xpath = "//button[contains(text(), 'CANCEL')]")
@@ -30,11 +28,20 @@ public class WriterEditProfilePage extends LeftMenuGeneralPage {
     @FindBy(xpath = "//form/div[5]/textarea")
     public WebElement aboutTextArea;
 
+    @FindBy(xpath = ".//fieldset/select[1]")
+    public WebElement selectMonth;
+
+    @FindBy(xpath = ".//fieldset/select[2]")
+    public WebElement selectDay;
+
+    @FindBy(xpath = ".//fieldset/select[3]")
+    public WebElement selectYear;
 
 
     public String languagesId = "language-box";
     public String expertisesId = "expertise-box";
     public String categoriesId = "category-box";
+
 
 
     public String notAddedSkillsArray(String skillBox){
@@ -55,7 +62,7 @@ public class WriterEditProfilePage extends LeftMenuGeneralPage {
 
     public WriterProfilePage clickOnSaveChangesButton() {
 
-        $(saveChangesButton).shouldBe(visible).click();
+        saveChangesButton.click();
         WriterProfilePage writerProfilePage = new WriterProfilePage(driver);
         return writerProfilePage;
     }

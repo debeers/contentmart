@@ -82,7 +82,6 @@ public class BalanceGeneralPage extends LeftMenuGeneralPage {
 
 ///////////////////////////////////////   Transfer
     public String xTransferStatus(String ID) {
-
         String xpath = "html/body//td[.//text()[contains(., ' #";
         String t = ID + "')]]/preceding-sibling::td[1][(contains(text(), 'Transfer'))]";
 
@@ -90,7 +89,6 @@ public class BalanceGeneralPage extends LeftMenuGeneralPage {
     }
 
     public String xTransferAmount(String ID) {
-
         String xpath = "html/body//td[.//text()[contains(., ' #";
         String t = ID + "')]]/preceding-sibling::td[1][(contains(text(), 'Transfer'))]/following-sibling::td[1]/following-sibling::td[1]";
 

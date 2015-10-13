@@ -25,10 +25,18 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
     @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[2]/div[3]/a")
     public WebElement editProfileButton;
-
                         // Portfolio
 
-    @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[4]/div[1]/div/svg/circle")
+    @FindBy(xpath = ".//div[contains(@class, 'user_main_info')]//div[2][contains(@class, 'd_in m_r-10')]")
+    public WebElement yearsOld;
+
+    @FindBy(xpath = ".//div[contains(@class, 'portfolio-item-delete-confirm-wrap')]//a[1]")
+    public WebElement confirmSweetAllertButton;
+
+    @FindBy(xpath = ".//a[contains (text(), 'CANCEL')]")
+    public WebElement cancelSweetAllertButton;
+
+    @FindBy(xpath = ".//div[contains (@class, 'add_portfolio_item')]")
     public WebElement addPortfolioItemButton;
 
     @FindBy(className="fancybox-wrap fancybox-default fancybox-opened")
@@ -69,6 +77,12 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
     @FindBy(xpath = ".//a[contains(text(), 'SAVE')]")
     public WebElement portfolioItemSaveButton;
+
+    @FindBy(xpath = ".//a[contains (@class, 'portfolio-item-delete-btn')]")
+    public WebElement deletePortfolioItemButton;
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                      // Languages and Expertises block
 
@@ -80,6 +94,14 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     public WriterProfilePage(WebDriver driver) {
         super(driver);
     }
+
+    public String getYearsOld(){
+
+        String year = yearsOld.getText();
+        System.out.println(year.substring(0, year.lastIndexOf('y') - 1));
+        return year.substring(0, year.lastIndexOf('y')-1);
+    }
+
 
     public Boolean addedPortfolioItem(WebDriver driver, String header) {
 
@@ -109,6 +131,14 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
                     editPortfolioItemButton
             );
         }
+    }
+
+
+    public void clickOnDeletePortfolioItemButton(String itemName) throws InterruptedException {
+
+        $(By.xpath(".//h4[contains(text(), '"+ itemName +"')]/preceding-sibling::a[contains " +
+                "(@class, 'portfolio-item-delete-btn')]")).shouldBe(Condition.visible).click();
+        Thread.sleep(3000);
     }
 
 
@@ -216,7 +246,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     }
 
 
-    public void editPortfolioItem(WebDriver driver, String title, String editTitle, String editText){
+    public void editPortfolioItem(WebDriver driver, String title, String editTitle, String editText) {
 
         openAddedPortfolioItem(driver, title);
         clickOnEditPortfolioItemButton();
@@ -228,7 +258,11 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
     }
 
-
+    public void clickOnConfirmSweetAllertButton() throws InterruptedException {
+Thread.sleep(3000);
+        confirmSweetAllertButton.click();
+        $(cancelSweetAllertButton).should(Condition.disappear);
+    }
 
 
 }

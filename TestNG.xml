@@ -25,7 +25,7 @@
             <classes>
 
 
-                <class name = "Tests.Balance.UnblockingMoneyAfterClientDecline"/>
+                <class name = "Tests.MyProfile.DeletePortfolioItem"/>
                 <!--
 
 

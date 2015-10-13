@@ -3,21 +3,53 @@ package Actions.Writer;
 import Actions.General.RegistrationAndLogin;
 import Entities.LoginObject;
 import PageObjects.General.MyOrdersPage;
+import PageObjects.Writer.WriterEditProfilePage;
 import PageObjects.Writer.WriterProfilePage;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
-import java.util.HashSet;
+import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
+import java.util.Random;
 
 import static GeneralHelpers.CreateNewOrderHelper.randomID;
 import static GeneralHelpers.Messages.randomMessageGeneratorLength;
-import static com.codeborne.selenide.Selenide.$$;
 
 /**
  * Created by DeBeers on 04.10.2015.
  */
 public class GoToWriterProfile {
+
+
+    public static String randomSelectDateOfBirth(WriterEditProfilePage writerEditProfilePage){
+
+        Select day = new Select(writerEditProfilePage.selectDay);
+        Select month = new Select(writerEditProfilePage.selectMonth);
+        Select year = new Select(writerEditProfilePage.selectYear);
+
+        day.selectByIndex( new Random().nextInt(day.getOptions().size()));
+        month.selectByIndex( new Random().nextInt(month.getOptions().size()));
+        year.selectByIndex(new Random().nextInt(year.getOptions().size()));
+
+        return year.getFirstSelectedOption().getText();
+    }
+
+
+    public static Boolean checkForOld(String yearFromRandom, String yearsFromProfilePage){
+
+        int year;
+        Calendar calendar = Calendar.getInstance();
+        year = calendar.get(Calendar.YEAR);
+
+        int yearFromProfile = Integer.parseInt(yearsFromProfilePage);
+        int randomYear = Integer.parseInt(yearFromRandom);
+
+        if((year - randomYear) == yearFromProfile){
+            return true;
+        }
+
+        return false;
+    }
 
 
     public static WriterProfilePage goToMyProfile(WebDriver driver, LoginObject writerLogin) {

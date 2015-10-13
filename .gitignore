@@ -1,4 +1,5 @@
 /.idea
-/target
 /build
+/target
+/.src/main/java/Tests/DEBUG.java
 /src/main/java/Tests/DEBUG.java
