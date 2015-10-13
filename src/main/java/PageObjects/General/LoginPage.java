@@ -17,20 +17,19 @@ public class LoginPage extends BasePageObject {
     public WebElement RegisterLink;
 
     @FindBy(id = "header_login")
-    public  WebElement loginLink;
+    public WebElement loginLink;
 
     @FindBy(id = "u_login")
-    public  WebElement loginField;
+    public WebElement loginField;
 
     @FindBy(name = "u_passwd")
-    public  WebElement passwordField;
+    public WebElement passwordField;
 
     @FindBy(xpath = ".//*[@id='login_form']/button")
-    public  WebElement submitButton;
+    public WebElement submitButton;
 
     @FindBy(css = ".fancybox-form.cell.login_block>h1")
     public WebElement welcomeLoginHeader;
-
 
     @FindBy(xpath = "//*[@id='header_register']")
     public WebElement registrationLinkNewUser;
@@ -58,7 +57,6 @@ public class LoginPage extends BasePageObject {
 
         return page;
     }
-
 
     public LoginPage setLoginField(String clientLogin) {
         $(loginField).shouldBe(visible).sendKeys(clientLogin);
@@ -92,11 +90,9 @@ public class LoginPage extends BasePageObject {
         return res;
     }
 
-
     public LoginPage(WebDriver driver) {
         super(driver);
 
     }
-
 
 }

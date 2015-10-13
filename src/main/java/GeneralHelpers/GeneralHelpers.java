@@ -1,12 +1,15 @@
 package GeneralHelpers;
 
-import Entities.Order;
+import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import static Tests.BaseTest.wait;
 import static com.codeborne.selenide.Selenide.$;
@@ -18,7 +21,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class GeneralHelpers {
 
 
-    public static void findCreatedClientOrderAndClickOnIt(WebDriver driver, Order order) {
+    public static void findCreatedOrderAndClickOnIt(WebDriver driver, OrderObject order) {
 
         OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
         String orderXPath = orderInfoAndActions.xOrder(order.getEntityOrderName());
@@ -37,8 +40,7 @@ public class GeneralHelpers {
     }
 
 
-
-    public static void uploadFileToOrder(WebDriver driver, String filepath) throws InterruptedException {
+    public static void uploadFileToHidenInput(WebDriver driver, String filepath) throws InterruptedException {
 
         String xPath = ".//*[@id='fileupload']";
         jsDeleteClasses(xPath, driver);
@@ -53,4 +55,31 @@ public class GeneralHelpers {
         System.out.println("You will upload file with name: " + resultStr);
         return resultStr;
     }
+
+
+    public static boolean isFileExists(String URLName) {
+        try {
+            HttpURLConnection.setFollowRedirects(false);
+            // note : you may also need
+            //        HttpURLConnection.setInstanceFollowRedirects(false)
+            HttpURLConnection con =
+                    (HttpURLConnection) new URL(URLName).openConnection();
+            con.setRequestMethod("HEAD");
+            return (con.getResponseCode() == HttpURLConnection.HTTP_OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public static Boolean entityAppear(String name){
+
+    if(wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//*[contains(text(),'" + name + "')]"))).isDisplayed()){
+        return true;
+    }
+        return false;
+
+    }
+
 }

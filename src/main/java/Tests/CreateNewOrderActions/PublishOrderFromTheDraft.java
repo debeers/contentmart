@@ -1,16 +1,11 @@
 package Tests.CreateNewOrderActions;
 
 import Actions.Client.ClientGoToCreateNewOrder;
-import DataProviders.CreateNewOrderActionsDataProvider;
-import Entities.Balance;
-import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
 
-import static Actions.RegistrationAndLogin.*;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -18,38 +13,14 @@ import static org.testng.Assert.assertEquals;
  */
 public class PublishOrderFromTheDraft extends BaseTest{
 
+    @Test(groups={"regress 1.0"})
+    public  void PublishOrderFromTheDraft() throws Exception {
 
+        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
 
-
-
-    @Test(groups={"regress 1.0"}, dataProvider= "CreateNewOrderActions", dataProviderClass = CreateNewOrderActionsDataProvider.class)
-    public  void PublishOrderFromTheDraft(Object clientLoginObject, Object orderObject) throws Exception {
-
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-
-
-        Order order = new Order();
-        OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andSaveAsDraft(driver, clientLogin, orderObj, order);
+        OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andSaveAsDraft(driver, clientLogin, order);
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Drafted");
         orderInfoAndActions.andClickOnPublishOrderButtonTop();
         assertEquals(orderInfoAndActions.getTextFromOrderStatus(), "Published");
-        logOut(driver);
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

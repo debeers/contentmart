@@ -1,57 +1,45 @@
 package Tests.Balance;
 
 import Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage;
-import Entities.Balance;
-import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
-import GeneralHelpers.GeneralWaits;
 import PageObjects.General.BalanceGeneralPage;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
 
-import static Actions.goToBalanceGeneralActions.getCurrentBallanceFromMenuButton;
+import static Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage.acceptWriterText;
+import static Actions.General.GoToBalanceGeneralActions.clientGoToCheckForBlockingBalance;
+import static Actions.General.GoToBalanceGeneralActions.checkForCorrectBalanceTransferOperation;
 import static java.lang.Thread.sleep;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * Created by CMG_TEST on 23.09.2015.
  */
 public class TransferMoney extends BaseTest{
 
+    @Test(groups={"regress 1.0"})
+    public static void TransferMoney() throws InterruptedException {
 
+        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        String writerText = "hello world, java is super cool but really hard languege! TestNG is my favourite framework! Peace!)))";
 
-    @Test(groups={"regress 1.0"}, dataProvider= "AcceptWriterText", dataProviderClass = AcceptWriterTextDataProvider.class)
-    public static void TransferMoney(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object text) throws InterruptedException {
+        OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andMakeAChoice(driver, clientLogin, order, writerLogin, writerText);
+        acceptWriterText(decisionPage);
+        BalanceGeneralPage balanceGeneral =
+                clientGoToCheckForBlockingBalance(driver, order);
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
-        String writerText = text.toString();
-
-        Order order = new Order();
-        Balance balance = new Balance();
-
-        OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andMakeAChoice(driver, clientLogin, orderObj, writerLogin, order, writerText);
-        getCurrentBallanceFromMenuButton(driver, balance);
-        decisionPage.clickOnAcceptButtonOnDecisionPage();
-
-        BalanceGeneralPage balanceGeneral = new BalanceGeneralPage(driver);
-        balanceGeneral.clickOnbalanceLeftMenu();
-        GeneralWaits.waitForPageLoad(driver);
-
-        String transferAmount = balanceGeneral.getMoneyTransferAmount(order.getEntityOrderSystemID());
+        String transferAmount = balanceGeneral.xTransferAmount(order.getEntityOrderSystemID());
         System.out.println("transfer money " + transferAmount);
         sleep(5000);
         driver.navigate().refresh();
 
-        assertEquals(balanceGeneral.getBlokingAmountMoneyByOrderId(order.getEntityOrderSystemID()), "- " + order.getEntityOrderValue());
-        assertEquals(balanceGeneral.getMoneyTransferAmount(order.getEntityOrderSystemID()).trim(), order.getEntityOrderValue());
-        assertEquals(balanceGeneral.getBlockingMoneyBallance(order.getEntityOrderSystemID()), balanceGeneral.getTransferBalance(order.getEntityOrderSystemID()));
+        assertEquals(balanceGeneral.xBlockingAmount(order.getEntityOrderSystemID()), "- " + order.getEntityOrderValue());
+        assertEquals(balanceGeneral.xTransferAmount(order.getEntityOrderSystemID()).trim(), order.getEntityOrderValue());
+
+        assertEquals(balanceGeneral.xBlockingBalance(order.getEntityOrderSystemID()), balanceGeneral.xTransferBalance(order.getEntityOrderSystemID()));
+        assertTrue(checkForCorrectBalanceTransferOperation(order));
 
     }
-
-
-
 }

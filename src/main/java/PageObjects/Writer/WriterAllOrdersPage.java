@@ -30,7 +30,6 @@ public class WriterAllOrdersPage extends LeftMenuGeneralPage {
         wait.until(ExpectedConditions.visibilityOf(searchField)).sendKeys(createdOrderName);
         wait.until(ExpectedConditions.elementToBeClickable(searchButton)).click();
         GeneralWaits.waitForPageLoad(driver);
-
     }
 
 
@@ -38,6 +37,4 @@ public class WriterAllOrdersPage extends LeftMenuGeneralPage {
         super(driver);
 
     }
-
-
 }

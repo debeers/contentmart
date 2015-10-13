@@ -1,14 +1,11 @@
 package Tests.OrdersActions;
 
 import Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage;
-import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
 
-import static Actions.RegistrationAndLogin.logOut;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -16,28 +13,15 @@ import static org.testng.Assert.assertEquals;
  */
 public class AcceptWriterText extends BaseTest {
 
+    @Test(groups={"regress 1.0"})
+    public static void AcceptWriterText() throws InterruptedException {
 
+        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        String writerText = "hello world, java is super cool but really hard languege! TestNG is my favourite framework! Peace!)))";
 
-
-    @Test(groups={"regress 1.0"}, dataProvider= "AcceptWriterText", dataProviderClass = AcceptWriterTextDataProvider.class)
-    public static void AcceptWriterText(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object text) throws InterruptedException {
-
-
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
-        String writerText = text.toString();
-
-        Order order = new Order();
-        OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andMakeAChoice(driver, clientLogin, orderObj, writerLogin, order, writerText);
+        OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andMakeAChoice(driver, clientLogin, order, writerLogin, writerText);
         decisionPage.clickOnAcceptButtonOnDecisionPage();
 
         assertEquals(decisionPage.acceptTextLableOnDecisionPage(), "TEXT ACCEPTED");
-        logOut(driver);
     }
-
-
-
-
-
 }

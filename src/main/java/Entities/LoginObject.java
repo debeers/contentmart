@@ -18,7 +18,4 @@ public class LoginObject {
 
         return Password;
     }
-
-
-
 }

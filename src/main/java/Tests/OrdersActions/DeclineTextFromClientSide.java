@@ -1,14 +1,11 @@
 package Tests.OrdersActions;
 
 import Actions.Client.CreateOrderAddBidSetWinnerGoToDecisionPage;
-import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
 
-import static Actions.RegistrationAndLogin.logOut;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -16,33 +13,23 @@ import static org.testng.Assert.assertEquals;
  */
 public class DeclineTextFromClientSide extends BaseTest {
 
+    @Test(groups={"regress 1.0"})
+    public static void DeclineTextFromClientSide() throws InterruptedException {
 
+        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        String writerText = "hello world, java is super cool but really hard languege! TestNG is my favourite framework! Peace!)))";
+        String declineReason = "Nothing pearsonal, just test!";
 
-    @Test(groups={"regress 1.0"}, dataProvider= "dataproviderObjectsForDeclineText", dataProviderClass = ClientDeclineWritersTextDataProvider.class)
-    public static void DeclineTextFromClientSide(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object text, Object declineReasonObj) throws InterruptedException {
-
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
-        String writerText = text.toString();
-        String declineReason = declineReasonObj.toString();
-        System.out.println(declineReason);
-
-
-        Order order = new Order();
-        OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andMakeAChoice(driver, clientLogin, orderObj, writerLogin, order, writerText);
-
+        OrderInfoAndActions decisionPage = CreateOrderAddBidSetWinnerGoToDecisionPage.andMakeAChoice(driver, clientLogin, order, writerLogin, writerText);
         decisionPage.clickOndeclineButtonOnDecisionPage();
         assertEquals(decisionPage.getTextFromLable(), "CONTENT REJECTED");
 
         decisionPage.sendReasonOfRefusalTextAreaDecision(driver, declineReason);
         decisionPage.clickOnDeclineButtonAfterRefusalDecision(driver);
 
-        assertEquals(decisionPage.getTextFromDeclineReasonOnDecisionPage(), declineReason, "Wrong decline reason!");
-        assertEquals(decisionPage.getTextFromOrderStatus(), "Declined", "ERROR: wrong status!");
-        logOut(driver);
+        assertEquals(decisionPage.getTextFromDeclineReasonOnDecisionPage(), declineReason);
+        assertEquals(decisionPage.getTextFromOrderStatus(), "Declined");
     }
-
 }
 
 

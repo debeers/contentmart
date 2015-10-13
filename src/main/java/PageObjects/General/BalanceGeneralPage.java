@@ -1,11 +1,10 @@
 package PageObjects.General;
 
+import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -16,120 +15,92 @@ import static com.codeborne.selenide.Selenide.$;
 public class BalanceGeneralPage extends LeftMenuGeneralPage {
 
 
-
     @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[2]/p")
     public WebElement availebleBalance;
 
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[7]/a/span")
+    public WebElement clientBallanceFromLeftMenu;
 
-    @FindBy(xpath = "//div/div[3]/ul/li[7]/a/span")
-    public  WebElement clientBallanceFromLeftMenu;
+//////////////////////////////////////////////    Blocking
 
+    public String scanBalanceFromMenu() {
 
-    public String xBlocking(String ID) {
+        String scan = $(clientBallanceFromLeftMenu).shouldBe(Condition.present).getText();
+        String balance = scan.substring(scan.indexOf(' ') + 1);
+        return balance;
+    }
+
+    public String xBlockingStatus(String ID) {
 
         String xpath = "html/body//td[.//text()[contains(., '#";
-        String t = ID + "')]]/preceding-sibling::td[1]";
+        String t = ID + "')]]/preceding-sibling::td[1][.//text()[contains(., 'Blocking')]]";
 
-        return xpath + t;
+        return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
     }
 
     public String xBlockingAmount(String ID) {
 
         String xpath = "html/body//td[.//text()[contains(., ' #";
-        String t = ID + "')]]/following-sibling::td[1][not(contains(@class, 'text-right grey_dark'))]";
+        String t = ID + "')]]/preceding-sibling::td[1][.//text()[contains(., 'Blocking')]]/following-sibling::td[1]/following-sibling::td[1]";
 
-        return xpath + t;
+        return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
     }
 
     public String xBlockingBalance(String ID) {
 
         String xpath = "html/body//td[.//text()[contains(., ' #";
-        String t = ID + "')]]/following-sibling::td[1][not(contains(@class, 'text-right grey_dark'))]/following-sibling::td[1]";
+        String t = ID + "')]]/preceding-sibling::td[1][.//text()[contains(., 'Blocking')]]/following-sibling::td[1]/following-sibling::td[1]/following-sibling::td[1]";
 
-        return xpath + t;
+        return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
     }
 
-    public String xTransfer(String ID) {
+    ///////////////////////////////////////////    Unblocking
 
+    public String xUnBlockingStatus(String ID) {
+
+        String xpath = "html/body//td[.//text()[contains(., '#";
+        String t = ID + "')]]/preceding-sibling::td[1][.//text()[contains(., 'Unblocking')]]";
+
+        return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
+    }
+
+    public String xUnBlockingAmount(String ID) {
+
+        String xpath = "html/body//td[.//text()[contains(., '#";
+        String t = ID + "')]]/preceding-sibling::td[1][.//text()[contains(., 'Unblocking')]]/following-sibling::td[2]";
+
+        return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
+    }
+
+    public String xUnBlockingBallance(String ID) {
+
+        String xpath = "html/body//td[.//text()[contains(., '#";
+        String t = ID + "')]]/preceding-sibling::td[1][.//text()[contains(., 'Unblocking')]]/following-sibling::td[1]/following-sibling::td[1]/following-sibling::td[1]";
+
+        return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
+    }
+
+///////////////////////////////////////   Transfer
+    public String xTransferStatus(String ID) {
         String xpath = "html/body//td[.//text()[contains(., ' #";
-        String t = ID + "')]]/preceding-sibling::td[1][not(contains(text(), 'Blocking'))]";
+        String t = ID + "')]]/preceding-sibling::td[1][(contains(text(), 'Transfer'))]";
 
-        return xpath + t;
+        return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
     }
 
     public String xTransferAmount(String ID) {
-
         String xpath = "html/body//td[.//text()[contains(., ' #";
-        String t = ID + "')]]/following-sibling::td[1][not(contains(@class, 'text-right red'))]";
+        String t = ID + "')]]/preceding-sibling::td[1][(contains(text(), 'Transfer'))]/following-sibling::td[1]/following-sibling::td[1]";
 
-        return xpath + t;
+        return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
     }
 
     public String xTransferBalance(String ID) {
 
         String xpath = "html/body//td[.//text()[contains(., ' #";
-        String t = ID + "')]]/following-sibling::td[1][not(contains(@class, 'text-right red'))]/following-sibling::td[1]";
+        String t = ID + "')]]/preceding-sibling::td[1][(contains(text(), 'Transfer'))]/following-sibling::td[1]/following-sibling::td[1]/following-sibling::td[1]";
 
-        return xpath + t;
-    }
-
-    public String getTransferBalance(String systemID) {
-
-        String path = xTransferBalance(systemID);
-        String blocking = driver.findElement(By.xpath(path)).getText();
-
-        return blocking;
-
-    }
-
-    public String getBlokingMoneyByOrderId(String systemID) {
-
-        String path = xBlocking(systemID);
-        String blocking = driver.findElement(By.xpath(path)).getText();
-
-        return blocking;
-
-    }
-
-
-    public String getBlokingAmountMoneyByOrderId(String systemID) {
-
-        String amountPath = xBlockingAmount(systemID);
-        String amount = driver.findElement(By.xpath(amountPath)).getText();
-
-        return amount;
-
-    }
-
-
-    public String getBlockingMoneyBallance(String systemID) throws InterruptedException {
-
-        String balancePath = xBlockingBalance(systemID);
-        String balance = $(driver.findElement(By.xpath(balancePath))).shouldBe(visible).getText();
-
-        return balance;
-
-    }
-
-
-    public String getMoneyTransferAmount(String systemID) throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
-
-        String amountPath = xTransferAmount(systemID);
-        String transfer = wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(amountPath)))).getText();
-
-        return transfer;
-
-    }
-
-
-    public String getMoneyBlockingBallance(String systemID) throws InterruptedException {
-
-        String balancePath = xBlockingBalance(systemID);
-        String balance = $(driver.findElement(By.xpath(balancePath))).shouldBe(visible).getText();
-
-        return balance;
-
+        return $(driver.findElement(By.xpath(xpath + t))).shouldBe(visible).getText();
     }
 
 
@@ -137,4 +108,5 @@ public class BalanceGeneralPage extends LeftMenuGeneralPage {
 
         super(driver);
     }
+
 }

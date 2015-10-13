@@ -1,8 +1,6 @@
 package Tests.RegistrationAndLogin;
 
-import Actions.RegistrationAndLogin;
-import DataProviders.LoginDataProvider;
-import Entities.LoginObject;
+import Actions.General.RegistrationAndLogin;
 import PageObjects.General.LoginPage;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
@@ -14,10 +12,8 @@ import static org.testng.Assert.assertEquals;
 public class ClientAndWriterLoginLogOutTest extends BaseTest {
 
 
-    @Test(groups = {"regress2.2"}, dataProvider = "ClientLoginData", dataProviderClass = LoginDataProvider.class)
-    public void positive_Client_LoginLogOut(Object clientLoginObject) throws InterruptedException {
-
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
+    @Test(groups = {"regress2.2"})
+    public void positive_Client_LoginLogOut() throws InterruptedException {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage(driver);
@@ -36,10 +32,8 @@ public class ClientAndWriterLoginLogOutTest extends BaseTest {
     }
 
 
-    @Test(groups = {"regress2.2"}, dataProvider = "WriterLoginData", dataProviderClass = LoginDataProvider.class)
-    public void positive_Writer_LoginLogOut(Object writerLoginObj) throws InterruptedException {
-
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
+    @Test(groups = {"regress2.2"})
+    public void positive_Writer_LoginLogOut() throws InterruptedException {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage(driver);
@@ -56,17 +50,4 @@ public class ClientAndWriterLoginLogOutTest extends BaseTest {
         RegistrationAndLogin.logOut(driver);
         assertEquals(driver.getCurrentUrl(), baseUrl);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

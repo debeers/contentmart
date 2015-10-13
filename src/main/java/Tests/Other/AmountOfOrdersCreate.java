@@ -1,10 +1,7 @@
 package Tests.Other;
 
 import Actions.Client.ClientGoToCreateNewOrder;
-import Actions.RegistrationAndLogin;
-import DataProviders.CreateNewOrderActionsDataProvider;
-import Entities.LoginObject;
-import Entities.Order;
+import Actions.General.RegistrationAndLogin;
 import Entities.OrderObject;
 import PageObjects.Client.ClientNewOrderPage;
 import PageObjects.General.OrderInfoAndActions;
@@ -17,24 +14,16 @@ import org.testng.annotations.Test;
 public class AmountOfOrdersCreate extends BaseTest{
 
 
-    @Test(groups={"regress 1.0"}, dataProvider= "CreateNewOrderActions", dataProviderClass = CreateNewOrderActionsDataProvider.class)
-    public  void AmountOfOrdersCreate(Object clientLoginObject, Object orderObject) throws Exception {
+    @Test(groups={"regress 1.0"})
+    public  void AmountOfOrdersCreate() throws Exception {
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-        Order order = new Order();
+        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
 
         for (int i = 0; i<=20; i++) {
-            OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, orderObj, order);
+            OrderInfoAndActions orderInfoAndActions = ClientGoToCreateNewOrder.andPublish(driver, clientLogin, order);
             ClientNewOrderPage clientNewOrderPage = orderInfoAndActions.clickOnCloneOrderButton();
             clientNewOrderPage.andClickOnPublishNewOrderButton(driver);
             RegistrationAndLogin.logOut(driver);
-
         }
-
-
     }
-
-
-
 }

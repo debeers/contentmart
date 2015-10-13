@@ -2,14 +2,13 @@ package Actions.Writer;
 
 import Actions.Client.CreateOrderAddBidAndSetAsWinner;
 import Entities.LoginObject;
-import Entities.Order;
 import Entities.OrderObject;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.General.OrderInfoAndActions;
 import org.openqa.selenium.WebDriver;
 
-import static Actions.RegistrationAndLogin.logOut;
-import static Actions.RegistrationAndLogin.loginAs;
+import static Actions.General.RegistrationAndLogin.logOut;
+import static Actions.General.RegistrationAndLogin.loginAs;
 
 
 /**
@@ -18,18 +17,16 @@ import static Actions.RegistrationAndLogin.loginAs;
 public class WriterGoToStartToWorking {
 
 
-    public static OrderInfoAndActions andPressStartWorkingButton(WebDriver driver, LoginObject clientLogin, OrderObject orderObject, LoginObject writerLogin, Order order) throws InterruptedException {
+    public static OrderInfoAndActions andPressStartWorkingButton(WebDriver driver, LoginObject clientLogin, OrderObject order,
+                                                                 LoginObject writerLogin) throws InterruptedException {
 
-        CreateOrderAddBidAndSetAsWinner.andAwardOrderToWriter(driver, clientLogin, orderObject, writerLogin, order);
+        CreateOrderAddBidAndSetAsWinner.andAwardOrderToWriter(driver, clientLogin, order, writerLogin);
         logOut(driver);
         MyOrdersPage myOrders = loginAs(driver, writerLogin);
         OrderInfoAndActions orderInfoWriter = myOrders.writerClickOnCreatedOrderByClientToStartToWorking(order);
-        orderInfoWriter.clickOnstartWorkingButtonAndAcceptSweet();
+        orderInfoWriter.clickOnStartWorkingButtonAndAcceptSweet();
 
         return orderInfoWriter;
-
     }
-
-
 
 }

@@ -1,9 +1,6 @@
 package Tests.UploadingFiles;
 
-import Actions.Writer.WriterGoToOrderWorkflow;
-import DataProviders.WriterUploadingFilesForSendResult;
-import Entities.LoginObject;
-import Entities.Order;
+import Actions.Writer.WriterGoToEndResultToClient;
 import Entities.OrderObject;
 import GeneralHelpers.GeneralHelpers;
 import PageObjects.General.OrderInfoAndActions;
@@ -18,23 +15,17 @@ import static org.testng.Assert.assertTrue;
  */
 public class UploadingFilesToOrderResult extends BaseTest{
 
-    @Test(groups={"regress 1.0"}, dataProvider= "UploadingFilesToSendResult", dataProviderClass = WriterUploadingFilesForSendResult.class)
-    public static void UploadingFilesToOrderResult(Object clientLoginObject, Object orderObject, Object writerLoginObj, Object text) throws InterruptedException {
+    @Test(groups={"regress 1.0"})
+    public static void UploadingFilesToOrderResult() throws InterruptedException {
 
-        LoginObject clientLogin = (LoginObject) clientLoginObject;
-        OrderObject orderObj = (OrderObject) orderObject;
-        LoginObject writerLogin = (LoginObject) writerLoginObj;
-        String writerText = text.toString();
-
-        Order order = new Order();
+        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        String writerText = "hello world, java is super cool but really hard languege! TestNG is my favourite framework! Peace!))) Skype, icq, telephone number";
         String filepath = System.getProperty("user.dir")+"\\src\\main\\java\\Resources\\BigByte.doc";
-        OrderInfoAndActions orderInfoAndActions = WriterGoToOrderWorkflow.uploadFilesAndSendResultToTheClient(driver, clientLogin, orderObj, writerLogin, order, writerText, filepath);
+
+        OrderInfoAndActions orderInfoAndActions = WriterGoToEndResultToClient.uploadFilesAndSendResultToTheClient(driver, clientLogin, order, writerLogin, writerText, filepath);
         String filename = GeneralHelpers.getFileName(filepath);
 
         assertTrue($(orderInfoAndActions.waitForUploadingFilesToOrder(filename)).isDisplayed());
         orderInfoAndActions.clickOnTheSendCompletedOrderButton(driver);
-
     }
-
-
 }

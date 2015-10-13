@@ -17,7 +17,6 @@ import java.util.List;
 public class GeneralWaits extends BaseTest {
 
 
-
     public static void waitForPageLoad(WebDriver driver) {
 
         Wait<WebDriver> wait = new WebDriverWait(driver, 30);
@@ -31,10 +30,10 @@ public class GeneralWaits extends BaseTest {
     }
 
 
-    public static void waitForTableLoad(WebDriver driver, List<WebElement> table) {
+    public static void waitForTableLoad(List<WebElement> table) {
 
         wait.until(ExpectedConditions.visibilityOfAllElements(table));
-        for (WebElement tr: table){
+        for (WebElement tr : table) {
 
             System.out.println(tr.toString());
 

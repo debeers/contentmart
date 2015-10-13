@@ -1,6 +1,5 @@
 package PageObjects.General;
 
-import Entities.LoginObject;
 import GeneralHelpers.GeneralWaits;
 import PageObjects.BasePageObject;
 import PageObjects.Client.ClientNewOrderPage;
@@ -12,8 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static Actions.RegistrationAndLogin.logOut;
-import static Actions.RegistrationAndLogin.loginAs;
+import static GeneralHelpers.CustomWaits.$WaitFor;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 import static Tests.BaseTest.wait;
 import static com.codeborne.selenide.Condition.present;
@@ -23,49 +21,52 @@ import static com.codeborne.selenide.Selenide.$;
 public class LeftMenuGeneralPage extends BasePageObject {
 
 
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[2]/div[1]/div/p")
+    public WebElement profileLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[2]/div[1]/div/p")
-    public  WebElement profileLeftMenu;
+    @FindBy(xpath = ".//span[contains (@class, 'item')][contains (text(), 'My profile')]")
+    public WebElement myProfileLeftMenu;
 
-    @FindBy(xpath = "/html/body/div[1]/div[3]/ul/li[3]/a")
-    public  WebElement newOrderLeftMenu;
+    @FindBy(xpath = ".//a[contains (text(), 'New Order')]")
+    public WebElement newOrderLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[2]/div[2]/ul/li[2]/a")
-    public WebElement editProfileLeftMenu;
+    @FindBy(xpath = ".//span[contains (@class, 'item')][contains (text(), 'Account Settings')]")
+    public WebElement accountSettingsLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[2]/div[2]/ul/li[3]/a")
-    public  WebElement myMessagesLeftMenu;
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[2]/div[2]/ul/li[3]/a")
+    public WebElement myMessagesLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[2]/div[2]/ul/li[4]/a")
-    public WebElement logOutLeftMenuWriter;
+    @FindBy(xpath = ".//span[contains (@class, 'item')][contains (text(), 'Logout')]")
+    public WebElement logOutLeftMenu;
 
     ///////////////////////////////// Static menu links
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[3]/a")
+    @FindBy(xpath = ".//a[contains (text(), 'My Orders')]")
     public WebElement myOrdersLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[4]/a")
-    public  WebElement allOrdersLeftMenu;
+    @FindBy(xpath = "html/body/div/div[3]/ul/li[4]/a")
+    public WebElement allOrdersLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[5]/a")
-    public  WebElement customersLeftMenu;
+    @FindBy(xpath = ".//a[contains (text(), 'Customers')]")
+    public WebElement customersLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[6]/a")
-    public  WebElement notificationsLeftMenu;
+    @FindBy(xpath = ".//a[contains (text(), 'Writers')]")
+    public WebElement writersLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[7]/a")
+    @FindBy(xpath = ".//a[contains (text(), 'Notifications')]")
+    public WebElement notificationsLeftMenu;
+
+    @FindBy(xpath = ".//a[contains (text(), 'Balance')]")
     public WebElement balanceLeftMenu;
 
-    @FindBy(xpath="html/body/div/div[3]/ul/li[8]/p/a")
+    @FindBy(xpath = ".//a[contains (text(), 'Help Center')]")
     public WebElement helpCenterLeft;
-
 
 ///////////////////////////////////   Left Template_Client Links END   ////////////////////////////////////////////////////////////
 
+    public EditProfilePage clickOnAccountSettingsFromLeftMenu() {
 
-    public EditProfilePage clickOnEditProfileLeftMenu() {
-
-        $(editProfileLeftMenu).shouldBe(present).click();
+        $(accountSettingsLeftMenu).shouldBe(present).click();
         waitForPageLoad(driver);
         EditProfilePage editProfilePage = new EditProfilePage(driver);
         return editProfilePage;
@@ -87,12 +88,7 @@ public class LeftMenuGeneralPage extends BasePageObject {
     }
 
 
-    public WriterAllOrdersPage clickOnAllOrdersLeftMenu(WebDriver driver, LoginObject writerLogin) {
-        if (driver.getTitle() != "My Orders | ContentMart") {
-            logOut(driver);
-            loginAs(driver, writerLogin);
-        }
-
+    public WriterAllOrdersPage clickOnAllOrdersFromLeftMenu(WebDriver driver) {
 
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.elementToBeClickable(allOrdersLeftMenu)).click();
@@ -102,18 +98,26 @@ public class LeftMenuGeneralPage extends BasePageObject {
         return writerAllOrdersPage;
     }
 
-    public void clickOnProfileLeftMenu() {
+    public void clickOnProfileFromLeftMenu() {
 
         $(profileLeftMenu).shouldBe(visible).click();
+        $WaitFor(accountSettingsLeftMenu, myMessagesLeftMenu, profileLeftMenu, logOutLeftMenu);
     }
 
-    public void clickOnAllOrdersLeftMenuMenu() {
+
+    public void clickOnMyProfileFromLeftMenuLeftMenu() {
+
+        $(myProfileLeftMenu).shouldBe(visible).click();
+    }
+
+
+    public void clickOnAllOrdersFromLeftMenuMenu() {
 
         wait.until(ExpectedConditions.visibilityOf(allOrdersLeftMenu)).click();
         GeneralWaits.waitForPageLoad(driver);
     }
 
-    public BalanceGeneralPage clickOnbalanceLeftMenu() {
+    public BalanceGeneralPage clickOnbalanceFromLeftMenu() {
 
         $(balanceLeftMenu).shouldBe(visible).click();
         GeneralWaits.waitForPageLoad(driver);
@@ -123,7 +127,7 @@ public class LeftMenuGeneralPage extends BasePageObject {
     }
 
 
-    public MyMessagesPage clickOnMyMessagesLeftMenu(WebDriver driver) {
+    public MyMessagesPage clickOnMyMessagesFromLeftMenu(WebDriver driver) {
 
         WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(ExpectedConditions.visibilityOf(myMessagesLeftMenu)).click();
@@ -133,9 +137,9 @@ public class LeftMenuGeneralPage extends BasePageObject {
         return myMessagesPage;
     }
 
-    public LoginPage clickOnLoOutLeftMenu(WebDriver driver) {
+    public LoginPage clickOnLoOutFromLeftMenu(WebDriver driver) {
 
-        wait.until(ExpectedConditions.visibilityOf(logOutLeftMenuWriter)).click();
+        wait.until(ExpectedConditions.visibilityOf(logOutLeftMenu)).click();
         GeneralWaits.waitForPageLoad(driver);
         LoginPage loginPage = new LoginPage(driver);
         return loginPage;
@@ -151,10 +155,6 @@ public class LeftMenuGeneralPage extends BasePageObject {
 
         PageFactory.initElements(driver, this);
     }
-
-
-
-
 
 }
 

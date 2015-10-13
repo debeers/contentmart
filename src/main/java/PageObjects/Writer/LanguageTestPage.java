@@ -21,7 +21,6 @@ public class LanguageTestPage extends LeftMenuGeneralPage {
     public WebElement question;
 
 
-
     @FindBy(xpath="//div/span[.//text()[contains(., 'Beginner')]]")
     public WebElement begginnerTest;
 
@@ -32,14 +31,11 @@ public class LanguageTestPage extends LeftMenuGeneralPage {
     public WebElement AdvancedTest;
 
 
-
-
     @FindBy(xpath="//div[3]//div/p")
     public WebElement msgBeforeTest;
 
     @FindBy(xpath="//a[.//text()[contains(., 'Start Language Test')]]")
     public WebElement startTestButton;
-
 
 
     public LanguageTestPage(WebDriver driver) {

@@ -1,7 +1,17 @@
 
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Functional_Regression_0.2b" >
+<suite name="Contentmart.in smoke test suite" >
+
+    <!--Credentials: -->
+
+    <parameter name="clientLoginParam"     value="debeers1989@gmail.com"/>
+    <parameter name="clientPasswordParam"  value="roottoor"            />
+    <parameter name="writerLoginParam"     value="debeers@bigmir.net"/>
+    <parameter name="writerPasswordParam"  value="H9CC1vxG"         />
+
+    <!--Credentials: END -->
+
 
 
     <!--Properties: -->
@@ -11,68 +21,64 @@
     <!--Properties: END -->
 
 
-
-
-
-
-
-
         <test name="regress1.0">
             <classes>
 
-                <class name = "Tests.Other.AmountOfOrdersCreate"/>
+
+                <class name = "Tests.MyProfile.DeletePortfolioItem"/>
+                <!--
 
 
 
+                <class name = "Tests.MyProfile.AddPortfolioItem"/>
+                <class name = "Tests.Messages.SendTextMessages"/>
+
+                <class name = "Tests.StatusActions.ProposalSent.SetAsWinner"/>
+                <class name = "Tests.MyProfile.EmailNotificationsSaving"/>
+
+                <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
+                <class name = "Tests.StatusActions.Published.BidOnOrder"/>
+                <class name = "Tests.MyProfile.AddPortfolioItem"/>
+                <class name = "Tests.MyProfile.EmailNotificationsSaving"/>
+
+                <class name = "Tests.OrdersActions.ReassignOrder"/>
+                <class name = "Tests.OrdersActions.SendResultToClient"/>
+                <class name = "Tests.StatusActions.Published.BidOnOrder"/>
+
+                <class name = "Tests.StatusActions.Awarded.StartWorking"/>
+                <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
+                <class name = "Tests.OrdersActions.ReassignOrder"/>
+
+                <class name = "Tests.StatusActions.Published.CloseNewOrderAfterPublish"/>
+                <class name = "Tests.CreateNewOrderActions.CreateNewOrderAndSaveAsDraft"/>
+                <class name = "Tests.StatusActions.CloneTheOrder"/>
+                <class name = "Tests.StatusActions.Awarded.StartWorking"/>
+                <class name = "Tests.StatusActions.Awarded.CancelChosenWordsmith"/>
+                <class name = "Tests.StatusActions.Awarded.CloneOrderFromAwardedAndPublishItAndPublishIt"/>
+                <class name = "Tests.StatusActions.ProposalSent.SetAsWinner"/>
+                <class name = "Tests.StatusActions.ProposalSent.CancelFromWriterSideAfterBid"/>
+                <class name = "Tests.StatusActions.Published.BidOnOrder"/>
+                <class name = "Tests.StatusActions.Published.CloseNewOrderAfterPublish"/>
+                <class name = "Tests.StatusActions.Published.EditAndThanPublishOrder"/>
 
 
-    <!--
-
-    <class name = "Tests.StopWords.StopWordsInOrderComposing"/>
-
-
-<class name = "Tests.DownloadingFiles.DownloadingFilesFromMessages "/>
-<class name = "Tests.OrdersActions.StartWorking"/>
-
-<class name = "Tests.Balance.TransferMoney"/>
-
-            <class name = "Tests.OrdersActionsDeclineTextFromClientSide"/>
-                <class name = "Tests.OrdersActionsSetAsWinner"/>
-
-                <class name = "Tests.OrdersActionsSendResultToClient"/>
-                <class name = "Tests.OrdersActionsDeclineTextFromClientSide"/>
-                <class name = "Tests.OrdersActionsReassignOrder"/>
-
-<class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
+                <class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
                 <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
 
+                <class name = "Tests.StopWords.StopWordsInLeaveAnOffer"/>
+                <class name = "Tests.StopWords.StopWordsInOrderComposing"/>
 
-                <class name = "Tests.CreateNewOrderActions.CreateNewOrderAndSaveAsDraft"/>
+                <class name = "Tests.Balance.BlockingMoney"/>
+                <class name = "Tests.Balance.TransferMoney"/>
 
-                <class name = "Tests.OrdersActionsReassignOrder"/>
-
-
-
-
-
-
-
+                <class name = "Tests.ExsistOfFile.ExistFileInMessages"/>
+                <class name = "Tests.ExsistOfFile.ExsistFilesInOrder"/>
+                <class name = "Tests.StatusActions.InProgress.SendResultFromSaveAsDraftromSaveAsDraft"/>
 
 
 
-     <class name = "Tests.OrdersActionsAcceptWriterText"/>
-     <class name = "Tests.RegistrationAndLogin.ClientAndWriterLoginLogOutTestLoginLogOutTest"/>
-     <class name = "Tests.OrdersActionsCreateNewOrderAndPublishAndPublish"/>
 
-     <class name = "Tests.OrdersActionsSendResultToClient"/>
-     <class name = "Tests.Messages.SendTextMessages"/>
-
-     <class name = "Tests.OrdersActionsSetAsWinner     <class name = "Tests.OrdersActionsStartWorking"/>
-
-     <class name = "Tests.UploadingFilesUploadingFilesToMessages"/>
-     <class name = "Tests.UploadingFilesUploadingFilesToOrder"/>
-     <class name = "Tests.UploadingFilesUploadingFilesToPortfolio"/>
-     -->
+                     -->
  </classes>
 </test>
 
