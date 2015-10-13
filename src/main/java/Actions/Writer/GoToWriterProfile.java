@@ -85,7 +85,7 @@ public class GoToWriterProfile {
         writerProfilePage.setPortfolioTitleField(title);
         writerProfilePage.setPortfolioTextField(text);
 
-        writerProfilePage.clickOnaAddWorkButton();
+        writerProfilePage.clickOnaAddWorkButton(title);
     }
 
 

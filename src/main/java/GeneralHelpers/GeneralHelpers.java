@@ -3,9 +3,7 @@ package GeneralHelpers;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import com.codeborne.selenide.Condition;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.net.HttpURLConnection;
@@ -81,5 +79,26 @@ public class GeneralHelpers {
         return false;
 
     }
+
+
+    public static void safeJavaScriptClick(WebDriver driver, WebElement element) throws Exception {
+        try {
+            if (element.isEnabled() && element.isDisplayed()) {
+                System.out.println("Clicking on element with using java script click");
+
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+            } else {
+                System.out.println("Unable to click on element");
+            }
+        } catch (StaleElementReferenceException e) {
+            System.out.println("Element is not attached to the page document "+ e.getStackTrace());
+        } catch (NoSuchElementException e) {
+            System.out.println("Element was not found in DOM "+ e.getStackTrace());
+        } catch (Exception e) {
+            System.out.println("Unable to click on element "+ e.getStackTrace());
+        }
+    }
+
+
 
 }

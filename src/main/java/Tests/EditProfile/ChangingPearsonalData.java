@@ -13,11 +13,11 @@ import static Actions.Writer.GoToWriterProfile.randomSelectDateOfBirth;
 /**
  * Created by CMG_TEST on 12.10.2015.
  */
-public class ChangingOfPearsonalData extends BaseTest{
+public class ChangingPearsonalData extends BaseTest{
 
 
     @Test(groups = {"regress2.2"})
-    public void ChangingOfPearsonalData() throws InterruptedException {
+    public void ChangingPearsonalData() throws InterruptedException {
 
         WriterProfilePage writerProfilePage = GoToWriterProfile.goToMyProfile(driver, writerLogin);
         writerProfilePage.clickOnEditProfileButton();

@@ -10,7 +10,7 @@ import static GeneralHelpers.CustomWaits.$WaitFor;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 import static com.codeborne.selenide.Selenide.$;
 
-public class EditProfilePage extends LeftMenuGeneralPage {
+public class EmailNotificationsPage extends LeftMenuGeneralPage {
 
     //For All
 
@@ -26,37 +26,6 @@ public class EditProfilePage extends LeftMenuGeneralPage {
     @FindBy(xpath = "//a[contains(text(), 'Email Notifications')]")
     public WebElement emailNotificationsLink;
     ////////////////////////////////////////////////////////////////////////////////////////////
-    //Account details
-    @FindBy(id = "nick_name")
-    public WebElement nickNameField;
-
-    @FindBy(id = "phone")
-    public WebElement phoneField;
-
-    @FindBy(id = "pan")
-    public WebElement panField;
-
-    @FindBy(id = "region")
-    public WebElement stateSelect;
-
-    @FindBy(id = "city")
-    public WebElement citySelect;
-
-    @FindBy(id = "address")
-    public WebElement adressTextArea;
-
-    @FindBy(id = "zip")
-    public WebElement zipField;
-
-    @FindBy(id = "biography")
-    public WebElement biographyTextArea;
-
-    @FindBy(id = "signature_image")
-    public WebElement signatureInput;
-
-    @FindBy(xpath = ".//*[@id='copywriter_details']/div[10]/div[2]/div[3]/a")
-    public WebElement viewSingatureInInvoiceLink;
-
     //Password change
 
     @FindBy(id = "old_password")
@@ -128,7 +97,7 @@ public class EditProfilePage extends LeftMenuGeneralPage {
     }
 
 
-    public EditProfilePage(WebDriver driver) {
+    public EmailNotificationsPage(WebDriver driver) {
 
         super(driver);
     }

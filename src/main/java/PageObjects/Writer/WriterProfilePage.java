@@ -4,6 +4,7 @@ import PageObjects.General.LeftMenuGeneralPage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,7 +31,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     @FindBy(xpath = ".//div[contains(@class, 'user_main_info')]//div[2][contains(@class, 'd_in m_r-10')]")
     public WebElement yearsOld;
 
-    @FindBy(xpath = ".//div[contains(@class, 'portfolio-item-delete-confirm-wrap')]//a[1]")
+    @FindBy(css = ".portfolio-item-delete-confirm-btn.new_blue_but")
     public WebElement confirmSweetAllertButton;
 
     @FindBy(xpath = ".//a[contains (text(), 'CANCEL')]")
@@ -194,9 +195,10 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
         $(enterPortfolioTextField).clear();
     }
 
-    public void clickOnaAddWorkButton() {
+    public void clickOnaAddWorkButton(String title) throws InterruptedException {
 
         $(addWorkButton).click();
+        findPortfolioItem(title);
 
     }
 
@@ -259,10 +261,22 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     }
 
     public void clickOnConfirmSweetAllertButton() throws InterruptedException {
-Thread.sleep(3000);
-        confirmSweetAllertButton.click();
+        JavascriptExecutor jse = (JavascriptExecutor)driver;
+        jse.executeScript("document.getElementsByClassName('portfolio-item-delete-confirm-btn')[0].click();");
         $(cancelSweetAllertButton).should(Condition.disappear);
+        Thread.sleep(5000);
     }
+
+
+    public Boolean findPortfolioItem(String title) throws InterruptedException {
+        Thread.sleep(5000);
+        if( $(By.xpath("//div[(contains(@class, 'document_block profile_added_block'))]//h4[contains (text(), '"+ title +"')]")).isDisplayed() ){
+
+            return true;
+        }
+        return false;
+    }
+
 
 
 }
