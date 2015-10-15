@@ -12,12 +12,14 @@ public class UserObject {
     private String phone = "";
     private String pan = "";
 
-
     private String state = "";
     private String city = "";
     private String address = "";
     private String zip = "";
     private String bio = "";
+
+
+   public UserObject(){}
 
 
     public UserObject(String nickname, String firstname, String lastname, String phone,

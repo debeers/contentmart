@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Random;
 
 import static GeneralHelpers.CreateNewOrderHelper.randomID;
-import static GeneralHelpers.Messages.randomMessageGeneratorLength;
+import static GeneralHelpers.Messages.randomTextGeneratorLength;
 
 /**
  * Created by DeBeers on 04.10.2015.
@@ -71,7 +71,7 @@ public class GoToWriterProfile {
 
     public static String createTextForPortfolioItem(int length){
 
-        return "Portfolio item text - " + randomMessageGeneratorLength(70);
+        return "Portfolio item text - " + randomTextGeneratorLength(70);
     }
 
 
@@ -80,7 +80,7 @@ public class GoToWriterProfile {
 
         writerProfilePage.clickOnAddPortfolioButton();
 
-        String text = randomMessageGeneratorLength(textLength);
+        String text = randomTextGeneratorLength(textLength);
 
         writerProfilePage.setPortfolioTitleField(title);
         writerProfilePage.setPortfolioTextField(text);

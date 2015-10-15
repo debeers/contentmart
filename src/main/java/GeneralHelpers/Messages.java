@@ -8,7 +8,7 @@ import java.util.Random;
 public class Messages {
 
 
-    public static String randomMessageGeneratorLength(int length) {
+    public static String randomTextGeneratorLength(int length) {
 
         Random ran = new Random();
         int top = length;

@@ -3,14 +3,11 @@ package Tests.MyProfile;
 import Actions.Writer.GoToWriterProfile;
 import PageObjects.Writer.WriterProfilePage;
 import Tests.BaseTest;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static Actions.Writer.GoToWriterProfile.addNewPortfolioItem;
 import static Actions.Writer.GoToWriterProfile.createTextForPortfolioItem;
 import static Actions.Writer.GoToWriterProfile.createTitleForPortfolioItem;
-import static GeneralHelpers.CreateNewOrderHelper.randomID;
-import static GeneralHelpers.Messages.randomMessageGeneratorLength;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 

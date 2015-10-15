@@ -20,7 +20,7 @@ public class SendTextMessages extends BaseTest {
 
         OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
 
-        String textMessage = Messages.randomMessageGeneratorLength(20);
+        String textMessage = Messages.randomTextGeneratorLength(20);
         WriterGoToMessages.sendMessageToClient(driver, clientLogin, order, writerLogin, textMessage);
 
         String msg = findMessage(driver, textMessage);

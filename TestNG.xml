@@ -26,15 +26,15 @@
 
 
 
-                <class name = "Tests.AccountSettings.ChangeUserDetails"/>
 
-
-
-
+                <class name = "Tests.ExsistOfFile.ExsistFilesInOrder"/>
 
 
 
                 <!--
+
+
+                <class name = "Tests.AccountSettings.ChangeUserDetails"/>
 
 
                 <class name = "Tests.MyProfile.DeletePortfolioItem"/>

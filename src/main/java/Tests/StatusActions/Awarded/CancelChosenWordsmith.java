@@ -4,8 +4,10 @@ import Actions.Client.CreateOrderAddBidAndSetAsWinner;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
+import com.codeborne.selenide.Condition;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -25,6 +27,7 @@ public class CancelChosenWordsmith extends BaseTest{
         assertEquals(orderInfoClientPage.getTextFromOrderStatus(), "Awarded");
 
         orderInfoClientPage.clickOnCancelChosenWorsmith();
+        $(orderInfoClientPage.infoMsgAfterCancelChosenWorsmith).should(Condition.appear);
         assertEquals(orderInfoClientPage.getorderStatus(), "Published");
         assertEquals(orderInfoClientPage.infoMsgText(), msg);
     }

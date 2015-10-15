@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 
 import static GeneralHelpers.CustomWaits.$WaitFor;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
@@ -45,10 +44,10 @@ public class AccountDetailsPage extends LeftMenuGeneralPage{
     public WebElement addressField;
 
     @FindBy(id = "region")
-    public Select userState;
+    public WebElement userState;
 
     @FindBy(id = "city")
-    public Select userCity;
+    public WebElement userCity;
 
     @FindBy(id = "zip")
     public WebElement userZip;
@@ -83,105 +82,119 @@ public class AccountDetailsPage extends LeftMenuGeneralPage{
 
     public String getUserNickName() {
 
-        return $(nickNameField).shouldBe(Condition.visible).getText();
+        return $(nickNameField).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserFirstName() {
 
-        return $(firstNameField).shouldBe(Condition.visible).getSelectedValue();
+        return $(firstNameField).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserLastName() {
 
-        return $(lastNameField).shouldBe(Condition.visible).getSelectedValue();
+        return $(lastNameField).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserPhone() {
 
-        return $(phoneField).shouldBe(Condition.visible).getSelectedValue();
+        return $(phoneField).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserPan() {
 
-        return $(panField).shouldBe(Condition.visible).getSelectedValue();
+        return $(panField).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserState() {
 
-        return userState.getFirstSelectedOption().getText();
+        return $(userState).shouldBe(Condition.visible).getText();
     }
 
     public String getUserCity() {
 
-        return userCity.getFirstSelectedOption().getText();
+        return $(userCity).shouldBe(Condition.visible).getText();
     }
 
     public String getUserAdress() {
 
-        return $(addressField).shouldBe(Condition.visible).getSelectedValue();
+        return $(addressField).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserZip() {
 
-        return $(userZip).shouldBe(Condition.visible).getSelectedValue();
+        return $(userZip).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserBio() {
 
-        return $(getUserBio()).shouldBe(Condition.visible).getSelectedValue();
+        return $(biographyField).shouldBe(Condition.visible).getAttribute("value");
     }
 
 
-    public void setFirstNameField(String firstName) {
+    public String setFirstNameField(String firstName) throws InterruptedException {
 
         $(firstNameField).shouldBe(Condition.visible).clear();
+        Thread.sleep(2000);
         $(firstNameField).shouldBe(Condition.visible).sendKeys(firstName);
+
+        return firstName;
     }
 
-    public void setLastNameField(String lastName) {
+    public String setLastNameField(String lastName) {
 
         $(lastNameField).shouldBe(Condition.visible).clear();
         $(lastNameField).shouldBe(Condition.visible).sendKeys(lastName);
+        return lastName;
     }
 
-    public void setPhoneField(String phone) {
+    public String setPhoneField(String phone) throws InterruptedException {
 
         $(phoneField).shouldBe(Condition.visible).clear();
         $(phoneField).shouldBe(Condition.visible).sendKeys(phone);
+
+        return phone;
     }
 
-    public void setPanField(String pan) {
+    public String setPanField(String pan) {
 
         $(panField).shouldBe(Condition.visible).clear();
         $(panField).shouldBe(Condition.visible).sendKeys(pan);
+
+        return pan;
     }
 
     public void setStateField(String state) {
 
-        userState.selectByValue(state);
+        $(userState).shouldBe(Condition.visible).sendKeys(state);
     }
 
     public void setCityField(String city) {
 
-        userCity.selectByValue(city);
+        $(userCity).shouldBe(Condition.visible).sendKeys(city);
     }
 
-    public void setAddressField(String address) {
+    public String setAddressField(String address) {
 
         $(addressField).shouldBe(Condition.visible).clear();
         $(addressField).shouldBe(Condition.visible).sendKeys(address);
+
+        return address;
     }
 
-    public void setZipField(String zip) {
+    public String setZipField(String zip) {
 
         $(userZip).shouldBe(Condition.visible).clear();
         $(userZip).shouldBe(Condition.visible).sendKeys(zip);
+
+        return zip;
     }
 
-    public void setBiographyField(String bio) {
+    public String setBiographyField(String bio) {
 
         $(biographyField).shouldBe(Condition.visible).clear();
         $(biographyField).shouldBe(Condition.visible).sendKeys(bio);
+
+        return bio;
     }
 
     public void clickOnSaveChangesButton() {
