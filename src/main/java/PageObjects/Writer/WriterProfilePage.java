@@ -96,6 +96,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
         super(driver);
     }
 
+
     public String getYearsOld(){
 
         String year = yearsOld.getText();
@@ -136,9 +137,15 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
 
     public void clickOnDeletePortfolioItemButton(String itemName) throws InterruptedException {
+        driver.navigate().refresh();
+        Thread.sleep(4000);
+       driver.findElement(By.xpath("//div[(contains(@class, 'document_block profile_added_block'))]/h4[contains(text(), '" + itemName + "')]/preceding-sibling::a")).click();
+     //   $(By.xpath(".//h4[contains(text(), '" + itemName + "')]/preceding-sibling::a[@data-portfolio-item-id = '117']")).shouldBe(Condition.visible).click();
+//        Actions action = new Actions(driver);
+//        WebElement we = $(By.xpath(".//h4[contains(text(), '"+ itemName +"')]//preceding-sibling::a[contains (@class, 'portfolio-item-delete-btn')]")).shouldBe(Condition.visible);
+//        action.moveToElement(we).click().build().perform();
 
-        $(By.xpath(".//h4[contains(text(), '"+ itemName +"')]/preceding-sibling::a[contains " +
-                "(@class, 'portfolio-item-delete-btn')]")).shouldBe(Condition.visible).click();
+        System.out.println(itemName);
         Thread.sleep(3000);
     }
 
@@ -202,9 +209,12 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
     }
 
-    public void clickOnEditProfileButton() {
+    public WriterEditProfilePage clickOnEditProfileButton() {
 
         $(editProfileButton).click();
+        WriterEditProfilePage writerEditProfilePage = new WriterEditProfilePage(driver);
+
+        return writerEditProfilePage;
     }
 
     public void clickOnBackToPortfolioButton() {
@@ -269,14 +279,12 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
 
     public Boolean findPortfolioItem(String title) throws InterruptedException {
-        Thread.sleep(5000);
+
         if( $(By.xpath("//div[(contains(@class, 'document_block profile_added_block'))]//h4[contains (text(), '"+ title +"')]")).isDisplayed() ){
 
             return true;
         }
         return false;
     }
-
-
 
 }

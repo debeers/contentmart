@@ -5,9 +5,14 @@ import Entities.LoginObject;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.Writer.WriterEditProfilePage;
 import PageObjects.Writer.WriterProfilePage;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
@@ -103,6 +108,45 @@ public class GoToWriterProfile {
             return true;
         }
         return false;
+    }
+
+
+    public static void verifyImageInFancyBox(WebDriver driver, WriterEditProfilePage writerProfilePage,
+                                             String path) throws IOException {
+
+        BufferedImage readImage;
+        readImage = ImageIO.read(new File(path));
+
+        int srcHeigh = readImage.getHeight();
+        int srcWidth = readImage.getWidth();
+        int imgHeigh = writerProfilePage.getImgHolderHeigh();
+        int imgWidth = writerProfilePage.getImgHolderWidth();
+
+        System.out.println("Src Image heigh = " + srcHeigh + "\n"
+                + "Src Image width = " + srcWidth );
+
+        Boolean ImagePresent = (Boolean) ((JavascriptExecutor) driver).executeScript
+                ("return arguments[0].complete && typeof arguments[0].naturalWidth != " +
+                                "\"undefined\" && arguments[0].naturalWidth > 0", writerProfilePage.avatarSrc);
+        if (!ImagePresent) {
+
+            System.out.println("Image not displayed.");
+
+        } else {
+
+            System.out.println("Uploaded Img heigh = " + imgHeigh + "\n" +
+                    "Uploaded Img width = " + imgWidth);
+
+            if ((srcHeigh == imgHeigh) && (srcWidth == imgWidth)) {
+
+                System.out.println("Got it bitch ass! ");
+            } else {
+
+                System.out.println("File broken or not uploaded correctly...");
+            }
+
+            System.out.println("Image displayed.");
+        }
     }
 
 }

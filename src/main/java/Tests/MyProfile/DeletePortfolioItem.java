@@ -22,6 +22,7 @@ public class DeletePortfolioItem extends BaseTest{
         System.out.println(title);
         WriterProfilePage writerProfilePage = GoToWriterProfile.goToMyProfile(driver, writerLogin);
         addNewPortfolioItem(writerProfilePage, title, 55);
+
         writerProfilePage.clickOnDeletePortfolioItemButton(title);
 
         writerProfilePage.clickOnConfirmSweetAllertButton();

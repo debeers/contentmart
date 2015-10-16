@@ -1,6 +1,7 @@
 package PageObjects.Writer;
 
 import PageObjects.General.LeftMenuGeneralPage;
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -37,14 +39,52 @@ public class WriterEditProfilePage extends LeftMenuGeneralPage {
     @FindBy(xpath = ".//fieldset/select[3]")
     public WebElement selectYear;
 
+    @FindBy(id = "avatar_photo")
+    public WebElement avatarPhoto;
+
+    @FindBy(xpath = ".//input[contains (@class, 'blue_but fl_r')]")
+    public WebElement saveAvatarPhotoButton;
+
+    @FindBy(className = "progress-bar")
+    public WebElement avatarUploadingProgressBar;
+
+    @FindBy(className = "percent")
+    public WebElement avatarUploadingProgress;
+
+    @FindBy(xpath = ".//img[@id = 'img_crop']")
+    public WebElement avatarSrc;
+
+    @FindBy(xpath = ".//div[contains (@class, 'jcrop-holder')]")
+    public WebElement avatarSrcHolder;
 
     public String languagesId = "language-box";
     public String expertisesId = "expertise-box";
     public String categoriesId = "category-box";
 
+    public int getImgHolderHeigh() {
 
+        return avatarSrcHolder.getSize().getHeight();
+    }
 
-    public String notAddedSkillsArray(String skillBox){
+    public int getImgHolderWidth() {
+
+        return avatarSrcHolder.getSize().getWidth();
+    }
+
+    public WriterProfilePage clickOnSaveProfileChangesButton() {
+
+        $(saveChangesButton).shouldBe(visible).click();
+        WriterProfilePage writerProfilePage = new WriterProfilePage(driver);
+        return writerProfilePage;
+    }
+
+    public Boolean avatarProgressCount() {
+        if ($(avatarUploadingProgress).shouldBe(visible).has(text("100%"))) {
+            return true;
+        } else return false;
+    }
+
+    public String notAddedSkillsArray(String skillBox) {
 
         String str = ".//div[@id = '" + skillBox + "']/following-sibling::div[contains(@class,'cell without_test_block skill-box')]" +
                 "/ul/li[not (contains(@class,'none'))]//span[contains(@class,'skill-name')]";
@@ -52,7 +92,7 @@ public class WriterEditProfilePage extends LeftMenuGeneralPage {
     }
 
 
-    public String addedSkillsArray(String skillBox){
+    public String addedSkillsArray(String skillBox) {
 
         String str = ".//div[@id = '" + skillBox + "']/following-sibling::div[contains(@class,'cell test_not_passed_block skill-box')]" +
                 "/ul/li[not (contains(@class,'none'))]//span[contains(@class,'skill-name')]";
@@ -90,23 +130,21 @@ public class WriterEditProfilePage extends LeftMenuGeneralPage {
     }
 
 
-    public String setCategoryBox(String category){
+    public String setCategoryBox(String category) {
 
         String categoryBox = "";
 
-        if(category == "Languages"){
+        if (category == "Languages") {
             categoryBox = languagesId;
             return categoryBox;
-        }
-        else if(category == "Expertises"){
+        } else if (category == "Expertises") {
             categoryBox = expertisesId;
             return categoryBox;
-        }
-        else if(category == "Categories"){
+        } else if (category == "Categories") {
             categoryBox = categoriesId;
             return categoryBox;
 
-        }else return null;
+        } else return null;
     }
 
 
@@ -128,8 +166,8 @@ public class WriterEditProfilePage extends LeftMenuGeneralPage {
         ElementsCollection addedCategoriesList = $$(driver.findElements(By.xpath(xStatePath)));
 
         for (WebElement element : addedCategoriesList) {
-                System.out.println(element.getText());
-                categoriesNamesArray.add(element.getText());
+            System.out.println(element.getText());
+            categoriesNamesArray.add(element.getText());
         }
         return categoriesNamesArray;
     }
@@ -145,11 +183,23 @@ public class WriterEditProfilePage extends LeftMenuGeneralPage {
                 $(remove).shouldBe(visible).click();
             }
             sleep(3000); //server side wait
-        }else System.out.println("All list`s of skills are empty, we`re begin!");
+        } else System.out.println("All list`s of skills are empty, we`re begin!");
     }
 
     public WriterEditProfilePage(WebDriver driver) {
 
         super(driver);
     }
+
+
+    public void uploadNewAvatarPhoto(String path) {
+
+        avatarPhoto.sendKeys(path);
+    }
+
+    public void saveAvatarPhotoButtonClick() {
+
+        $(saveAvatarPhotoButton).shouldBe(Condition.visible).click();
+    }
+
 }
