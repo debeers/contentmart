@@ -1,18 +1,20 @@
 package PageObjects.General;
 
+import PageObjects.PageObjectWithImages;
 import com.codeborne.selenide.Condition;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import static GeneralHelpers.CustomWaits.$WaitFor;
+import static GeneralHelpers.GeneralHelpers.jsDeleteClasses;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 import static com.codeborne.selenide.Selenide.$;
 
 /**
  * Created by CMG_TEST on 13.10.2015.
  */
-public class AccountDetailsPage extends LeftMenuGeneralPage{
+public class AccountDetailsPage extends LeftMenuGeneralPage implements PageObjectWithImages {
 
 
     @FindBy(xpath = "//a[contains(text(), 'Account details')]")
@@ -23,7 +25,6 @@ public class AccountDetailsPage extends LeftMenuGeneralPage{
 
     @FindBy(xpath = "//a[contains(text(), 'Email Notifications')]")
     public WebElement emailNotificationsLink;
-
 
     @FindBy(id = "nick_name")
     public WebElement nickNameField;
@@ -40,6 +41,12 @@ public class AccountDetailsPage extends LeftMenuGeneralPage{
     @FindBy(id = "pan")
     public WebElement panField;
 
+    @FindBy(id = "currency")
+    public WebElement currencyField;
+
+    @FindBy(id = "country")
+    public WebElement countryField;
+
     @FindBy(id = "address")
     public WebElement addressField;
 
@@ -49,17 +56,46 @@ public class AccountDetailsPage extends LeftMenuGeneralPage{
     @FindBy(id = "city")
     public WebElement userCity;
 
+    @FindBy(id = "timezone")
+    public WebElement userTimeZone;
+
     @FindBy(id = "zip")
     public WebElement userZip;
 
     @FindBy(id = "biography")
     public WebElement biographyField;
 
-    @FindBy(xpath = "//button[contains(text(), 'Save Changes')]")
+    @FindBy(id = "signature_image")
+    public WebElement signature;
+
+    @FindBy(xpath = ".//button[contains(text(), 'Save Changes')]")
     public WebElement saveChangesButton;
 
     @FindBy(className = "text-success")
     public WebElement successSavedChangesMsg;
+
+    @FindBy(xpath = ".//input[contains(@class, 'blue_but fl_r')]")
+    public WebElement saveSignatureButton;
+
+    @FindBy(id = "signature_image_crop")
+    public WebElement signatureSrc;
+
+    @FindBy(xpath = ".//div[contains (@class, 'jcrop-holder')]")
+    public WebElement signatureSrcHolder;
+
+
+    @Override
+    public int getImgHolderHeigh() {
+        return signatureSrcHolder.getSize().getHeight();
+    }
+    @Override
+    public int getImgHolderWidth() {
+        return signatureSrcHolder.getSize().getWidth();
+    }
+    @Override
+    public WebElement imgSrcElement(){
+        return signatureSrc;
+    }
 
 
     public EmailNotificationsPage clickOnEmailNotificationsLink(WebDriver driver) {
@@ -70,6 +106,17 @@ public class AccountDetailsPage extends LeftMenuGeneralPage{
         return emailNotificationsPage;
     }
 
+    public void clickOnSaveSignatureButton(){
+
+        $(saveSignatureButton).shouldBe(Condition.visible).click();
+    }
+
+    public void uploadNewSignature(String path) throws InterruptedException {
+        Thread.sleep(2000);
+        jsDeleteClasses(".//*[@id='signature_image']", driver);
+        signature.sendKeys(path);
+    }
+
     public void clickOnChangePasswordLinkLink() {
 
         $WaitFor(changePasswordLink).click();
@@ -78,6 +125,21 @@ public class AccountDetailsPage extends LeftMenuGeneralPage{
     public void clickOnAccountDetailsLinkLinkLink() {
 
         $WaitFor(accountDetailsLink).click();
+    }
+
+    public String getUserCountry() {
+
+        return $(countryField).shouldBe(Condition.visible).getText();
+    }
+
+    public String getUserCurrency() {
+
+        return $(currencyField).shouldBe(Condition.visible).getText();
+    }
+
+    public String getUserTimeZone() {
+
+        return $(userTimeZone).shouldBe(Condition.visible).getText();
     }
 
     public String getUserNickName() {
@@ -129,7 +191,6 @@ public class AccountDetailsPage extends LeftMenuGeneralPage{
 
         return $(biographyField).shouldBe(Condition.visible).getAttribute("value");
     }
-
 
     public String setFirstNameField(String firstName) throws InterruptedException {
 
@@ -197,9 +258,10 @@ public class AccountDetailsPage extends LeftMenuGeneralPage{
         return bio;
     }
 
-    public void clickOnSaveChangesButton() {
+    public void clickOnSaveChangesButton() throws InterruptedException {
 
         $(saveChangesButton).shouldBe(Condition.visible).click();
+        Thread.sleep(3000);
         $(successSavedChangesMsg).should(Condition.appear);
     }
 

@@ -221,11 +221,11 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         $(yesSweetAllert).shouldBe(visible).click();
     }
 
-    public Boolean waitForPlagiatorCheckAppear(){
+    public Boolean waitForPlagiatorCheckAppear() {
 
-       if($(plagiatorCheck).should(appear).isDisplayed()){
-           return true;
-       }
+        if ($(plagiatorCheck).should(appear).isDisplayed()) {
+            return true;
+        }
         return false;
     }
 

@@ -27,15 +27,14 @@
 
 
 
-                <class name = "Tests.EditProfile.WriterAvatarUploading"/>
+                <class name = "Tests.EditProfile.ClientChangingPearsonalData"/>
 
 
 
                 <!--
 
 
-                <class name = "Tests.AccountSettings.ChangeUserDetails"/>
-
+                <class name = "Tests.AccountSettings.ChangeWriterDetailsls"/>
 
                 <class name = "Tests.MyProfile.DeletePortfolioItem"/>
                 <class name = "Tests.MyProfile.AddPortfolioItem"/>
@@ -69,7 +68,6 @@
                 <class name = "Tests.StatusActions.Published.CloseNewOrderAfterPublish"/>
                 <class name = "Tests.StatusActions.Published.EditAndThanPublishOrder"/>
 
-
                 <class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
                 <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
 
@@ -82,8 +80,6 @@
                 <class name = "Tests.ExsistOfFile.ExistFileInMessages"/>
                 <class name = "Tests.ExsistOfFile.ExsistFilesInOrder"/>
                 <class name = "Tests.StatusActions.InProgress.SendResultFromSaveAsDraft"/>
-
-
 
 
 

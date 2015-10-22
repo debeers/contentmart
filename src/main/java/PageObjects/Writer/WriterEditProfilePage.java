@@ -1,6 +1,8 @@
 package PageObjects.Writer;
 
+import PageObjects.BirthdayDateInterface;
 import PageObjects.General.LeftMenuGeneralPage;
+import PageObjects.PageObjectWithImages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
@@ -18,8 +20,7 @@ import static com.codeborne.selenide.Selenide.*;
 /**
  * Created by CMG_TEST on 08.10.2015.
  */
-public class WriterEditProfilePage extends LeftMenuGeneralPage {
-
+public class WriterEditProfilePage extends LeftMenuGeneralPage implements PageObjectWithImages, BirthdayDateInterface {
 
     @FindBy(xpath = ".//button[contains(@class, 'new_blue_but m_r-10')]")
     public WebElement saveChangesButton;
@@ -57,19 +58,47 @@ public class WriterEditProfilePage extends LeftMenuGeneralPage {
     @FindBy(xpath = ".//div[contains (@class, 'jcrop-holder')]")
     public WebElement avatarSrcHolder;
 
+
+    @Override
+    public int getImgHolderHeigh() {
+        return avatarSrcHolder.getSize().getHeight();
+    }
+
+    @Override
+    public int getImgHolderWidth() {
+        return avatarSrcHolder.getSize().getWidth();
+    }
+
+    @Override
+    public WebElement imgSrcElement() {
+        return avatarSrc;
+    }
+
+    @Override
+    public String getUserYearsOld() {
+        return null;
+    }
+
+    @Override
+    public WebElement selectDay() {
+        return selectDay;
+    }
+
+    @Override
+    public WebElement selectYear() {
+        return selectYear;
+    }
+
+    @Override
+    public WebElement selectMonth() {
+        return selectMonth;
+    }
+
+
     public String languagesId = "language-box";
     public String expertisesId = "expertise-box";
     public String categoriesId = "category-box";
 
-    public int getImgHolderHeigh() {
-
-        return avatarSrcHolder.getSize().getHeight();
-    }
-
-    public int getImgHolderWidth() {
-
-        return avatarSrcHolder.getSize().getWidth();
-    }
 
     public WriterProfilePage clickOnSaveProfileChangesButton() {
 
@@ -78,11 +107,13 @@ public class WriterEditProfilePage extends LeftMenuGeneralPage {
         return writerProfilePage;
     }
 
+
     public Boolean avatarProgressCount() {
         if ($(avatarUploadingProgress).shouldBe(visible).has(text("100%"))) {
             return true;
         } else return false;
     }
+
 
     public String notAddedSkillsArray(String skillBox) {
 
@@ -196,6 +227,7 @@ public class WriterEditProfilePage extends LeftMenuGeneralPage {
 
         avatarPhoto.sendKeys(path);
     }
+
 
     public void saveAvatarPhotoButtonClick() {
 

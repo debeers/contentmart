@@ -11,17 +11,17 @@ import static Actions.General.GoToAccountSettings.setUserData;
 import static Actions.General.RegistrationAndLogin.loginAs;
 
 /**
- * Created by CMG_TEST on 13.10.2015.
+ * Created by DeBeers on 18.10.2015.
  */
-public class ChangeUserDetails extends BaseTest {
+public class ChangeClientDetails extends BaseTest{
 
 
     @Test(groups={"regress 1.0"})
-    public void ChangeUserDetails() throws Exception {
+    public void ChangeClientDetails() throws Exception {
 
         UserObject user = new UserObject();
 
-        MyOrdersPage myOrdersPage = loginAs(driver, writerLogin);
+        MyOrdersPage myOrdersPage = loginAs(driver, clientLogin);
         myOrdersPage.clickOnProfileFromLeftMenu();
         AccountDetailsPage accountDetailsPage = myOrdersPage.clickOnAccountSettingsFromLeftMenu();
         setUserData(user, accountDetailsPage);
@@ -31,13 +31,13 @@ public class ChangeUserDetails extends BaseTest {
 
         Assert.assertEquals(accountDetailsPage.getUserFirstName(), user.getFirstname());
         Assert.assertEquals(accountDetailsPage.getUserLastName(), user.getLastname());
-        Assert.assertEquals(accountDetailsPage.getUserPhone(), "+91-" + user.getPhone());
+        Assert.assertEquals(accountDetailsPage.getUserPhone(), user.getPhone());
         Assert.assertEquals(accountDetailsPage.getUserPan(), user.getPan());
         Assert.assertEquals(accountDetailsPage.getUserState(), user.getState());
         Assert.assertEquals(accountDetailsPage.getUserCity(), user.getCity());
         Assert.assertEquals(accountDetailsPage.getUserAdress(), user.getAddress());
         Assert.assertEquals(accountDetailsPage.getUserZip(), user.getZip());
-       // Assert.assertEquals(accountDetailsPage.getUserBio(), user.getBio()); // CMI-1201 wait for fixing
 
     }
+
 }

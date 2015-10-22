@@ -1,12 +1,12 @@
 package Tests.MyProfile;
 
-import Actions.Writer.GoToWriterProfile;
+import Actions.Writer.WriterGoToProfilePage;
 import PageObjects.Writer.WriterProfilePage;
 import Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static Actions.Writer.GoToWriterProfile.addNewPortfolioItem;
+import static Actions.Writer.WriterGoToProfilePage.addNewPortfolioItem;
 import static GeneralHelpers.CreateNewOrderHelper.randomID;
 
 /**
@@ -20,7 +20,7 @@ public class DeletePortfolioItem extends BaseTest{
 
         String title = "New automation item: " + randomID();
         System.out.println(title);
-        WriterProfilePage writerProfilePage = GoToWriterProfile.goToMyProfile(driver, writerLogin);
+        WriterProfilePage writerProfilePage = WriterGoToProfilePage.goToMyProfile(driver, writerLogin);
         addNewPortfolioItem(writerProfilePage, title, 55);
 
         writerProfilePage.clickOnDeletePortfolioItemButton(title);

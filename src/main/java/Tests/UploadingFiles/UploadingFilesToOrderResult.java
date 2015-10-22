@@ -1,6 +1,6 @@
 package Tests.UploadingFiles;
 
-import Actions.Writer.WriterGoToEndResultToClient;
+import Actions.Writer.WriterGoToSendResultToClient;
 import Entities.OrderObject;
 import GeneralHelpers.GeneralHelpers;
 import PageObjects.General.OrderInfoAndActions;
@@ -22,7 +22,7 @@ public class UploadingFilesToOrderResult extends BaseTest{
         String writerText = "hello world, java is super cool but really hard languege! TestNG is my favourite framework! Peace!))) Skype, icq, telephone number";
         String filepath = System.getProperty("user.dir")+"\\src\\main\\java\\Resources\\BigByte.doc";
 
-        OrderInfoAndActions orderInfoAndActions = WriterGoToEndResultToClient.uploadFilesAndSendResultToTheClient(driver, clientLogin, order, writerLogin, writerText, filepath);
+        OrderInfoAndActions orderInfoAndActions = WriterGoToSendResultToClient.uploadFilesAndSendResultToTheClient(driver, clientLogin, order, writerLogin, writerText, filepath);
         String filename = GeneralHelpers.getFileName(filepath);
 
         assertTrue($(orderInfoAndActions.waitForUploadingFilesToOrder(filename)).isDisplayed());

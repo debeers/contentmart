@@ -6,37 +6,67 @@ package Entities;
 public class UserObject {
 
 
-    private String nickname = "";
-    private String firstname = "";
-    private String lastname = "";
-    private String phone = "";
-    private String pan = "";
+    private String nickname   = "";
+    private String firstname  = "";
+    private String lastname   = "";
+    private String phone      = "";
+    private String pan        = "";
+    private String currency   = "";
+    private String country    = "";
+    private String state      = "";
+    private String city       = "";
+    private String timeZone   = "";
+    private String address    = "";
+    private String zip        = "";
+    private String bio        = "";
 
-    private String state = "";
-    private String city = "";
-    private String address = "";
-    private String zip = "";
-    private String bio = "";
 
-
-   public UserObject(){}
-
-
-    public UserObject(String nickname, String firstname, String lastname, String phone,
-                      String pan, String state, String city, String address, String zip, String bio) {
-
-        this.nickname = nickname;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.phone = phone;
-        this.pan = pan;
-        this.state = state;
-        this.city = city;
-        this.address = address;
-        this.zip = zip;
-        this.bio = bio;
+    public UserObject() {
     }
 
+
+    public UserObject(String nickname, String firstname, String lastname, String phone, String pan, String currency,
+                      String country, String state, String city, String timeZone, String address, String zip, String bio) {
+
+        this.nickname   = nickname;
+        this.firstname  = firstname;
+        this.lastname   = lastname;
+        this.phone      = phone;
+        this.pan        = pan;
+        this.currency   = currency;
+        this.country    = country;
+        this.state      = state;
+        this.city       = city;
+        this.timeZone   = timeZone;
+        this.address    = address;
+        this.zip        = zip;
+        this.bio        = bio;
+    }
+
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String currency) {
+        this.country = country;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
+    }
 
     public String getState() {
         return state;
