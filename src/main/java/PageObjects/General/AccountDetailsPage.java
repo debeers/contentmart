@@ -6,6 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import static GeneralHelpers.CustomWaits.$WaitFor;
 import static GeneralHelpers.GeneralHelpers.jsDeleteClasses;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
@@ -83,6 +86,18 @@ public class AccountDetailsPage extends LeftMenuGeneralPage implements PageObjec
     @FindBy(xpath = ".//div[contains (@class, 'jcrop-holder')]")
     public WebElement signatureSrcHolder;
 
+    @Override
+    public URL getImageURL() {
+
+        URL url = null;
+        try {
+            url = new URL(signatureSrc.getAttribute("src"));
+            System.out.println("Current image URL: " + url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
 
     @Override
     public int getImgHolderHeigh() {

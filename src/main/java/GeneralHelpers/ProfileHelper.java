@@ -2,18 +2,16 @@ package GeneralHelpers;
 
 import PageObjects.BirthdayDateInterface;
 import PageObjects.PageObjectWithImages;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Random;
+import java.io.*;
+import java.util.*;
 
 /**
  * Created by DeBeers on 22.10.2015.
@@ -134,8 +132,75 @@ public class ProfileHelper {
     }
 
 
+    public static void downloadFileFromURL(PageObjectWithImages page, File file) {
+
+        try {
+            FileUtils.copyURLToFile(page.getImageURL(), file);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    private static File writeImageToTemp(PageObjectWithImages page) {
+
+        try {
+            File temp = File.createTempFile("uploadedImage", ".jpg");
+
+            downloadFileFromURL(page, temp);
+
+            System.out.println("======== Downloading done =========");
+            System.out.println("File path: " + temp.getAbsolutePath());
+
+            return temp;
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
+        }
+
+        return null;
+    }
+
+
+    public static String getFileHash(File file) {
+
+        try (FileInputStream fis = new FileInputStream(file)) {
+
+            String md5 = DigestUtils.md5Hex(fis);
+            fis.close();
+            System.out.println("File MD5 is: " + md5);
+            return md5;
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    @SuppressWarnings("ConstantConditions")
+    public static Boolean compareMD5(File srcFile, File downloadedFile) {
+
+        if (getFileHash(srcFile).equals(getFileHash(downloadedFile))) {
+            System.out.println("Files equals, congrats!");
+
+            return true;
+        }
+        System.out.println("Files not equals, go and kill yourself.");
+        return false;
+    }
+
+
     public static Boolean verifyUploadedImages(WebDriver driver, PageObjectWithImages page,
                                                String path) throws IOException, NoSuchFieldException, NoSuchMethodException {
+
+        File scrFile = new File(path);
 
         if (!isImagePresent(driver, page)) {
             System.out.println("Image not displayed.");
@@ -145,13 +210,12 @@ public class ProfileHelper {
         } else {
             System.out.println("Image displayed.");
 
-            if (isImagesEquals(page, path)) {
-                System.out.println("Got it bitch ass! Images totally equals!) HURRAY!");
+            if (isImagesEquals(page, path) && compareMD5(scrFile, writeImageToTemp(page))) {
 
+                System.out.println("Got it bitch ass! Images totally equals!) HURRAY!");
                 return true;
 
-            } else
-                System.out.println("Images not equals baby(((");
+            } else System.out.println("Images not equals baby(((");
 
             return false;
         }

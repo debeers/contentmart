@@ -27,7 +27,7 @@
 
 
 
-                <class name = "Tests.EditProfile.ClientChangingPearsonalData"/>
+                <class name = "Tests.EditProfile.ClientAvatarUploading"/>
 
 
 

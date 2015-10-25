@@ -10,6 +10,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +60,19 @@ public class WriterEditProfilePage extends LeftMenuGeneralPage implements PageOb
     @FindBy(xpath = ".//div[contains (@class, 'jcrop-holder')]")
     public WebElement avatarSrcHolder;
 
+
+    @Override
+    public URL getImageURL() {
+
+        URL url = null;
+        try {
+            url = new URL(avatarSrc.getAttribute("src"));
+            System.out.println("Current image URL: " + url);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return url;
+    }
 
     @Override
     public int getImgHolderHeigh() {
