@@ -15,7 +15,7 @@ public class JDBCutil {
 
 
     private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static final String DB_CONNECTION = "jdbc:oracle:thin:@localhost:1521:MKYONG";
+    private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/MyDataBaseName";
     private static final String DB_USER = "user";
     private static final String DB_PASSWORD = "password";
     private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
