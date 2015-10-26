@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.io.IOException;
 
+import static GeneralHelpers.ProfileHelper.getFileHash;
 import static GeneralHelpers.ProfileHelper.verifyUploadedImages;
 
 /**
