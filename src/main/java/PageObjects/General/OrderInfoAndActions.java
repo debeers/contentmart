@@ -39,7 +39,6 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(className = "well cell")
     public WebElement sendedByWriterText;
 
-
     @FindBy(xpath = "//a[contains(text(), 'Save as Draft')]")
     public WebElement saveAsDraftButton;
 

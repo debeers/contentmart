@@ -35,8 +35,8 @@ public class TransferMoney extends BaseTest{
         sleep(5000);
         driver.navigate().refresh();
 
-        assertEquals(balanceGeneral.xBlockingAmount(order.getEntityOrderSystemID()), "- " + order.getEntityOrderValue());
-        assertEquals(balanceGeneral.xTransferAmount(order.getEntityOrderSystemID()).trim(), order.getEntityOrderValue());
+        assertEquals(balanceGeneral.xBlockingAmount(order.getEntityOrderSystemID()), "- " + order.getOrderValueInRupee());
+        assertEquals(balanceGeneral.xTransferAmount(order.getEntityOrderSystemID()).trim(), order.getOrderValueInRupee());
 
         assertEquals(balanceGeneral.xBlockingBalance(order.getEntityOrderSystemID()), balanceGeneral.xTransferBalance(order.getEntityOrderSystemID()));
         assertTrue(checkForCorrectBalanceTransferOperation(order));

@@ -90,9 +90,9 @@ public class ProfileHelper {
     }
 
 
-    private static Boolean isImagePresent(WebDriver driver, PageObjectWithImages page) throws NoSuchFieldException {
+    private static Boolean isImagePresent(PageObjectWithImages page) throws NoSuchFieldException {
 
-        Boolean ImagePresent = (Boolean) ((JavascriptExecutor) driver).executeScript
+        Boolean ImagePresent = (Boolean) ((JavascriptExecutor) page.getDriver()).executeScript
                 ("return arguments[0].complete && typeof arguments[0].naturalWidth != " +
                         "\"undefined\" && arguments[0].naturalWidth > 0", page != null ? page.imgSrcElement() : null);
         if (ImagePresent) {
@@ -184,9 +184,9 @@ public class ProfileHelper {
     }
 
 
-    @SuppressWarnings("ConstantConditions")
     public static Boolean compareMD5(File srcFile, File downloadedFile) {
 
+        //noinspection ConstantConditions
         if (getFileHash(srcFile).equals(getFileHash(downloadedFile))) {
             System.out.println("Files equals, congrats!");
 
@@ -197,12 +197,12 @@ public class ProfileHelper {
     }
 
 
-    public static Boolean verifyUploadedImages(WebDriver driver, PageObjectWithImages page,
+    public static Boolean verifyUploadedImages(PageObjectWithImages page,
                                                String path) throws IOException, NoSuchFieldException, NoSuchMethodException {
 
         File scrFile = new File(path);
 
-        if (!isImagePresent(driver, page)) {
+        if (!isImagePresent(page)) {
             System.out.println("Image not displayed.");
 
             return false;
@@ -215,7 +215,7 @@ public class ProfileHelper {
                 System.out.println("Got it bitch ass! Images totally equals!) HURRAY!");
                 return true;
 
-            } else System.out.println("Images not equals baby(((");
+            } else System.out.println("Images not equals baby((("); // for now all out`s will be on them places, untill we`re not finnish with Jenkins integretion. Till that time I need it for debugging.
 
             return false;
         }

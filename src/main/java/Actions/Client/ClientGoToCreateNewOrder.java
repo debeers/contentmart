@@ -85,7 +85,7 @@ public class ClientGoToCreateNewOrder {
     }
 
 
-    public static Boolean checkForFileUploadInNewOrder(String filePath) {
+    public static Boolean isFileUploadedeInNewOrder(String filePath) {
         String fileName = getFileName(filePath);
         ClientNewOrderPage newOrderPage = new ClientNewOrderPage(driver);
 
@@ -108,7 +108,7 @@ public class ClientGoToCreateNewOrder {
     }
 
 
-    public static Boolean checkForFileExsistInNewOrder() {
+    public static Boolean isFileExsistInNewOrder() {
 
         ClientNewOrderPage newOrderPage = new ClientNewOrderPage(driver);
         List<WebElement> attachedFiles = newOrderPage.attachedFiles;
@@ -137,11 +137,11 @@ public class ClientGoToCreateNewOrder {
         ClientNewOrderPage clientNewOrderPage = leftMenuGeneralPage.clickOnNewOrderFromLeftMenu();
         createNewOrderWaits(clientNewOrderPage);
 
-        clientNewOrderPage.setOrder(driver, clientNewOrderPage, order);
-        order.setEntityOrderValue(order.getEntityOrderValue());
+        clientNewOrderPage.setOrder(clientNewOrderPage, order);
+        order.setOrderValueInRupee(order.getOrderValueInRupee());
         order.setTotalBalanceBefore(getCurrentBallanceFromMenuButton(driver));
 
-        System.out.println("Order value: " + order.getEntityOrderValue());
+        System.out.println("Order value in rupee: " + order.getOrderValueInRupee());
         System.out.println("Total balance before: " + order.getTotalBalanceBefore());
 
         return clientNewOrderPage;

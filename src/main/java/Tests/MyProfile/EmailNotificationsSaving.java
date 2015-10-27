@@ -6,7 +6,7 @@ import PageObjects.General.EmailNotificationsPage;
 import Tests.BaseTest;
 import org.testng.annotations.Test;
 
-import static Actions.General.GoToAccountSettings.checkForTriggersStatus;
+import static Actions.General.GoToAccountSettings.isTriggersHaveNeededConditions;
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 import static org.testng.Assert.assertTrue;
 
@@ -26,13 +26,13 @@ public class EmailNotificationsSaving extends BaseTest{
         Thread.sleep(4000);
         driver.navigate().refresh();
         waitForPageLoad(driver);
-        assertTrue(checkForTriggersStatus("OFF"));
+        assertTrue(isTriggersHaveNeededConditions("OFF"));
 
         emailNotificationsPage.switchTriggersON();
         Thread.sleep(4000); // need to save changes, waits for server side...
         driver.navigate().refresh();
         waitForPageLoad(driver);
 
-        assertTrue(checkForTriggersStatus("ON"));
+        assertTrue(isTriggersHaveNeededConditions("ON"));
     }
 }

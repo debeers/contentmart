@@ -1,5 +1,6 @@
 package PageObjects;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.net.URL;
@@ -9,8 +10,13 @@ import java.net.URL;
  */
 public interface PageObjectWithImages {
 
+    public WebDriver getDriver();
+
     public URL getImageURL();
+
     public int getImgHolderHeigh();
+
     public int getImgHolderWidth();
+
     public WebElement imgSrcElement();
 }

@@ -25,7 +25,7 @@ public class WriterAvatarUploading extends BaseTest {
         WriterEditProfilePage editProfilePage = writerProfilePage.writerClickOnEditProfileButton();
         editProfilePage.uploadNewAvatarPhoto(filepath);
 
-        Assert.assertTrue(verifyUploadedImages(driver, editProfilePage, filepath));
+        Assert.assertTrue(verifyUploadedImages(editProfilePage, filepath));
         editProfilePage.saveAvatarPhotoButtonClick();
 
         Assert.assertTrue(editProfilePage.avatarProgressCount());

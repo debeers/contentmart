@@ -24,7 +24,7 @@ public class ClientSighnUploading extends BaseTest {
         AccountDetailsPage accountDetailsPage = myOrdersPage.clickOnAccountSettingsFromLeftMenu();
         accountDetailsPage.uploadNewSignature(filepath);
 
-        Assert.assertTrue(verifyUploadedImages(driver, accountDetailsPage, filepath));
+        Assert.assertTrue(verifyUploadedImages(accountDetailsPage, filepath));
         accountDetailsPage.clickOnSaveSignatureButton();
 
     }

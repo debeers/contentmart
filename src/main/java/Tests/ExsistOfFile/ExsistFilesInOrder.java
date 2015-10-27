@@ -6,7 +6,7 @@ import Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static Actions.Client.ClientGoToCreateNewOrder.checkForFileExsistInNewOrder;
+import static Actions.Client.ClientGoToCreateNewOrder.isFileExsistInNewOrder;
 
 /**
  * Created by DeBeers on 27.09.2015.
@@ -21,7 +21,7 @@ public class ExsistFilesInOrder extends BaseTest{
 
         String filepath = System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\DMX.jpg";
         ClientGoToCreateNewOrder.andUploadFilesToIt(driver, clientLogin, order, filepath);
-        Assert.assertTrue(checkForFileExsistInNewOrder());
+        Assert.assertTrue(isFileExsistInNewOrder());
 
     }
 }

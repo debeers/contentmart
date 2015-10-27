@@ -25,7 +25,7 @@ public class BlockingMoney extends BaseTest{
         BalanceGeneralPage balanceGeneral = clientGoToCheckForBlockingBalance(driver, order);
 
         assertEquals(balanceGeneral.xBlockingStatus(order.getEntityOrderSystemID()), "Blocking");
-        assertEquals(balanceGeneral.xBlockingAmount(order.getEntityOrderSystemID()), "- " + order.getEntityOrderValue());
+        assertEquals(balanceGeneral.xBlockingAmount(order.getEntityOrderSystemID()), "- " + order.getOrderValueInRupee());
         assertTrue(GoToBalanceGeneralActions.checkForCorrectBlockingMoneyOperation(order));
 
     }

@@ -26,7 +26,7 @@ public class ClientAvatarUploading extends BaseTest{
         ClientEditProfilePage editProfilePage = clientEditProfilePage.clickOnEditProfileButton();
         editProfilePage.uploadNewAvatarPhoto(filepath);
 
-        Assert.assertTrue(verifyUploadedImages(driver, editProfilePage, filepath));
+        Assert.assertTrue(verifyUploadedImages(editProfilePage, filepath));
         editProfilePage.saveAvatarPhotoButtonClick();
 
         Assert.assertTrue(editProfilePage.avatarProgressCount());

@@ -46,20 +46,16 @@ public class GoToAccountSettings {
     }
 
 
-    public static Boolean checkForTriggersStatus(String status) {
+    public static Boolean isTriggersHaveNeededConditions(String status) {
 
         EmailNotificationsPage ep = new EmailNotificationsPage(driver);
 
         for (WebElement trigger : ep.triggers) {
 
             if (status == "OFF" && $(trigger).getAttribute("class").contains("switch toggle-on")) {
-
-                System.out.println("Some elements did not save changes: " + trigger.getAttribute("class"));
                 return false;
 
             }else if(status == "ON" && $(trigger).getAttribute("class").contains("switch toggle-off")) {
-
-                System.out.println("Some elements did not save changes: " + trigger.getAttribute("class"));
                 return false;
             }
         }

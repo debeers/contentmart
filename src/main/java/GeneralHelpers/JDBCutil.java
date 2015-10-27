@@ -15,18 +15,13 @@ public class JDBCutil {
 
 
     private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/MyDataBaseName";
-    private static final String DB_USER = "user";
-    private static final String DB_PASSWORD = "password";
+    private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/content1";
+    private static final String DB_USER = "dev_contentmart";
+    private static final String DB_PASSWORD = "iequ5eYeev0l";
     private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
-    protected String insertTableSQL = "INSERT INTO DBUSER"
-            + "(USER_ID, USERNAME, CREATED_BY, CREATED_DATE) " + "VALUES"
-            + "(1,'mkyong','system', " + "to_date('"
-            + getCurrentTimeStamp() + "', 'yyyy/mm/dd hh24:mi:ss'))";
 
-
-    private static void insertRecordIntoDbUserTable(String insertTableSQL) throws SQLException {
+    public static void insertRecordIntoDbUserTable(String insertTableSQL) throws SQLException {
 
         Connection dbConnection = null;
         Statement statement = null;
@@ -97,39 +92,23 @@ public class JDBCutil {
     }
 
 
-    public static void getJDBC(String query, String column) {
+    public static void executeQuery(String query, String column) {
 
+        Connection dbConnection;
+        Statement statement;
 
-        String user = "root";
-        String password = "toor";
-        String url = "jdbc:mysql://localhost:3306/bitnami_wordpress";
-        String driver = "oracle.jdbc.driver.OracleDriver";
         try {
-            Class.forName(driver);
-        } catch (ClassNotFoundException e) {
+            dbConnection = getDBConnection();
+            statement = dbConnection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
 
-            e.printStackTrace();
-        }
-        Connection c = null;
-        try {
-            c = DriverManager.getConnection(url, user, password);
-            Statement st = c.createStatement();
-            ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 System.out.println(rs.getString(column));
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-
-            try {
-                if (c != null)
-                    c.close();
-            } catch (SQLException e) {
-
-                e.printStackTrace();
-            }
         }
+
     }
 
 }

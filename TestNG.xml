@@ -7,8 +7,8 @@
 
     <parameter name="clientLoginParam"     value="debeers1989@gmail.com"/>
     <parameter name="clientPasswordParam"  value="roottoor"            />
-    <parameter name="writerLoginParam"     value="debeers@bigmir.net"/>
-    <parameter name="writerPasswordParam"  value="H9CC1vxG"         />
+    <parameter name="writerLoginParam"     value="debeers@bigmir.net" />
+    <parameter name="writerPasswordParam"  value="roottoor"          />
 
     <!--Credentials: END -->
 
@@ -27,12 +27,12 @@
 
 
 
-                <class name = "Tests.EditProfile.ClientAvatarUploading"/>
+                <class name = "Tests.OrdersActions.ReassignOrder"/>
 
 
 
                 <!--
-
+                <class name = "Tests.UserCreate.InsertionOfNewUserToDB"/>
 
                 <class name = "Tests.AccountSettings.ChangeWriterDetailsls"/>
 
