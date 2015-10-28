@@ -28,14 +28,14 @@ public class GoToBalanceGeneralActions {
     public static Boolean checkForCorrectBlockingMoneyOperation(OrderObject order) {
 
         double balanceBefore = Double.parseDouble(order.getTotalBalanceBefore());
-        double orderPrice = Double.parseDouble(order.getEntityOrderValue());
+        double orderPrice = Double.parseDouble(order.getOrderValueInRupee());
         double balanceAfterBlocking = Double.parseDouble(order.getTotalBalanceAfterBlocking());
 
         double res = balanceBefore - balanceAfterBlocking;
 
         if (res == orderPrice) {
             System.out.println("Balance before: " + order.getTotalBalanceBefore() + "\n" +
-                    "Balance price: " + order.getEntityOrderValue() + "\n");
+                    "Balance price: " + order.getOrderValueInRupee() + "\n");
             System.out.println("Balance operation correct! ");
 
             return true;
@@ -49,7 +49,7 @@ public class GoToBalanceGeneralActions {
 
     public static Boolean checkForCorrectUnblockingMoneyOperation(OrderObject order) {
 
-        double orderPrice = Double.parseDouble(order.getEntityOrderValue());
+        double orderPrice = Double.parseDouble(order.getOrderValueInRupee());
         double balanceAfterBlocking = Double.parseDouble(order.getTotalBalanceAfterBlocking());
         double balanceAfterUnblocking = Double.parseDouble(order.getTotalBalanceAfterUnBlocking());
 
@@ -57,7 +57,7 @@ public class GoToBalanceGeneralActions {
 
         if (res == orderPrice) {
             System.out.println("Balance before: " + order.getTotalBalanceBefore() + "\n" +
-                    "Balance price: " + order.getEntityOrderValue() + "\n");
+                    "Balance price: " + order.getOrderValueInRupee() + "\n");
             System.out.println("Balance operation correct! ");
 
             return true;
@@ -72,14 +72,14 @@ public class GoToBalanceGeneralActions {
     public static Boolean checkForCorrectBalanceTransferOperation(OrderObject order) {
 
         double balanceBefore = Double.parseDouble(order.getTotalBalanceBefore());
-        double orderPrice = Double.parseDouble(order.getEntityOrderValue());
+        double orderPrice = Double.parseDouble(order.getOrderValueInRupee());
         double balanceAfterBlocking = Double.parseDouble(order.getTotalBalanceAfterBlocking());
 
         double res = balanceBefore - balanceAfterBlocking;
 
         if (res == orderPrice) {
             System.out.println("Balance before: " + order.getTotalBalanceBefore() + "\n" +
-                    "Balance price: " + order.getEntityOrderValue() + "\n");
+                    "Balance price: " + order.getOrderValueInRupee() + "\n");
             System.out.println("Balance operation correct! ");
 
             return true;

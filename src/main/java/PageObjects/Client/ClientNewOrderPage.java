@@ -11,14 +11,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 import static java.lang.Thread.sleep;
 
 public class ClientNewOrderPage extends LeftMenuGeneralPage {
@@ -34,6 +38,15 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     @FindBy(id = "date_deadline")
     public WebElement deadlineField;
 
+    @FindBy(xpath = ".//*[@id='categories']")
+    public WebElement selectCategories;
+
+    @FindBy(className = "ms-choice")
+    public WebElement expertise;
+
+    @FindBy(xpath = ".//*[@id='languages']")
+    public WebElement languages;
+
     @FindBy(id = "articles_quantity")
     public WebElement articlesquantityField;
 
@@ -41,13 +54,19 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     public WebElement wordsRequiredField;
 
     @FindBy(id = "price")
-    public WebElement priceField;
+    public WebElement rupeePriceField;
+
+    @FindBy(id = "price-currency")
+    public WebElement dollarPriceField;
 
     @FindBy(xpath = ".//*[@id='fileupload']")
     public WebElement fileuploadInput;
 
-    @FindBy(id = "max_count")
-    public WebElement orderValue;
+    @FindBy(xpath = ".//*[@id='max-count']")
+    public WebElement rupeeOrderValue;
+
+    @FindBy(id = "max-count-currency")
+    public WebElement dollarOrderValue;
 
     @FindBy(id = "d_ord_form")
     public WebElement saveAsDraftButtonInNewOrder;
@@ -79,7 +98,6 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     public List<WebElement> attachedFiles;
 
     @FindBy(xpath = "html//td[contains(@class, 'xdsoft_current')]")
-    //   /following-sibling::td[1]   next   html//td[.//text()[contains(., '29')]]  [not(contains(@class, 'xdsoft_disabled'))]
     public WebElement currentOrderDay;
 
     @FindBy(xpath = "html/body/div[2]/div[2]/div/div[1]/div[contains(@class, 'xdsoft_current')]")
@@ -100,6 +118,23 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
 
     @FindBy(id = "progress")
     public WebElement progressCounter;
+
+    @FindBy(xpath = ".//*[@id='new_order']/form/div/div[4]/div[2]/div/div/ul/li/label")
+    public WebElement expertisesSelect;
+
+
+    public void randomSelectWritingCategories(){
+
+        Select selectWritingCategories = new Select(selectCategories);
+        selectWritingCategories.selectByIndex(new Random().nextInt(selectWritingCategories.getOptions().size()));
+    }
+
+
+    public void randomSelectLanguage(){
+
+        Select selectLanguages = new Select(languages);
+        selectLanguages.selectByIndex(new Random().nextInt(selectLanguages.getOptions().size()));
+    }
 
 
     public OrderInfoAndActions andClickOnSaveAsDraftButton(WebDriver driver) throws InterruptedException {
@@ -158,6 +193,7 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
 
     }
 
+
     public void waitForProgressBarWhenUploadingFilesToNewOrder() {
 
         WebDriverWait wait = new WebDriverWait(driver, 15);
@@ -166,9 +202,16 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     }
 
 
-    public String getOrderValue() {
+    public String getRupeeOrderValue() {
 
-        String orderVal = $(orderValue).shouldBe(visible).getText();
+        String orderVal = $(rupeeOrderValue).shouldBe(visible).getText();
+        return orderVal;
+    }
+
+
+    public String getDollarOrderValue() {
+
+        String orderVal = $(dollarOrderValue).shouldBe(visible).getText();
         return orderVal;
     }
 
@@ -194,28 +237,40 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     }
 
 
-    public ClientNewOrderPage setPriceField(String price) {
+    public ClientNewOrderPage setRupeePriceField(String price) {
 
-        priceField.sendKeys(price);
+        rupeePriceField.sendKeys(price);
         return this;
     }
 
 
-    public void setOrder(WebDriver driver, ClientNewOrderPage newOrder, OrderObject order) throws InterruptedException {
+    public ClientNewOrderPage setDollarPriceField(String price) {
+
+        dollarPriceField.sendKeys(price);
+        return this;
+    }
+
+
+    public void setOrder(ClientNewOrderPage newOrder, OrderObject order) throws InterruptedException {
 
         String id = CreateNewOrderHelper.randomID();
         newOrder.orderNameField.clear();
         newOrder.descriptionField.clear();
         newOrder.wordsRequiredField.clear();
-        newOrder.priceField.clear();
+        newOrder.dollarPriceField.clear();
+        randomSelectWritingCategories();
         newOrder.setOrderNameField(order.getOrdName(), id);
         newOrder.setDescriptionField(order.getDesc());
         newOrder.setWordsRequiredField(order.getWordsReq());
-        newOrder.setPriceField(order.getPrice());
+
+        randomSelectLanguage();
+        newOrder.setDollarPriceField(order.getDollarPrice());
         $(newOrder.deadlineField).shouldBe(visible).click();
 
-        order.setEntityOrderValue($(newOrder.orderValue).shouldBe(visible).getText());
+        order.setOrderValueInRupee(getRupeeOrderValue());
+        order.setOrderValueInDollars(getDollarOrderValue());
 
+        System.out.println(order.getOrderValueInDollars() +"  " +  order.getOrderValueInRupee());
         sleep(3000);
 
         String day = CreateNewOrderHelper.getDay();

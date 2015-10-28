@@ -39,7 +39,6 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(className = "well cell")
     public WebElement sendedByWriterText;
 
-
     @FindBy(xpath = "//a[contains(text(), 'Save as Draft')]")
     public WebElement saveAsDraftButton;
 
@@ -82,7 +81,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     @FindBy(xpath = ".//*[@id='new_results']/div[4]/span")
     public WebElement successMessageAfterSendResult;
 
-    @FindBy(className = "js_confirm_action cancel-link")
+    @FindBy(xpath = ".//a[contains(@class, 'js_confirm_action cancel-link')]")
     public WebElement cancelChosenWorsmith;
 
     @FindBy(xpath = "//button[contains(text(),'Drop the Client a Message')]")
@@ -221,11 +220,11 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         $(yesSweetAllert).shouldBe(visible).click();
     }
 
-    public Boolean waitForPlagiatorCheckAppear(){
+    public Boolean waitForPlagiatorCheckAppear() {
 
-       if($(plagiatorCheck).should(appear).isDisplayed()){
-           return true;
-       }
+        if ($(plagiatorCheck).should(appear).isDisplayed()) {
+            return true;
+        }
         return false;
     }
 
@@ -311,9 +310,10 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         return res;
     }
 
-    public void clickOnCancelChosenWorsmith() {
+    public void clickOnCancelChosenWorsmith() throws InterruptedException {
 
-        $(cancelChosenWorsmith).shouldBe(present).click();
+        $(cancelChosenWorsmith).shouldBe(visible).click();
+        Thread.sleep(2000);
         $(yesSweetAllert).should(appear).click();
         getorderStatus();
     }

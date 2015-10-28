@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by DeBeers on 18.09.2015.
  */
-public class WriterGoToEndResultToClient {
+public class WriterGoToSendResultToClient {
 
 
     public static OrderInfoAndActions andSendResultToTheClient(WebDriver driver, LoginObject clientLogin, OrderObject orderObject,

@@ -7,8 +7,8 @@
 
     <parameter name="clientLoginParam"     value="debeers1989@gmail.com"/>
     <parameter name="clientPasswordParam"  value="roottoor"            />
-    <parameter name="writerLoginParam"     value="debeers@bigmir.net"/>
-    <parameter name="writerPasswordParam"  value="H9CC1vxG"         />
+    <parameter name="writerLoginParam"     value="debeers@bigmir.net" />
+    <parameter name="writerPasswordParam"  value="roottoor"          />
 
     <!--Credentials: END -->
 
@@ -25,11 +25,18 @@
             <classes>
 
 
-                <class name = "Tests.MyProfile.DeletePortfolioItem"/>
+
+
+                <class name = "Tests.OrdersActions.ReassignOrder"/>
+
+
+
                 <!--
+                <class name = "Tests.UserCreate.InsertionOfNewUserToDB"/>
 
+                <class name = "Tests.AccountSettings.ChangeWriterDetailsls"/>
 
-
+                <class name = "Tests.MyProfile.DeletePortfolioItem"/>
                 <class name = "Tests.MyProfile.AddPortfolioItem"/>
                 <class name = "Tests.Messages.SendTextMessages"/>
 
@@ -54,13 +61,12 @@
                 <class name = "Tests.StatusActions.CloneTheOrder"/>
                 <class name = "Tests.StatusActions.Awarded.StartWorking"/>
                 <class name = "Tests.StatusActions.Awarded.CancelChosenWordsmith"/>
-                <class name = "Tests.StatusActions.Awarded.CloneOrderFromAwardedAndPublishItAndPublishIt"/>
+                <class name = "Tests.StatusActions.Awarded.CloneOrderFromAwardedAndPublishIt"/>
                 <class name = "Tests.StatusActions.ProposalSent.SetAsWinner"/>
                 <class name = "Tests.StatusActions.ProposalSent.CancelFromWriterSideAfterBid"/>
                 <class name = "Tests.StatusActions.Published.BidOnOrder"/>
                 <class name = "Tests.StatusActions.Published.CloseNewOrderAfterPublish"/>
                 <class name = "Tests.StatusActions.Published.EditAndThanPublishOrder"/>
-
 
                 <class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
                 <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
@@ -73,8 +79,7 @@
 
                 <class name = "Tests.ExsistOfFile.ExistFileInMessages"/>
                 <class name = "Tests.ExsistOfFile.ExsistFilesInOrder"/>
-                <class name = "Tests.StatusActions.InProgress.SendResultFromSaveAsDraftromSaveAsDraft"/>
-
+                <class name = "Tests.StatusActions.InProgress.SendResultFromSaveAsDraft"/>
 
 
 

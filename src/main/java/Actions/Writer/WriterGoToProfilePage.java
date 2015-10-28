@@ -2,55 +2,29 @@ package Actions.Writer;
 
 import Actions.General.RegistrationAndLogin;
 import Entities.LoginObject;
+import PageObjects.Client.ClientEditProfilePage;
+import PageObjects.Client.ClientProfilePage;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.Writer.WriterEditProfilePage;
 import PageObjects.Writer.WriterProfilePage;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.Random;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.*;
 
 import static GeneralHelpers.CreateNewOrderHelper.randomID;
-import static GeneralHelpers.Messages.randomMessageGeneratorLength;
+import static GeneralHelpers.Messages.randomTextGeneratorLength;
 
 /**
  * Created by DeBeers on 04.10.2015.
  */
-public class GoToWriterProfile {
-
-
-    public static String randomSelectDateOfBirth(WriterEditProfilePage writerEditProfilePage){
-
-        Select day = new Select(writerEditProfilePage.selectDay);
-        Select month = new Select(writerEditProfilePage.selectMonth);
-        Select year = new Select(writerEditProfilePage.selectYear);
-
-        day.selectByIndex( new Random().nextInt(day.getOptions().size()));
-        month.selectByIndex( new Random().nextInt(month.getOptions().size()));
-        year.selectByIndex(new Random().nextInt(year.getOptions().size()));
-
-        return year.getFirstSelectedOption().getText();
-    }
-
-
-    public static Boolean checkForOld(String yearFromRandom, String yearsFromProfilePage){
-
-        int year;
-        Calendar calendar = Calendar.getInstance();
-        year = calendar.get(Calendar.YEAR);
-
-        int yearFromProfile = Integer.parseInt(yearsFromProfilePage);
-        int randomYear = Integer.parseInt(yearFromRandom);
-
-        if((year - randomYear) == yearFromProfile){
-            return true;
-        }
-
-        return false;
-    }
-
+public class WriterGoToProfilePage {
 
     public static WriterProfilePage goToMyProfile(WebDriver driver, LoginObject writerLogin) {
 
@@ -71,7 +45,7 @@ public class GoToWriterProfile {
 
     public static String createTextForPortfolioItem(int length){
 
-        return "Portfolio item text - " + randomMessageGeneratorLength(70);
+        return "Portfolio item text - " + randomTextGeneratorLength(length);
     }
 
 
@@ -80,25 +54,25 @@ public class GoToWriterProfile {
 
         writerProfilePage.clickOnAddPortfolioButton();
 
-        String text = randomMessageGeneratorLength(textLength);
+        String text = randomTextGeneratorLength(textLength);
 
         writerProfilePage.setPortfolioTitleField(title);
         writerProfilePage.setPortfolioTextField(text);
 
-        writerProfilePage.clickOnaAddWorkButton();
+        writerProfilePage.clickOnaAddWorkButton(title);
     }
 
 
     public static Boolean checkForMadeCategoriesChanges(WriterProfilePage writerProfilePage,
-                                                        List<String> madeChanges, String category){
+                                                        List<String> madeChanges, String category) {
 
         List<String> addedSkillsList = writerProfilePage.getSettetCategoriesNames(category);
 
-        for(String skillName : addedSkillsList){
+        for (String skillName : addedSkillsList) {
             System.out.println(skillName);
         }
 
-        if(addedSkillsList.containsAll(madeChanges)){
+        if (addedSkillsList.containsAll(madeChanges)) {
 
             return true;
         }

@@ -11,30 +11,30 @@ import org.openqa.selenium.support.FindBy;
 public class LanguageTestPage extends LeftMenuGeneralPage {
 
 
-    @FindBy(xpath="//h1[.//text()[contains(., 'English Language Test')]]")
+    @FindBy(xpath = "//h1[.//text()[contains(., 'English Language Test')]]")
     public WebElement testHeader;
 
-    @FindBy(xpath="//div[3]/div/div/p")
+    @FindBy(xpath = "//div[3]/div/div/p")
     public WebElement testFAQ;
 
-    @FindBy(xpath="//p[(contains(@class, 'question'))]")
+    @FindBy(xpath = "//p[(contains(@class, 'question'))]")
     public WebElement question;
 
 
-    @FindBy(xpath="//div/span[.//text()[contains(., 'Beginner')]]")
+    @FindBy(xpath = "//div/span[.//text()[contains(., 'Beginner')]]")
     public WebElement begginnerTest;
 
-    @FindBy(xpath="//div[3]/div[.//text()[contains(., 'Intermediate')]]")
+    @FindBy(xpath = "//div[3]/div[.//text()[contains(., 'Intermediate')]]")
     public WebElement intermediateTest;
 
-    @FindBy(xpath="//div[5]/div[.//text()[contains(., 'Advanced')]]")
+    @FindBy(xpath = "//div[5]/div[.//text()[contains(., 'Advanced')]]")
     public WebElement AdvancedTest;
 
 
-    @FindBy(xpath="//div[3]//div/p")
+    @FindBy(xpath = "//div[3]//div/p")
     public WebElement msgBeforeTest;
 
-    @FindBy(xpath="//a[.//text()[contains(., 'Start Language Test')]]")
+    @FindBy(xpath = "//a[.//text()[contains(., 'Start Language Test')]]")
     public WebElement startTestButton;
 
 
@@ -42,6 +42,5 @@ public class LanguageTestPage extends LeftMenuGeneralPage {
 
         super(driver);
     }
-
 
 }

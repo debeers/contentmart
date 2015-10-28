@@ -1,9 +1,14 @@
 package PageObjects.Writer;
 
+import PageObjects.BirthdayDateInterface;
+import PageObjects.Client.ClientEditProfilePage;
 import PageObjects.General.LeftMenuGeneralPage;
+import PageObjects.PageObjectWithImages;
+import PageObjects.Writer.WriterEditProfilePage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,17 +25,17 @@ import static com.codeborne.selenide.Selenide.$$;
 /**
  * Created by CMG_TEST on 30.09.2015.
  */
-public class WriterProfilePage extends LeftMenuGeneralPage {
+public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDateInterface {
 
 
     @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[2]/div[3]/a")
     public WebElement editProfileButton;
-                        // Portfolio
+    // Portfolio
 
     @FindBy(xpath = ".//div[contains(@class, 'user_main_info')]//div[2][contains(@class, 'd_in m_r-10')]")
-    public WebElement yearsOld;
+    public WebElement writerYearsOld;
 
-    @FindBy(xpath = ".//div[contains(@class, 'portfolio-item-delete-confirm-wrap')]//a[1]")
+    @FindBy(css = ".portfolio-item-delete-confirm-btn.new_blue_but")
     public WebElement confirmSweetAllertButton;
 
     @FindBy(xpath = ".//a[contains (text(), 'CANCEL')]")
@@ -39,7 +44,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     @FindBy(xpath = ".//div[contains (@class, 'add_portfolio_item')]")
     public WebElement addPortfolioItemButton;
 
-    @FindBy(className="fancybox-wrap fancybox-default fancybox-opened")
+    @FindBy(className = "fancybox-wrap fancybox-default fancybox-opened")
     public WebElement portfolioFrame;
 
     @FindBy(xpath = "//div/form/input[1]")
@@ -51,7 +56,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     @FindBy(xpath = "//div/form/input[2]")
     public WebElement addWorkButton;
 
-    @FindBy(className="fancybox_close_link")
+    @FindBy(className = "fancybox_close_link")
     public WebElement closePortfolioFrameButton;
 
     @FindBy(xpath = "//a[.//text()[contains(., 'READ MORE')]]  [(contains(@class, 'open_link'))]")
@@ -81,10 +86,29 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     @FindBy(xpath = ".//a[contains (@class, 'portfolio-item-delete-btn')]")
     public WebElement deletePortfolioItemButton;
 
+    @Override
+    public String getUserYearsOld() {
+        String year = writerYearsOld.getText();
+        System.out.println(year.substring(0, year.lastIndexOf('y') - 1));
+        return year.substring(0, year.lastIndexOf('y') - 1);
+    }
 
+    @Override
+    public WebElement selectDay() {
+        return null;
+    }
 
+    @Override
+    public WebElement selectYear() {
+        return null;
+    }
+
+    @Override
+    public WebElement selectMonth() {
+        return null;
+    }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                     // Languages and Expertises block
+    // Languages and Expertises block
 
     public String settetExpertisesClassName = "cell expertises m_b-20";
     public String settetLanguagesClassName = "cell languages m_b-20";
@@ -93,13 +117,6 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
     public WriterProfilePage(WebDriver driver) {
         super(driver);
-    }
-
-    public String getYearsOld(){
-
-        String year = yearsOld.getText();
-        System.out.println(year.substring(0, year.lastIndexOf('y') - 1));
-        return year.substring(0, year.lastIndexOf('y')-1);
     }
 
 
@@ -119,9 +136,9 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     }
 
 
-    public void openAddedPortfolioItem(WebDriver driver, String header){
+    public void openAddedPortfolioItem(WebDriver driver, String header) {
 
-        if(addedPortfolioItem(driver, header)){
+        if (addedPortfolioItem(driver, header)) {
 
             $(driver.findElement(By.xpath(".//h4[contains (text(), '" + header + "')]/following-sibling::a[contains (text(), 'READ MORE')]"))).click();
             $WaitFor(
@@ -135,30 +152,33 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
 
 
     public void clickOnDeletePortfolioItemButton(String itemName) throws InterruptedException {
+        driver.navigate().refresh();
+        Thread.sleep(4000);
+        driver.findElement(By.xpath("//div[(contains(@class, 'document_block profile_added_block'))]/h4[contains(text(), '" + itemName + "')]/preceding-sibling::a")).click();
+           $(By.xpath(".//h4[contains(text(), '" + itemName + "')]/preceding-sibling::a[@data-portfolio-item-id = '117']")).shouldBe(Condition.visible).click();
 
-        $(By.xpath(".//h4[contains(text(), '"+ itemName +"')]/preceding-sibling::a[contains " +
-                "(@class, 'portfolio-item-delete-btn')]")).shouldBe(Condition.visible).click();
+        System.out.println(itemName);
         Thread.sleep(3000);
     }
 
 
-    public String getPortfolioItemTitle(){
+    public String getPortfolioItemTitle() {
 
         return $(portfolioItemTitle).shouldBe(Condition.visible).getText();
     }
 
-    public String getPortfolioItemText(){
+    public String getPortfolioItemText() {
 
         return $(portfolioItemText).shouldBe(Condition.visible).getText();
     }
 
-    public void clickOnEditPortfolioItemButton(){
+    public void clickOnEditPortfolioItemButton() {
 
         $(editPortfolioItemButton).click();
         $(portfolioItemSaveButton).should(Condition.appear);
     }
 
-    public void clickOnSavePortfolioItemButton(){
+    public void clickOnSavePortfolioItemButton() {
 
         $(portfolioItemSaveButton).click();
     }
@@ -194,16 +214,22 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
         $(enterPortfolioTextField).clear();
     }
 
-    public void clickOnaAddWorkButton() {
+
+    public void clickOnaAddWorkButton(String title) throws InterruptedException {
 
         $(addWorkButton).click();
-
+        findPortfolioItem(title);
     }
 
-    public void clickOnEditProfileButton() {
+
+    public WriterEditProfilePage writerClickOnEditProfileButton() {
 
         $(editProfileButton).click();
+        WriterEditProfilePage writerEditProfilePage = new WriterEditProfilePage(driver);
+
+        return writerEditProfilePage;
     }
+
 
     public void clickOnBackToPortfolioButton() {
 
@@ -211,23 +237,22 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
         $(backToPortfolioButton).should(Condition.disappear);
     }
 
-    public String setCategoryBox(String category){
+
+    public String setCategoryBox(String category) {
 
         String categoryBox = "";
 
-        if(category == "Languages"){
+        if (category == "Languages") {
             categoryBox = settetLanguagesClassName;
             return categoryBox;
-        }
-        else if(category == "Expertises"){
+        } else if (category == "Expertises") {
             categoryBox = settetExpertisesClassName;
             return categoryBox;
-        }
-        else if(category == "Categories"){
+        } else if (category == "Categories") {
             categoryBox = settetCategoriesOfWritingClassName;
             return categoryBox;
 
-        }else return null;
+        } else return null;
     }
 
 
@@ -259,10 +284,21 @@ public class WriterProfilePage extends LeftMenuGeneralPage {
     }
 
     public void clickOnConfirmSweetAllertButton() throws InterruptedException {
-Thread.sleep(3000);
-        confirmSweetAllertButton.click();
+
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        jse.executeScript("document.getElementsByClassName('portfolio-item-delete-confirm-btn')[0].click();");
         $(cancelSweetAllertButton).should(Condition.disappear);
+        Thread.sleep(3000);
     }
 
+
+    public Boolean findPortfolioItem(String title) throws InterruptedException {
+
+        if ($(By.xpath("//div[(contains(@class, 'document_block profile_added_block'))]//h4[contains (text(), '" + title + "')]")).isDisplayed()) {
+
+            return true;
+        }
+        return false;
+    }
 
 }

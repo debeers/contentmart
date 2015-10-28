@@ -1,6 +1,6 @@
 package Tests.OrdersActions;
 
-import Actions.Writer.WriterGoToEndResultToClient;
+import Actions.Writer.WriterGoToSendResultToClient;
 import Entities.OrderObject;
 import PageObjects.General.OrderInfoAndActions;
 import Tests.BaseTest;
@@ -23,7 +23,7 @@ public class SendResultToClient extends BaseTest {
         String successMessage = "Your result has been delivered to the order owner successfully! You will be notified as and when your result is accepted/rejected.";
         String filepath = System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\DMX.jpg";
 
-        OrderInfoAndActions orderInfoWriter = WriterGoToEndResultToClient.andSendResultToTheClient(driver, clientLogin, order, writerLogin, writerText, filepath);
+        OrderInfoAndActions orderInfoWriter = WriterGoToSendResultToClient.andSendResultToTheClient(driver, clientLogin, order, writerLogin, writerText, filepath);
 
         Assert.assertEquals(orderInfoWriter.getTextFromSuccessMessageAfterSendResult(), successMessage);
         assertEquals(orderInfoWriter.getTextFromOrderStatus(), "Result sent");

@@ -6,7 +6,7 @@ import Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static Actions.Client.ClientGoToCreateNewOrder.checkForFileUploadInNewOrder;
+import static Actions.Client.ClientGoToCreateNewOrder.isFileUploadedeInNewOrder;
 
 /**
  * Created by ilya on 30.08.2015.
@@ -20,6 +20,6 @@ public class UploadingFilesToOrder extends BaseTest {
         String filepath = System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\DMX.jpg";
 
         ClientGoToCreateNewOrder.andUploadFilesToIt(driver, clientLogin, order, filepath);
-        Assert.assertTrue(checkForFileUploadInNewOrder(filepath));
+        Assert.assertTrue(isFileUploadedeInNewOrder(filepath));
     }
 }

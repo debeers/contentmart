@@ -23,7 +23,7 @@ public class CloneOrderFromAwardedAndPublishIt extends BaseTest{
         OrderInfoAndActions orderInfoClientPage = CreateOrderAddBidAndSetAsWinner.andAwardOrderToWriter(driver, clientLogin, order, writerLogin);
         assertEquals(orderInfoClientPage.getTextFromOrderStatus(), "Awarded");
         ClientNewOrderPage clientNewOrderPage = orderInfoClientPage.clickOnCloneOrderButton();
-        clientNewOrderPage.setOrder(driver, clientNewOrderPage, order);
+        clientNewOrderPage.setOrder(clientNewOrderPage, order);
         OrderInfoAndActions orderInfoAndActions = clientNewOrderPage.andClickOnPublishNewOrderButton(driver);
 
         assertEquals(orderInfoAndActions.getorderStatus(), "Published");

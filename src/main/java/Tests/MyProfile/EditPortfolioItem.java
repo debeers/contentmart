@@ -1,16 +1,13 @@
 package Tests.MyProfile;
 
-import Actions.Writer.GoToWriterProfile;
+import Actions.Writer.WriterGoToProfilePage;
 import PageObjects.Writer.WriterProfilePage;
 import Tests.BaseTest;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static Actions.Writer.GoToWriterProfile.addNewPortfolioItem;
-import static Actions.Writer.GoToWriterProfile.createTextForPortfolioItem;
-import static Actions.Writer.GoToWriterProfile.createTitleForPortfolioItem;
-import static GeneralHelpers.CreateNewOrderHelper.randomID;
-import static GeneralHelpers.Messages.randomMessageGeneratorLength;
+import static Actions.Writer.WriterGoToProfilePage.addNewPortfolioItem;
+import static Actions.Writer.WriterGoToProfilePage.createTextForPortfolioItem;
+import static Actions.Writer.WriterGoToProfilePage.createTitleForPortfolioItem;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -27,7 +24,7 @@ public class EditPortfolioItem extends BaseTest {
         String editedTitle = createTitleForPortfolioItem();
         String editedText = createTextForPortfolioItem(70);
 
-        WriterProfilePage writerProfilePage = GoToWriterProfile.goToMyProfile(driver, writerLogin);
+        WriterProfilePage writerProfilePage = WriterGoToProfilePage.goToMyProfile(driver, writerLogin);
         addNewPortfolioItem(writerProfilePage, title, 55);
         assertTrue(writerProfilePage.addedPortfolioItem(driver, title));
 

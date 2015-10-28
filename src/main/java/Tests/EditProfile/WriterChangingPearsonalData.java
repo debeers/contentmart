@@ -7,30 +7,27 @@ import Tests.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
-import static Actions.Writer.WriterGoToProfilePage.checkForMadeCategoriesChanges;
-import static Actions.Writer.WriterGoToEditProfile.setupSkills;
+import java.util.GregorianCalendar;
+import static GeneralHelpers.ProfileHelper.userCheckForOld;
+import static GeneralHelpers.ProfileHelper.userSelectDateOfBirth;
 
 /**
- * Created by DeBeers on 04.10.2015.
+ * Created by CMG_TEST on 12.10.2015.
  */
-public class LanguagesExpertisesCategoriesAdd extends BaseTest {
+public class WriterChangingPearsonalData extends BaseTest{
 
 
     @Test(groups = {"regress2.2"})
-    public void LanguagesExpertisesCategoriesAdd() throws InterruptedException {
+    public void WriterChangingPearsonalData() throws InterruptedException {
 
         WriterProfilePage writerProfilePage = WriterGoToProfilePage.goToMyProfile(driver, writerLogin);
         writerProfilePage.writerClickOnEditProfileButton();
 
         WriterEditProfilePage writerEditProfilePage = new WriterEditProfilePage(driver);
-        writerEditProfilePage.clear();
-
-        List<String> madeChangesFor = setupSkills(driver, "Languages", "add");
+        GregorianCalendar birthdaySet = userSelectDateOfBirth(writerEditProfilePage);
         writerEditProfilePage.clickOnSaveChangesButton();
 
-        Assert.assertTrue(checkForMadeCategoriesChanges(writerProfilePage, madeChangesFor, "Languages"));
-
+        Assert.assertTrue(userCheckForOld(birthdaySet, writerProfilePage));
     }
+
 }

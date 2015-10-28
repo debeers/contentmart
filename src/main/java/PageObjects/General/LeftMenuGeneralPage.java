@@ -64,12 +64,12 @@ public class LeftMenuGeneralPage extends BasePageObject {
 
 ///////////////////////////////////   Left Template_Client Links END   ////////////////////////////////////////////////////////////
 
-    public EditProfilePage clickOnAccountSettingsFromLeftMenu() {
+    public AccountDetailsPage clickOnAccountSettingsFromLeftMenu() {
 
         $(accountSettingsLeftMenu).shouldBe(present).click();
         waitForPageLoad(driver);
-        EditProfilePage editProfilePage = new EditProfilePage(driver);
-        return editProfilePage;
+        AccountDetailsPage accountDetailsPage = new AccountDetailsPage(driver);
+        return accountDetailsPage;
     }
 
 

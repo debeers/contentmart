@@ -15,7 +15,7 @@ public class ReassignOrder extends BaseTest {
     @Test(groups={"regress 1.0"})
     public static void ReassignOrder() throws Exception {
 
-        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "22");
         String writerText = "hello world, java is super cool but really hard languege! TestNG is my favourite framework! Peace!)))";
         String declineReason = "Nothing pearsonal, just test!";
 

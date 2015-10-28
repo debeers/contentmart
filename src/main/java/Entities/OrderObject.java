@@ -6,11 +6,11 @@ public class OrderObject {
     private String totalBalanceBefore = "";
     private String totalBalanceAfterBlocking = "";
     private String totalBalanceAfterUnBlocking = "";
-    private String orderValue = "";
     private String ordName = "";
     private String desc = "";
     private String wordsReq = "";
-    private String price = "";
+    private String rupeePrice = "";
+    private String dollarPrice = "";
     private String entityOrderName = "";
     private String entityOrderSystemID = "";
     private String entityOrderStatus = "";
@@ -18,37 +18,36 @@ public class OrderObject {
     private String entityOrderPublicDate = "";
     private String entityOrderDeadLine = "";
     private String entityOrderVisibility = "";
-    private String entityOrderValue = "";
+    private String orderValueInRupee = "";
+    private String orderValueInDollars = "";
 
 
     public OrderObject() {
 
     }
 
-    public OrderObject(String ordName, String desc, String wordsReq, String price) {
+    public OrderObject(String ordName, String desc, String wordsReq, String dollarPrice) {
 
         this.ordName = ordName;
         this.desc = desc;
         this.wordsReq = wordsReq;
-        this.price = price;
+        this.dollarPrice = dollarPrice;
     }
 
     public OrderObject(String totalBalanceBefore, String totalBalanceAfterBlocking, String totalBalanceAfterUnBlocking,
-                       String orderValue, String ordName, String desc, String wordsReq, String price, String entityOrderName,
+                       String ordName, String desc, String wordsReq, String dollarPrice, String rupeePrice, String entityOrderName,
                        String entityOrderSystemID, String entityOrderStatus, String entityOrderDescription, String entityOrderPublicDate,
-                       String entityOrderDeadLine, String entityOrderVisibility, String entityOrderValue) {
+                       String entityOrderDeadLine, String entityOrderVisibility, String orderValueInRupee, String orderValueInDollars) {
 
 
         this.totalBalanceBefore = totalBalanceBefore;
         this.totalBalanceAfterBlocking = totalBalanceAfterBlocking;
         this.totalBalanceAfterUnBlocking = totalBalanceAfterUnBlocking;
-        this.orderValue = orderValue;
-
         this.ordName = ordName;
         this.desc = desc;
         this.wordsReq = wordsReq;
-        this.price = price;
-
+        this.dollarPrice = dollarPrice;
+        this.rupeePrice = rupeePrice;
         this.entityOrderName = entityOrderName;
         this.entityOrderSystemID = entityOrderSystemID;
         this.entityOrderStatus = entityOrderStatus;
@@ -56,7 +55,9 @@ public class OrderObject {
         this.entityOrderPublicDate = entityOrderPublicDate;
         this.entityOrderDeadLine = entityOrderDeadLine;
         this.entityOrderVisibility = entityOrderVisibility;
-        this.entityOrderValue = entityOrderValue;
+        this.orderValueInRupee = orderValueInRupee;
+        this.orderValueInDollars = orderValueInDollars;
+
     }
 
     public String getTotalBalanceBefore() {
@@ -64,9 +65,14 @@ public class OrderObject {
         return totalBalanceBefore;
     }
 
-    public String getOrderValue() {
+    public String getDollarPrice() {
 
-        return orderValue;
+        return dollarPrice;
+    }
+
+    public void setDollarPrice(String dollarPrice) {
+
+        this.dollarPrice = dollarPrice;
     }
 
     public void setTotalBalanceBefore(String totalBalanceBefore) {
@@ -74,14 +80,11 @@ public class OrderObject {
         this.totalBalanceBefore = totalBalanceBefore;
     }
 
-    public void setOrderValue(String orderValue) {
-
-        this.orderValue = orderValue;
-    }
-
     public void setWordsReq(String wordsReq) {
+
         this.wordsReq = wordsReq;
     }
+
     public String getOrdName() {
 
         return ordName;
@@ -97,9 +100,9 @@ public class OrderObject {
         return wordsReq;
     }
 
-    public String getPrice() {
+    public String getRupeePrice() {
 
-        return price;
+        return rupeePrice;
     }
 
     public String getEntityOrderName() {
@@ -132,9 +135,9 @@ public class OrderObject {
         return entityOrderDeadLine;
     }
 
-    public String getEntityOrderValue() {
+    public String getOrderValueInRupee() {
 
-        return entityOrderValue;
+        return orderValueInRupee;
     }
 
     public void setEntityOrderName(String entityOrderName) {
@@ -153,10 +156,12 @@ public class OrderObject {
     }
 
     public void setEntityOrderDescription(String entityOrderDescription) {
+
         this.entityOrderDescription = entityOrderDescription;
     }
 
     public void setEntityOrderPublicDate(String entityOrderPublicDate) {
+
         this.entityOrderPublicDate = entityOrderPublicDate;
     }
 
@@ -170,11 +175,10 @@ public class OrderObject {
         this.entityOrderVisibility = entityOrderVisibility;
     }
 
-    public void setEntityOrderValue(String entityOrderValue) {
+    public void setOrderValueInRupee(String entityOrderValue) {
 
-        this.entityOrderValue = entityOrderValue;
+        this.orderValueInRupee = entityOrderValue;
     }
-
 
     public String getEntityOrderVisibility() {
 
@@ -187,14 +191,25 @@ public class OrderObject {
     }
 
     public void setTotalBalanceAfterBlocking(String totalBalanceAfterBlocking) {
+
         this.totalBalanceAfterBlocking = totalBalanceAfterBlocking;
     }
 
     public String getTotalBalanceAfterUnBlocking() {
+
         return totalBalanceAfterUnBlocking;
     }
 
     public void setTotalBalanceAfterUnBlocking(String totalBalanceAfterUnBlocking) {
+
         this.totalBalanceAfterUnBlocking = totalBalanceAfterUnBlocking;
+    }
+
+    public String getOrderValueInDollars() {
+        return orderValueInDollars;
+    }
+
+    public void setOrderValueInDollars(String orderValueInDollars) {
+        this.orderValueInDollars = orderValueInDollars;
     }
 }

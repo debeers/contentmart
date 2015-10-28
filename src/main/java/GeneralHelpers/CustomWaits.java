@@ -55,7 +55,7 @@ public class CustomWaits extends BaseTest {
                 newOrder.orderNameField,
                 newOrder.descriptionField,
                 newOrder.wordsRequiredField,
-                newOrder.priceField,
+                newOrder.rupeePriceField,
                 newOrder.publishButton
         );
         out.println("HAPPY HOUR`S in McDonald`s! All elements had been loaded successfully! Yuuuuuuupppiiiiii!)))))");
