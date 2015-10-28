@@ -397,7 +397,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         $WaitFor(sendTextToTheClientTextArea).sendKeys(textClassVar);
 
         waitForPageLoad(driver);
-        $WaitFor(orderStatus); //страховка
+        $WaitFor(orderStatus);
     }
 
     public void clickOnTheSendCompletedOrderButton(WebDriver driver) {
