@@ -25,18 +25,7 @@
             <classes>
 
 
-
-
-                <class name = "Tests.OrdersActions.ReassignOrder"/>
-
-
-
-                <!--
-                <class name = "Tests.UserCreate.InsertionOfNewUserToDB"/>
-
-                <class name = "Tests.AccountSettings.ChangeWriterDetailsls"/>
-
-                <class name = "Tests.MyProfile.DeletePortfolioItem"/>
+                <class name = "Tests.AccountSettings.ChangeWriterDetails"/>
                 <class name = "Tests.MyProfile.AddPortfolioItem"/>
                 <class name = "Tests.Messages.SendTextMessages"/>
 
@@ -80,6 +69,19 @@
                 <class name = "Tests.ExsistOfFile.ExistFileInMessages"/>
                 <class name = "Tests.ExsistOfFile.ExsistFilesInOrder"/>
                 <class name = "Tests.StatusActions.InProgress.SendResultFromSaveAsDraft"/>
+
+
+
+
+                <!--
+<class name = "Tests.DBtests.InsertionOfNewUserToDB"/>
+                <class name = "Tests.OrdersActions.ReassignOrder"/>
+
+
+
+
+                <class name = "Tests.MyProfile.DeletePortfolioItem"/>
+
 
 
 

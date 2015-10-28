@@ -3,23 +3,23 @@ package Entities;
 public class OrderObject {
 
 
-    private String totalBalanceBefore = "";
-    private String totalBalanceAfterBlocking = "";
+    private String totalBalanceBefore          = "";
+    private String totalBalanceAfterBlocking   = "";
     private String totalBalanceAfterUnBlocking = "";
-    private String ordName = "";
-    private String desc = "";
-    private String wordsReq = "";
-    private String rupeePrice = "";
-    private String dollarPrice = "";
-    private String entityOrderName = "";
-    private String entityOrderSystemID = "";
-    private String entityOrderStatus = "";
-    private String entityOrderDescription = "";
-    private String entityOrderPublicDate = "";
-    private String entityOrderDeadLine = "";
-    private String entityOrderVisibility = "";
-    private String orderValueInRupee = "";
-    private String orderValueInDollars = "";
+    private String ordName                     = "";
+    private String desc                        = "";
+    private String wordsReq                    = "";
+    private String rupeePrice                  = "";
+    private String dollarPrice                 = "";
+    private String entityOrderName             = "";
+    private String entityOrderSystemID         = "";
+    private String entityOrderStatus           = "";
+    private String entityOrderDescription      = "";
+    private String entityOrderPublicDate       = "";
+    private String entityOrderDeadLine         = "";
+    private String entityOrderVisibility       = "";
+    private String orderValueInRupee           = "";
+    private String orderValueInDollars         = "";
 
 
     public OrderObject() {
@@ -28,10 +28,10 @@ public class OrderObject {
 
     public OrderObject(String ordName, String desc, String wordsReq, String dollarPrice) {
 
-        this.ordName = ordName;
-        this.desc = desc;
-        this.wordsReq = wordsReq;
-        this.dollarPrice = dollarPrice;
+        this.ordName      = ordName;
+        this.desc         = desc;
+        this.wordsReq     = wordsReq;
+        this.dollarPrice  = dollarPrice;
     }
 
     public OrderObject(String totalBalanceBefore, String totalBalanceAfterBlocking, String totalBalanceAfterUnBlocking,
@@ -40,23 +40,23 @@ public class OrderObject {
                        String entityOrderDeadLine, String entityOrderVisibility, String orderValueInRupee, String orderValueInDollars) {
 
 
-        this.totalBalanceBefore = totalBalanceBefore;
-        this.totalBalanceAfterBlocking = totalBalanceAfterBlocking;
+        this.totalBalanceBefore          = totalBalanceBefore;
+        this.totalBalanceAfterBlocking   = totalBalanceAfterBlocking;
         this.totalBalanceAfterUnBlocking = totalBalanceAfterUnBlocking;
-        this.ordName = ordName;
-        this.desc = desc;
-        this.wordsReq = wordsReq;
-        this.dollarPrice = dollarPrice;
-        this.rupeePrice = rupeePrice;
-        this.entityOrderName = entityOrderName;
-        this.entityOrderSystemID = entityOrderSystemID;
-        this.entityOrderStatus = entityOrderStatus;
-        this.entityOrderDescription = entityOrderDescription;
-        this.entityOrderPublicDate = entityOrderPublicDate;
-        this.entityOrderDeadLine = entityOrderDeadLine;
-        this.entityOrderVisibility = entityOrderVisibility;
-        this.orderValueInRupee = orderValueInRupee;
-        this.orderValueInDollars = orderValueInDollars;
+        this.ordName                     = ordName;
+        this.desc                        = desc;
+        this.wordsReq                    = wordsReq;
+        this.dollarPrice                 = dollarPrice;
+        this.rupeePrice                  = rupeePrice;
+        this.entityOrderName             = entityOrderName;
+        this.entityOrderSystemID         = entityOrderSystemID;
+        this.entityOrderStatus           = entityOrderStatus;
+        this.entityOrderDescription      = entityOrderDescription;
+        this.entityOrderPublicDate       = entityOrderPublicDate;
+        this.entityOrderDeadLine         = entityOrderDeadLine;
+        this.entityOrderVisibility       = entityOrderVisibility;
+        this.orderValueInRupee           = orderValueInRupee;
+        this.orderValueInDollars         = orderValueInDollars;
 
     }
 

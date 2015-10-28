@@ -3,11 +3,7 @@ package GeneralHelpers;
 /**
  * Created by ilya on 07.09.2015.
  */
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -54,7 +50,7 @@ public class JDBCutil {
 
     }
 
-    private static Connection getDBConnection() {
+    public static Connection getDBConnection() {
 
         Connection dbConnection = null;
 
@@ -92,7 +88,21 @@ public class JDBCutil {
     }
 
 
-    public static void executeQuery(String query, String column) {
+    public static void executePrepeared(String query) throws SQLException {
+
+        Connection dbConnection;
+        PreparedStatement statement = null;
+
+
+            dbConnection = getDBConnection();
+            statement = dbConnection.prepareStatement(query);
+
+
+
+    }
+
+
+    public static String executeQuery(String query, String column) {
 
         Connection dbConnection;
         Statement statement;
@@ -104,11 +114,13 @@ public class JDBCutil {
 
             while (rs.next()) {
                 System.out.println(rs.getString(column));
+                return rs.getString(column);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        return null;
     }
 
 }
