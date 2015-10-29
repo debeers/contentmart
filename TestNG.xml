@@ -26,23 +26,23 @@
 
 
                 <class name = "Tests.AccountSettings.ChangeWriterDetails"/>
-
-
-
-
-
+                <class name = "Tests.StatusActions.Published.BidOnOrder"/>
+                <class name = "Tests.Messages.SendTextMessages"/>
+                <class name = "Tests.StatusActions.ProposalSent.SetAsWinner"/>
+                <class name = "Tests.MyProfile.EmailNotificationsSaving"/>
+                <class name = "Tests.OrdersActions.SendResultToClient"/>
+                <class name = "Tests.MyProfile.AddPortfolioItem"/>
 
                 <!--
-                <class name = "Tests.StatusActions.Published.BidOnOrder"/>
+
 
 <class name = "Tests.DBtests.InsertionOfNewUserToDB"/>
                 <class name = "Tests.OrdersActions.ReassignOrder"/>
 
-<class name = "Tests.MyProfile.AddPortfolioItem"/>
-<class name = "Tests.Messages.SendTextMessages"/>
 
-                <class name = "Tests.StatusActions.ProposalSent.SetAsWinner"/>
-                <class name = "Tests.MyProfile.EmailNotificationsSaving"/>
+
+
+
 
                 <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
                 <class name = "Tests.StatusActions.Published.BidOnOrder"/>
@@ -50,7 +50,7 @@
                 <class name = "Tests.MyProfile.EmailNotificationsSaving"/>
 
                 <class name = "Tests.OrdersActions.ReassignOrder"/>
-                <class name = "Tests.OrdersActions.SendResultToClient"/>
+
 
 
                 <class name = "Tests.StatusActions.Awarded.StartWorking"/>
