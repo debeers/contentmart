@@ -154,7 +154,7 @@
                      <version>2.0</version>
                      <configuration>
                          <allureResultsDirectory>${allure.results.directory}</allureResultsDirectory>
-                         <resultsPattern>*.xml</resultsPattern>
+                         <resultsPattern>${project.build.directory}/allure-results</resultsPattern>
                          <reportVersion>1.4.18</reportVersion>
                      </configuration>
                  </plugin>
