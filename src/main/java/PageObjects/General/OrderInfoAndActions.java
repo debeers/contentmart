@@ -391,7 +391,6 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
         return el;
     }
 
-
     public void sendTextToTheClientTextArea(WebDriver driver, String textClassVar) {
 
         $WaitFor(sendTextToTheClientTextArea).sendKeys(textClassVar);

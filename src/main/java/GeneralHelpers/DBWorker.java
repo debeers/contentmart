@@ -25,7 +25,6 @@ public class DBWorker {
     // values('98765443','Ilya','Ilya-Slabiy','Slabiy','1908-08-02','debeers@bigmir.net','','0','$2a$10$8AjxEfQy.QTLqioWFqK8j.XuMgG8kXwt4tizaT.4elFlEW2jlit8O','$2a$10$8AjxEfQy.QTLqioWFqK8jB$','2015-10-27 21:37:27','1',NULL,NULL,'','0',NULL,'0','1','ilya-slabiy','individual',NULL,NULL,'copywriter','862775793760125','2015-10-28 12:26:04','213.186.202.162','0','0','not_sent','0','321',NULL);
 
 
-
     @SuppressWarnings("ConstantConditions")
     public static String createMaxUserId(){
 
@@ -54,7 +53,6 @@ public class DBWorker {
     }
 
 
-
     public static void createNewUserFromDB1(String query) throws SQLException {
 
         Connection dbConnection;
@@ -64,7 +62,10 @@ public class DBWorker {
         dbConnection = getDBConnection();
         preparedStatement = dbConnection.prepareStatement(query);
         preparedStatement.setInt(1, Integer.parseInt(executeQuery(MAX_USER_ID, "id"))+1);
-
+        preparedStatement.setString(2, createTestUserName());
+        preparedStatement.setString(3, setUserNickName("copywriter"));
+        preparedStatement.setString(4, "TEST");
+        preparedStatement.setDate(5, java.sql.Date.valueOf("1908-08-02"));
 
 
     }
