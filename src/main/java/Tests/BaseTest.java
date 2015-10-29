@@ -31,6 +31,8 @@ public class BaseTest {
     @BeforeClass(alwaysRun = true)
     public void setUp(String URL, String clientLoginParam, String clientPasswordParam, String writerLoginParam, String writerPasswordParam) {
 
+        System.out.println(this.getClass().getName());
+
         clientLogin = new LoginObject(clientLoginParam, clientPasswordParam);
         writerLogin = new LoginObject(writerLoginParam, writerPasswordParam);
 
