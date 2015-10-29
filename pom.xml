@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
             <properties>
                 <allure.version>1.4.18</allure.version>
-                <allure.results.directory>/var/lib/jenkins/jobs/CMI Autotest/workspace/target/allure-results</allure.results.directory>
+                <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                 <aspectj.version>1.8.7</aspectj.version>
             </properties>
     <dependencies>
@@ -123,6 +123,10 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.3</version>
+            </plugin>
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
@@ -153,7 +157,7 @@
                      <artifactId>allure-maven-plugin</artifactId>
                      <version>2.0</version>
                      <configuration>
-                         <allureResultsDirectory>/var/lib/jenkins/jobs/CMI Autotest/workspace/target/allure-results</allureResultsDirectory>
+                         <allureResultsDirectory>${allure.results.directory}</allureResultsDirectory>
                          <resultsPattern>${project.build.directory}/allure-results</resultsPattern>
                          <reportVersion>1.4.18</reportVersion>
                      </configuration>
