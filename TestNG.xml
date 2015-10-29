@@ -33,10 +33,6 @@
                 <class name = "Tests.OrdersActions.SendResultToClient"/>
                 <class name = "Tests.MyProfile.AddPortfolioItem"/>
 
-                <!--
-
-
-<class name = "Tests.DBtests.InsertionOfNewUserToDB"/>
                 <class name = "Tests.OrdersActions.ReassignOrder"/>
 
 
@@ -44,21 +40,24 @@
 
 
 
-                <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
-                <class name = "Tests.StatusActions.Published.BidOnOrder"/>
+
+
                 <class name = "Tests.MyProfile.AddPortfolioItem"/>
                 <class name = "Tests.MyProfile.EmailNotificationsSaving"/>
+                <class name = "Tests.MyProfile.DeletePortfolioItem"/>
 
                 <class name = "Tests.OrdersActions.ReassignOrder"/>
-
-
-
-                <class name = "Tests.StatusActions.Awarded.StartWorking"/>
                 <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
                 <class name = "Tests.OrdersActions.ReassignOrder"/>
+                <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
 
-                <class name = "Tests.StatusActions.Published.CloseNewOrderAfterPublish"/>
                 <class name = "Tests.CreateNewOrderActions.CreateNewOrderAndSaveAsDraft"/>
+                <class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
+                <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
+
+                <class name = "Tests.StatusActions.Published.BidOnOrder"/>
+                <class name = "Tests.StatusActions.Published.CloseNewOrderAfterPublish"/>
+                <class name = "Tests.StatusActions.Awarded.StartWorking"/>
                 <class name = "Tests.StatusActions.CloneTheOrder"/>
                 <class name = "Tests.StatusActions.Awarded.StartWorking"/>
                 <class name = "Tests.StatusActions.Awarded.CancelChosenWordsmith"/>
@@ -68,9 +67,7 @@
                 <class name = "Tests.StatusActions.Published.BidOnOrder"/>
                 <class name = "Tests.StatusActions.Published.CloseNewOrderAfterPublish"/>
                 <class name = "Tests.StatusActions.Published.EditAndThanPublishOrder"/>
-
-                <class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
-                <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
+                <class name = "Tests.StatusActions.InProgress.SendResultFromSaveAsDraft"/>
 
                 <class name = "Tests.StopWords.StopWordsInLeaveAnOffer"/>
                 <class name = "Tests.StopWords.StopWordsInOrderComposing"/>
@@ -80,15 +77,12 @@
 
                 <class name = "Tests.ExsistOfFile.ExistFileInMessages"/>
                 <class name = "Tests.ExsistOfFile.ExsistFilesInOrder"/>
-                <class name = "Tests.StatusActions.InProgress.SendResultFromSaveAsDraft"/>
+
+                <!--
 
 
+<class name = "Tests.DBtests.InsertionOfNewUserToDB"/>
 
-
-
-
-
-                <class name = "Tests.MyProfile.DeletePortfolioItem"/>
 
 
 

@@ -132,14 +132,9 @@ public class AccountDetailsPage extends LeftMenuGeneralPage implements PageObjec
         signature.sendKeys(path);
     }
 
-    public void clickOnChangePasswordLinkLink() {
+    public void clickOnChangePasswordLink() {
 
         $WaitFor(changePasswordLink).click();
-    }
-
-    public void clickOnAccountDetailsLinkLinkLink() {
-
-        $WaitFor(accountDetailsLink).click();
     }
 
     public String getUserCountry() {
@@ -202,11 +197,6 @@ public class AccountDetailsPage extends LeftMenuGeneralPage implements PageObjec
         return $(userZip).shouldBe(Condition.visible).getAttribute("value");
     }
 
-    public String getUserBio() {
-
-        return $(biographyField).shouldBe(Condition.visible).getAttribute("value");
-    }
-
     public String setFirstNameField(String firstName) throws InterruptedException {
 
         $(firstNameField).shouldBe(Condition.visible).clear();
@@ -265,18 +255,9 @@ public class AccountDetailsPage extends LeftMenuGeneralPage implements PageObjec
         return zip;
     }
 
-    public String setBiographyField(String bio) {
-
-        $(biographyField).shouldBe(Condition.visible).clear();
-        $(biographyField).shouldBe(Condition.visible).sendKeys(bio);
-
-        return bio;
-    }
-
     public void clickOnSaveChangesButton() throws InterruptedException {
 
         $(saveChangesButton).shouldBe(Condition.visible).click();
-        Thread.sleep(3000);
         $(successSavedChangesMsg).should(Condition.appear);
     }
 
