@@ -24,7 +24,7 @@
         <test name="regress1.0">
             <classes>
 
-                <class name = "Tests.StatusActions.Published.BidOnOrder"/>
+
                 <class name = "Tests.AccountSettings.ChangeWriterDetails"/>
 
 
@@ -33,6 +33,8 @@
 
 
                 <!--
+                <class name = "Tests.StatusActions.Published.BidOnOrder"/>
+
 <class name = "Tests.DBtests.InsertionOfNewUserToDB"/>
                 <class name = "Tests.OrdersActions.ReassignOrder"/>
 
