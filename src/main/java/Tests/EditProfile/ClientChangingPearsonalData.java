@@ -17,7 +17,7 @@ import static GeneralHelpers.ProfileHelper.userSelectDateOfBirth;
 public class ClientChangingPearsonalData extends BaseTest {
 
 
-    @Test(groups = {"regress2.2"})
+    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
     public void ClientChangingPearsonalData() throws InterruptedException {
 
         ClientProfilePage clientProfilePage = ClientGoToProfilePage.goToMyProfile(driver, clientLogin);

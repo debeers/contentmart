@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
  */
 public class EditAndThanPublishOrder extends BaseTest{
 
-    @Test(groups={"regress 1.0"})
+    @Test(groups={"Fast_And_Furious_Smoke_1.0"})
     public  void EditAndThanPublishOrder() throws Exception {
 
         OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");

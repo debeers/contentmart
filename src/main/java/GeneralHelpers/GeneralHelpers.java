@@ -70,6 +70,7 @@ public class GeneralHelpers {
         }
     }
 
+
     public static Boolean entityAppear(String name){
 
     if(wait.until(ExpectedConditions.visibilityOfElementLocated(
@@ -77,7 +78,6 @@ public class GeneralHelpers {
         return true;
     }
         return false;
-
     }
 
 

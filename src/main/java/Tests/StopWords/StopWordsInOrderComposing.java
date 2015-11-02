@@ -12,13 +12,13 @@ import org.testng.annotations.Test;
  */
 public class StopWordsInOrderComposing extends BaseTest{
 
-    @Test(groups={"regress 1.0"})
+    @Test(groups={"Fast_And_Furious_Smoke_1.0"})
     public  void StopWordsInOrderComposing() throws Exception {
 
-        OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");
+        OrderObject order = new OrderObject("Automation test order ID:", "call me to skype", "15", "1");
 
         ClientNewOrderPage clientNewOrderPage = ClientGoToCreateNewOrder.andCreateTheNewOrder(driver, clientLogin, order);
-        Assert.assertTrue(clientNewOrderPage.waitForStopWordsAllertAppear());
+        Assert.assertEquals(clientNewOrderPage.getStopWordsAllert(), "why not to work outside ContentMart");
         clientNewOrderPage.andClickOnPublishNewOrderButton(driver);
     }
 }

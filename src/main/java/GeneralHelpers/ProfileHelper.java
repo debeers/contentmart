@@ -21,9 +21,9 @@ public class ProfileHelper {
 
     public static GregorianCalendar userSelectDateOfBirth(BirthdayDateInterface page) {
 
-        Select day = new Select(page.selectDay());
+        Select day   = new Select(page.selectDay());
         Select month = new Select(page.selectMonth());
-        Select year = new Select(page.selectYear());
+        Select year  = new Select(page.selectYear());
 
         day.selectByIndex(new Random().nextInt(day.getOptions().size()));
         month.selectByIndex(new Random().nextInt(month.getOptions().size()));

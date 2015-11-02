@@ -16,7 +16,7 @@ import static Actions.General.RegistrationAndLogin.loginAs;
 public class ChangeWriterDetails extends BaseTest {
 
 
-    @Test(groups={"regress 1.0"})
+    @Test(groups={"Fast_And_Furious_Smoke_1.0"})
     public void ChangeUserDetails() throws Exception {
 
         UserObject user = new UserObject();

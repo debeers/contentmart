@@ -1,10 +1,7 @@
 package PageObjects.Writer;
 
 import PageObjects.BirthdayDateInterface;
-import PageObjects.Client.ClientEditProfilePage;
 import PageObjects.General.LeftMenuGeneralPage;
-import PageObjects.PageObjectWithImages;
-import PageObjects.Writer.WriterEditProfilePage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
@@ -32,16 +29,16 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
     public WebElement editProfileButton;
     // Portfolio
 
-    @FindBy(xpath = ".//div[contains(@class, 'user_main_info')]//div[2][contains(@class, 'd_in m_r-10')]")
+    @FindBy(xpath = ".//div[contains(@class, 'user_main_info')]//div[3][contains(@class, 'age d_in m_l-10')]")
     public WebElement writerYearsOld;
 
-    @FindBy(css = ".portfolio-item-delete-confirm-btn.new_blue_but")
+    @FindBy(xpath = "html/body/div[2]/div[1]/div/div/div/a[1]")
     public WebElement confirmSweetAllertButton;
 
     @FindBy(xpath = ".//a[contains (text(), 'CANCEL')]")
     public WebElement cancelSweetAllertButton;
 
-    @FindBy(xpath = ".//div[contains (@class, 'add_portfolio_item')]")
+    @FindBy(xpath = ".//*[@id='add-portfolio-item-svg']")
     public WebElement addPortfolioItemButton;
 
     @FindBy(className = "fancybox-wrap fancybox-default fancybox-opened")
@@ -49,6 +46,12 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
 
     @FindBy(xpath = "//div/form/input[1]")
     public WebElement enterPortfolioTitleField;
+
+    @FindBy(xpath = "portfolio-item-title-fld")
+    public WebElement enterEditPortfolioTitleField;
+
+    @FindBy(className = "portfolio-item-title-fld")
+    public WebElement editPortfolioTitleField;
 
     @FindBy(xpath = "//div/form/textarea")
     public WebElement enterPortfolioTextField;
@@ -77,7 +80,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
     @FindBy(xpath = ".//p[contains(@class, 'portfolio-item-text')]")
     public WebElement portfolioItemText;
 
-    @FindBy(xpath = ".//h2[contains(@class, 'portfolio-item-title')]")
+    @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[4]/div[2]/div[1]/div/h4")
     public WebElement portfolioItemTitle;
 
     @FindBy(xpath = ".//a[contains(text(), 'SAVE')]")
@@ -122,7 +125,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
 
     public Boolean addedPortfolioItem(WebDriver driver, String header) {
 
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+        WebDriverWait wait = new WebDriverWait(driver, 5);
         WebElement portfolioHeader = wait.until(ExpectedConditions.visibilityOf(
                 driver.findElement(By.xpath(
                         "//div[contains(@class, 'document_block profile_added_block')]/h4[contains(text(),'" +
@@ -136,7 +139,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
     }
 
 
-    public void openAddedPortfolioItem(WebDriver driver, String header) {
+    public void openAddedPortfolioItem(WebDriver driver, String header) throws InterruptedException {
 
         if (addedPortfolioItem(driver, header)) {
 
@@ -147,6 +150,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
                     backToPortfolioButton,
                     editPortfolioItemButton
             );
+            Thread.sleep(3000);
         }
     }
 
@@ -155,16 +159,15 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
         driver.navigate().refresh();
         Thread.sleep(4000);
         driver.findElement(By.xpath("//div[(contains(@class, 'document_block profile_added_block'))]/h4[contains(text(), '" + itemName + "')]/preceding-sibling::a")).click();
-           $(By.xpath(".//h4[contains(text(), '" + itemName + "')]/preceding-sibling::a[@data-portfolio-item-id = '117']")).shouldBe(Condition.visible).click();
-
-        System.out.println(itemName);
         Thread.sleep(3000);
+        confirmSweetAllertButton.click();
+        Thread.sleep(3000);
+
     }
 
+    public String getAddedPortfolioItemText(String text){
 
-    public String getPortfolioItemTitle() {
-
-        return $(portfolioItemTitle).shouldBe(Condition.visible).getText();
+        return driver.findElement(By.xpath(".//div[@class = 'box visible']//p[contains (text(), '" + text + "')]")).getText();
     }
 
     public String getPortfolioItemText() {
@@ -202,6 +205,16 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
     public void clearPortfolioTitleField() {
 
         $(enterPortfolioTitleField).clear();
+    }
+
+    public void clearEditPortfolioTitleField() {
+
+        $(editPortfolioTitleField).clear();
+    }
+
+    public void setEditPortfolioTitleField(String text) {
+
+        $(editPortfolioTitleField).sendKeys(text);
     }
 
     public void setPortfolioTextField(String text) {
@@ -271,16 +284,18 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
     }
 
 
-    public void editPortfolioItem(WebDriver driver, String title, String editTitle, String editText) {
+    public void editPortfolioItem(WebDriver driver, String title, String editTitle, String editText) throws InterruptedException {
 
         openAddedPortfolioItem(driver, title);
+
         clickOnEditPortfolioItemButton();
-        clearPortfolioTitleField();
+
+        clearEditPortfolioTitleField();
         clearPortfolioTextField();
-        setPortfolioTitleField(editTitle);
+        setEditPortfolioTitleField(editTitle);
         setPortfolioTextField(editText);
         clickOnSavePortfolioItemButton();
-
+        Thread.sleep(3000);
     }
 
     public void clickOnConfirmSweetAllertButton() throws InterruptedException {

@@ -37,7 +37,7 @@ public class MyMessagesPage extends LeftMenuGeneralPage {
 
     public void closeMessageWindowClick() {
 
-        $(closeMessageWindow).shouldBe(present).shouldBe(visible).click();
+        closeMessageWindow.click();
     }
 
     public void inputFileToTheMessage(String filePath) {

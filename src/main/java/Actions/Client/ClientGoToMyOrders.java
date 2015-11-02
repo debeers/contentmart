@@ -41,7 +41,6 @@ public class ClientGoToMyOrders {
 
         myOrders.clickOnPublishedLinkMyOrdersClient();
         GeneralHelpers.findCreatedOrderAndClickOnIt(driver, order);
-        System.out.println("Balance successfully found!");
         return myOrders;
     }
 

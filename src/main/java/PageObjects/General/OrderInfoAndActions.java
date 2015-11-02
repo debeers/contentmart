@@ -127,7 +127,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     public WebElement typeOfSharing;
 
 
-    @FindBy(xpath = ".//*[@id='new_results']/div[1]/span")
+    @FindBy(className = "text_accepted")
     public WebElement textAcceptedLablenDecision;
 
     @FindBy(xpath = "//div[2]/form/div[1]/span")

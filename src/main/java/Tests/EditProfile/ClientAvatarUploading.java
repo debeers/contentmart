@@ -17,7 +17,7 @@ import static GeneralHelpers.ProfileHelper.verifyUploadedImages;
 public class ClientAvatarUploading extends BaseTest{
 
 
-    @Test(groups = {"regress2.2"})
+    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
     public void ClientAvatarUploading() throws InterruptedException, IOException, NoSuchFieldException, NoSuchMethodException {
 
         String filepath = System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\avatar.jpg";

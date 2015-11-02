@@ -53,12 +53,10 @@ public class WriterGoToProfilePage {
                                            int textLength) throws InterruptedException {
 
         writerProfilePage.clickOnAddPortfolioButton();
-
         String text = randomTextGeneratorLength(textLength);
 
         writerProfilePage.setPortfolioTitleField(title);
         writerProfilePage.setPortfolioTextField(text);
-
         writerProfilePage.clickOnaAddWorkButton(title);
     }
 

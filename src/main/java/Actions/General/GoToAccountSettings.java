@@ -86,6 +86,9 @@ public class GoToAccountSettings {
             user.setCurrency(accountDetailsPage.getUserCurrency());
             System.out.println("Currency: " + accountDetailsPage.getUserCurrency());
 
+            user.setTimeZone(accountDetailsPage.getUserTimeZone());
+            System.out.println("Timezone: " + accountDetailsPage.getUserTimeZone());
+
         }else System.out.println("We are in the writer account settings NEO");
 
 
@@ -120,13 +123,12 @@ public class GoToAccountSettings {
         user.setZip(accountDetailsPage.setZipField(RandomStringUtils.randomNumeric(6)));
         System.out.println("ZIP: " + accountDetailsPage.getUserZip());
 
-        Thread.sleep(3000); // server side wait
-        city.selectByIndex(new Random().nextInt(city.getOptions().size()));
+        accountDetailsPage.userCity.click();
+        Thread.sleep(2000); // server side wait
+        accountDetailsPage.userCity.click();
+        city.selectByIndex(1 + new Random().nextInt(city.getOptions().size() - 1));
         user.setCity(accountDetailsPage.getUserCity());
         System.out.println("City: " + accountDetailsPage.getUserCity());
-
-        user.setTimeZone(accountDetailsPage.getUserTimeZone());
-        System.out.println("Timezone: " + accountDetailsPage.getUserTimeZone());
 
         user.setState(accountDetailsPage.getUserState());
         System.out.println("State: " + accountDetailsPage.getUserState());

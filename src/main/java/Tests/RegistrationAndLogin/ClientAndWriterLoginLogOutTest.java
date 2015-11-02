@@ -12,7 +12,7 @@ import static org.testng.Assert.assertEquals;
 public class ClientAndWriterLoginLogOutTest extends BaseTest {
 
 
-    @Test(groups = {"regress2.2"})
+    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
     public void positive_Client_LoginLogOut() throws InterruptedException {
 
         LoginPage loginPage = new LoginPage(driver);

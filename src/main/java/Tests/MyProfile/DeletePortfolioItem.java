@@ -15,7 +15,7 @@ import static GeneralHelpers.CreateNewOrderHelper.randomID;
 public class DeletePortfolioItem extends BaseTest{
 
 
-    @Test(groups = {"regress2.2"})
+    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
     public void DeletePortfolioItem() throws Exception {
 
         String title = "New automation item: " + randomID();
@@ -24,9 +24,6 @@ public class DeletePortfolioItem extends BaseTest{
         addNewPortfolioItem(writerProfilePage, title, 55);
 
         writerProfilePage.clickOnDeletePortfolioItemButton(title);
-
-        writerProfilePage.clickOnConfirmSweetAllertButton();
-        Thread.sleep(3000);
         Assert.assertFalse(writerProfilePage.findPortfolioItem(title));
 
     }

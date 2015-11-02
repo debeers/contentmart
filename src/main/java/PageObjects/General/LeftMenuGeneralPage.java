@@ -21,7 +21,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class LeftMenuGeneralPage extends BasePageObject {
 
 
-    @FindBy(xpath = "html/body/div/div[3]/ul/li[2]/div[1]/div/p")
+    @FindBy(className = "menu_avatar")
     public WebElement profileLeftMenu;
 
     @FindBy(xpath = ".//span[contains (@class, 'item')][contains (text(), 'My profile')]")
@@ -100,7 +100,7 @@ public class LeftMenuGeneralPage extends BasePageObject {
 
     public void clickOnProfileFromLeftMenu() {
 
-        $(profileLeftMenu).shouldBe(visible).click();
+        profileLeftMenu.click();
         $WaitFor(accountSettingsLeftMenu, myMessagesLeftMenu, profileLeftMenu, logOutLeftMenu);
     }
 

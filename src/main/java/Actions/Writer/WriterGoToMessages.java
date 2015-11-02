@@ -44,7 +44,7 @@ public class WriterGoToMessages {
         message.inputFileToTheMessage(path);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("fileDownloadIcon")));
         String href = message.getFileHref(filename);
-        System.out.println("File link is:  " + href);
+
 
         return href;
     }
