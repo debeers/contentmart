@@ -18,7 +18,7 @@ import static Actions.Writer.WriterGoToEditProfile.setupSkills;
 public class LanguagesExpertisesCategoriesAdd extends BaseTest {
 
 
-    @Test(groups = {"regress2.2"})
+    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
     public void LanguagesExpertisesCategoriesAdd() throws InterruptedException {
 
         WriterProfilePage writerProfilePage = WriterGoToProfilePage.goToMyProfile(driver, writerLogin);

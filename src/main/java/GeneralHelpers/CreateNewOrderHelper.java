@@ -21,10 +21,7 @@ public class CreateNewOrderHelper {
         } else if (i <= 29) {
             i += 1;
         }
-        String day = Integer.toString(i);
-        System.out.println(day);
-
-        return day;
+        return Integer.toString(i);
     }
 
 }

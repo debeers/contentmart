@@ -14,10 +14,10 @@ import static GeneralHelpers.ProfileHelper.verifyUploadedImages;
  */
 public class ClientSighnUploading extends BaseTest {
 
-    @Test(groups={"regress 1.0"})
+    @Test(groups={"Fast_And_Furious_Smoke_1.0"})
     public void ClientSighnUploading() throws Exception {
 
-        String filepath = System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\avatar.jpg";
+        String filepath = System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\sign.jpg";
 
         MyOrdersPage myOrdersPage = loginAs(driver, clientLogin);
         myOrdersPage.clickOnProfileFromLeftMenu();

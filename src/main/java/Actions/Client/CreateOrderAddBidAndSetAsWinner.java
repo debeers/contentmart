@@ -25,7 +25,6 @@ public class CreateOrderAddBidAndSetAsWinner {
         OrderInfoAndActions orderInfoClientPage = offersToOrder.clickOnSetAsWinnerButtonAndAprooveMoneyBlocking();
         Thread.sleep(3000);
         order.setTotalBalanceAfterBlocking(getCurrentBallanceFromMenuButton(driver));
-        System.out.println(order.getTotalBalanceAfterBlocking() + "Balance scan in awward order to writer");
 
         return orderInfoClientPage;
     }

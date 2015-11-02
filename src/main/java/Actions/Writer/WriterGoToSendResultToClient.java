@@ -19,7 +19,6 @@ public class WriterGoToSendResultToClient {
         OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, orderObject, writerLogin);
         orderInfoWriter.sendTextToTheClientTextArea(driver, text);
         orderInfoWriter.clickOnTheSendCompletedOrderButton(driver);
-        GeneralHelpers.uploadFileToHidenInput(driver, filepath);
 
         return orderInfoWriter;
     }

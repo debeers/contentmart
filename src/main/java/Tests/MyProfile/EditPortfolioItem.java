@@ -17,23 +17,21 @@ import static org.testng.Assert.assertTrue;
 public class EditPortfolioItem extends BaseTest {
 
 
-    @Test(groups = {"regress2.2"})
+    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
     public void EditPortfolioItem() throws InterruptedException {
 
         String title = createTitleForPortfolioItem();
         String editedTitle = createTitleForPortfolioItem();
         String editedText = createTextForPortfolioItem(70);
-
+        System.out.println(title);
         WriterProfilePage writerProfilePage = WriterGoToProfilePage.goToMyProfile(driver, writerLogin);
         addNewPortfolioItem(writerProfilePage, title, 55);
         assertTrue(writerProfilePage.addedPortfolioItem(driver, title));
 
-        writerProfilePage.openAddedPortfolioItem(driver, title);
         writerProfilePage.editPortfolioItem(driver, title, editedTitle, editedText);
 
-        assertEquals(writerProfilePage.getPortfolioItemTitle(), editedTitle);
-        assertEquals(writerProfilePage.getPortfolioItemText(), editedText);
-        writerProfilePage.clickOnBackToPortfolioButton();
+        assertTrue(writerProfilePage.addedPortfolioItem(driver, editedTitle));
+        assertEquals(writerProfilePage.getAddedPortfolioItemText(editedText), editedText);
 
     }
 

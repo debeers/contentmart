@@ -71,7 +71,7 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     @FindBy(id = "d_ord_form")
     public WebElement saveAsDraftButtonInNewOrder;
 
-    @FindBy(className = "red banned_words_notice")
+    @FindBy(xpath = ".//*[@id='new_order']/form/div/div[2]/div[2]/div/a")
     public WebElement stopWordsAllert;
 
     /////////////////////  TOP
@@ -177,13 +177,9 @@ public class ClientNewOrderPage extends LeftMenuGeneralPage {
     }
 
 
-    public Boolean waitForStopWordsAllertAppear() {
+    public String getStopWordsAllert() {
 
-        if ($(stopWordsAllert).is(visible)) {
-            return true;
-        }
-        System.out.println("Stop words allert did not appear!");
-        return false;
+       return  $(stopWordsAllert).shouldBe(visible).getText();
     }
 
 

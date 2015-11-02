@@ -15,7 +15,7 @@ import static org.testng.Assert.assertEquals;
 public class CreateNewOrderAndSaveAsDraft extends BaseTest{
 
 
-    @Test(groups={"regress 1.0"})
+    @Test(groups={"Fast_And_Furious_Smoke_1.0"})
     public  void CreateNewOrderAndSaveAsDraft() throws Exception {
 
         OrderObject order = new OrderObject("Automation test order ID:", "New automation test order description", "15", "1");

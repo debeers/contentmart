@@ -58,7 +58,6 @@ public class CustomWaits extends BaseTest {
                 newOrder.rupeePriceField,
                 newOrder.publishButton
         );
-        out.println("HAPPY HOUR`S in McDonald`s! All elements had been loaded successfully! Yuuuuuuupppiiiiii!)))))");
     }
 
 
@@ -93,14 +92,12 @@ public class CustomWaits extends BaseTest {
     public static WebElement $waitForVisibilityOfElement(WebElement webElement) {
 
         wait.until(ExpectedConditions.visibilityOf(webElement));
-        out.println("Waiting for visibility of: " + "Tag name: " + webElement.getTagName() + " " + "with text: " + webElement.getText());
         return webElement;
     }
 
     public static WebElement $waitForElementToBeClickable(WebElement webElement) {
 
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
-        out.println("Waiting for visibility of Button: " + webElement.getText());
         return webElement;
     }
 

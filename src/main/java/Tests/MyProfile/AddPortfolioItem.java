@@ -17,7 +17,7 @@ import static GeneralHelpers.CreateNewOrderHelper.randomID;
 public class AddPortfolioItem extends BaseTest {
 
 
-    @Test(groups = {"regress2.2"})
+    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
     public void AddPortfolioItemTest() throws InterruptedException {
 
         String title = "New automation item: " + randomID();
