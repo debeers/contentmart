@@ -27,10 +27,7 @@ public class CancelWithoutSendResultFromWriterSide extends BaseTest{
 
         OrderInfoAndActions orderInfoWriter = WriterGoToStartToWorking.andPressStartWorkingButton(driver, clientLogin, order, writerLogin);
         assertEquals(orderInfoWriter.getTextFromOrderStatus(), "In Progress");
-
         orderInfoWriter.sendTextToTheClientTextArea(driver, writerText);
-        uploadFileToHidenInput(driver, filepath);
-        orderInfoWriter.waitForProgressBarWhenUploadingFiles();
 
         orderInfoWriter.clickOnCancelButtonInOrderComposingWS();
         assertTrue($WaitFor(orderInfoWriter.leaveAnOfferButton).isDisplayed());

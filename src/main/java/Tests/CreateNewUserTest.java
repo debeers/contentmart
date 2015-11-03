@@ -1,12 +1,11 @@
 package Tests;
 
+import GeneralHelpers.ImapReconnect;
 import org.testng.annotations.Test;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
 
-import static GeneralHelpers.GMailHelper.getActivationLinkFromTargetMessage;
-import static GeneralHelpers.GMailHelper.getMessages;
 
 /**
  * Created by DeBeers on 02.11.2015.
@@ -17,9 +16,10 @@ public class CreateNewUserTest extends BaseTest{
     public static void CreateNewUserTest() throws InterruptedException, IOException, MessagingException {
 
 
-        String activationLink = getActivationLinkFromTargetMessage(gmailCredentials);
+       // String activationLink = getActivationLinkFromTargetMessage(gmailCredentials);
 
-
+        ImapReconnect reconnect = new ImapReconnect();
+        reconnect.startService(gmailCredentials);
 
     }
 }

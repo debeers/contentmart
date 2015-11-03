@@ -62,7 +62,7 @@ public class MyOrdersPage extends LeftMenuGeneralPage {
         WebDriverWait wait = new WebDriverWait(driver, 15);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("html//table/tbody/tr/td[3]/a[1]"))).click();
-        Thread.sleep(1500);
+        Thread.sleep(2500);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='winner_form']/button[1]"))).click();
         waitForPageLoad(driver);
         OrderInfoAndActions bidPage = new OrderInfoAndActions(driver);
