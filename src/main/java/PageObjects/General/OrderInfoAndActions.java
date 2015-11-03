@@ -424,7 +424,7 @@ public class OrderInfoAndActions extends LeftMenuGeneralPage {
     public void clickOnStartWorkingButtonAndAcceptSweet() throws InterruptedException {
 
         $WaitFor(startWorkingButton).click();
-        sleep(2000);
+        sleep(3000);
         driver.findElement(By.xpath("html/body/div[3]/div[7]/button[2]")).click();
         waitForPageLoad(driver);
     }
