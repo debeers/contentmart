@@ -1,6 +1,7 @@
 package Tests;
 
 
+import Entities.GmailCredentials;
 import Entities.LoginObject;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
@@ -26,17 +27,19 @@ public class BaseTest {
     public static StringBuffer verificationErrors = new StringBuffer();
     public static LoginObject clientLogin;
     public static LoginObject writerLogin;
+    public static GmailCredentials gmailCredentials;
 
-    @Parameters({"URL", "clientLoginParam", "clientPasswordParam", "writerLoginParam", "writerPasswordParam"})
+    @Parameters({"URL", "clientLoginParam", "clientPasswordParam", "writerLoginParam", "writerPasswordParam", "mailbox", "mailboxPassword"})
     @BeforeClass(alwaysRun = true)
-    public void setUp(String URL, String clientLoginParam, String clientPasswordParam, String writerLoginParam, String writerPasswordParam) {
+    public void setUp(String URL, String clientLoginParam, String clientPasswordParam, String writerLoginParam, String writerPasswordParam, String mailbox, String mailboxPassword) {
 
 
         String TestClassName = this.getClass().getName();
         System.out.println(TestClassName);
 
-        clientLogin = new LoginObject(clientLoginParam, clientPasswordParam);
-        writerLogin = new LoginObject(writerLoginParam, writerPasswordParam);
+        clientLogin      = new LoginObject(clientLoginParam, clientPasswordParam);
+        writerLogin      = new LoginObject(writerLoginParam, writerPasswordParam);
+        gmailCredentials = new GmailCredentials(mailbox, mailboxPassword);
 
         baseUrl = URL;
 
