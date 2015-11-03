@@ -26,73 +26,69 @@
         <test name="Fast_And_Furious_Smoke_1.0">
             <classes>
 
+                                <class name = "Tests.MyProfile.EditPortfolioItem"/>
 
-                <class name = "Tests.ExsistOfFile.ExsistFilesInOrder"/>
-                <class name = "Tests.AccountSettings.ClientSighnUploading"/>
-                <class name = "Tests.EditProfile.ClientAvatarUploading"/>
-                <class name = "Tests.EditProfile.WriterAvatarUploading"/>
-                <class name = "Tests.UploadingFiles.UploadingFilesToOrder"/>
-                <class name = "Tests.UploadingFiles.UploadingFilesToOrderResult"/>
+                                <class name = "Tests.StatusActions.InProgress.CancelWithoutSendResultFromWriterSide"/>
+                                <class name = "Tests.AccountSettings.ChangeClientDetails"/>
+                                <class name = "Tests.EditProfile.WriterChangingPearsonalData"/>
+                                <class name = "Tests.Messages.SendTextMessages"/>
+                                <class name = "Tests.AccountSettings.ChangeWriterDetails"/>
 
+                                <class name = "Tests.CreateNewOrderActions.CreateNewOrderAndSaveAsDraft"/>
+                                <class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
+                                <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
 
+                                <class name = "Tests.EditProfile.ClientChangingPearsonalData"/>
+                                <class name = "Tests.EditProfile.LanguagesExpertisesCategoriesAdd"/>
 
-                <!-- To fix::
-                                                <class name = "Tests.MyProfile.EditPortfolioItem"/>
+                                <class name = "Tests.MyProfile.AddPortfolioItem"/>
+                                <class name = "Tests.MyProfile.EmailNotificationsSaving"/>
+                                <class name = "Tests.MyProfile.DeletePortfolioItem"/>
+                                <class name = "Tests.OrdersActions.AcceptWriterText"/>
+                                <class name = "Tests.OrdersActions.ReassignOrder"/>
+                                <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
+                                <class name = "Tests.OrdersActions.SendResultToClient"/>
+                                <class name = "Tests.RegistrationAndLogin.ClientAndWriterLoginLogOutTest"/>
 
+                                <class name = "Tests.StatusActions.Awarded.StartWorking"/>
+                                <class name = "Tests.StatusActions.Awarded.CancelChosenWordsmith"/>
+                                <class name = "Tests.StatusActions.Awarded.CloneOrderFromAwardedAndPublishIt"/>
 
-                                                <class name = "Tests.StatusActions.InProgress.CancelWithoutSendResultFromWriterSide"/>
-                                                <class name = "Tests.AccountSettings.ChangeClientDetails"/>
-                                                <class name = "Tests.EditProfile.WriterChangingPearsonalData"/>
-                                                <class name = "Tests.Messages.SendTextMessages"/>
-                                                <class name = "Tests.AccountSettings.ChangeWriterDetails"/>
+                                <class name = "Tests.StatusActions.ProposalSent.SetAsWinner"/>
+                                <class name = "Tests.StatusActions.ProposalSent.CancelFromWriterSideAfterBid"/>
 
-                                                <class name = "Tests.CreateNewOrderActions.CreateNewOrderAndSaveAsDraft"/>
-                                                <class name = "Tests.CreateNewOrderActions.PublishOrderFromTheDraft"/>
-                                                <class name = "Tests.CreateNewOrderActions.CancelOrderFromCreationPage"/>
+                                <class name = "Tests.StatusActions.Published.EditAndThanPublishOrder"/>
+                                <class name = "Tests.StatusActions.Published.BidOnOrder"/>
+                                <class name = "Tests.StatusActions.Published.CloseNewOrderAfterPublish"/>
+                                <class name = "Tests.StatusActions.CloneTheOrder"/>
 
-
-                                                <class name = "Tests.EditProfile.ClientChangingPearsonalData"/>
-                                                <class name = "Tests.EditProfile.LanguagesExpertisesCategoriesAdd"/>
-
-
-                                                <class name = "Tests.MyProfile.AddPortfolioItem"/>
-                                                <class name = "Tests.MyProfile.EmailNotificationsSaving"/>
-                                                <class name = "Tests.MyProfile.DeletePortfolioItem"/>
-                                                <class name = "Tests.OrdersActions.AcceptWriterText"/>
-                                                <class name = "Tests.OrdersActions.ReassignOrder"/>
-                                                <class name = "Tests.OrdersActions.DeclineTextFromClientSide"/>
-                                                <class name = "Tests.OrdersActions.SendResultToClient"/>
-                                                <class name = "Tests.RegistrationAndLogin.ClientAndWriterLoginLogOutTest"/>
-
-                                                <class name = "Tests.StatusActions.Awarded.StartWorking"/>
-                                                <class name = "Tests.StatusActions.Awarded.CancelChosenWordsmith"/>
-                                                <class name = "Tests.StatusActions.Awarded.CloneOrderFromAwardedAndPublishIt"/>
-
-                                                <class name = "Tests.StatusActions.ProposalSent.SetAsWinner"/>
-                                                <class name = "Tests.StatusActions.ProposalSent.CancelFromWriterSideAfterBid"/>
-
-                                                <class name = "Tests.StatusActions.Published.EditAndThanPublishOrder"/>
-                                                <class name = "Tests.StatusActions.Published.BidOnOrd                                         <class name = "Tests.StatusActions.Published.CloseNewOrderAfterPublish"/>
-                                                <class name = "Tests.StatusActions.CloneTheOrder"/>
-
-                                                <class name = "Tests.StopWords.StopWordsInOrderComposing"/>
-                                                <class name = "Tests.StopWords.StopWordsInLeaveAnOffer"/>
-
-                                                <class name = "Tests.UploadingFiles.UploadingFilesToMessages"/>
+                                <class name = "Tests.StopWords.StopWordsInOrderComposing"/>
+                                <class name = "Tests.StopWords.StopWordsInLeaveAnOffer"/>
+                                <class name = "Tests.UploadingFiles.UploadingFilesToMessages"/>
 
 
 
 
-                                                <!- To fix::
+                                <!-- To fix::
 
-                                                <class name = "Tests.ExsistOfFile.ExistFileInMessages"/> // Just God know...
-                                                <class name = "Tests.StatusActions.InProgress.SendResultFromSaveAsDraft"/> // Firefox bug
-                                                <class name = "Tests.DBtests.InsertionOfNewUserToDB"/>
-                                                <class name = "Tests.Balance.BlockingMoney"/>
-                                                <class name = "Tests.Balance.TransferMoney"/>
-                                                <class name = "Tests.CreateNewUserTest"/> // in dev
+                                <class name = "Tests.ExsistOfFile.ExistFileInMessages"/> // Just God know...
+                                <class name = "Tests.StatusActions.InProgress.SendResultFromSaveAsDraft"/> // Firefox bug
+                                <class name = "Tests.DBtests.InsertionOfNewUserToDB"/>
+                                <class name = "Tests.Balance.BlockingMoney"/>
+                                <class name = "Tests.Balance.TransferMoney"/>
+                                <class name = "Tests.CreateNewUserTest"/> // in dev
 
-                                                -->
+
+                                                ++++ Jenkins problems ++++
+
+                                <class name = "Tests.ExsistOfFile.ExsistFilesInOrder"/>
+                                <class name = "Tests.UploadingFiles.UploadingFilesToOrderResult"/>
+                                <class name = "Tests.UploadingFiles.UploadingFilesToOrder"/>
+                                <class name = "Tests.EditProfile.WriterAvatarUploading"/>
+                                <class name = "Tests.EditProfile.ClientAvatarUploading"/>
+                                <class name = "Tests.AccountSettings.ClientSighnUploading"/>
+
+                                -->
             </classes>
         </test>
 

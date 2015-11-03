@@ -1,6 +1,6 @@
 package Tests;
 
-import GeneralHelpers.ImapReconnect;
+import GeneralHelpers.GmailListener;
 import org.testng.annotations.Test;
 
 import javax.mail.MessagingException;
@@ -18,7 +18,7 @@ public class CreateNewUserTest extends BaseTest{
 
        // String activationLink = getActivationLinkFromTargetMessage(gmailCredentials);
 
-        ImapReconnect reconnect = new ImapReconnect();
+        GmailListener reconnect = new GmailListener();
         reconnect.startService(gmailCredentials);
 
     }
