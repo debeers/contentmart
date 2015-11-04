@@ -3,6 +3,10 @@
 
 <suite name="Contentmart.in smoke test suite" >
 
+    <listeners>
+    <listener class-name="GeneralHelpers.RetryListener"/>
+    </listeners>
+
     <!--Credentials: -->
 
     <parameter name="clientLoginParam"     value="debeers1989@gmail.com"         />
@@ -25,10 +29,7 @@
 
         <test name="Fast_And_Furious_Smoke_1.0">
             <classes>
-
-                <class name = "Tests.EditProfile.WriterAvatarUploading"/>
-
-
+                
                                 <class name = "Tests.MyProfile.EditPortfolioItem"/>
 
                                 <class name = "Tests.StatusActions.InProgress.CancelWithoutSendResultFromWriterSide"/>
@@ -70,9 +71,7 @@
                                 <class name = "Tests.UploadingFiles.UploadingFilesToMessages"/>
 
 
-
 <!-- To fix::
-
 
                                 <class name = "Tests.ExsistOfFile.ExistFileInMessages"/> // Just God know...
                                 <class name = "Tests.StatusActions.InProgress.SendResultFromSaveAsDraft"/> // Firefox bug
