@@ -19,7 +19,7 @@ public class WriterAvatarUploading extends BaseTest {
     @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
     public void WriterAvatarUploading() throws InterruptedException, IOException, NoSuchFieldException, NoSuchMethodException {
 
-        String filepath = System.getProperty("user.dir") + "\\src\\main\\java\\Resources\\avatar.jpg";
+        String filepath = System.getProperty("user.dir") + "\\src\\main\\test\\resources\\avatar.jpg";
 
         WriterProfilePage writerProfilePage = WriterGoToProfilePage.goToMyProfile(driver, writerLogin);
         WriterEditProfilePage editProfilePage = writerProfilePage.writerClickOnEditProfileButton();
