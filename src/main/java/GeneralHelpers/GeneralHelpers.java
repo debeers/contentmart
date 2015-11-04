@@ -49,7 +49,7 @@ public class GeneralHelpers {
 
     public static String getFileName(String path) {
 
-        String resultStr = path.substring(path.indexOf("Resources") + 10, path.lastIndexOf('.'));
+        String resultStr = path.substring(path.indexOf("resources2") + 10, path.lastIndexOf('.'));
         System.out.println("You will upload file with name: " + resultStr);
         return resultStr;
     }
