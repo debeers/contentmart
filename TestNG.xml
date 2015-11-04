@@ -27,7 +27,7 @@
             <classes>
 
                 <class name = "Tests.EditProfile.WriterAvatarUploading"/>
-                <!-- To fix::
+
 
                                 <class name = "Tests.MyProfile.EditPortfolioItem"/>
 
@@ -71,7 +71,7 @@
 
 
 
-
+<!-- To fix::
 
 
                                 <class name = "Tests.ExsistOfFile.ExistFileInMessages"/> // Just God know...
