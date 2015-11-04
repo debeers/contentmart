@@ -125,7 +125,7 @@
     <build>
         <resources>
             <resource>
-                <directory>src/test/resources</directory>
+                <directory>src/main/resources</directory>
             </resource>
         </resources>
         <plugins>
