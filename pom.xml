@@ -123,6 +123,11 @@
     </dependencies>
     <name>Allure TestNg contentmart.in suite</name>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/Resources</directory>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
