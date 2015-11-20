@@ -28,14 +28,12 @@
 
         <test name="Fast_And_Furious_Smoke_1.0">
             <classes>
-                <class name = "Tests.EmailNotificationsSaving"/>
                 <class name = "Tests.AddPortfolioItem"/>
                 <class name = "Tests.ChangeClientDetails"/>
                 <class name = "Tests.ChangeWriterDetails"/>
                 <class name = "Tests.DeletePortfolioItem"/>
                 <class name = "Tests.EditPortfolioItem"/>
                 <class name = "Tests.Login_Logout_Test"/>
-                <class name = "Tests.CreateNewUserTest"/>
             </classes>
         </test>
 </suite>
