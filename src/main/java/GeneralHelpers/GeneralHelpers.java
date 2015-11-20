@@ -1,15 +1,12 @@
 package GeneralHelpers;
 
-import Entities.OrderObject;
-import PageObjects.General.OrderInfoAndActions;
 import com.codeborne.selenide.Condition;
+import org.apache.commons.collections4.CollectionUtils;
 import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import static Tests.BaseTest.wait;
+import java.util.ArrayList;
+import java.util.List;
 import static com.codeborne.selenide.Selenide.$;
 
 
@@ -17,15 +14,6 @@ import static com.codeborne.selenide.Selenide.$;
  * Created by ilya on 28.08.2015.
  */
 public class GeneralHelpers {
-
-
-    public static void findCreatedOrderAndClickOnIt(WebDriver driver, OrderObject order) {
-
-        OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
-        String orderXPath = orderInfoAndActions.xOrder(order.getEntityOrderName());
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(orderXPath))).click();
-
-    }
 
 
     public static void jsDeleteClasses(String xpath, WebDriver driver) throws InterruptedException {
@@ -71,15 +59,24 @@ public class GeneralHelpers {
     }
 
 
-    public static Boolean entityAppear(String name){
+    public static Boolean isFileUploaded(String filePath, List<WebElement> elementList) {
+        String fileName = getFileName(filePath);
 
-    if(wait.until(ExpectedConditions.visibilityOfElementLocated(
-            By.xpath("//*[contains(text(),'" + name + "')]"))).isDisplayed()){
+        for (WebElement el : elementList) {
+
+            if (el.getText().contains(fileName)) {
+
+                System.out.println("File successfully found! " + el);
+                return true;
+
+            } else {
+
+                System.out.println("File not found!!!");
+                return false;
+            }
+        }
         return true;
     }
-        return false;
-    }
-
 
     public static void safeJavaScriptClick(WebDriver driver, WebElement element) throws Exception {
         try {
@@ -99,6 +96,18 @@ public class GeneralHelpers {
         }
     }
 
+    public static List<String> hintSeeker(List<WebElement> hints){
+        List<String> hintsText = new ArrayList<>();
+
+        for (WebElement hintText : hints){
+            hintsText.add(hintText.getAttribute("data-value"));
+        }
+        return hintsText;
+    }
+
+    public static Boolean hintComparator(List<WebElement> hints, List<String> matcher){
+       return CollectionUtils.isEqualCollection(hintSeeker(hints), matcher);
+    }
 
 
 }

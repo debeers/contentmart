@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
 
-public class MyMessagesPage extends LeftMenuGeneralPage {
+public class MyMessagesPage extends TopMenuGeneralPage {
 
 
     @FindBy(id = "comment_message")

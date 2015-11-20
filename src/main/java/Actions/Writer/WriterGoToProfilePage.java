@@ -2,21 +2,11 @@ package Actions.Writer;
 
 import Actions.General.RegistrationAndLogin;
 import Entities.LoginObject;
-import PageObjects.Client.ClientEditProfilePage;
-import PageObjects.Client.ClientProfilePage;
 import PageObjects.General.MyOrdersPage;
-import PageObjects.Writer.WriterEditProfilePage;
 import PageObjects.Writer.WriterProfilePage;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.Select;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.*;
+import java.util.List;
 
 import static GeneralHelpers.CreateNewOrderHelper.randomID;
 import static GeneralHelpers.Messages.randomTextGeneratorLength;
@@ -29,8 +19,7 @@ public class WriterGoToProfilePage {
     public static WriterProfilePage goToMyProfile(WebDriver driver, LoginObject writerLogin) {
 
         MyOrdersPage myOrdersPage = RegistrationAndLogin.loginAs(driver, writerLogin);
-        myOrdersPage.clickOnProfileFromLeftMenu();
-        myOrdersPage.clickOnMyProfileFromLeftMenuLeftMenu();
+        myOrdersPage.selectEditWriterProfileFromMenu();
         WriterProfilePage writerProfilePage = new WriterProfilePage(driver);
 
         return writerProfilePage;

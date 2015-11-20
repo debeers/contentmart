@@ -1,13 +1,14 @@
 package PageObjects.General;
 
 
-import GeneralHelpers.GeneralWaits;
 import PageObjects.BasePageObject;
 import Tests.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import static GeneralHelpers.CustomWaits.$WaitFor;
+import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -31,7 +32,7 @@ public class LoginPage extends BasePageObject {
     @FindBy(css = ".fancybox-form.cell.login_block>h1")
     public WebElement welcomeLoginHeader;
 
-    @FindBy(xpath = "//*[@id='header_register']")
+    @FindBy(xpath = ".//a[2][contains(text(), 'Register')]")
     public WebElement registrationLinkNewUser;
 
     @FindBy(xpath = "//div[1]//div/div[1]/button")
@@ -48,6 +49,18 @@ public class LoginPage extends BasePageObject {
 
     @FindBy(xpath = "//*[@id='registration']/div[5]/button")
     public WebElement registerButtonNewUser;
+
+    @FindBy(xpath = "//div[@class = 'cell6 writer_block']")
+    public WebElement registerAsWriter;
+
+    @FindBy(xpath = "//div[@class = 'cell6 client_block']")
+    public WebElement registerAsClient;
+
+    @FindBy(xpath = "//h1[contains(text(), 'Register as a Writer')]")
+    public WebElement writerHeader;
+
+    @FindBy(xpath = "//h1[contains(text(), 'Register as a Client')]")
+    public WebElement clientHeader;
 
 
     public LoginPage goToLoginPage(WebDriver driver) {
@@ -71,7 +84,6 @@ public class LoginPage extends BasePageObject {
     public MyOrdersPage submit() {
 
         $(submitButton).shouldBe(visible).click();
-        GeneralWaits.waitForPageLoad(driver);
         MyOrdersPage page = new MyOrdersPage(driver);
 
         return page;
@@ -88,6 +100,42 @@ public class LoginPage extends BasePageObject {
 
         String res = $(welcomeLoginHeader).getText();
         return res;
+    }
+
+    public void registrationLinkClick() throws InterruptedException {
+        registrationLinkNewUser.click();
+        $(registerAsClient).should(appear);
+        $(registerAsWriter).should(appear);
+    }
+
+    public RegistrationFormPage clickOnRegisterAsWriter() {
+
+        $(registerAsWriter).shouldBe(visible).click();
+        RegistrationFormPage registrationFormPage = new RegistrationFormPage(driver);
+
+        $WaitFor(
+                registrationFormPage.writerHeader,
+                registrationFormPage.nickNameFiled,
+                registrationFormPage.emailFiled,
+                registrationFormPage.passwordField,
+                registrationFormPage.submitRegistrationButton
+        );
+        return registrationFormPage;
+    }
+
+    public RegistrationFormPage clickOnRegisterAsClient() {
+
+        $(registerAsClient).shouldBe(visible).click();
+        RegistrationFormPage registrationFormPage = new RegistrationFormPage(driver);
+
+        $WaitFor(
+                registrationFormPage.clientHeader,
+                registrationFormPage.nickNameFiled,
+                registrationFormPage.emailFiled,
+                registrationFormPage.passwordField,
+                registrationFormPage.submitRegistrationButton
+        );
+        return registrationFormPage;
     }
 
     public LoginPage(WebDriver driver) {

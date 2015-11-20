@@ -1,7 +1,7 @@
 package PageObjects.Writer;
 
 import PageObjects.BirthdayDateInterface;
-import PageObjects.General.LeftMenuGeneralPage;
+import PageObjects.General.TopMenuGeneralPage;
 import PageObjects.PageObjectWithImages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
@@ -22,7 +22,7 @@ import static com.codeborne.selenide.Selenide.*;
 /**
  * Created by CMG_TEST on 08.10.2015.
  */
-public class WriterEditProfilePage extends LeftMenuGeneralPage implements PageObjectWithImages, BirthdayDateInterface {
+public class WriterEditProfilePage extends TopMenuGeneralPage implements PageObjectWithImages, BirthdayDateInterface {
 
     @FindBy(xpath = ".//button[contains(@class, 'new_blue_but m_r-10')]")
     public WebElement saveChangesButton;

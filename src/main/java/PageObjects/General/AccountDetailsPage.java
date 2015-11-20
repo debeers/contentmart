@@ -11,13 +11,12 @@ import java.net.URL;
 
 import static GeneralHelpers.CustomWaits.$WaitFor;
 import static GeneralHelpers.GeneralHelpers.jsDeleteClasses;
-import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 import static com.codeborne.selenide.Selenide.$;
 
 /**
  * Created by CMG_TEST on 13.10.2015.
  */
-public class AccountDetailsPage extends LeftMenuGeneralPage implements PageObjectWithImages {
+public class AccountDetailsPage extends TopMenuGeneralPage implements PageObjectWithImages {
 
 
     @FindBy(xpath = "//a[contains(text(), 'Account details')]")
@@ -116,7 +115,6 @@ public class AccountDetailsPage extends LeftMenuGeneralPage implements PageObjec
     public EmailNotificationsPage clickOnEmailNotificationsLink(WebDriver driver) {
 
         $WaitFor(emailNotificationsLink).click();
-        waitForPageLoad(driver);
         EmailNotificationsPage emailNotificationsPage = new EmailNotificationsPage(driver);
         return emailNotificationsPage;
     }
@@ -152,7 +150,7 @@ public class AccountDetailsPage extends LeftMenuGeneralPage implements PageObjec
         return $(userTimeZone).shouldBe(Condition.visible).getText();
     }
 
-    public String getUserNickName() {
+    public String getUserNickNameFromProfileDropMenu() {
 
         return $(nickNameField).shouldBe(Condition.visible).getAttribute("value");
     }

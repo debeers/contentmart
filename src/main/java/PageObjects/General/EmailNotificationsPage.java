@@ -5,12 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-
 import static GeneralHelpers.CustomWaits.$WaitFor;
-import static GeneralHelpers.GeneralWaits.waitForPageLoad;
 import static com.codeborne.selenide.Selenide.$;
 
-public class EmailNotificationsPage extends LeftMenuGeneralPage {
+public class EmailNotificationsPage extends TopMenuGeneralPage {
 
     //For All
 
@@ -55,7 +53,6 @@ public class EmailNotificationsPage extends LeftMenuGeneralPage {
     public void clickOnEmailNotificationsLink() {
 
         $WaitFor(emailNotificationsLink).click();
-        waitForPageLoad(driver);
     }
 
     public void clickOnChangePasswordLinkLink() {

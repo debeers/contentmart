@@ -17,7 +17,7 @@ public class JDBCutil {
     private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 
-    public static void insertRecordIntoDbUserTable(String insertTableSQL) throws SQLException {
+    public static void executeUpdateDbUserTable(String insertTableSQL) throws SQLException {
 
         Connection dbConnection = null;
         Statement statement = null;
@@ -30,7 +30,7 @@ public class JDBCutil {
             System.out.println(insertTableSQL);
             statement.executeUpdate(insertTableSQL);
 
-            System.out.println("Record is inserted into DBUSER table!");
+            System.out.println("Record updated!");
 
         } catch (SQLException e) {
 
