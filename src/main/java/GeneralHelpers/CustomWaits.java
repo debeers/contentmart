@@ -1,12 +1,10 @@
 package GeneralHelpers;
 
-
-import PageObjects.Client.ClientNewOrderPage;
+import PageObjects.Client.NewOrderPage;
 import Tests.BaseTest;
 import com.google.common.collect.Sets;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
 import java.util.HashSet;
 
 import static GeneralHelpers.GeneralHelpers.isFileExists;
@@ -49,13 +47,13 @@ public class CustomWaits extends BaseTest {
             );
 
 
-    public static void createNewOrderWaits(ClientNewOrderPage newOrder) {
+    public static void NewOrderWaits(NewOrderPage newOrder) {
 
         $WaitFor(
                 newOrder.orderNameField,
-                newOrder.descriptionField,
-                newOrder.wordsRequiredField,
-                newOrder.rupeePriceField,
+                newOrder.orderDetailsField,
+                newOrder.wordsRequired,
+                newOrder.priceInRupeeField,
                 newOrder.publishButton
         );
     }

@@ -2,23 +2,15 @@ package Actions.General;
 
 import Entities.LoginObject;
 import Entities.UserObject;
-import PageObjects.Client.ClientEditProfilePage;
 import PageObjects.General.AccountDetailsPage;
 import PageObjects.General.EmailNotificationsPage;
 import PageObjects.General.MyOrdersPage;
-import PageObjects.Writer.WriterProfilePage;
-import PageObjects.PageObjectWithImages;
 import com.codeborne.selenide.Condition;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
 import static GeneralHelpers.CustomWaits.$WaitFor;
@@ -35,8 +27,8 @@ public class GoToAccountSettings {
     public static AccountDetailsPage goToEditProfile(WebDriver driver, LoginObject clientLogin) throws InterruptedException {
 
         MyOrdersPage defaultClientPage = RegistrationAndLogin.loginAs(driver, clientLogin);
-        defaultClientPage.clickOnProfileFromLeftMenu();
-        AccountDetailsPage accountDetailsPage = defaultClientPage.clickOnAccountSettingsFromLeftMenu();
+        defaultClientPage.clickOnProfileFromTopMenu();
+        AccountDetailsPage accountDetailsPage = defaultClientPage.clickOnAccountSettingsDropMenu();
 
         $WaitFor(
                 accountDetailsPage.saveChangesButton,
@@ -99,8 +91,8 @@ public class GoToAccountSettings {
         $(accountDetailsPage.userState).shouldBe(Condition.visible);
         state.selectByIndex(new Random().nextInt(state.getOptions().size()));
 
-        user.setNickname(accountDetailsPage.getUserNickName());
-        System.out.println("NickName: " + accountDetailsPage.getUserNickName());
+        user.setNickname(accountDetailsPage.getUserNickNameFromProfileDropMenu());
+        System.out.println("NickName: " + accountDetailsPage.getUserNickNameFromProfileDropMenu());
 
         user.setFirstname(accountDetailsPage.setFirstNameField(randomTextGeneratorLength(8)));
         System.out.println("FirstName: " + accountDetailsPage.getUserFirstName());

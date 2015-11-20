@@ -1,7 +1,7 @@
 package PageObjects.Writer;
 
 import PageObjects.BirthdayDateInterface;
-import PageObjects.General.LeftMenuGeneralPage;
+import PageObjects.General.TopMenuGeneralPage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
@@ -22,7 +22,7 @@ import static com.codeborne.selenide.Selenide.$$;
 /**
  * Created by CMG_TEST on 30.09.2015.
  */
-public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDateInterface {
+public class WriterProfilePage extends TopMenuGeneralPage implements BirthdayDateInterface {
 
 
     @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[2]/div[3]/a")
@@ -32,7 +32,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
     @FindBy(xpath = ".//div[contains(@class, 'user_main_info')]//div[3][contains(@class, 'age d_in m_l-10')]")
     public WebElement writerYearsOld;
 
-    @FindBy(xpath = "html/body/div[2]/div[1]/div/div/div/a[1]")
+    @FindBy(xpath = "html/body/div[6]/div[1]/div/div/div/a[1]")
     public WebElement confirmSweetAllertButton;
 
     @FindBy(xpath = ".//a[contains (text(), 'CANCEL')]")
@@ -40,6 +40,9 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
 
     @FindBy(xpath = ".//*[@id='add-portfolio-item-svg']")
     public WebElement addPortfolioItemButton;
+
+    @FindBy(xpath = ".//*[@id='language-box']/p")
+    public WebElement linguisticForte;
 
     @FindBy(className = "fancybox-wrap fancybox-default fancybox-opened")
     public WebElement portfolioFrame;
@@ -80,7 +83,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
     @FindBy(xpath = ".//p[contains(@class, 'portfolio-item-text')]")
     public WebElement portfolioItemText;
 
-    @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[4]/div[2]/div[1]/div/h4")
+    @FindBy(xpath = "html/body/div[6]/div[1]/div/div/form/h2")
     public WebElement portfolioItemTitle;
 
     @FindBy(xpath = ".//a[contains(text(), 'SAVE')]")
@@ -142,7 +145,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
     public void openAddedPortfolioItem(WebDriver driver, String header) throws InterruptedException {
 
         if (addedPortfolioItem(driver, header)) {
-
+            Thread.sleep(3000);
             $(driver.findElement(By.xpath(".//h4[contains (text(), '" + header + "')]/following-sibling::a[contains (text(), 'READ MORE')]"))).click();
             $WaitFor(
                     portfolioItemTitle,
@@ -230,7 +233,7 @@ public class WriterProfilePage extends LeftMenuGeneralPage implements BirthdayDa
 
     public void clickOnaAddWorkButton(String title) throws InterruptedException {
 
-        $(addWorkButton).click();
+        $(addWorkButton).shouldBe(Condition.visible).click();
         findPortfolioItem(title);
     }
 

@@ -1,16 +1,13 @@
 package GeneralHelpers;
 
-import org.apache.commons.lang.RandomStringUtils;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import static GeneralHelpers.JDBCutil.executeQuery;
-import static GeneralHelpers.JDBCutil.getDBConnection;
-import static GeneralHelpers.JDBCutil.insertRecordIntoDbUserTable;
-import static org.apache.commons.lang.RandomStringUtils.*;
+import static GeneralHelpers.JDBCutil.*;
+import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
+import static org.apache.commons.lang.RandomStringUtils.randomNumeric;
 
 /**
  * Created by DeBeers on 28.10.2015.
@@ -37,19 +34,32 @@ public class DBWorker {
         return "AutoBot-" + randomNumeric(4) + randomAlphabetic(3);
     }
 
-    private static String setUserNickName(String role){
+    public static String setUserNickName(String role){
 
-        if(role.equalsIgnoreCase("copywriter")){
+        if(role.equalsIgnoreCase("writer")){
         return "WriterBOT-" + randomNumeric(4) + randomAlphabetic(3);
         }else return "ClientBOT-" + randomNumeric(4) + randomAlphabetic(3);
+    }
+
+    public static String deleteCreatedUserFromDB(String whereEmail) throws SQLException {
+
+        String mail = randomNumeric(4) + randomAlphabetic(3) + randomNumeric(3) + "@testmail.com' ";
+
+        executeUpdateDbUserTable(
+
+                "UPDATE users " +
+                "SET email = '" + mail +
+                "WHERE email = '" + whereEmail + "'"
+        );
+            return mail;
     }
 
     public static void createUserBills(String id, String name) throws SQLException {
 
         String bill_1 = "insert into `billing`.`bills` (`id`, `bill_type`, `name`, `user_id`, `balance`) values(NULL,'GU','General user account for "+ name +"','"+ id +"','0.00')";
         String bill_2 = "insert into `billing`.`bills` (`id`, `bill_type`, `name`, `user_id`, `balance`) values(NULL,'BU','Blocked user account for "+ name +"','"+ id +"','0.00')";
-        insertRecordIntoDbUserTable(bill_1);
-        insertRecordIntoDbUserTable(bill_2);
+        executeUpdateDbUserTable(bill_1);
+        executeUpdateDbUserTable(bill_2);
     }
 
 
@@ -83,7 +93,7 @@ public class DBWorker {
                         "'$2a$10$YdQcM3RmhCDJbatSoBgFGw$','2015-08-11 06:45:10','28','751','76651','spttbiougis','555555','Dererer rerere rerere','0','1','','individual','TESTT8477T',NULL," +
                         "'"+ role +"','','2015-10-26 14:48:57','213.186.202.162','0','193','sent','0','397','1')";
 
-        insertRecordIntoDbUserTable(insertTableSQL);
+        executeUpdateDbUserTable(insertTableSQL);
     }
 
 
