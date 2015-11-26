@@ -1,5 +1,6 @@
 package PageObjects.General;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,10 +15,10 @@ import static com.codeborne.selenide.Selenide.$;
 public class PartnersPage extends TopMenuGeneralPage {
 
 
-    @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[2]/form/div[1]/input[1]")
+    @FindBy(xpath = "html/body/div[4]/div[1]/div/div/div[1]/form/div/input[1]")
     public WebElement searchFieldPartners;
 
-    @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[2]/form/div/input[2]")
+    @FindBy(xpath = ".//input[@class = 'but_search']")
     public WebElement searchButtonPartners;
 
     @FindBy(xpath = "html/body/div/div[3]/div/div/div/ul/li[1]/a")
@@ -51,6 +52,21 @@ public class PartnersPage extends TopMenuGeneralPage {
         $(searchButtonPartners).shouldBe(present).click();
     }
 
+    public Boolean searchBySearchEngine(String searchText) {
+
+        searchBysearchFieldInPartnersPage(searchText);
+        if($(By.linkText(searchText)).exists())
+            return true;
+        else
+            return false;
+    }
+
+    public WebElement search(String searchText) {
+
+        searchBysearchFieldInPartnersPage(searchText);
+        WebElement el = $(By.xpath(".//*[contains(text(), '"+ searchText +"')]")) ;
+        return  el;
+    }
 
     public PartnersPage(WebDriver driver) {
 

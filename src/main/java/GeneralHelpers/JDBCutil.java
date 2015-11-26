@@ -116,6 +116,7 @@ public class JDBCutil {
                 System.out.println(rs.getString(column));
                 return rs.getString(column);
             }
+            dbConnection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

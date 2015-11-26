@@ -24,6 +24,13 @@ import static com.codeborne.selenide.Selenide.*;
  */
 public class WriterEditProfilePage extends TopMenuGeneralPage implements PageObjectWithImages, BirthdayDateInterface {
 
+
+    @FindBy(xpath = ".//*[@class='cell user_name']")
+    public WebElement writerNickName;
+
+    @FindBy(xpath = ".//a[contains (text(), 'TAKE THE TEST NOW')]")
+    public WebElement takeTheTestNowButtonInHeader;
+
     @FindBy(xpath = ".//button[contains(@class, 'new_blue_but m_r-10')]")
     public WebElement saveChangesButton;
 

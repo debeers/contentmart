@@ -5,8 +5,13 @@ import PageObjects.General.LoginPage;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.General.RegistrationFormPage;
 import PageObjects.General.TopMenuGeneralPage;
+import PageObjects.Landings.ForClientsPage;
+import PageObjects.Landings.ForWritersPage;
+import com.codeborne.selenide.Condition;
+import junit.framework.Assert;
 import org.openqa.selenium.WebDriver;
 
+import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -32,13 +37,18 @@ public class RegistrationAndLogin {
     }
 
 
-    public static LoginPage logOut(WebDriver driver) {
+    public static LoginPage logOut(WebDriver driver) throws InterruptedException {
 
         TopMenuGeneralPage topMenuGeneralPage = new TopMenuGeneralPage(driver);
-        topMenuGeneralPage.clickOnProfileFromTopMenu();
-        LoginPage loginPage = topMenuGeneralPage.clickOnLogOutFromDropMenu();
+        LoginPage loginPage = topMenuGeneralPage.selectLogoutFromMenu();
 
         return loginPage;
+    }
+
+    public static void switchUser(WebDriver driver, LoginObject userRole) throws InterruptedException {
+
+        logOut(driver);
+        loginAs(driver, userRole);
     }
 
 
@@ -61,14 +71,40 @@ public class RegistrationAndLogin {
         }
 
         assert registrationFormPage != null;
-        registrationFormPage.setUserNickName(nickname);
-        registrationFormPage.setUserEmail(email);
-        registrationFormPage.setUserPassword(password);
-        registrationFormPage.clickOnHeaderToDropWarnings();
-
-        registrationFormPage.clickOnRegisterButton();
-
+        registrationFormPage.register(nickname, email, password);
         return result;
+    }
+
+
+    public static String registerFromLandingAs(WebDriver driver, String userType, String nickname, String email, String password, String URL) throws InterruptedException {
+
+        if (userType.equalsIgnoreCase("writer")) {
+
+            ForWritersPage forWritersPage = new ForWritersPage(driver);
+            forWritersPage.goToForWritersLanding(URL);
+            RegistrationFormPage registrationFormPage = forWritersPage.clickOnRegisterNowButton();
+
+            try {
+                registrationFormPage.getHeader().trim().equals("Register as a Writer");
+
+            }catch (Exception e) {
+                System.out.println("Wrong header, probably we are not at required page");
+            }
+
+            registrationFormPage.register(nickname, email, password);
+            $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
+            return driver.getTitle();
+
+        } else if (userType.equalsIgnoreCase("client")) {
+
+            ForClientsPage forClientsPage = new ForClientsPage(driver);
+            forClientsPage.goToForClientsLanding(URL);
+            RegistrationFormPage registrationFormPage = forClientsPage.fillRegistrationFormFromLanding(nickname, email, password);
+            $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
+            return driver.getTitle();
+        }
+
+        return "Oops! Something goes wrong";
     }
 
 }

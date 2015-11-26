@@ -147,7 +147,7 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
 
     public String getUserTimeZone() {
 
-        return $(userTimeZone).shouldBe(Condition.visible).getText();
+        return $(userTimeZone).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserNickNameFromProfileDropMenu() {

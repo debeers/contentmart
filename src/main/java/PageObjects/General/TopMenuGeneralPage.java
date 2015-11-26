@@ -3,6 +3,7 @@ package PageObjects.General;
 import PageObjects.BasePageObject;
 import PageObjects.Client.NewOrderPage;
 import PageObjects.Writer.WriterEditProfilePage;
+import PageObjects.Writer.WriterProfilePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -128,12 +129,11 @@ public class TopMenuGeneralPage extends BasePageObject {
 
     public AccountDetailsPage clickOnAccountSettingsDropMenu() {
 
-        $(accountSettingsDropMenu).shouldBe(visible).click();
+        accountSettingsDropMenu.click();
         return new AccountDetailsPage(driver);
     }
 
-    public LoginPage clickOnLogOutFromDropMenu() {
-
+    public LoginPage clickOnLogOutFromDropMenu() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOf(logOutDropMenu)).click();
         return new LoginPage(driver);
     }
@@ -215,6 +215,15 @@ public class TopMenuGeneralPage extends BasePageObject {
         clickOnProfileFromTopMenu();
         return writerClickOnEditProfileFromDropMenu();
     }
+
+    public WriterProfilePage selectWriterProfileFromMenu() {
+
+        clickOnProfileFromTopMenu();
+        $(userProfileDropMenu).click();
+        return new WriterProfilePage(driver);
+    }
+
+
 //
 //    public ClientEditProfilePage selectEditClientProfileFromMenu() {
 //
@@ -228,7 +237,7 @@ public class TopMenuGeneralPage extends BasePageObject {
         return clickOnAccountSettingsDropMenu();
     }
 
-    public LoginPage selectLogoutFromMenu() {
+    public LoginPage selectLogoutFromMenu() throws InterruptedException {
 
         clickOnProfileFromTopMenu();
         return clickOnLogOutFromDropMenu();

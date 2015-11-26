@@ -40,6 +40,8 @@ public class RegistrationFormPage extends BasePageObject {
     public WebElement successMessageAfterSubmitRegistration;
 
 
+
+
     public String getHeader() {
         return $(registrationHeader).getText();
     }
@@ -76,6 +78,14 @@ public class RegistrationFormPage extends BasePageObject {
         $(successMessageAfterSubmitRegistration).should(Condition.appear);
     }
 
+    public RegistrationFormPage register(String nickname, String email, String password) throws InterruptedException {
+        setUserNickName(nickname);
+        setUserEmail(email);
+        setUserPassword(password);
+        clickOnHeaderToDropWarnings();
+        clickOnRegisterButton();
+        return this;
+    }
 
     public RegistrationFormPage(WebDriver driver) {
         super(driver);

@@ -41,6 +41,18 @@ public class DBWorker {
         }else return "ClientBOT-" + randomNumeric(4) + randomAlphabetic(3);
     }
 
+
+    @SuppressWarnings("ConstantConditions")
+    public static void checkForExitingUser(String query, String column, String email) throws SQLException, InterruptedException {
+
+        if(executeQuery(query, column).equalsIgnoreCase(email)){
+            deleteCreatedUserFromDB(email);
+            Thread.sleep(3000);
+        }else System.out.println("No such user in DB");
+    }
+
+
+
     public static String deleteCreatedUserFromDB(String whereEmail) throws SQLException {
 
         String mail = randomNumeric(4) + randomAlphabetic(3) + randomNumeric(3) + "@testmail.com' ";

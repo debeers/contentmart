@@ -9,6 +9,8 @@ import org.openqa.selenium.support.FindBy;
  */
 public class MyOrdersPage extends TopMenuGeneralPage{
 
+    @FindBy(id="take-the-test-button")
+    public WebElement takeTheTestNowButton;
 
     @FindBy(xpath = "//h1[contains(text(), 'My Orders')]")
     public WebElement myOrdersTitle;

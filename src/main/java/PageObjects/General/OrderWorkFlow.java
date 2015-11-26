@@ -104,7 +104,6 @@ public class OrderWorkFlow {
     public WebElement publishButton;
 
 
-
     public String getOrderStatus(){
        return  $(statusLable).shouldBe(visible).getText();
     }
