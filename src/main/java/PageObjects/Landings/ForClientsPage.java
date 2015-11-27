@@ -63,14 +63,18 @@ public class ForClientsPage extends BasePageObject {
         return new RegistrationFormPage(driver);
     }
 
-    public RegistrationFormPage fillRegistrationFormFromLanding(String nick, String email, String password) {
+    public RegistrationFormPage fillRegistrationFormFromLanding(String nick, String email, String password) throws InterruptedException {
 
         enterNickName(nick);
         enterEmail(email);
         enterPassword(password);
-
-        return clickOnSubmitRegistrationButton();
+        Thread.sleep(3000);
+        clickOnSubmitRegistrationButton();
+        Thread.sleep(3000);
+        clickOnSubmitRegistrationButton();
+        return new RegistrationFormPage(driver);
     }
+
 
 
 }

@@ -74,8 +74,7 @@ public class BaseTest {
             driver.get("https://contentmart.in/exit");
         }
 
-        driver.manage().deleteAllCookies(); //try incognito
-//        Thread.sleep(5000);
+        driver.manage().deleteAllCookies();
         driver.quit();
 
         String verificationErrorString = verificationErrors.toString();

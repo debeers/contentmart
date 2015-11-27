@@ -1,6 +1,7 @@
 package Actions.General;
 
 import Entities.LoginObject;
+import GeneralHelpers.JDBCutil;
 import PageObjects.General.LoginPage;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.General.RegistrationFormPage;
@@ -9,8 +10,11 @@ import PageObjects.Landings.ForClientsPage;
 import PageObjects.Landings.ForWritersPage;
 import com.codeborne.selenide.Condition;
 import junit.framework.Assert;
+import net.sf.qualitycheck.Throws;
 import org.openqa.selenium.WebDriver;
 
+import static GeneralHelpers.JDBCutil.*;
+import static SQLRepo.General.checkUserID;
 import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertEquals;
 
@@ -45,10 +49,11 @@ public class RegistrationAndLogin {
         return loginPage;
     }
 
-    public static void switchUser(WebDriver driver, LoginObject userRole) throws InterruptedException {
+    public static MyOrdersPage switchUser(WebDriver driver, LoginObject userRole) throws InterruptedException {
 
         logOut(driver);
         loginAs(driver, userRole);
+        return new MyOrdersPage(driver);
     }
 
 
@@ -76,35 +81,54 @@ public class RegistrationAndLogin {
     }
 
 
-    public static String registerFromLandingAs(WebDriver driver, String userType, String nickname, String email, String password, String URL) throws InterruptedException {
+    public static String registerFromLandingAsWriter(WebDriver driver, String URL, String nickname, String email, String password) throws InterruptedException {
 
-        if (userType.equalsIgnoreCase("writer")) {
+        ForWritersPage forWritersPage = new ForWritersPage(driver);
+        forWritersPage.goToForWritersLanding(URL);
+        RegistrationFormPage registrationFormPage = forWritersPage.clickOnRegisterNowButton();
 
-            ForWritersPage forWritersPage = new ForWritersPage(driver);
-            forWritersPage.goToForWritersLanding(URL);
-            RegistrationFormPage registrationFormPage = forWritersPage.clickOnRegisterNowButton();
+        try {
+            registrationFormPage.getHeader().trim().equals("Register as a Writer");
 
-            try {
-                registrationFormPage.getHeader().trim().equals("Register as a Writer");
-
-            }catch (Exception e) {
-                System.out.println("Wrong header, probably we are not at required page");
-            }
-
-            registrationFormPage.register(nickname, email, password);
-            $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
-            return driver.getTitle();
-
-        } else if (userType.equalsIgnoreCase("client")) {
-
-            ForClientsPage forClientsPage = new ForClientsPage(driver);
-            forClientsPage.goToForClientsLanding(URL);
-            RegistrationFormPage registrationFormPage = forClientsPage.fillRegistrationFormFromLanding(nickname, email, password);
-            $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
-            return driver.getTitle();
+        }catch (Exception e) {
+            System.out.println("Wrong header, probably we are not at required page");
         }
 
-        return "Oops! Something goes wrong";
+        registrationFormPage.register(nickname, email, password);
+        $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
+        return driver.getTitle();
+    }
+
+
+    public static String registerFromLandingAsClient(WebDriver driver, String URL, String nickname, String email, String password) throws InterruptedException {
+
+        ForClientsPage forClientsPage = new ForClientsPage(driver);
+        forClientsPage.goToForClientsLanding(URL);
+        RegistrationFormPage registrationFormPage = forClientsPage.fillRegistrationFormFromLanding(nickname, email, password);
+        $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
+        return driver.getTitle();
+    }
+
+
+    public static Boolean isEvenID(String email){
+
+        int res = Integer.parseInt(getUserID(email));
+
+        if(res%2 == 1){
+            return true;
+        }else
+            return false;
+    }
+
+
+    public static String getUserID(String email){
+
+        String res = executeQuery(checkUserID(email), "id");
+
+        if(res != null){
+            return res;
+        }
+        return null;
     }
 
 }

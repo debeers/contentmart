@@ -159,6 +159,25 @@ public class WriterProfilePage extends TopMenuGeneralPage implements BirthdayDat
         return false;
     }
 
+    public String getUserName(){
+        return $(userName).shouldBe(Condition.visible).getText().trim();
+    }
+
+    public String getLanguageDefText(){
+        return $(languageDefText).shouldBe(Condition.visible).getText().trim();
+    }
+
+    public String getExpertisesDefText(){
+        return $(expertisesDefText).shouldBe(Condition.visible).getText().trim();
+    }
+
+    public String getCategoriesDefText(){
+        return $(categoriesDefText).shouldBe(Condition.visible).getText().trim();
+    }
+
+    public String getWriterDoesNotHavePortfolioText(){
+        return $(writerDoesNotHavePortfolioText).shouldBe(Condition.visible).getText().trim();
+    }
 
     public void openAddedPortfolioItem(WebDriver driver, String header) throws InterruptedException {
 

@@ -137,7 +137,7 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
 
     public String getUserCountry() {
 
-        return $(countryField).shouldBe(Condition.visible).getText();
+        return $(countryField).shouldBe(Condition.visible).getAttribute("value").trim();
     }
 
     public String getUserCurrency() {
@@ -177,7 +177,7 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
 
     public String getUserState() {
 
-        return $(userState).shouldBe(Condition.visible).getText();
+        return $(userState).shouldBe(Condition.visible).getAttribute("value").trim();
     }
 
     public String getUserCity() {

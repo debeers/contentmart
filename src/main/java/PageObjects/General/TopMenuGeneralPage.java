@@ -1,6 +1,7 @@
 package PageObjects.General;
 
 import PageObjects.BasePageObject;
+import PageObjects.Client.ClientEditProfilePage;
 import PageObjects.Client.NewOrderPage;
 import PageObjects.Writer.WriterEditProfilePage;
 import PageObjects.Writer.WriterProfilePage;
@@ -106,7 +107,7 @@ public class TopMenuGeneralPage extends BasePageObject {
 
     public String getUserNickNameFromProfileDropMenu() {
         clickOnProfileFromTopMenu();
-        return $(userNameFromDropMenu).shouldBe(visible).getText();
+        return $(userNameFromDropMenu).shouldBe(visible).getText().trim();
     }
 
     public NotificationsPage clickOnNotificationsFromDropMenu() {
@@ -115,12 +116,12 @@ public class TopMenuGeneralPage extends BasePageObject {
         return new NotificationsPage(driver);
     }
 
-//    public ClientEditProfilePage clientClickOnEditProfileFromDropMenu() {
-//
-//        $(editProfileDropMenu).shouldBe(visible).click();
-//        return new ClientEditProfilePage(driver);
-//    }
-//
+    public ClientEditProfilePage clientClickOnEditProfileFromDropMenu() {
+
+        $(editProfileDropMenu).shouldBe(visible).click();
+        return new ClientEditProfilePage(driver);
+    }
+
     public WriterEditProfilePage writerClickOnEditProfileFromDropMenu() {
 
         $(editProfileDropMenu).shouldBe(visible).click();
@@ -223,13 +224,11 @@ public class TopMenuGeneralPage extends BasePageObject {
         return new WriterProfilePage(driver);
     }
 
+    public ClientEditProfilePage selectEditClientProfileFromMenu() {
 
-//
-//    public ClientEditProfilePage selectEditClientProfileFromMenu() {
-//
-//        clickOnProfileFromTopMenu();
-//        return clientClickOnEditProfileFromDropMenu();
-//    }
+        clickOnProfileFromTopMenu();
+        return clientClickOnEditProfileFromDropMenu();
+    }
 
     public AccountDetailsPage selectAccountSettingsFromMenu() {
 

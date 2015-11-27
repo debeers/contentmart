@@ -44,11 +44,13 @@ public class DBWorker {
 
     @SuppressWarnings("ConstantConditions")
     public static void checkForExitingUser(String query, String column, String email) throws SQLException, InterruptedException {
+        String result = executeQuery(query, column);
+        if (result != null ) {
+            if (result.equalsIgnoreCase(email)){
+                deleteCreatedUserFromDB(email);
+            }
 
-        if(executeQuery(query, column).equalsIgnoreCase(email)){
-            deleteCreatedUserFromDB(email);
-            Thread.sleep(3000);
-        }else System.out.println("No such user in DB");
+        } else System.out.println("No such user in DB");
     }
 
 
