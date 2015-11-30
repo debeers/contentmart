@@ -12,6 +12,8 @@ import java.io.*;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by DeBeers on 06.11.2015.
@@ -19,8 +21,6 @@ import java.util.concurrent.TimeUnit;
 public class GmailListener {
 
     private IMAPFolder imapFolder;
-    private static final String ACTIVATION_LINK_PATTERN_BEGIN = "https://dev.contentmart.in/registration/activate_account/";
-    private static final String ACTIVATION_LINK_PATTERN_END = ">";
     public  Message message;
 
 
@@ -221,16 +221,19 @@ public class GmailListener {
 
     public  static String getActivationLinkFromTargetMessage(Message message) throws MessagingException, IOException {
 
-        String res = "";
-
         Multipart multipart = (Multipart)message.getContent();
         for (int i=0; i<multipart.getCount(); i++){
 
             BodyPart bodyPart = multipart.getBodyPart(i);
             String s = (String)bodyPart.getContent();
-            if(s.contains(ACTIVATION_LINK_PATTERN_BEGIN)){
-                res = s;
-                return res.substring(res.indexOf(ACTIVATION_LINK_PATTERN_BEGIN), res.lastIndexOf(ACTIVATION_LINK_PATTERN_END));
+
+            Pattern p = Pattern.compile("<a[^>]*href=\"(http[s]?:[^\"]*)\".*Activate<\\/a>");
+            Matcher m = p.matcher(s);
+
+            if(m.find()){
+                String url = m.group(1);
+                System.out.println("Regexp : " + url);
+                return url;
             }
         }
 

@@ -15,7 +15,6 @@ import static com.codeborne.selenide.Selenide.$;
  */
 public class GeneralHelpers {
 
-
     public static void jsDeleteClasses(String xpath, WebDriver driver) throws InterruptedException {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -78,6 +77,7 @@ public class GeneralHelpers {
         return true;
     }
 
+
     public static void safeJavaScriptClick(WebDriver driver, WebElement element) throws Exception {
         try {
             if (element.isEnabled() && element.isDisplayed()) {
@@ -96,6 +96,7 @@ public class GeneralHelpers {
         }
     }
 
+
     public static List<String> hintSeeker(List<WebElement> hints){
         List<String> hintsText = new ArrayList<>();
 
@@ -105,9 +106,9 @@ public class GeneralHelpers {
         return hintsText;
     }
 
+
     public static Boolean hintComparator(List<WebElement> hints, List<String> matcher){
        return CollectionUtils.isEqualCollection(hintSeeker(hints), matcher);
     }
-
 
 }

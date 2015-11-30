@@ -19,11 +19,12 @@ public class ChangeWriterDetails extends BaseTest {
     public void ChangeUserDetails() throws Exception {
 
         UserObject user = new UserObject();
+        String country = "Some";
 
         MyOrdersPage myOrdersPage = loginAs(driver, writerLogin);
         myOrdersPage.clickOnProfileFromTopMenu();
         AccountDetailsPage accountDetailsPage = myOrdersPage.clickOnAccountSettingsDropMenu();
-        setUserData(user, accountDetailsPage);
+        setUserData(user, accountDetailsPage, country);
         accountDetailsPage.clickOnSaveChangesButton();
         driver.navigate().refresh();
         Thread.sleep(3000); //server side wait

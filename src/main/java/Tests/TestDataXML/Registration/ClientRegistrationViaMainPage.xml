@@ -1,0 +1,25 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <!--Test Data -->
+    <entry key="timeout">600</entry>
+    <entry key="userRole">client</entry>
+    <entry key="userPassword">7777777</entry>
+    <entry key="mail">info@contentmart.in</entry>
+    <entry key="subject">Welcome to ContentMart.in!</entry>
+    <entry key="userEmail">contentmartmai@gmail.com</entry>
+
+    <!--Asserts -->
+    <entry key="UserCity">Kiev</entry>
+    <entry key="UserCountry">43</entry>
+    <entry key="UserState">2931</entry>
+    <entry key="UserTimeZone">267</entry>
+
+    <entry key="MyOrdersTitle">My Orders</entry>
+    <entry key="Post an order">Post an order</entry>
+    <entry key="Review Content">Review Content</entry>
+    <entry key="Choose a writer">Choose a writer</entry>
+    <entry key="Project complete">Project complete</entry>
+    <entry key="registrationTitle">Register successful | ContentMart</entry>
+
+</properties>

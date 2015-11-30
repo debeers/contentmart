@@ -19,11 +19,12 @@ public class ChangeClientDetails extends BaseTest {
     public void ChangeClientDetails() throws Exception {
 
         UserObject user = new UserObject();
+        String country = "India";
 
         MyOrdersPage myOrdersPage = loginAs(driver, clientLogin);
         myOrdersPage.clickOnProfileFromTopMenu();
         AccountDetailsPage accountDetailsPage = myOrdersPage.clickOnAccountSettingsDropMenu();
-        setUserData(user, accountDetailsPage);
+        setUserData(user, accountDetailsPage, country);
         accountDetailsPage.clickOnSaveChangesButton();
         driver.navigate().refresh();
         Thread.sleep(3000); //server side wait

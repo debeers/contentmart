@@ -37,8 +37,8 @@ public class MyOrdersPage extends TopMenuGeneralPage{
     @FindBy(xpath = ".//a[contains (text(), 'New order')]")
     public WebElement newOrderButton;
 
-    @FindBy(xpath = ".//div[@class = 'phone-fixed']")
-    public WebElement phoneBlock;
+    @FindBy(xpath = ".//div[@class = 'phone-fixed']/p")
+    public WebElement helpBlock;
 
 
     public String getProjectCompleteElementElement(){
@@ -66,8 +66,8 @@ public class MyOrdersPage extends TopMenuGeneralPage{
         return $(myOrdersTitle).shouldBe(Condition.visible).getText().trim();
     }
 
-    public String getNumberFromThePhoneBlock(){
-        return $(phoneBlock).shouldBe(Condition.visible).getText();
+    public String getNumberFromTheHelpBlock(){
+        return $(helpBlock).shouldBe(Condition.visible).getText();
     }
 
     public MyOrdersPage(WebDriver driver) {

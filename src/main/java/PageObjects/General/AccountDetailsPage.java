@@ -85,6 +85,13 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
     @FindBy(xpath = ".//div[contains (@class, 'jcrop-holder')]")
     public WebElement signatureSrcHolder;
 
+    @FindBy(xpath = ".//div[@class = 'phone-fixed']/p")
+    public WebElement phoneBlock;
+
+    public String getNumberFromThePhoneBlock(){
+        return phoneBlock.getText();
+    }
+
     @Override
     public URL getImageURL() {
 

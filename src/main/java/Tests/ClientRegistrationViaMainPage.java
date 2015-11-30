@@ -21,15 +21,15 @@ import static SQLRepo.General.checkUserExsistanceByMail;
 import static org.testng.Assert.assertEquals;
 
 /**
- * Created by DeBeers on 27.11.2015.
+ * Created by DeBeers on 30.11.2015.
  */
-public class ClientRegistrationViaLanding extends BaseTest{
+public class ClientRegistrationViaMainPage extends BaseTest{
 
     @Test(groups={"Fast_And_Furious_Smoke_1.0"})
-    public void ClientRegistrationViaLanding() throws Exception {
+    public void ClientRegistrationViaMainPage() throws Exception {
 
         Properties props = propertyXMLoader(System.getProperty("user.dir") +
-                "\\src\\main\\java\\tests\\TestDataXML\\Registration\\ClientRegistrationViaLanding.xml");
+                "\\src\\main\\java\\tests\\TestDataXML\\Registration\\ClientRegistrationViaMainPage.xml");
 
         Boolean isSeen = false;
         String userNickName = setUserNickName(props.getProperty("userRole"));
@@ -39,9 +39,8 @@ public class ClientRegistrationViaLanding extends BaseTest{
                         props.getProperty("userEmail")), "email", props.getProperty("userEmail")
         );
 
-        String title = registerFromLandingAsClient(
+        String title = registerAsClientFromMainPage(
                 driver,
-                props.getProperty("URL"),
                 userNickName,
                 props.getProperty("userEmail"),
                 props.getProperty("userPassword")
@@ -65,7 +64,7 @@ public class ClientRegistrationViaLanding extends BaseTest{
         MyOrdersPage myOrdersPage = new MyOrdersPage(driver);
 
         try{
-           myOrdersPage.newOrderButton.isDisplayed();
+            myOrdersPage.newOrderButton.isDisplayed();
 
         }catch (Exception e){
             System.out.println("For some reasons driver can`t open activation link, we gonna try it one more time after timeout");
@@ -73,13 +72,11 @@ public class ClientRegistrationViaLanding extends BaseTest{
             driver.get(activLink);
         }
 
-        isEvenID(props.getProperty("userEmail"));
-
-        Assert.assertEquals(myOrdersPage.getMyOrdersH1(),                      props.getProperty("MyOrdersTitle")    );
+        Assert.assertEquals(myOrdersPage.getMyOrdersH1(), props.getProperty("MyOrdersTitle"));
         Assert.assertEquals(myOrdersPage.getChooseAwriterElement(),            props.getProperty("Choose a writer")  );
-        Assert.assertEquals(myOrdersPage.getPostAnOrderElementText(), props.getProperty("Post an order"));
-        Assert.assertEquals(myOrdersPage.getReviewContentElementElement(), props.getProperty("Review Content"));
-        Assert.assertEquals(myOrdersPage.getProjectCompleteElementElement(), props.getProperty("Project complete"));
+        Assert.assertEquals(myOrdersPage.getPostAnOrderElementText(),          props.getProperty("Post an order")    );
+        Assert.assertEquals(myOrdersPage.getReviewContentElementElement(),     props.getProperty("Review Content")   );
+        Assert.assertEquals(myOrdersPage.getProjectCompleteElementElement(),   props.getProperty("Project complete") );
         Assert.assertEquals(myOrdersPage.getUserNickNameFromProfileDropMenu(), userNickName);
 
         NewOrderPage newOrderPage = myOrdersPage.clickOnNewOrderButton();
@@ -92,10 +89,10 @@ public class ClientRegistrationViaLanding extends BaseTest{
         AccountDetailsPage accountDetailsPage = newOrderPage.selectAccountSettingsFromMenu();
 
         Assert.assertEquals(accountDetailsPage.getUserNickNameFromProfileDropMenu(), userNickName   );
-        Assert.assertEquals(accountDetailsPage.getUserCountry(), props.getProperty("UserCountry"));
-        Assert.assertEquals(accountDetailsPage.getUserState(), props.getProperty("UserState"));
-        Assert.assertEquals(accountDetailsPage.getUserCity(), props.getProperty("UserCity"));
-        Assert.assertEquals(accountDetailsPage.getUserTimeZone(), props.getProperty("UserTimeZone"));
+        Assert.assertEquals(accountDetailsPage.getUserCountry(),  props.getProperty("UserCountry")  );
+        Assert.assertEquals(accountDetailsPage.getUserState(),    props.getProperty("UserState")    );
+        Assert.assertEquals(accountDetailsPage.getUserCity(),     props.getProperty("UserCity")     );
+        Assert.assertEquals(accountDetailsPage.getUserTimeZone(), props.getProperty("UserTimeZone") );
 
         Assert.assertEquals(accountDetailsPage.selectEditClientProfileFromMenu().getUserName(), userNickName);
 
@@ -109,4 +106,5 @@ public class ClientRegistrationViaLanding extends BaseTest{
 
         logOut(driver);
     }
+
 }

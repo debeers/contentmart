@@ -5,8 +5,6 @@ import PageObjects.General.MyOrdersPage;
 import org.testng.annotations.Test;
 
 import javax.mail.Message;
-
-import static Actions.General.RegistrationAndLogin.registerAs;
 import static GeneralHelpers.DBWorker.deleteCreatedUserFromDB;
 import static GeneralHelpers.DBWorker.setUserNickName;
 import static GeneralHelpers.GmailListener.getActivationLinkFromTargetMessage;
@@ -32,8 +30,8 @@ public class CreateNewUserTest extends BaseTest {
         String userPassword      = "7777777";
         String registrationTitle = "Register as a Client | ContentMart";
 
-        String title = registerAs(driver, userType, userNickName, userEmail, userPassword);
-        assertEquals(title, registrationTitle);
+ //       String title = registerAs(driver, userType, userNickName, userEmail, userPassword);
+  //      assertEquals(title, registrationTitle);
         Message targetMessage = new GmailListener()
                 .startListening(gmailCredentials, subject, fromEmail, isSeen, timeToWait);
 

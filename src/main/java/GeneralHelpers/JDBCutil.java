@@ -3,21 +3,24 @@ package GeneralHelpers;
 /**
  * Created by ilya on 07.09.2015.
  */
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Properties;
+
+import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
 
 public class JDBCutil {
 
+    private static Properties props() throws IOException {
+        Properties props =  propertyXMLoader(System.getProperty("user.dir") +
+                "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\MainSettings.xmll");
+        return props;
+    }
 
-    private static final String DB_DRIVER = "oracle.jdbc.driver.OracleDriver";
-    private static final String DB_CONNECTION = "jdbc:mysql://localhost:3306/content1";
-    private static final String DB_USER = "dev_contentmart";
-    private static final String DB_PASSWORD = "iequ5eYeev0l";
-    private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-
-
-    public static void executeUpdateDbUserTable(String insertTableSQL) throws SQLException {
+    public static void executeUpdateDbUserTable(String insertTableSQL) throws SQLException, IOException {
 
         Connection dbConnection = null;
         Statement statement = null;
@@ -50,13 +53,13 @@ public class JDBCutil {
 
     }
 
-    public static Connection getDBConnection() {
+    public static Connection getDBConnection() throws IOException {
 
         Connection dbConnection = null;
 
         try {
 
-            Class.forName(DB_DRIVER);
+            Class.forName(props().getProperty("DB_DRIVER"));
 
         } catch (ClassNotFoundException e) {
 
@@ -67,7 +70,11 @@ public class JDBCutil {
         try {
 
             dbConnection = DriverManager.getConnection(
-                    DB_CONNECTION, DB_USER, DB_PASSWORD);
+
+                    props().getProperty("DB_CONNECTION"),
+                    props().getProperty("DB_USER"),
+                    props().getProperty("DB_PASSWORD"));
+
             return dbConnection;
 
         } catch (SQLException e) {
@@ -77,27 +84,6 @@ public class JDBCutil {
         }
 
         return dbConnection;
-
-    }
-
-    private static String getCurrentTimeStamp() {
-
-        java.util.Date today = new java.util.Date();
-        return dateFormat.format(today.getTime());
-
-    }
-
-
-    public static void executePrepeared(String query) throws SQLException {
-
-        Connection dbConnection;
-        PreparedStatement statement = null;
-
-
-            dbConnection = getDBConnection();
-            statement = dbConnection.prepareStatement(query);
-
-
 
     }
 

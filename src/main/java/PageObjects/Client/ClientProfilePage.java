@@ -30,7 +30,7 @@ public class ClientProfilePage extends TopMenuGeneralPage implements BirthdayDat
     @FindBy(xpath = ".//p[@class = 'user_name']")
     public WebElement clientName;
 
-    @FindBy(xpath = ".//div[@class = 'phone-fixed']")
+    @FindBy(xpath = ".//div[@class = 'phone-fixed']/p")
     public WebElement phoneBlock;
 
     public String getNumberFromThePhoneBlock(){

@@ -7,29 +7,33 @@ import PageObjects.General.PartnersPage;
 import PageObjects.Writer.WriterProfilePage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import javax.mail.Message;
 import java.util.Properties;
 
-import static Actions.General.RegistrationAndLogin.*;
+import static Actions.General.RegistrationAndLogin.registerAsWriterFromMainPage;
+import static Actions.General.RegistrationAndLogin.switchUser;
 import static GeneralHelpers.DBWorker.checkForExitingUser;
 import static GeneralHelpers.DBWorker.deleteCreatedUserFromDB;
 import static GeneralHelpers.DBWorker.setUserNickName;
 import static GeneralHelpers.GmailListener.getActivationLinkFromTargetMessage;
-import static GeneralHelpers.PropertiesLoader.*;
+import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
 import static SQLRepo.General.checkUserExsistanceByMail;
 import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertEquals;
 
-
-public class WriterRegistrationViaLanding extends BaseTest{
+/**
+ * Created by DeBeers on 30.11.2015.
+ */
+public class WriterRegistrationViaMainPage extends BaseTest{
 
     @Test(groups={"Fast_And_Furious_Smoke_1.0"})
-    public void WriterRegistrationViaLanding() throws Exception {
+    public void WriterRegistrationViaMainPage() throws Exception {
 
         Properties props     = propertyXMLoader(System.getProperty("user.dir") +
-                "\\src\\main\\java\\tests\\TestDataXML\\Registration\\WriterRegistrationViaLanding.xml");
+                "\\src\\main\\java\\tests\\TestDataXML\\Registration\\WriterRegistrationViaMainPage.xml");
 
-        Boolean isSeen       = false;
+        Boolean isSeen       =  false;
         String userNickName  =  setUserNickName(props.getProperty("userRole"));
 
         checkForExitingUser(
@@ -37,9 +41,8 @@ public class WriterRegistrationViaLanding extends BaseTest{
                         props.getProperty("userEmail")), "email", props.getProperty("userEmail")
         );
 
-        String title = registerFromLandingAsWriter(
+        String title = registerAsWriterFromMainPage(
                 driver,
-                props.getProperty("URL"),
                 userNickName,
                 props.getProperty("userEmail"),
                 props.getProperty("userPassword")
@@ -57,9 +60,8 @@ public class WriterRegistrationViaLanding extends BaseTest{
                 );
 
         String activLink = getActivationLinkFromTargetMessage(targetMessage);
-        System.out.println(activLink);
-
         driver.get(activLink);
+
         MyOrdersPage myOrdersPage = new MyOrdersPage(driver);
 
         try{
@@ -70,7 +72,6 @@ public class WriterRegistrationViaLanding extends BaseTest{
             Thread.sleep(5000);
             driver.get(activLink);
         }
-
 
         myOrdersPage = new MyOrdersPage(driver);
         Assert.assertTrue($(myOrdersPage.takeTheTestNowButton).isDisplayed());
@@ -97,7 +98,7 @@ public class WriterRegistrationViaLanding extends BaseTest{
         Assert.assertEquals(writerProfilePage.getLanguageDefText(),   props.getProperty("User does not know any language")               );
         Assert.assertEquals(writerProfilePage.getExpertisesDefText(), props.getProperty("User does not have any expertises")             );
         Assert.assertEquals(writerProfilePage.getCategoriesDefText(), props.getProperty("User does not selected any writing categories") );
-        Assert.assertEquals(writerProfilePage.getWriterDoesNotHavePortfolioText(), userNickName + " does not have portfolio yet :("     );
+        Assert.assertEquals(writerProfilePage.getWriterDoesNotHavePortfolioText(), userNickName + "User does not have portfolio yet"     );
 
         deleteCreatedUserFromDB(props.getProperty("userEmail"));
     }

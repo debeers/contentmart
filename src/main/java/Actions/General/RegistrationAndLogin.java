@@ -23,7 +23,6 @@ import static org.testng.Assert.assertEquals;
  */
 public class RegistrationAndLogin {
 
-
     public static MyOrdersPage loginAs(WebDriver driver, LoginObject clientLogin) {
 
         LoginPage loginPage = new LoginPage(driver);
@@ -57,27 +56,43 @@ public class RegistrationAndLogin {
     }
 
 
-    public static String registerAs(WebDriver driver, String userType, String nickname, String email, String password) throws InterruptedException {
-
-        RegistrationFormPage registrationFormPage = null;
-        String result = "";
+    public static String registerAsClientFromMainPage(WebDriver driver, String nickname, String email, String password) throws InterruptedException {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage(driver);
         loginPage.registrationLinkClick();
+        RegistrationFormPage registrationFormPage = loginPage.clickOnRegisterAsClient();
 
-        if (userType.equalsIgnoreCase("writer")) {
-            registrationFormPage = loginPage.clickOnRegisterAsWriter();
-            result = driver.getTitle();
+        try {
+            registrationFormPage.getHeader().trim().equals("Register as a Client");
 
-        } else if (userType.equalsIgnoreCase("client")) {
-            registrationFormPage = loginPage.clickOnRegisterAsClient();
-            result = driver.getTitle();
+        }catch (Exception e) {
+            System.out.println("Wrong header, probably we are not at required page");
         }
 
-        assert registrationFormPage != null;
         registrationFormPage.register(nickname, email, password);
-        return result;
+        $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
+        return driver.getTitle();
+    }
+
+
+    public static String registerAsWriterFromMainPage(WebDriver driver, String nickname, String email, String password) throws InterruptedException {
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.goToLoginPage(driver);
+        loginPage.registrationLinkClick();
+        RegistrationFormPage registrationFormPage = loginPage.clickOnRegisterAsWriter();
+
+        try {
+            registrationFormPage.getHeader().trim().equals("Register as a Writer");
+
+        }catch (Exception e) {
+            System.out.println("Wrong header, probably we are not at required page");
+        }
+
+        registrationFormPage.register(nickname, email, password);
+        $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
+        return driver.getTitle();
     }
 
 

@@ -55,7 +55,7 @@ public class GoToAccountSettings {
     }
 
 
-    public static void setUserData(UserObject user, AccountDetailsPage accountDetailsPage) throws InterruptedException {
+    public static void setUserData(UserObject user, AccountDetailsPage accountDetailsPage, String clientCountry) throws InterruptedException {
 
 
         if($(accountDetailsPage.countryField).is(Condition.enabled)) {
@@ -67,7 +67,8 @@ public class GoToAccountSettings {
             Select country  = new Select(accountDetailsPage.countryField);
 
             $(accountDetailsPage.countryField).shouldBe(Condition.visible);
-            country.selectByIndex(new Random().nextInt(country.getOptions().size()));
+            country.selectByIndex(
+                    clientCountry.equalsIgnoreCase("India") ? 102 : new Random().nextInt(country.getOptions().size()));
 
             $(accountDetailsPage.currencyField).shouldBe(Condition.visible);
             currency.selectByIndex(new Random().nextInt(currency.getOptions().size()));

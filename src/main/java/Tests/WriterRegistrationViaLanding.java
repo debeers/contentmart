@@ -57,9 +57,22 @@ public class WriterRegistrationViaLanding extends BaseTest{
                 );
 
         String activLink = getActivationLinkFromTargetMessage(targetMessage);
-        driver.get(activLink);
+        System.out.println(activLink);
 
+        driver.get(activLink);
         MyOrdersPage myOrdersPage = new MyOrdersPage(driver);
+
+        try{
+            myOrdersPage.takeTheTestNowButton.isDisplayed();
+
+        }catch (Exception e){
+            System.out.println("For some reasons driver can`t open activation link, we gonna try it one more time after timeout");
+            Thread.sleep(5000);
+            driver.get(activLink);
+        }
+
+
+        myOrdersPage = new MyOrdersPage(driver);
         Assert.assertTrue($(myOrdersPage.takeTheTestNowButton).isDisplayed());
 
         assertEquals(driver.getTitle(), "My Orders | ContentMart");
@@ -84,7 +97,7 @@ public class WriterRegistrationViaLanding extends BaseTest{
         Assert.assertEquals(writerProfilePage.getLanguageDefText(),   props.getProperty("User does not know any language")               );
         Assert.assertEquals(writerProfilePage.getExpertisesDefText(), props.getProperty("User does not have any expertises")             );
         Assert.assertEquals(writerProfilePage.getCategoriesDefText(), props.getProperty("User does not selected any writing categories") );
-        Assert.assertEquals(writerProfilePage.getWriterDoesNotHavePortfolioText(), userNickName + "User does not have portfolio yet"     );
+        Assert.assertEquals(writerProfilePage.getWriterDoesNotHavePortfolioText(), userNickName + " does not have portfolio yet :("     );
 
         deleteCreatedUserFromDB(props.getProperty("userEmail"));
     }
