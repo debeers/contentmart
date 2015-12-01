@@ -95,12 +95,7 @@ public class RegistrationAndLogin {
         forWritersPage.goToForWritersLanding(URL);
         RegistrationFormPage registrationFormPage = forWritersPage.clickOnRegisterNowButton();
 
-        try {
             registrationFormPage.getHeader().trim().equals("Register as a Writer");
-
-        }catch (Exception e) {
-            System.out.println("Wrong header, probably we are not at required page");
-        }
 
         registrationFormPage.register(nickname, email, password);
         $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
