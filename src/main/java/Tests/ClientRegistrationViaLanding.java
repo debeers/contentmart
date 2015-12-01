@@ -13,7 +13,7 @@ import javax.mail.Message;
 import java.util.Properties;
 
 import static Actions.General.RegistrationAndLogin.*;
-import static GeneralHelpers.DBWorker.checkForExitingUser;
+import static GeneralHelpers.DBWorker.checkForExitingUserAndDeleteIt;
 import static GeneralHelpers.DBWorker.setUserNickName;
 import static GeneralHelpers.GmailListener.getActivationLinkFromTargetMessage;
 import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
@@ -23,7 +23,7 @@ import static org.testng.Assert.assertEquals;
 /**
  * Created by DeBeers on 27.11.2015.
  */
-public class ClientRegistrationViaLanding extends BaseTest{
+public class   ClientRegistrationViaLanding extends BaseTest{
 
     @Test(groups={"Fast_And_Furious_Smoke_1.0"})
     public void ClientRegistrationViaLanding() throws Exception {
@@ -34,7 +34,7 @@ public class ClientRegistrationViaLanding extends BaseTest{
         Boolean isSeen = false;
         String userNickName = setUserNickName(props.getProperty("userRole"));
 
-        checkForExitingUser(
+        checkForExitingUserAndDeleteIt(
                 checkUserExsistanceByMail(
                         props.getProperty("userEmail")), "email", props.getProperty("userEmail")
         );
@@ -72,8 +72,6 @@ public class ClientRegistrationViaLanding extends BaseTest{
             Thread.sleep(5000);
             driver.get(activLink);
         }
-
-        isEvenID(props.getProperty("userEmail"));
 
         Assert.assertEquals(myOrdersPage.getMyOrdersH1(),                      props.getProperty("MyOrdersTitle")    );
         Assert.assertEquals(myOrdersPage.getChooseAwriterElement(),            props.getProperty("Choose a writer")  );

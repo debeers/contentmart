@@ -292,14 +292,6 @@ public class NewOrderPage extends TopMenuGeneralPage {
 
     }
 
-
-
-
-
-
-
-
-
     public NewOrderPage(WebDriver driver) {
         super(driver);
     }

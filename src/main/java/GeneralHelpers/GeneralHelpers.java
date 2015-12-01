@@ -3,9 +3,13 @@ package GeneralHelpers;
 import com.codeborne.selenide.Condition;
 import org.apache.commons.collections4.CollectionUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.firefox.internal.Streams;
+
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -109,6 +113,18 @@ public class GeneralHelpers {
 
     public static Boolean hintComparator(List<WebElement> hints, List<String> matcher){
        return CollectionUtils.isEqualCollection(hintSeeker(hints), matcher);
+    }
+
+    public static String getSystemDate(){
+        return new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
+    }
+
+    public static String getSystemTime_24(){
+        return new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
+    }
+
+    public static String getSystemTime_AM_PM(){
+        return new SimpleDateFormat("hh:mm a").format(Calendar.getInstance().getTime());
     }
 
 }

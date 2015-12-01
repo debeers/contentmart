@@ -1,11 +1,13 @@
 package GeneralHelpers;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import static GeneralHelpers.JDBCutil.*;
+import static SQLRepo.General.checkUserID;
 import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang.RandomStringUtils.randomNumeric;
 
@@ -25,7 +27,7 @@ public class DBWorker {
     @SuppressWarnings("ConstantConditions")
     public static String createMaxUserId(){
 
-        int i = Integer.parseInt(executeQuery(MAX_USER_ID, "id"))+1;
+        int i = Integer.parseInt(getColumn(MAX_USER_ID, "id"))+1;
         return Integer.toString(i);
     }
 
@@ -43,8 +45,8 @@ public class DBWorker {
 
 
     @SuppressWarnings("ConstantConditions")
-    public static void checkForExitingUser(String query, String column, String email) throws SQLException, InterruptedException {
-        String result = executeQuery(query, column);
+    public static void checkForExitingUserAndDeleteIt(String query, String column, String email) throws SQLException, InterruptedException, IOException {
+        String result = getColumn(query, column);
         if (result != null ) {
             if (result.equalsIgnoreCase(email)){
                 deleteCreatedUserFromDB(email);
@@ -55,7 +57,7 @@ public class DBWorker {
 
 
 
-    public static String deleteCreatedUserFromDB(String whereEmail) throws SQLException {
+    public static String deleteCreatedUserFromDB(String whereEmail) throws SQLException, IOException {
 
         String mail = randomNumeric(4) + randomAlphabetic(3) + randomNumeric(3) + "@testmail.com' ";
 
@@ -68,7 +70,7 @@ public class DBWorker {
             return mail;
     }
 
-    public static void createUserBills(String id, String name) throws SQLException {
+    public static void createUserBills(String id, String name) throws SQLException, IOException {
 
         String bill_1 = "insert into `billing`.`bills` (`id`, `bill_type`, `name`, `user_id`, `balance`) values(NULL,'GU','General user account for "+ name +"','"+ id +"','0.00')";
         String bill_2 = "insert into `billing`.`bills` (`id`, `bill_type`, `name`, `user_id`, `balance`) values(NULL,'BU','Blocked user account for "+ name +"','"+ id +"','0.00')";
@@ -77,7 +79,7 @@ public class DBWorker {
     }
 
 
-    public static void createNewUserFromDB1(String query) throws SQLException {
+    public static void createNewUserFromDB1(String query) throws SQLException, IOException {
 
         Connection dbConnection;
         PreparedStatement preparedStatement;
@@ -85,7 +87,7 @@ public class DBWorker {
 
         dbConnection = getDBConnection();
         preparedStatement = dbConnection.prepareStatement(query);
-        preparedStatement.setInt(1, Integer.parseInt(executeQuery(MAX_USER_ID, "id"))+1);
+        preparedStatement.setInt(1, Integer.parseInt(getColumn(MAX_USER_ID, "id"))+1);
         preparedStatement.setString(2, createTestUserName());
         preparedStatement.setString(3, setUserNickName("copywriter"));
         preparedStatement.setString(4, "TEST");
@@ -95,7 +97,7 @@ public class DBWorker {
     }
 
 
-    public static void createNewUserFromDB(String role, String name) throws SQLException {
+    public static void createNewUserFromDB(String role, String name) throws SQLException, IOException {
 
                 String insertTableSQL = "insert into `users` " +
                  "(`id`, `first_name`, `nick_name`, `last_name`, `birthday`, `email`, `phone`, `is_user_deleted`, `password`, `password_salt`, `register_date`, " +
@@ -111,4 +113,12 @@ public class DBWorker {
     }
 
 
+    public static String getUserID(String email){
+
+        String res = getColumn(checkUserID(email), "id");
+        if(res != null){
+            return res;
+        }
+        return null;
+    }
 }

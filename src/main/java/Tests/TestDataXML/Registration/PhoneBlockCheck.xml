@@ -6,6 +6,7 @@
     <entry key="evenUserPassword">111111</entry>
 
     <!--Asserts -->
-    <entry key="helpBlock">Leave a missed call. We will get back soon</entry>
+    <entry key="helpBlock_10_19">call our toll free no.</entry>
+    <entry key="helpBlock_19_10">Leave a missed call. We will get back soon</entry>
 
 </properties>

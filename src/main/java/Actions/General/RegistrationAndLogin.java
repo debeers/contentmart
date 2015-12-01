@@ -1,7 +1,7 @@
 package Actions.General;
 
 import Entities.LoginObject;
-import GeneralHelpers.JDBCutil;
+import GeneralHelpers.DBWorker;
 import PageObjects.General.LoginPage;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.General.RegistrationFormPage;
@@ -9,12 +9,10 @@ import PageObjects.General.TopMenuGeneralPage;
 import PageObjects.Landings.ForClientsPage;
 import PageObjects.Landings.ForWritersPage;
 import com.codeborne.selenide.Condition;
-import junit.framework.Assert;
-import net.sf.qualitycheck.Throws;
 import org.openqa.selenium.WebDriver;
 
-import static GeneralHelpers.JDBCutil.*;
-import static SQLRepo.General.checkUserID;
+import java.io.File;
+
 import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertEquals;
 
@@ -83,12 +81,7 @@ public class RegistrationAndLogin {
         loginPage.registrationLinkClick();
         RegistrationFormPage registrationFormPage = loginPage.clickOnRegisterAsWriter();
 
-        try {
             registrationFormPage.getHeader().trim().equals("Register as a Writer");
-
-        }catch (Exception e) {
-            System.out.println("Wrong header, probably we are not at required page");
-        }
 
         registrationFormPage.register(nickname, email, password);
         $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
@@ -125,25 +118,12 @@ public class RegistrationAndLogin {
     }
 
 
-    public static Boolean isEvenID(String email){
+    public static Boolean isEvenID(int id){
 
-        int res = Integer.parseInt(getUserID(email));
-
-        if(res%2 == 1){
+        if(id%2 == 1){
             return true;
         }else
             return false;
-    }
-
-
-    public static String getUserID(String email){
-
-        String res = executeQuery(checkUserID(email), "id");
-
-        if(res != null){
-            return res;
-        }
-        return null;
     }
 
 }

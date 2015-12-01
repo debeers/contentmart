@@ -13,7 +13,7 @@ import java.util.Properties;
 
 import static Actions.General.RegistrationAndLogin.registerAsWriterFromMainPage;
 import static Actions.General.RegistrationAndLogin.switchUser;
-import static GeneralHelpers.DBWorker.checkForExitingUser;
+import static GeneralHelpers.DBWorker.checkForExitingUserAndDeleteIt;
 import static GeneralHelpers.DBWorker.deleteCreatedUserFromDB;
 import static GeneralHelpers.DBWorker.setUserNickName;
 import static GeneralHelpers.GmailListener.getActivationLinkFromTargetMessage;
@@ -36,7 +36,7 @@ public class WriterRegistrationViaMainPage extends BaseTest{
         Boolean isSeen       =  false;
         String userNickName  =  setUserNickName(props.getProperty("userRole"));
 
-        checkForExitingUser(
+        checkForExitingUserAndDeleteIt(
                 checkUserExsistanceByMail(
                         props.getProperty("userEmail")), "email", props.getProperty("userEmail")
         );

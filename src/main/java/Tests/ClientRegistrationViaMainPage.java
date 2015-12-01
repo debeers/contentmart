@@ -13,7 +13,7 @@ import javax.mail.Message;
 import java.util.Properties;
 
 import static Actions.General.RegistrationAndLogin.*;
-import static GeneralHelpers.DBWorker.checkForExitingUser;
+import static GeneralHelpers.DBWorker.checkForExitingUserAndDeleteIt;
 import static GeneralHelpers.DBWorker.setUserNickName;
 import static GeneralHelpers.GmailListener.getActivationLinkFromTargetMessage;
 import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
@@ -34,7 +34,7 @@ public class ClientRegistrationViaMainPage extends BaseTest{
         Boolean isSeen = false;
         String userNickName = setUserNickName(props.getProperty("userRole"));
 
-        checkForExitingUser(
+        checkForExitingUserAndDeleteIt(
                 checkUserExsistanceByMail(
                         props.getProperty("userEmail")), "email", props.getProperty("userEmail")
         );
@@ -74,9 +74,9 @@ public class ClientRegistrationViaMainPage extends BaseTest{
 
         Assert.assertEquals(myOrdersPage.getMyOrdersH1(), props.getProperty("MyOrdersTitle"));
         Assert.assertEquals(myOrdersPage.getChooseAwriterElement(),            props.getProperty("Choose a writer")  );
-        Assert.assertEquals(myOrdersPage.getPostAnOrderElementText(),          props.getProperty("Post an order")    );
-        Assert.assertEquals(myOrdersPage.getReviewContentElementElement(),     props.getProperty("Review Content")   );
-        Assert.assertEquals(myOrdersPage.getProjectCompleteElementElement(),   props.getProperty("Project complete") );
+        Assert.assertEquals(myOrdersPage.getPostAnOrderElementText(), props.getProperty("Post an order"));
+        Assert.assertEquals(myOrdersPage.getReviewContentElementElement(), props.getProperty("Review Content"));
+        Assert.assertEquals(myOrdersPage.getProjectCompleteElementElement(), props.getProperty("Project complete"));
         Assert.assertEquals(myOrdersPage.getUserNickNameFromProfileDropMenu(), userNickName);
 
         NewOrderPage newOrderPage = myOrdersPage.clickOnNewOrderButton();
@@ -89,10 +89,10 @@ public class ClientRegistrationViaMainPage extends BaseTest{
         AccountDetailsPage accountDetailsPage = newOrderPage.selectAccountSettingsFromMenu();
 
         Assert.assertEquals(accountDetailsPage.getUserNickNameFromProfileDropMenu(), userNickName   );
-        Assert.assertEquals(accountDetailsPage.getUserCountry(),  props.getProperty("UserCountry")  );
-        Assert.assertEquals(accountDetailsPage.getUserState(),    props.getProperty("UserState")    );
-        Assert.assertEquals(accountDetailsPage.getUserCity(),     props.getProperty("UserCity")     );
-        Assert.assertEquals(accountDetailsPage.getUserTimeZone(), props.getProperty("UserTimeZone") );
+        Assert.assertEquals(accountDetailsPage.getUserCountry(), props.getProperty("UserCountry"));
+        Assert.assertEquals(accountDetailsPage.getUserState(), props.getProperty("UserState"));
+        Assert.assertEquals(accountDetailsPage.getUserCity(), props.getProperty("UserCity"));
+        Assert.assertEquals(accountDetailsPage.getUserTimeZone(), props.getProperty("UserTimeZone"));
 
         Assert.assertEquals(accountDetailsPage.selectEditClientProfileFromMenu().getUserName(), userNickName);
 

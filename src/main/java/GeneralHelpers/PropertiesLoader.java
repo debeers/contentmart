@@ -10,19 +10,9 @@ import java.util.Properties;
  */
 public class PropertiesLoader {
 
-
-
-
     public static Properties propertyXMLoader(String path) throws FileNotFoundException, IOException {
-
         Properties props = new Properties();
         props.loadFromXML(new FileInputStream(path));
-
         return props;
     }
-
-
-
-
-
 }

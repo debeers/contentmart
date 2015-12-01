@@ -1,11 +1,6 @@
 package PageObjects.Client;
 
-
-import Entities.OrderObject;
-import GeneralHelpers.CreateNewOrderHelper;
 import PageObjects.General.TopMenuGeneralPage;
-import PageObjects.General.MyOrdersPage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,7 +14,6 @@ import java.util.Random;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
-import static java.lang.Thread.sleep;
 
 public class ClientNewOrderPage extends TopMenuGeneralPage {
 
@@ -133,44 +127,12 @@ public class ClientNewOrderPage extends TopMenuGeneralPage {
     }
 
 
-//    public OrderInfoAndActions andClickOnSaveAsDraftButton(WebDriver driver) throws InterruptedException {
-//
-//        $(saveAsDraftButtonBottom).shouldBe(visible).click();
-//        waitForPageLoad(driver);
-//        OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
-//
-//        return orderInfoAndActions;
-//    }
-
-
     public String xDateBuilder(String day) {
 
         String xpath = "html//td[.//text()[contains(., '";
         String t = day + "')]] [not(contains(@class, 'xdsoft_disabled'))]";
         return xpath + t;
     }
-
-
-//    public MyOrdersPage clickOnCancelOrderButton() {
-//
-//        $(cancelOrderButtonBottom).shouldBe(visible).click();
-//        waitForPageLoad(driver);
-//        MyOrdersPage myOrders = new MyOrdersPage(driver);
-//        return myOrders;
-//    }
-
-
-//    public OrderInfoAndActions andClickOnPublishNewOrderButton(WebDriver driver) {
-//        WebDriverWait wait = new WebDriverWait(driver, 15);
-//
-//        publishButton.click();
-//        OrderInfoAndActions orderInfoAndActions = new OrderInfoAndActions(driver);
-//        waitForPageLoad(driver);
-//        wait.until(ExpectedConditions.visibilityOf(orderInfoAndActions.orderStatus));
-//        wait.until(ExpectedConditions.visibilityOf(orderInfoAndActions.orderDeadline));
-//
-//        return orderInfoAndActions;
-//    }
 
 
     public String getStopWordsAllert() {

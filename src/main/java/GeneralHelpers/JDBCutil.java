@@ -16,7 +16,7 @@ public class JDBCutil {
 
     private static Properties props() throws IOException {
         Properties props =  propertyXMLoader(System.getProperty("user.dir") +
-                "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\MainSettings.xmll");
+                "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\DB_CONNECTION.xml");
         return props;
     }
 
@@ -88,7 +88,7 @@ public class JDBCutil {
     }
 
 
-    public static String executeQuery(String query, String column) {
+    public static String getColumn(String query, String column) {
 
         Connection dbConnection;
         Statement statement;
