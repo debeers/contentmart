@@ -1,5 +1,7 @@
 package Tests;
 
+import Entities.Mail;
+import GeneralHelpers.DBUtill;
 import GeneralHelpers.GmailListener;
 import PageObjects.General.AccountDetailsPage;
 import PageObjects.General.MyOrdersPage;
@@ -13,8 +15,9 @@ import java.util.Properties;
 import static Actions.General.RegistrationAndLogin.*;
 import static GeneralHelpers.DBWorker.checkForExitingUserAndDeleteIt;
 import static GeneralHelpers.DBWorker.deleteCreatedUserFromDB;
-import static GeneralHelpers.DBWorker.setUserNickName;
+import static GeneralHelpers.GeneralHelpers.setRandomUserNickName;
 import static GeneralHelpers.GmailListener.getActivationLinkFromTargetMessage;
+import static GeneralHelpers.MailCreator.createNewUserMail;
 import static GeneralHelpers.PropertiesLoader.*;
 import static SQLRepo.General.checkUserExsistanceByMail;
 import static com.codeborne.selenide.Selenide.$;
@@ -29,21 +32,38 @@ public class WriterRegistrationViaLanding extends BaseTest{
         Properties props     = propertyXMLoader(System.getProperty("user.dir") +
                 "\\src\\main\\java\\tests\\TestDataXML\\Registration\\WriterRegistrationViaLanding.xml");
 
+        String userDBconn = "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\DB_CONNECTION.xml";
+
+        Mail mail = new Mail();
+
+        DBUtill dbUtill_User = new DBUtill();
+        dbUtill_User = dbUtill_User.initDB(userDBconn);
+
+        
         Boolean isSeen       = false;
-        String userNickName  =  setUserNickName(props.getProperty("userRole"));
+        String userNickName  =  setRandomUserNickName(props.getProperty("userRole"));
 
         checkForExitingUserAndDeleteIt(
-                checkUserExsistanceByMail(
-                        props.getProperty("userEmail")), "email", props.getProperty("userEmail")
+                dbUtill_User,
+                checkUserExsistanceByMail(mail.getId()),
+                "email", mail.getId()
         );
+
+
+        String email = createNewUserMail(
+                                mail.initMail(
+                                        props.getProperty("userRole")), dbUtill_User
+        );
+
 
         String title = registerFromLandingAsWriter(
                 driver,
                 props.getProperty("URL"),
                 userNickName,
-                props.getProperty("userEmail"),
+                email,
                 props.getProperty("userPassword")
         );
+
 
         assertEquals(title, props.getProperty("registrationTitle"));
 
@@ -55,6 +75,7 @@ public class WriterRegistrationViaLanding extends BaseTest{
                         isSeen,
                         Integer.valueOf(props.getProperty("timeout"))
                 );
+
 
         String activLink = getActivationLinkFromTargetMessage(targetMessage);
         System.out.println(activLink);
@@ -81,7 +102,7 @@ public class WriterRegistrationViaLanding extends BaseTest{
         AccountDetailsPage accountDetailsPage = myOrdersPage.selectAccountSettingsFromMenu();
 
         Assert.assertEquals(accountDetailsPage.getUserNickNameFromProfileDropMenu(), userNickName   );
-        Assert.assertEquals(accountDetailsPage.getUserCountry(),  props.getProperty("UserCountry")  );
+        Assert.assertEquals(accountDetailsPage.getUserCountry(), props.getProperty("UserCountry")   );
         Assert.assertEquals(accountDetailsPage.getUserTimeZone(), props.getProperty("UserTimeZone") );
 
         WriterProfilePage writerProfilePage = accountDetailsPage.selectWriterProfileFromMenu();
@@ -97,9 +118,10 @@ public class WriterRegistrationViaLanding extends BaseTest{
         Assert.assertEquals(writerProfilePage.getLanguageDefText(),   props.getProperty("User does not know any language")               );
         Assert.assertEquals(writerProfilePage.getExpertisesDefText(), props.getProperty("User does not have any expertises")             );
         Assert.assertEquals(writerProfilePage.getCategoriesDefText(), props.getProperty("User does not selected any writing categories") );
-        Assert.assertEquals(writerProfilePage.getWriterDoesNotHavePortfolioText(), userNickName + " does not have portfolio yet :("     );
+        Assert.assertEquals(writerProfilePage.getWriterDoesNotHavePortfolioText(), userNickName + " does not have portfolio yet :("      );
 
-        deleteCreatedUserFromDB(props.getProperty("userEmail"));
+        logOut(driver);
+
     }
 
 }

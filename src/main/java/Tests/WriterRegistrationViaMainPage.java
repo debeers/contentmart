@@ -1,5 +1,7 @@
 package Tests;
 
+import Entities.Mail;
+import GeneralHelpers.DBUtill;
 import GeneralHelpers.GmailListener;
 import PageObjects.General.AccountDetailsPage;
 import PageObjects.General.MyOrdersPage;
@@ -11,12 +13,14 @@ import org.testng.annotations.Test;
 import javax.mail.Message;
 import java.util.Properties;
 
+import static Actions.General.RegistrationAndLogin.logOut;
 import static Actions.General.RegistrationAndLogin.registerAsWriterFromMainPage;
 import static Actions.General.RegistrationAndLogin.switchUser;
 import static GeneralHelpers.DBWorker.checkForExitingUserAndDeleteIt;
 import static GeneralHelpers.DBWorker.deleteCreatedUserFromDB;
-import static GeneralHelpers.DBWorker.setUserNickName;
+import static GeneralHelpers.GeneralHelpers.setRandomUserNickName;
 import static GeneralHelpers.GmailListener.getActivationLinkFromTargetMessage;
+import static GeneralHelpers.MailCreator.createNewUserMail;
 import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
 import static SQLRepo.General.checkUserExsistanceByMail;
 import static com.codeborne.selenide.Selenide.$;
@@ -33,20 +37,36 @@ public class WriterRegistrationViaMainPage extends BaseTest{
         Properties props     = propertyXMLoader(System.getProperty("user.dir") +
                 "\\src\\main\\java\\tests\\TestDataXML\\Registration\\WriterRegistrationViaMainPage.xml");
 
-        Boolean isSeen       =  false;
-        String userNickName  =  setUserNickName(props.getProperty("userRole"));
+        String userDBconn = "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\DB_CONNECTION.xml";
+
+        Mail mail = new Mail();
+
+        DBUtill dbUtill_User = new DBUtill();
+        dbUtill_User = dbUtill_User.initDB(userDBconn);
+
+        Boolean isSeen       = false;
+        String userNickName  =  setRandomUserNickName(props.getProperty("userRole"));
 
         checkForExitingUserAndDeleteIt(
-                checkUserExsistanceByMail(
-                        props.getProperty("userEmail")), "email", props.getProperty("userEmail")
+                dbUtill_User,
+                checkUserExsistanceByMail(mail.getId()),
+                "email", mail.getId()
         );
+
+
+        String email = createNewUserMail(
+                mail.initMail(
+                        props.getProperty("userRole")), dbUtill_User
+        );
+
 
         String title = registerAsWriterFromMainPage(
                 driver,
                 userNickName,
-                props.getProperty("userEmail"),
+                email,
                 props.getProperty("userPassword")
         );
+
 
         assertEquals(title, props.getProperty("registrationTitle"));
 
@@ -58,6 +78,7 @@ public class WriterRegistrationViaMainPage extends BaseTest{
                         isSeen,
                         Integer.valueOf(props.getProperty("timeout"))
                 );
+
 
         String activLink = getActivationLinkFromTargetMessage(targetMessage);
         driver.get(activLink);
@@ -100,7 +121,7 @@ public class WriterRegistrationViaMainPage extends BaseTest{
         Assert.assertEquals(writerProfilePage.getCategoriesDefText(), props.getProperty("User does not selected any writing categories") );
         Assert.assertEquals(writerProfilePage.getWriterDoesNotHavePortfolioText(), userNickName + "User does not have portfolio yet"     );
 
-        deleteCreatedUserFromDB(props.getProperty("userEmail"));
+        logOut(driver);
     }
 
 }

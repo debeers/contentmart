@@ -27,7 +27,7 @@
 
     <test name="Fast_And_Furious_Smoke_1.0">
         <classes>
-
+            
             <class name="Tests.PhoneBlockCheckTest"/>
             <class name="Tests.ClientRegistrationViaMainPage"/>
             <class name="Tests.ClientRegistrationViaLanding"/>

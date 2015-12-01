@@ -1,5 +1,7 @@
 package Tests;
 
+import Entities.Mail;
+import GeneralHelpers.DBUtill;
 import GeneralHelpers.GmailListener;
 import PageObjects.Client.ClientProfilePage;
 import PageObjects.Client.NewOrderPage;
@@ -14,8 +16,9 @@ import java.util.Properties;
 
 import static Actions.General.RegistrationAndLogin.*;
 import static GeneralHelpers.DBWorker.checkForExitingUserAndDeleteIt;
-import static GeneralHelpers.DBWorker.setUserNickName;
+import static GeneralHelpers.GeneralHelpers.setRandomUserNickName;
 import static GeneralHelpers.GmailListener.getActivationLinkFromTargetMessage;
+import static GeneralHelpers.MailCreator.createNewUserMail;
 import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
 import static SQLRepo.General.checkUserExsistanceByMail;
 import static org.testng.Assert.assertEquals;
@@ -31,19 +34,34 @@ public class   ClientRegistrationViaLanding extends BaseTest{
         Properties props = propertyXMLoader(System.getProperty("user.dir") +
                 "\\src\\main\\java\\tests\\TestDataXML\\Registration\\ClientRegistrationViaLanding.xml");
 
-        Boolean isSeen = false;
-        String userNickName = setUserNickName(props.getProperty("userRole"));
+        String userDBconn = "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\DB_CONNECTION.xml";
+
+        Mail mail = new Mail();
+
+        DBUtill dbUtill_User = new DBUtill();
+        dbUtill_User = dbUtill_User.initDB(userDBconn);
+
+
+        Boolean isSeen       = false;
+        String userNickName  =  setRandomUserNickName(props.getProperty("userRole"));
 
         checkForExitingUserAndDeleteIt(
-                checkUserExsistanceByMail(
-                        props.getProperty("userEmail")), "email", props.getProperty("userEmail")
+                dbUtill_User,
+                checkUserExsistanceByMail(mail.getId()),
+                "email", mail.getId()
+        );
+
+
+        String email = createNewUserMail(
+                mail.initMail(
+                        props.getProperty("userRole")), dbUtill_User
         );
 
         String title = registerFromLandingAsClient(
                 driver,
                 props.getProperty("URL"),
                 userNickName,
-                props.getProperty("userEmail"),
+                email,
                 props.getProperty("userPassword")
         );
 
