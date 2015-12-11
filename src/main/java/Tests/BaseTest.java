@@ -26,7 +26,7 @@ public class BaseTest {
     public static GmailCredentials gmailCredentials;
 
     @Parameters({"URL", "clientLoginParam", "clientPasswordParam", "writerLoginParam", "writerPasswordParam", "mailbox", "mailboxPassword"})
-    @BeforeTest(alwaysRun = true)
+    @BeforeMethod(alwaysRun = true)
     public void setUp(String URL, String clientLoginParam, String clientPasswordParam, String writerLoginParam, String writerPasswordParam, String mailbox, String mailboxPassword) {
 
         String TestClassName = this.getClass().getName();
@@ -62,7 +62,7 @@ public class BaseTest {
     }
 
 
-    @AfterTest(alwaysRun = true)
+    @AfterMethod(alwaysRun = true)
     public void tearDown() throws Exception {
 
         if (driver.getTitle() != "ContentMart") {
