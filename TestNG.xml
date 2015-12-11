@@ -26,7 +26,6 @@
     <!--Properties: END -->
 
     <test name="Fast_And_Furious_Smoke_1.0">
-
         <classes>
             <class name="Tests.PhoneBlockCheckTest"/>
             <class name="Tests.CreateNewOrderTest"/>
@@ -41,5 +40,4 @@
             <class name="Tests.LoginLogoutTest"/>
         </classes>
     </test>
-
 </suite>

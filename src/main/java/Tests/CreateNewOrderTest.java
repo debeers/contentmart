@@ -28,7 +28,7 @@ import static junit.framework.Assert.*;
 
 public class  CreateNewOrderTest extends BaseTest {
 
-    @Test
+    @Test(groups={"Fast_And_Furious_Smoke_1.0"})
     public void CreateNewOrderTest() throws InterruptedException, IOException, AWTException, SQLException {
 
         String orderData  = "\\src\\main\\java\\Tests\\TestDataXML\\CreateNewOrder\\OrderData.xml";
