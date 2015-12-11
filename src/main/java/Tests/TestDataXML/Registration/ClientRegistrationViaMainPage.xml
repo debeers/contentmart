@@ -2,12 +2,12 @@
 <properties>
 
     <!--Test Data -->
-    <entry key="timeout">600</entry>
+
     <entry key="userRole">client</entry>
     <entry key="userPassword">7777777</entry>
-    <entry key="mail">info@contentmart.in</entry>
+    <entry key="UserEmailAccount">info@contentmart.in</entry>
     <entry key="subject">Welcome to ContentMart.in!</entry>
-    <entry key="userEmail">contentmartmai@gmail.com</entry>
+
 
     <!--Asserts -->
     <entry key="UserCity">Kiev</entry>

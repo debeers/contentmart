@@ -27,13 +27,11 @@ public class WriterGoToProfilePage {
 
 
     public static String createTitleForPortfolioItem(){
-
         return "New automation portfolio item: " + randomID();
     }
 
 
     public static String createTextForPortfolioItem(int length){
-
         return "Portfolio item text - " + randomTextGeneratorLength(length);
     }
 
@@ -58,14 +56,8 @@ public class WriterGoToProfilePage {
         for (String skillName : addedSkillsList) {
             System.out.println(skillName);
         }
-
-        if (addedSkillsList.containsAll(madeChanges)) {
-
-            return true;
-        }
-        return false;
+        return addedSkillsList.containsAll(madeChanges);
     }
-
 }
 
 

@@ -18,8 +18,6 @@ public class ForWritersPage extends BasePageObject{
     public WebElement registerNowButton;
 
 
-
-
     public ForWritersPage goToForWritersLanding(String URL){
         driver.get(URL);
         $(registerNowButton).shouldBe(Condition.visible);
@@ -30,8 +28,6 @@ public class ForWritersPage extends BasePageObject{
         registerNowButton.click();
         return new RegistrationFormPage(driver);
     }
-
-
 
     public ForWritersPage(WebDriver driver) {
         super(driver);

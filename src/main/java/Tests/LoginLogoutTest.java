@@ -14,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 /**
  * Created by DeBeers on 20.11.2015.
  */
-public class Login_Logout_Test extends BaseTest{
+public class LoginLogoutTest extends BaseTest{
 
     private static Properties props() throws IOException {
         Properties props =  propertyXMLoader(System.getProperty("user.dir") +

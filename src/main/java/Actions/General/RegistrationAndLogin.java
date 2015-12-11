@@ -2,10 +2,7 @@ package Actions.General;
 
 import Entities.LoginObject;
 import GeneralHelpers.DBWorker;
-import PageObjects.General.LoginPage;
-import PageObjects.General.MyOrdersPage;
-import PageObjects.General.RegistrationFormPage;
-import PageObjects.General.TopMenuGeneralPage;
+import PageObjects.General.*;
 import PageObjects.Landings.ForClientsPage;
 import PageObjects.Landings.ForWritersPage;
 import com.codeborne.selenide.Condition;
@@ -46,45 +43,43 @@ public class RegistrationAndLogin {
         return loginPage;
     }
 
+
     public static MyOrdersPage switchUser(WebDriver driver, LoginObject userRole) throws InterruptedException {
 
         logOut(driver);
         loginAs(driver, userRole);
+
         return new MyOrdersPage(driver);
     }
 
 
-    public static String registerAsClientFromMainPage(WebDriver driver, String nickname, String email, String password) throws InterruptedException {
+    public static String registerAsClientFromMainPageAndGetPageTitle(WebDriver driver, String nickname, String email, String password) throws Exception{
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage(driver);
         loginPage.registrationLinkClick();
         RegistrationFormPage registrationFormPage = loginPage.clickOnRegisterAsClient();
 
-        try {
-            registrationFormPage.getHeader().trim().equals("Register as a Client");
-
-        }catch (Exception e) {
-            System.out.println("Wrong header, probably we are not at required page");
-        }
-
         registrationFormPage.register(nickname, email, password);
         $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
+
         return driver.getTitle();
     }
 
 
-    public static String registerAsWriterFromMainPage(WebDriver driver, String nickname, String email, String password) throws InterruptedException {
+    public static String registerAsWriterFromMainPage(WebDriver driver, String nickname, String email, String password) throws Exception {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage(driver);
         loginPage.registrationLinkClick();
         RegistrationFormPage registrationFormPage = loginPage.clickOnRegisterAsWriter();
 
-            registrationFormPage.getHeader().trim().equals("Register as a Writer");
+            if(registrationFormPage.getHeader().trim().equals("Register as a Writer"))
+                throw new Exception("Wrong header, probably we are not at required page");
 
         registrationFormPage.register(nickname, email, password);
         $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
+
         return driver.getTitle();
     }
 
@@ -99,26 +94,40 @@ public class RegistrationAndLogin {
 
         registrationFormPage.register(nickname, email, password);
         $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
+
         return driver.getTitle();
     }
 
 
-    public static String registerFromLandingAsClient(WebDriver driver, String URL, String nickname, String email, String password) throws InterruptedException {
+    public static String registerFromLandingAsClientAndGetTheTitle(WebDriver driver, String URL, String nickname, String email, String password) throws InterruptedException {
 
         ForClientsPage forClientsPage = new ForClientsPage(driver);
         forClientsPage.goToForClientsLanding(URL);
         RegistrationFormPage registrationFormPage = forClientsPage.fillRegistrationFormFromLanding(nickname, email, password);
         $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
+
         return driver.getTitle();
     }
 
 
-    public static Boolean isEvenID(int id){
+    public static MyOrdersPage activateUserAccount(WebDriver driver, String activLink, String title) throws InterruptedException {
 
-        if(id%2 == 1){
-            return true;
-        }else
-            return false;
+        driver.get(activLink);
+        MyOrdersPage myOrdersPage = new MyOrdersPage(driver);
+        try{
+            driver.getTitle().equalsIgnoreCase(title);
+
+        }catch (Exception e){
+            System.out.println("For some reasons driver can`t open activation link, we gonna try it one more time after timeout");
+            Thread.sleep(5000);
+            driver.get(activLink);
+        }
+        return myOrdersPage;
+    }
+
+
+    public static Boolean isEvenID(int id){
+        return id%2 == 1;
     }
 
 }

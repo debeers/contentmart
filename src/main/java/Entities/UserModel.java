@@ -1,15 +1,5 @@
 package Entities;
 
-import java.io.IOException;
-
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-
-import static GeneralHelpers.JDBCutil.getDBConnection;
-
 /**
  * Created by DeBeers on 30.11.2015.
  */
@@ -68,13 +58,13 @@ public class UserModel {
     public String      userFirstName;
     public String      userNickName;
     public String      userLastName;
-    public String        userBirthday;
+    public String      userBirthday;
     public String      userEmail;
     public String      userPhone;
     public Boolean     isUserDeleted;
     public String      userPassword;
     public String      userPasswordSalt;
-    public String        userRegisterDate;
+    public String      userRegisterDate;
     public int         userCountry;
     public int         userRegion;
     public int         userCity;
@@ -89,7 +79,7 @@ public class UserModel {
     public String      userServiceTax;
     public String      userRole;
     public String      userSocialId;
-    public String        userLastVisit;
+    public String      userLastVisit;
     public String      userLastIP;
     public Boolean     userNoCommission;
     public int         userCompletedOrders;
@@ -99,54 +89,6 @@ public class UserModel {
     public int         userCurrency;
     public Boolean     userIsServiceTaxPayer;
 
-
-    public UserModel userModelOnCreateByMail(String email) throws IOException, SQLException {
-
-        String query = "SELECT * FROM users WHERE email = '" + email + "'";
-
-        Statement statement = getDBConnection().createStatement();
-        ResultSet resultSet = statement.executeQuery(query);
-        UserModel userModel = new UserModel();
-
-        while (resultSet.next()) {
-
-            userModel.setIsUserActive(resultSet.getBoolean("is_user_active"));
-            userModel.setIsUserBlocked(resultSet.getBoolean("is_user_blocked"));
-            userModel.setIsUserDeleted(resultSet.getBoolean("is_user_deleted"));
-            userModel.setUserAddress(resultSet.getString("address"));
-            userModel.setUserBiography(resultSet.getString("biography"));
-            userModel.setUserBirthday(resultSet.getString("birthday"));
-            userModel.setUserCity(resultSet.getInt("location_city"));
-            userModel.setUserCompletedOrders(resultSet.getInt("completed_orders"));
-            userModel.setUserCountry(resultSet.getInt("location_country"));
-            userModel.setUserCurrency(resultSet.getInt("currency_id"));
-            userModel.setUserEmail(resultSet.getString("email"));
-            userModel.setUserFirstName(resultSet.getString("first_name"));
-            userModel.setUserId(resultSet.getInt("id"));
-            userModel.setUserIncreaseProfileEmailSent(resultSet.getString("increase_profile_email_sent"));
-            userModel.setUserIsServiceTaxPayer(resultSet.getBoolean("is_service_tax_payer"));
-            userModel.setUserLastIP(resultSet.getString("last_ip"));
-            userModel.setUserLastName(resultSet.getString("last_name"));
-            userModel.setUserLastVisit(resultSet.getString("last_visit"));
-            userModel.setUserNickName(resultSet.getString("nick_name"));
-            userModel.setUserNoCommission(resultSet.getBoolean("no_commission"));
-            userModel.setUserPan(resultSet.getString("pan"));
-            userModel.setUserPassword(resultSet.getString("password"));
-            userModel.setUserPasswordSalt(resultSet.getString("password_salt"));
-            userModel.setUserPerson(resultSet.getString("person"));
-            userModel.setUserPhone(resultSet.getString("phone"));
-            userModel.setUserRegion(resultSet.getInt("location_region"));
-            userModel.setUserRegisterDate(resultSet.getString("register_date"));
-            userModel.setUserRole(resultSet.getString("user_role"));
-            userModel.setUserServiceTax(resultSet.getString("service_tax_number"));
-            userModel.setUserSocialId(resultSet.getString("social_id"));
-            userModel.setUserTimeZone(resultSet.getInt("timezone_id"));
-            userModel.setUserTransliteName(resultSet.getString("translite_name"));
-            userModel.setUserWarnedCount(resultSet.getInt("warned_count"));
-            userModel.setUserZip(resultSet.getString("zip"));
-        }
-        return userModel;
-    }
 
     public String getUserPasswordSalt() {
         return userPasswordSalt;

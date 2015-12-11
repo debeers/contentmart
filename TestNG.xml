@@ -26,11 +26,11 @@
     <!--Properties: END -->
 
     <test name="Fast_And_Furious_Smoke_1.0">
+
         <classes>
-            
             <class name="Tests.PhoneBlockCheckTest"/>
+            <class name="Tests.CreateNewOrderTest"/>
             <class name="Tests.ClientRegistrationViaMainPage"/>
-            <class name="Tests.ClientRegistrationViaLanding"/>
             <class name="Tests.WriterRegistrationViaMainPage"/>
             <class name="Tests.WriterRegistrationViaLanding"/>
             <class name="Tests.AddPortfolioItem"/>
@@ -38,8 +38,8 @@
             <class name="Tests.ChangeWriterDetails"/>
             <class name="Tests.DeletePortfolioItem"/>
             <class name="Tests.EditPortfolioItem"/>
-            <class name="Tests.Login_Logout_Test"/>
-
+            <class name="Tests.LoginLogoutTest"/>
         </classes>
     </test>
+
 </suite>

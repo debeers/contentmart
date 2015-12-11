@@ -2,6 +2,7 @@ package PageObjects.General;
 
 import PageObjects.Client.NewOrderPage;
 import com.codeborne.selenide.Condition;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -60,6 +61,26 @@ public class MyOrdersPage extends TopMenuGeneralPage{
     public NewOrderPage clickOnNewOrderButton(){
         $(newOrderButton).shouldBe(Condition.visible).click();
         return new NewOrderPage(driver);
+    }
+
+    public String getOrderIDFromOrdersTable(String orderName){
+        return $(By.xpath(".//td[4]/a[contains(text(), '"+ orderName +
+                "')]/ancestor::td//preceding-sibling::td[1]")).shouldBe(Condition.visible).getText();
+    }
+
+    public WebElement getOrderFromOrdersTable(String orderName){
+        return $(By.xpath(".//td[4]/a[contains(text(), '" + orderName +
+                "')]")).shouldBe(Condition.visible);
+    }
+
+    public String getOrderStatusFromOrdersTable(String orderName){
+        return $(By.xpath(".//td[4]/a[contains(text(), '" + orderName +
+                "')]/ancestor::td//preceding-sibling::td[2]/span/span")).shouldBe(Condition.visible).getText();
+    }
+
+    public String getOrderNameFromOrdersTable(String orderName){
+        return $(By.xpath(".//td[4]/a[contains(text(), '" + orderName +
+                "')]")).shouldBe(Condition.visible).getText();
     }
 
     public String getMyOrdersH1(){

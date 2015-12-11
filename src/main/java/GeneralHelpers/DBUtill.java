@@ -2,9 +2,11 @@ package GeneralHelpers;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
+import static SQLRepo.General.getOrderCategories;
 
 /**
  * Created by DeBeers on 01.12.2015.
@@ -25,7 +27,6 @@ public class DBUtill {
     }
 
     public DBUtill(){};
-
 
     public String getDB_USER() {
         return DB_USER;
@@ -59,8 +60,8 @@ public class DBUtill {
         this.DB_CONNECTION = DB_CONNECTION;
     }
 
-    public DBUtill initDB(String path) throws IOException {
-        Properties props =  propertyXMLoader(System.getProperty("user.dir") + path);
+    public DBUtill initDB() throws IOException {
+        Properties props =  propertyXMLoader(System.getProperty("user.dir") + "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\DB_CONNECTION.xml");
 
         return new DBUtill(
                 props.getProperty("DB_USER"),
@@ -68,6 +69,14 @@ public class DBUtill {
                 props.getProperty("DB_PASSWORD"),
                 props.getProperty("DB_CONNECTION")
         );
+    }
+
+    public ResultSet getResultSet(String sqlQuery) throws IOException, SQLException {
+
+        Statement statement = getDBConnection().createStatement();
+        ResultSet resultSet = statement.executeQuery(sqlQuery);
+
+        return resultSet;
     }
 
 
@@ -86,40 +95,29 @@ public class DBUtill {
             System.out.println("Record updated!");
 
         } catch (SQLException e) {
-
             System.out.println(e.getMessage());
 
         } finally {
-
             if (statement != null) {
                 statement.close();
             }
-
             if (dbConnection != null) {
                 dbConnection.close();
             }
-
         }
-
     }
 
 
     public Connection getDBConnection() throws IOException {
 
         Connection dbConnection = null;
-
         try {
-
             Class.forName(DB_DRIVER);
-
         } catch (ClassNotFoundException e) {
-
             System.out.println(e.getMessage());
-
         }
 
         try {
-
             dbConnection = DriverManager.getConnection(
 
                     DB_CONNECTION,
@@ -129,13 +127,9 @@ public class DBUtill {
             return dbConnection;
 
         } catch (SQLException e) {
-
             System.out.println(e.getMessage());
-
         }
-
         return dbConnection;
-
     }
 
 
@@ -147,7 +141,7 @@ public class DBUtill {
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
-            ResultSet rs = statement.executeQuery(query);
+             ResultSet rs = statement.executeQuery(query);
 
             while (rs.next()) {
                 System.out.println(rs.getString(column));
@@ -157,8 +151,6 @@ public class DBUtill {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return null;
     }
-
 }

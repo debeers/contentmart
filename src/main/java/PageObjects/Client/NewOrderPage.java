@@ -2,6 +2,7 @@ package PageObjects.Client;
 
 import Entities.OrderObject;
 import GeneralHelpers.CreateNewOrderHelper;
+import GeneralHelpers.DBUtill;
 import PageObjects.General.OrderWorkFlow;
 import PageObjects.General.TopMenuGeneralPage;
 import org.openqa.selenium.By;
@@ -12,11 +13,20 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.awt.*;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
-import static GeneralHelpers.GeneralHelpers.isFileUploaded;
-import static com.codeborne.selenide.Condition.or;
+import static GeneralHelpers.CreateNewOrderHelper.createNewOrderName;
+import static GeneralHelpers.DBWorker.getExpertisesList;
+import static GeneralHelpers.DBWorker.getLanguageList;
+import static GeneralHelpers.GeneralHelpers.uploadFilesByRobot;
+import static GeneralHelpers.GeneralHelpers.findUploadedFilesByXPath;
+import static GeneralHelpers.GeneralHelpers.getFileName;
+import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
+import static SQLRepo.General.getUserCurrencyID;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -38,7 +48,7 @@ public class NewOrderPage extends TopMenuGeneralPage {
     @FindBy(xpath = ".//*[@id='new_order']/form/div[2]/div[2]/div/a")
     public WebElement stopWordsAllert;
 
-    @FindBy(className = "fileupload blue")
+    @FindBy(xpath = ".//*[@class='fileupload blue']")
     public WebElement fileUpload;
 
     @FindBy(className = ".//*[@id='photos']//span[2]")
@@ -47,7 +57,7 @@ public class NewOrderPage extends TopMenuGeneralPage {
     @FindBy(className = "progress-bar")
     public WebElement progressBar;
 
-    @FindBy(id = "progress")
+    @FindBy(className = "percent")
     public WebElement progressCounter;
 
     @FindBy(id = "date_deadline")
@@ -65,7 +75,7 @@ public class NewOrderPage extends TopMenuGeneralPage {
     @FindBy(xpath = ".//*[@id='new_order']/form/div[6]/div[2]/div/button")
     public WebElement expertisesSelect;
 
-    @FindBy(xpath = ".//*[@id='new_order']/form/div[6]/div[2]/div/div/ul/li")
+    @FindBy(xpath = ".//*[@id='new_order']/form/div[6]/div[2]/div/div/ul/li[not(contains(@class,'ms-no-results'))]")
     public List<WebElement> expertisesElements;
 
     @FindBy(xpath = ".//*[@id='new_order']/form/div[8]//ul/li[1]/label")
@@ -107,13 +117,13 @@ public class NewOrderPage extends TopMenuGeneralPage {
     @FindBy(xpath = "html//td[contains(@class, 'xdsoft_current')]")
     public WebElement currentOrderDay;
 
-    @FindBy(xpath = "html/body/div[2]/div[2]/div/div[1]/div[contains(@class, 'xdsoft_current')]")
+    @FindBy(xpath = ".//div[@class = 'xdsoft_time xdsoft_current']")
     public WebElement currentOrderTime;
 
 
-    public String setOrderNameField(String orderName, String id) {
+    public String setOrderNameField(String orderName) {
         orderNameField.clear();
-        orderNameField.sendKeys(orderName + id);
+        orderNameField.sendKeys(orderName);
         return orderNameField.getAttribute("value");
     }
 
@@ -129,30 +139,46 @@ public class NewOrderPage extends TopMenuGeneralPage {
         return wordsRequired.getAttribute("value");
     }
 
-    public String setPriceInRupeeField(String price) {
+    public String setPriceInRupeeField(String price) throws InterruptedException {
+
         priceInRupeeField.clear();
         priceInRupeeField.sendKeys(price);
+        System.out.println(priceInRupeeField.getAttribute("value") + "<<<========");
+        Thread.sleep(5000);
         return priceInRupeeField.getAttribute("value");
     }
 
     public String setPriceInUSDField(String price) {
+
         priceInUSDField.clear();
         priceInUSDField.sendKeys(price);
         return priceInUSDField.getAttribute("value");
     }
 
-    public String randomSelectWritingCategories(){
-
+    public String selectWritingCategories(String category){
         Select selectWritingCategories = new Select(categoriesOfWritingSelect);
-        selectWritingCategories.selectByIndex(new Random().nextInt(selectWritingCategories.getOptions().size()));
-        return categoriesOfWritingSelect.getAttribute("value");
+
+        if(category == null || category.equalsIgnoreCase("random")){
+            selectWritingCategories.selectByIndex(1+ new Random().nextInt(selectWritingCategories.getOptions().size() -1));
+
+        }else
+            selectWritingCategories.selectByVisibleText(category);
+
+        return category;
     }
 
     public String randomSelectLanguage(){
 
         Select selectLanguages = new Select(languegesOfWritingSelect);
         selectLanguages.selectByIndex(new Random().nextInt(selectLanguages.getOptions().size()));
-        return languegesOfWritingSelect.getAttribute("value");
+        return languegesOfWritingSelect.getText();
+    }
+
+    public String selectLanguageByParameter(String lang){
+
+        Select selectLanguages = new Select(languegesOfWritingSelect);
+        selectLanguages.selectByVisibleText(lang);
+        return languegesOfWritingSelect.getText();
     }
 
     public String xDateBuilder(String day) {
@@ -204,7 +230,7 @@ public class NewOrderPage extends TopMenuGeneralPage {
 
         if(visibility.equalsIgnoreCase("all")){
            visibilityForAll.click();
-            return visibilityForAll.getText();
+            return "All";
 
         }else if (visibility.equalsIgnoreCase("favorites")){
                   visibilityForFavourites.click();
@@ -216,81 +242,140 @@ public class NewOrderPage extends TopMenuGeneralPage {
     }
 
     public String setArticlesQuantity(String articles){
+        articlesQuantity.clear();
         $(articlesQuantity).shouldBe(visible).sendKeys(articles);
         return articlesQuantity.getAttribute("value");
     }
 
-    public String chooseExpertise(String method){
-
+    public List<String> chooseExpertise(String method){
+        List<String> exp = new ArrayList<>();
         expertisesSelect.click();
+
+        String selectedExpertises = ($(By.xpath(".//*[@id='new_order']/form/div[6]/div[2]/div/button/span")).getText());
 
         if (method.equalsIgnoreCase("random")) {
             WebElement currentExpertise =
                     expertisesElements.get(new Random().nextInt(expertisesElements.size()));
             currentExpertise.click();
             expertisesSelect.click();
-            return expertisesSelect.getAttribute("value");
+            exp.add(selectedExpertises);
+            return exp;
 
         } else if(method.equalsIgnoreCase("all")){
 
             for (WebElement expertises : expertisesElements){
                 $(expertises).shouldBe(visible).click();
             }
-        }
-        else for (WebElement exp : expertisesElements){
-
-            if(exp.getText().equalsIgnoreCase(method))
-                exp.click();
+            exp.add($(By.xpath(".//*[@id='new_order']/form/div[6]/div[2]/div/button/span")).getText());
             expertisesSelect.click();
-            return expertisesSelect.getAttribute("value");
+            return exp;
         }
-        return "Sorry something went wrong and expertises did not select";
+        else for (WebElement exprt : expertisesElements){
+
+            if(exprt.getText().equalsIgnoreCase(method))
+                exprt.click();
+                expertisesSelect.click();
+                exp.add($(By.xpath(".//*[@id='new_order']/form/div[6]/div[2]/div/button/span")).getText());
+            return exp;
+        }
+        return null;
     }
 
-    public OrderWorkFlow clickOnPublishButton(WebDriver driver) {
-        WebDriverWait wait = new WebDriverWait(driver, 15);
+    public OrderWorkFlow clickOnPublishButton() throws InterruptedException {
 
-        publishButton.click();
-        OrderWorkFlow orderWorkFlow = new OrderWorkFlow();
-        wait.until(ExpectedConditions.visibilityOf(orderWorkFlow.statusLable));
-        wait.until(ExpectedConditions.visibilityOf(orderWorkFlow.orderDeadline));
-
-        return orderWorkFlow;
+        $(publishButton).shouldBe(visible).click();
+        return  new OrderWorkFlow(driver);
     }
 
-
-    public void setOrder(OrderObject order, String filepath, String per, String visibility, String articles) throws InterruptedException {
-
-        String random = "random";
-        String id = CreateNewOrderHelper.randomID();
-
-        order.setOrderName(setOrderNameField(order.getOrderName(), id));
-        order.setOrderDetails(setDetailsField(order.getOrderDetails()));
-
-        uploadFileToOrder(filepath);
-        $(progressCounter).shouldHave(text("100%"));
-        isFileUploaded(filepath, uploadedFilesNames);
+    public String setRandomDeadline() throws InterruptedException {
 
         $(deadlineField).shouldBe(visible).click();
+        Thread.sleep(2000);
         driver.findElement(By.xpath(xDateBuilder(CreateNewOrderHelper.getDay()))).click();
-        $(currentOrderTime).click();
-        $(orderDetailsField).click();
+        currentOrderTime.click();
+        orderDetailsField.click();
 
-        order.setOrderCategoryOfWriting(randomSelectWritingCategories());
-        chooseExpertise(random);
-        order.setOrderLanguage(randomSelectLanguage());
+        return $(deadlineField).shouldBe(visible).getAttribute("value");
+    }
 
-        setOrderPricePer(per);
-        order.setOrderDollarPrice(setPriceInUSDField(order.getOrderDollarPrice()));
-        order.setOrderArticlesQuantity(setArticlesQuantity(articles));
-        order.setOrderWordsRequired(setWordsRequiredField(order.getOrderWordsRequired()));
-        order.setOrderVisibility(setVisibility(visibility));
+    public void setOrder(DBUtill dbUtill, OrderObject order, String xmlPath) throws InterruptedException, AWTException, IOException, SQLException {
+
+        Properties props = propertyXMLoader(System.getProperty("user.dir") + xmlPath);
+
+        System.out.println("cur email");
+        order.setOrderName(
+                setOrderNameField(
+                        createNewOrderName())
+        );
+
+        order.setOrderDetails(
+                setDetailsField(
+                        props.getProperty("OrderDetails"))
+        );
+
+        uploadFilesByRobot(
+                fileUpload, System.getProperty("user.dir") + props.getProperty("FileForUpload")
+        );
+
+        findUploadedFilesByXPath(
+                progressCounter,
+                getFileName(
+                        props.getProperty("FileForUpload"))
+        );
+
+        order.setOrderDeadLine(
+                setRandomDeadline()
+        );
+
+        order.setOrderCategoryOfWriting(
+                selectWritingCategories(
+                        props.getProperty("CategoriesOfWriting"))
+        );
+
+        order.setOrderAvailebleExpertises(
+                getExpertisesList(dbUtill));
 
 
-        order.setOrderValueInRupee(getRupeeOrderValue());
-        order.setOrderValueInDollars(getOrderTotalPriceValue());
+        chooseExpertise(
+                props.getProperty("Expertises")
+        );
+
+        order.setOrderLanguage(
+                props.getProperty("Language")
+                        .equalsIgnoreCase("random") ? randomSelectLanguage() :
+                        selectLanguageByParameter(props.getProperty("Language"))
+        );
+
+        setOrderPricePer(
+                props.getProperty("PricePerWordOrPerOrder")
+        );
+
+        order.setOrderArticlesQuantity(
+                setArticlesQuantity(
+                        props.getProperty("ArticlesQuantity"))
+        );
+
+        order.setOrderWordsRequired(
+                setWordsRequiredField(
+                        props.getProperty("WordsRequired"))
+        );
+
+        order.setOrderVisibility(
+                setVisibility(
+                        props.getProperty("VisibilityForAll"))
+        );
+
+            order.setOrderValueInRupee(
+                setPriceInRupeeField(
+                        props.getProperty("PriceInRupee"))
+        );
 
     }
+
+    public static int checkForWordsRequired(String wordsRequired, String articles){
+       return Integer.parseInt(wordsRequired) * Integer.parseInt(articles);
+    }
+
 
     public NewOrderPage(WebDriver driver) {
         super(driver);

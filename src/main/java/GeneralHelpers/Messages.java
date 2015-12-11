@@ -7,7 +7,6 @@ import java.util.Random;
  */
 public class Messages {
 
-
     public static String randomTextGeneratorLength(int length) {
 
         Random ran = new Random();
@@ -19,10 +18,8 @@ public class Messages {
             data = (char) (ran.nextInt(25) + 97);
             dat = data + dat;
         }
-
         System.out.println(dat);
 
         return dat;
     }
-
 }

@@ -40,8 +40,6 @@ public class RegistrationFormPage extends BasePageObject {
     public WebElement successMessageAfterSubmitRegistration;
 
 
-
-
     public String getHeader() {
         return $(registrationHeader).getText();
     }

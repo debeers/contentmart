@@ -81,9 +81,6 @@ public class TopMenuGeneralPage extends BasePageObject {
     @FindBy(xpath = "//div[@class = 'container-navbar']/div[1]")
     public WebElement logoContentMartTopMenu;
 
-
-    //  Methods::
-
     // Drop down profile menu ::
 
     public void clickOnProfileFromTopMenu() {
@@ -98,12 +95,10 @@ public class TopMenuGeneralPage extends BasePageObject {
         );
     }
 
-
-//    public WriterProfilePage clickOnUserProfileFromDropMenu() {
-//
-//        $(userProfileDropMenu).shouldBe(visible).click();
-//        return new WriterProfilePage(driver);
-//    }
+    public MyOrdersPage clickOnMyOrdersFromTopMenu() {
+        $(myOrdersTopMenu).shouldBe(visible).click();
+        return new MyOrdersPage(driver);
+    }
 
     public String getUserNickNameFromProfileDropMenu() {
         clickOnProfileFromTopMenu();
@@ -139,8 +134,6 @@ public class TopMenuGeneralPage extends BasePageObject {
         return new LoginPage(driver);
     }
 
-    // Static menu components::
-
     public NewOrderPage clickOnNewOrderFromTopMenu() {
 
         WebDriverWait wait = new WebDriverWait(driver, 15);
@@ -150,19 +143,6 @@ public class TopMenuGeneralPage extends BasePageObject {
         $(clientNewOrderPage.publishButton).shouldBe(present);
         return clientNewOrderPage;
     }
-
-//    public WriterAllOrdersPage clickOnAllOrdersFromTopMenu() {
-//
-//        $(allOrdersTopMenu).shouldBe(visible).click();
-//        WriterAllOrdersPage writerAllOrdersPage = new WriterAllOrdersPage(driver);
-//        return writerAllOrdersPage;
-//    }
-//
-//    public MyOrdersPage clickOnMyOrdersTopMenu() {
-//
-//        $(myOrdersTopMenu).shouldBe(visible).click();
-//        return new MyOrdersPage(driver);
-//    }
 
     public PartnersPage clickOnClientsFromTopMenu() {
 
@@ -175,14 +155,6 @@ public class TopMenuGeneralPage extends BasePageObject {
         $(writersTopMenu).shouldBe(visible).click();
         return new PartnersPage(driver);
     }
-
-//    public BalanceGeneralPage clickOnbalanceFromLeftMenu() {
-//
-//        $(balanceTopMenu).shouldBe(visible).click();
-//        BalanceGeneralPage balanceGeneral = new BalanceGeneralPage(driver);
-//        wait.until(ExpectedConditions.visibilityOf(balanceGeneral.availebleBalance));
-//        return balanceGeneral;
-//    }
 
     public String getBalanceInRupeeFromTopMenu() {
 

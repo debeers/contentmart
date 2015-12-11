@@ -2,15 +2,14 @@
 <properties>
 
     <!--Test Data -->
-    <entry key="timeout">600</entry>
     <entry key="userRole">writer</entry>
     <entry key="userPassword">7777777</entry>
-    <entry key="mail">info@contentmart.in</entry>
+    <entry key="UserEmailAccount">info@contentmart.in</entry>
     <entry key="subject">Welcome to ContentMart.in</entry>
     <entry key="userEmail">contentmartmai@gmail.com</entry>
     <entry key="URL">https://dev.contentmart.in/forwriters</entry>
     <entry key="registrationTitle">Register successful | ContentMart</entry>
-
+    <entry key="MyOrdersTitle">My Orders | ContentMart</entry>
     <!--Asserts -->
     <entry key="UserCountry">1</entry>
     <entry key="UserTimeZone">321</entry>

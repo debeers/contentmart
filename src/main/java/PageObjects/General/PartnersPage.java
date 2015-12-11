@@ -64,12 +64,16 @@ public class PartnersPage extends TopMenuGeneralPage {
     public WebElement search(String searchText) {
 
         searchBysearchFieldInPartnersPage(searchText);
-        WebElement el = $(By.xpath(".//*[contains(text(), '"+ searchText +"')]")) ;
+        WebElement el = $(By.xpath(".//*[contains(text(), '"+ searchText +"')]")).shouldBe(visible) ;
         return  el;
     }
 
-    public PartnersPage(WebDriver driver) {
+    public WebElement analogSearch(String searchText){
+        searchBysearchFieldInPartnersPage(searchText);
+        return $(By.linkText(searchText));
+    }
 
+    public PartnersPage(WebDriver driver) {
         super(driver);
     }
 

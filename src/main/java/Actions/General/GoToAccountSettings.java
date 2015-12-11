@@ -23,7 +23,6 @@ import static com.codeborne.selenide.Selenide.$;
  */
 public class GoToAccountSettings {
 
-
     public static AccountDetailsPage goToEditProfile(WebDriver driver, LoginObject clientLogin) throws InterruptedException {
 
         MyOrdersPage defaultClientPage = RegistrationAndLogin.loginAs(driver, clientLogin);
@@ -57,7 +56,6 @@ public class GoToAccountSettings {
 
     public static void setUserData(UserObject user, AccountDetailsPage accountDetailsPage, String clientCountry) throws InterruptedException {
 
-
         if($(accountDetailsPage.countryField).is(Condition.enabled)) {
 
             System.out.println("We are in the client account settings NEO");
@@ -79,17 +77,17 @@ public class GoToAccountSettings {
             user.setCurrency(accountDetailsPage.getUserCurrency());
             System.out.println("Currency: " + accountDetailsPage.getUserCurrency());
 
-            user.setTimeZone(accountDetailsPage.getUserTimeZone());
-            System.out.println("Timezone: " + accountDetailsPage.getUserTimeZone());
+            user.setTimeZone(accountDetailsPage.getUserTimeZoneValue());
+            System.out.println("Timezone: " + accountDetailsPage.getUserTimeZoneValue());
 
         }else System.out.println("We are in the writer account settings NEO");
 
 
-        Select state  = new Select(accountDetailsPage.userState);
+        Select state  = new Select(accountDetailsPage.userRegion);
         Select city   = new Select(accountDetailsPage.userCity);
 
 
-        $(accountDetailsPage.userState).shouldBe(Condition.visible);
+        $(accountDetailsPage.userRegion).shouldBe(Condition.visible);
         state.selectByIndex(new Random().nextInt(state.getOptions().size()));
 
         user.setNickname(accountDetailsPage.getUserNickNameFromProfileDropMenu());
@@ -123,8 +121,8 @@ public class GoToAccountSettings {
         user.setCity(accountDetailsPage.getUserCity());
         System.out.println("City: " + accountDetailsPage.getUserCity());
 
-        user.setState(accountDetailsPage.getUserState());
-        System.out.println("State: " + accountDetailsPage.getUserState());
+        user.setState(accountDetailsPage.getUserRegion());
+        System.out.println("State: " + accountDetailsPage.getUserRegion());
     }
 
 

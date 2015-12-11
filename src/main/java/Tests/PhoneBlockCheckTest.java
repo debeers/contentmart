@@ -3,6 +3,7 @@ package Tests;
 import Entities.LoginObject;
 import Entities.UserModel;
 import PageObjects.General.MyOrdersPage;
+import Repository.UserModelRepo;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -25,12 +26,11 @@ public class PhoneBlockCheckTest extends BaseTest{
         Properties props = propertyXMLoader(System.getProperty("user.dir") +
                 "\\src\\main\\java\\tests\\TestDataXML\\Registration\\PhoneBlockCheck.xml");
 
-        UserModel user = new UserModel();
-        user = user.userModelOnCreateByMail(props.getProperty("evenUserLogin"));
+        UserModel user = UserModelRepo.getUserDATAFromDB(props.getProperty("evenUserLogin"));
 
         LoginObject evenUser = new LoginObject(props.getProperty("evenUserLogin"), props.getProperty("evenUserPassword"));
         MyOrdersPage myOrdersPage = loginAs(driver, evenUser);
-        System.out.println("user id is : " + user.getUserId());
+        System.out.println("user email is : " + user.getUserId());
 
         if (isEvenID(user.getUserId())) {
 
@@ -42,8 +42,6 @@ public class PhoneBlockCheckTest extends BaseTest{
 
             }else Assert.assertEquals(myOrdersPage.getNumberFromTheHelpBlock(), props.getProperty("helpBlock_19_10"));
         }
-
         logOut(driver);
     }
-
 }

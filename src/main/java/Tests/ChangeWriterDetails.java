@@ -33,7 +33,7 @@ public class ChangeWriterDetails extends BaseTest {
         Assert.assertEquals(accountDetailsPage.getUserLastName(), user.getLastname());
         Assert.assertEquals(accountDetailsPage.getUserPhone(), "+91-"+user.getPhone());
         Assert.assertEquals(accountDetailsPage.getUserPan(), user.getPan());
-        Assert.assertEquals(accountDetailsPage.getUserState(), user.getState());
+        Assert.assertEquals(accountDetailsPage.getUserRegion(), user.getState());
         Assert.assertEquals(accountDetailsPage.getUserCity(), user.getCity());
         Assert.assertEquals(accountDetailsPage.getUserAdress(), user.getAddress());
         Assert.assertEquals(accountDetailsPage.getUserZip(), user.getZip());

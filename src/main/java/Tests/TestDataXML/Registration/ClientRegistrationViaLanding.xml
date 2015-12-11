@@ -2,13 +2,21 @@
 <properties>
 
     <!--Test Data -->
-    <entry key="timeout">600</entry>
+
     <entry key="userRole">client</entry>
     <entry key="userPassword">7777777</entry>
-    <entry key="mail">info@contentmart.in</entry>
+    <entry key="UserEmailAccount">info@contentmart.in</entry>
     <entry key="subject">Welcome to ContentMart.in!</entry>
-    <entry key="userEmail">contentmartmai@gmail.com</entry>
     <entry key="URL">https://dev.contentmart.in/forclients</entry>
+
+    <!--Test email data -->
+
+    <entry key="Mail To">mim@dev.contentmart.in</entry>
+    <entry key="Mail From">mim@dev.contentmart.in</entry>
+    <entry key="Mail Subject">test message</entry>
+    <entry key="Mail text">Test message from user to activate this fucking UserEmailAccount</entry>
+    <entry key="SMTP Port">587</entry>
+    <entry key="SMTP Host">dev.contentmart.in</entry>
 
     <!--Asserts -->
     <entry key="UserCity">Kiev</entry>
@@ -18,9 +26,6 @@
 
     <entry key="MyOrdersTitle">My Orders</entry>
     <entry key="Post an order">Post an order</entry>
-    <entry key="Review Content">Review Content</entry>
-    <entry key="Choose a writer">Choose a writer</entry>
-    <entry key="Project complete">Project complete</entry>
     <entry key="registrationTitle">Register successful | ContentMart</entry>
 
 </properties>

@@ -34,14 +34,12 @@ public class ProfileHelper {
         month.selectByIndex(new Random().nextInt(month.getOptions().size()));
         year.selectByIndex(new Random().nextInt(year.getOptions().size()));
 
-
         GregorianCalendar birthDaySet = new GregorianCalendar(
 
                 Integer.parseInt(year.getFirstSelectedOption().getText()),
                 Integer.parseInt(month.getFirstSelectedOption().getAttribute("value")),
                 Integer.parseInt(day.getFirstSelectedOption().getAttribute("value"))
         );
-
         return birthDaySet;
     }
 
@@ -118,7 +116,6 @@ public class ProfileHelper {
         int imgHeigh = page.getImgHolderHeigh();
         int imgWidth = page.getImgHolderWidth();
 
-
         System.out.println("Src Image heigh = " + srcHeigh + "\n"
                 + "Src Image width = " + srcWidth);
 
@@ -129,11 +126,9 @@ public class ProfileHelper {
             return true;
 
         } else {
-
             System.out.println("File broken or not uploaded correctly...");
             return false;
         }
-
     }
 
 
@@ -145,7 +140,6 @@ public class ProfileHelper {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 
@@ -162,11 +156,8 @@ public class ProfileHelper {
             return temp;
 
         } catch (IOException e) {
-
             e.printStackTrace();
-
         }
-
         return null;
     }
 
@@ -202,8 +193,8 @@ public class ProfileHelper {
     }
 
 
-    public static Boolean verifyUploadedImages(PageObjectWithImages page,
-                                               String path) throws IOException, NoSuchFieldException, NoSuchMethodException {
+    public static Boolean verifyUploadedImages(PageObjectWithImages page, String path)
+            throws IOException, NoSuchFieldException, NoSuchMethodException {
 
         File scrFile = new File(path);
 
@@ -224,7 +215,5 @@ public class ProfileHelper {
 
             return false;
         }
-
     }
-
 }

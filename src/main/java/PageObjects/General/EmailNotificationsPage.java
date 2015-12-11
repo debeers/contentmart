@@ -62,9 +62,7 @@ public class EmailNotificationsPage extends TopMenuGeneralPage {
     }
 
     public void clickOnAccountDetailsLinkLinkLink() {
-
         $WaitFor(accountDetailsLink).click();
-
     }
 
     public void switchTriggersOFF() {
@@ -74,7 +72,6 @@ public class EmailNotificationsPage extends TopMenuGeneralPage {
 
                 if ($(webElement).getAttribute("class").contains("switch toggle-on")) {
                     $(webElement).click();
-
                 }
             }
         }
@@ -87,12 +84,10 @@ public class EmailNotificationsPage extends TopMenuGeneralPage {
 
                 if ($(webElement).getAttribute("class").contains("switch toggle-off")) {
                     $(webElement).click();
-
                 }
             }
         }
     }
-
 
     public EmailNotificationsPage(WebDriver driver) {
 

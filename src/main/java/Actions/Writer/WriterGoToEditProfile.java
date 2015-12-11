@@ -27,5 +27,4 @@ public class WriterGoToEditProfile {
         }
         return skillBox;
     }
-
 }

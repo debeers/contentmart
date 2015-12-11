@@ -2,8 +2,8 @@
 <properties>
 
     <!--Test Data -->
-    <entry key="evenUserLogin">clint.for.number@yandex.com</entry>
-    <entry key="evenUserPassword">111111</entry>
+    <entry key="evenUserLogin">clientbot-8615oyq@dev.contentmart.in</entry>
+    <entry key="evenUserPassword">7777777</entry>
 
     <!--Asserts -->
     <entry key="helpBlock_10_19">call our toll free no.</entry>

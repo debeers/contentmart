@@ -61,7 +61,7 @@ public class WriterEditProfilePage extends TopMenuGeneralPage implements PageObj
     @FindBy(className = "percent")
     public WebElement avatarUploadingProgress;
 
-    @FindBy(xpath = ".//img[@id = 'img_crop']")
+    @FindBy(xpath = ".//img[@email = 'img_crop']")
     public WebElement avatarSrc;
 
     @FindBy(xpath = ".//div[contains (@class, 'jcrop-holder')]")
@@ -139,7 +139,7 @@ public class WriterEditProfilePage extends TopMenuGeneralPage implements PageObj
 
     public String notAddedSkillsArray(String skillBox) {
 
-        String str = ".//div[@id = '" + skillBox + "']/following-sibling::div[contains(@class,'cell without_test_block skill-box')]" +
+        String str = ".//div[@email = '" + skillBox + "']/following-sibling::div[contains(@class,'cell without_test_block skill-box')]" +
                 "/ul/li[not (contains(@class,'none'))]//span[contains(@class,'skill-name')]";
         return str;
     }
@@ -147,7 +147,7 @@ public class WriterEditProfilePage extends TopMenuGeneralPage implements PageObj
 
     public String addedSkillsArray(String skillBox) {
 
-        String str = ".//div[@id = '" + skillBox + "']/following-sibling::div[contains(@class,'cell test_not_passed_block skill-box')]" +
+        String str = ".//div[@email = '" + skillBox + "']/following-sibling::div[contains(@class,'cell test_not_passed_block skill-box')]" +
                 "/ul/li[not (contains(@class,'none'))]//span[contains(@class,'skill-name')]";
         return str;
     }
@@ -164,7 +164,7 @@ public class WriterEditProfilePage extends TopMenuGeneralPage implements PageObj
     public void clickOnRemoveSkill(String category, String skillName) {
         String skillBox = setCategoryBox(category);
 
-        $(driver.findElement(By.xpath(".//div[@id = '" + skillBox + "']/following-sibling::div[contains(@class,'cell test_not_passed_block skill-box')]" +
+        $(driver.findElement(By.xpath(".//div[@email = '" + skillBox + "']/following-sibling::div[contains(@class,'cell test_not_passed_block skill-box')]" +
                 "/ul/li[not (contains(@class,'none'))]//span[contains(@class,'skill-name') and (contains (text(), '" + skillName + "'))]//following-sibling::span[contains(@class,'close_test move-next-skill-btn')]")))
                 .shouldBe(visible).click(); // xxx remove
         System.out.println("Element found! Removing element from added list ====<");
@@ -175,11 +175,10 @@ public class WriterEditProfilePage extends TopMenuGeneralPage implements PageObj
     public void clickOnAddSkill(String category, String skillName) {
         String skillBox = setCategoryBox(category);
 
-        $(driver.findElement(By.xpath(".//div[@id = '" + skillBox + "']/following-sibling::div[contains(@class,'cell without_test_block skill-box')]" +
+        $(driver.findElement(By.xpath(".//div[@email = '" + skillBox + "']/following-sibling::div[contains(@class,'cell without_test_block skill-box')]" +
                 "/ul/li[not (contains(@class,'none'))]//span[contains(@class,'skill-name') and (contains (text(), '" + skillName + "'))]//preceding-sibling::span[contains(@class,'test_plus')]")))
                 .shouldBe(visible).click(); // +++ add
         System.out.println("Element found! Adding element to added list ====>");
-
     }
 
 

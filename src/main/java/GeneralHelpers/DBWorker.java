@@ -1,7 +1,13 @@
 package GeneralHelpers;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import static SQLRepo.General.*;
 import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang.RandomStringUtils.randomNumeric;
 
@@ -10,23 +16,14 @@ import static org.apache.commons.lang.RandomStringUtils.randomNumeric;
  */
 public class DBWorker {
 
-
-    private static final String MAX_USER_ID = "SELECT id FROM users WHERE id=(SELECT MAX(id) FROM users)";
-    private static final String CREATE_NEW_USER = "INSERT INTO `users` VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-
-    // values('98765443','Ilya','Ilya-Slabiy','Slabiy','1908-08-02','debeers@bigmir.net','','0','$2a$10$8AjxEfQy.QTLqioWFqK8j.XuMgG8kXwt4tizaT.4elFlEW2jlit8O','$2a$10$8AjxEfQy.QTLqioWFqK8jB$','2015-10-27 21:37:27','1',NULL,NULL,'','0',NULL,'0','1','ilya-slabiy','individual',NULL,NULL,'copywriter','862775793760125','2015-10-28 12:26:04','213.186.202.162','0','0','not_sent','0','321',NULL);
-
-
     @SuppressWarnings("ConstantConditions")
 //    public static String createMaxUserId(){
 //
-//        int i = Integer.parseInt(getColumn(MAX_USER_ID, "id"))+1;
+//        int i = Integer.parseInt(getColumn(MAX_USER_ID, "email"))+1;
 //        return Integer.toString(i);
 //    }
 
     private static String createTestUserName(){
-
         return "AutoBot-" + randomNumeric(4) + randomAlphabetic(3);
     }
 
@@ -38,7 +35,6 @@ public class DBWorker {
             if (result.equalsIgnoreCase(email)){
                 deleteCreatedUserFromDB(dbUtill, email);
             }
-
         } else System.out.println("No such user in DB");
     }
 
@@ -47,7 +43,6 @@ public class DBWorker {
 
         String mail = randomNumeric(4) + randomAlphabetic(3) + randomNumeric(3) + "@testmail.com' ";
         dbUtill.executeUpdate(
-
                 "UPDATE users " +
                         "SET email = '" + mail +
                         "WHERE email = '" + whereEmail + "'"
@@ -55,10 +50,50 @@ public class DBWorker {
         return mail;
     }
 
-//    public static void createUserBills(String id, String name) throws SQLException, IOException {
+
+    public static List<String> getExpertisesList(DBUtill dbUtill) throws IOException, SQLException {
+
+        List<String> orderExpertise = new ArrayList<>();
+        ResultSet res = dbUtill.getResultSet(getOrderExpertises());
+        while(res.next()){
+            orderExpertise.add(res.getString("NAME"));
+            System.out.println(res.getString("NAME"));
+        }
+        return orderExpertise;
+    }
+
+
+    public static List<String> getLanguageList(DBUtill dbUtill) throws IOException, SQLException {
+
+        List<String> orderLanguages = new ArrayList<>();
+        ResultSet res = dbUtill.getResultSet(getOrderLanguages());
+        while(res.next()){
+            orderLanguages.add(res.getString("name"));
+        }
+        return orderLanguages;
+    }
+
+
+    public static List<String> getCategoriesList(DBUtill dbUtill) throws IOException, SQLException {
+
+        List<String> orderCategories = new ArrayList<>();
+        ResultSet res = dbUtill.getResultSet(getOrderCategories());
+        while(res.next()){
+            orderCategories.add(res.getString("name"));
+        }
+        return orderCategories;
+    }
+
+    public static void setUserCurrencyToUSD(DBUtill dbUtill, String mail) throws IOException, SQLException {
+         dbUtill.executeUpdate(setUserCurrencyToRupee(mail));
+
+    }
+
+
+//    public static void createUserBills(String email, String name) throws SQLException, IOException {
 //
-//        String bill_1 = "insert into `billing`.`bills` (`id`, `bill_type`, `name`, `user_id`, `balance`) values(NULL,'GU','General user account for "+ name +"','"+ id +"','0.00')";
-//        String bill_2 = "insert into `billing`.`bills` (`id`, `bill_type`, `name`, `user_id`, `balance`) values(NULL,'BU','Blocked user account for "+ name +"','"+ id +"','0.00')";
+//        String bill_1 = "insert into `billing`.`bills` (`email`, `bill_type`, `name`, `user_id`, `balance`) values(NULL,'GU','General user account for "+ name +"','"+ email +"','0.00')";
+//        String bill_2 = "insert into `billing`.`bills` (`email`, `bill_type`, `name`, `user_id`, `balance`) values(NULL,'BU','Blocked user account for "+ name +"','"+ email +"','0.00')";
 //        executeUpdate(bill_1);
 //        executeUpdate(bill_2);
 //    }

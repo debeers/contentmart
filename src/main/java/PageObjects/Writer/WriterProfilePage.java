@@ -211,7 +211,6 @@ public class WriterProfilePage extends TopMenuGeneralPage implements BirthdayDat
     }
 
     public String getPortfolioItemText() {
-
         return $(portfolioItemText).shouldBe(Condition.visible).getText();
     }
 
@@ -355,5 +354,4 @@ public class WriterProfilePage extends TopMenuGeneralPage implements BirthdayDat
         }
         return false;
     }
-
 }

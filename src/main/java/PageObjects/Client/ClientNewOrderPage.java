@@ -25,6 +25,9 @@ public class ClientNewOrderPage extends TopMenuGeneralPage {
     @FindBy(id = "description")
     public WebElement descriptionField;
 
+    @FindBy(xpath = ".//div[@class = 'cell3 timezone m_t-10 p_l-10']")
+    public WebElement userTimezone;
+
     @FindBy(id = "date_deadline")
     public WebElement deadlineField;
 
@@ -111,6 +114,11 @@ public class ClientNewOrderPage extends TopMenuGeneralPage {
 
     @FindBy(xpath = ".//*[@id='new_order']/form/div/div[4]/div[2]/div/div/ul/li/label")
     public WebElement expertisesSelect;
+
+
+    public String getUserTimezone(){
+        return $(userTimezone).shouldBe(visible).getText();
+    }
 
 
     public void randomSelectWritingCategories(){

@@ -24,7 +24,5 @@ public class DeletePortfolioItem extends BaseTest {
 
         writerProfilePage.clickOnDeletePortfolioItemButton(title);
         Assert.assertFalse(writerProfilePage.findPortfolioItem(title));
-
     }
-
 }

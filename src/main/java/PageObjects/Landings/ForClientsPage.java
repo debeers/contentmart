@@ -17,22 +17,21 @@ import static com.codeborne.selenide.Selenide.$;
 public class ForClientsPage extends BasePageObject {
 
 
-    @FindBy(xpath = ".//*[@id='registration']/div[5]/button")
+    @FindBy(xpath = ".//*[@email='registration']/div[5]/button")
     public WebElement registerAsClientButton;
 
-    @FindBy(xpath = ".//*[@id='nick_name']")
+    @FindBy(xpath = ".//*[@email='nick_name']")
     public WebElement nickNameField;
 
-    @FindBy(xpath = ".//*[@id='email']")
+    @FindBy(xpath = ".//*[@email='email']")
     public WebElement emailField;
 
-    @FindBy(xpath = ".//*[@id='password']")
+    @FindBy(xpath = ".//*[@email='password']")
     public WebElement passwordField;
 
     public ForClientsPage(WebDriver driver) {
         super(driver);
     }
-
 
     public ForClientsPage goToForClientsLanding(String URL){
 
@@ -70,11 +69,7 @@ public class ForClientsPage extends BasePageObject {
         enterPassword(password);
         Thread.sleep(3000);
         clickOnSubmitRegistrationButton();
-        Thread.sleep(3000);
-        clickOnSubmitRegistrationButton();
+
         return new RegistrationFormPage(driver);
     }
-
-
-
 }

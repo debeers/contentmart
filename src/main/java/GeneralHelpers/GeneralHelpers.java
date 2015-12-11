@@ -5,12 +5,17 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.internal.Streams;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang.RandomStringUtils.randomNumeric;
@@ -27,26 +32,21 @@ public class GeneralHelpers {
         String script = "document.evaluate(\"" + xpath + "\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)" +
                 ".singleNodeValue.setAttribute('class', '');";
         js.executeScript(script);
-
     }
-
 
     public static void uploadFileToHidenInput(WebDriver driver, String filepath) throws InterruptedException {
 
         String xPath = ".//*[@id='fileupload']";
         jsDeleteClasses(xPath, driver);
         $(By.xpath(xPath)).shouldBe(Condition.visible).sendKeys(filepath);
-
     }
-
 
     public static String getFileName(String path) {
 
-        String resultStr = path.substring(path.indexOf("resources2") + 10, path.lastIndexOf('.'));
+        String resultStr = path.substring(path.indexOf("Resources") + 10, path.lastIndexOf('.'));
         System.out.println("You will upload file with name: " + resultStr);
         return resultStr;
     }
-
 
     public static boolean isFileExists(String URLName) {
         try {
@@ -63,6 +63,15 @@ public class GeneralHelpers {
         }
     }
 
+    public static WebElement findUploadedFilesByXPath(WebElement element, String name) {
+        $(element).shouldHave(text("100%"));
+        return $(By.xpath(".//*[@id='photos']//span[2][contains(text(), '" + name + "')]")).shouldBe(Condition.visible);
+    }
+
+    public static WebElement findUploadedFilesByXPathInPublished(String name) {
+
+        return $(By.xpath(".//li/a[contains(text(), '" + name + "')]")).shouldBe(Condition.visible);
+    }
 
     public static Boolean isFileUploaded(String filePath, List<WebElement> elementList) {
         String fileName = getFileName(filePath);
@@ -83,7 +92,6 @@ public class GeneralHelpers {
         return true;
     }
 
-
     public static void safeJavaScriptClick(WebDriver driver, WebElement element) throws Exception {
         try {
             if (element.isEnabled() && element.isDisplayed()) {
@@ -94,45 +102,60 @@ public class GeneralHelpers {
                 System.out.println("Unable to click on element");
             }
         } catch (StaleElementReferenceException e) {
-            System.out.println("Element is not attached to the page document "+ e.getStackTrace());
+            System.out.println("Element is not attached to the page document " + e.getStackTrace());
         } catch (NoSuchElementException e) {
-            System.out.println("Element was not found in DOM "+ e.getStackTrace());
+            System.out.println("Element was not found in DOM " + e.getStackTrace());
         } catch (Exception e) {
-            System.out.println("Unable to click on element "+ e.getStackTrace());
+            System.out.println("Unable to click on element " + e.getStackTrace());
         }
     }
 
-
-    public static List<String> hintSeeker(List<WebElement> hints){
+    public static List<String> hintSeeker(List<WebElement> hints) {
         List<String> hintsText = new ArrayList<>();
-
-        for (WebElement hintText : hints){
+        for (WebElement hintText : hints) {
             hintsText.add(hintText.getAttribute("data-value"));
         }
         return hintsText;
     }
 
-
-    public static Boolean hintComparator(List<WebElement> hints, List<String> matcher){
-       return CollectionUtils.isEqualCollection(hintSeeker(hints), matcher);
+    public static Boolean hintComparator(List<WebElement> hints, List<String> matcher) {
+        return CollectionUtils.isEqualCollection(hintSeeker(hints), matcher);
     }
 
-    public static String getSystemDate(){
+    public static String getSystemDate() {
         return new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
     }
 
-    public static String getSystemTime_24(){
+    public static String getSystemTime_24() {
         return new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime());
     }
 
-    public static String getSystemTime_AM_PM(){
+    public static String getSystemTime_AM_PM() {
         return new SimpleDateFormat("hh:mm a").format(Calendar.getInstance().getTime());
     }
 
-    public static String setRandomUserNickName(String role){
+    public static String setRandomUserNickName(String role) {
+        if (role.equalsIgnoreCase("writer")) {
+            return "WriterBOT-" + randomNumeric(4) + randomAlphabetic(3);
+        } else return "ClientBOT-" + randomNumeric(4) + randomAlphabetic(3);
+    }
 
-        if(role.equalsIgnoreCase("writer")){
-        return "WriterBOT-" + randomNumeric(4) + randomAlphabetic(3);
-        }else return "ClientBOT-" + randomNumeric(4) + randomAlphabetic(3);
+    public static void uploadFilesByRobot(WebElement element, String filepath) throws AWTException, InterruptedException {
+
+        $(element).shouldBe(Condition.visible).click();
+
+        StringSelection ss = new StringSelection(filepath);
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+
+        Robot robot = new Robot();
+        robot.keyPress(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_V);
+        robot.keyRelease(KeyEvent.VK_CONTROL);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
+        Thread.sleep(1500);
+        robot.keyPress(KeyEvent.VK_ENTER);
+        robot.keyRelease(KeyEvent.VK_ENTER);
     }
 }
