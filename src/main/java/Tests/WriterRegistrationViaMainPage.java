@@ -13,9 +13,8 @@ import javax.mail.Message;
 import java.util.Properties;
 import static Actions.General.RegistrationAndLogin.*;
 import static GeneralHelpers.CreateEmailAccountUtill.createNewUserEmail;
-import static GeneralHelpers.DBWorker.checkForExitingUserAndDeleteIt;
-import static GeneralHelpers.GeneralHelpers.setRandomUserNickName;
-import static GeneralHelpers.EmailListener.getActivationLinkFromTargetMessage;
+import static GeneralHelpers.Randomizers.setRandomUserNickName;
+import static Actions.General.RegistrationAndLogin.getActivationLinkFromTargetMessage;
 import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
 import static SQLRepo.General.checkUserExsistanceByMail;
 import static com.codeborne.selenide.Selenide.$;
@@ -37,7 +36,7 @@ public class WriterRegistrationViaMainPage extends BaseTest{
         String email = userEmailAccount.getEmail();
         String userNickName  = setRandomUserNickName(props.getProperty("userRole"));
 
-        String title = registerAsWriterFromMainPage(
+        String title = registerAsWriterFromMainPageAndGetPageTitle(
                 driver,
                 userNickName,
                 email,
@@ -56,12 +55,11 @@ public class WriterRegistrationViaMainPage extends BaseTest{
                 driver, getActivationLinkFromTargetMessage(targetMessage),
                 props.getProperty("MyOrdersTitle"));
 
-        assertTrue($(myOrdersPage.takeTheTestNowButton).isDisplayed()                       );
+        assertTrue($(myOrdersPage.takeTheTestNowButton).isDisplayed()                      );
         assertEquals(myOrdersPage.getUserNickNameFromProfileDropMenu().trim(), userNickName);
-        new DBUtill().initDB().getColumn(checkUserExsistanceByMail(email), "*");
         AccountDetailsPage accountDetailsPage = myOrdersPage.selectAccountSettingsFromMenu();
 
-        Assert.assertEquals(accountDetailsPage.getUserCountry(), props.getProperty("UserCountry")        );
+        Assert.assertEquals(accountDetailsPage.getUserCountry(), props.getProperty("UserCountry")       );
         Assert.assertEquals(accountDetailsPage.getUserTimeZoneValue(), props.getProperty("UserTimeZone"));
 
         WriterProfilePage writerProfilePage = myOrdersPage.selectWriterProfileFromMenu();

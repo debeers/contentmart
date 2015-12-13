@@ -1,5 +1,6 @@
 package Tests;
 
+import Actions.Client.CreateNewOrder;
 import Entities.OrderObject;
 import GeneralHelpers.DBUtill;
 import PageObjects.Client.NewOrderPage;
@@ -16,11 +17,9 @@ import java.util.*;
 import static Actions.Client.CreateNewOrder.setUserCurrencyToRupee;
 import static Actions.General.RegistrationAndLogin.logOut;
 import static Actions.General.RegistrationAndLogin.loginAs;
-import static GeneralHelpers.CreateNewOrderHelper.*;
 import static GeneralHelpers.DateTimeUtils.getEtalonTimezone;
 import static GeneralHelpers.DateTimeUtils.getUserTimezoneName;
-import static GeneralHelpers.GeneralHelpers.findUploadedFilesByXPathInPublished;
-import static GeneralHelpers.GeneralHelpers.getFileName;
+import static GeneralHelpers.UploadingAndDownloadingFiles.getFileName;
 import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
 import static PageObjects.Client.NewOrderPage.checkForWordsRequired;
 import static PageObjects.General.OrderWorkFlow.compareExpertises;
@@ -31,12 +30,11 @@ public class  CreateNewOrderTest extends BaseTest {
     @Test(groups={"Fast_And_Furious_Smoke_1.0"})
     public void CreateNewOrderTest() throws InterruptedException, IOException, AWTException, SQLException {
 
-        String orderData  = "\\src\\main\\java\\Tests\\TestDataXML\\CreateNewOrder\\OrderData.xml";
         Properties props  = propertyXMLoader(System.getProperty("user.dir") +
                 "\\src\\main\\java\\Tests\\TestDataXML\\CreateNewOrder\\OrderData.xml");
 
         OrderObject order = new OrderObject();
-        DBUtill dbUtill   = new DBUtill().initDB();
+        DBUtill dbUtill   = new DBUtill();
 
         setUserCurrencyToRupee(dbUtill, props);
         String etalTime = getEtalonTimezone(
@@ -44,9 +42,9 @@ public class  CreateNewOrderTest extends BaseTest {
 
         MyOrdersPage myOrdersPage = loginAs(driver, clientLogin);
         NewOrderPage newOrderPage = myOrdersPage.clickOnNewOrderFromTopMenu();
-        newOrderPage.setOrder(dbUtill, order, orderData);
+        newOrderPage.setOrder(dbUtill, order, props);
 
-        assertEquals(checkForTotalPrice(
+        assertEquals(CreateNewOrder.checkForTotalPrice(
 
                 order.getOrderValueInRupee(),
                 order.getOrderWordsRequired(),
@@ -55,7 +53,7 @@ public class  CreateNewOrderTest extends BaseTest {
         ),
                 Double.parseDouble(newOrderPage.getOrderTotalPriceValue()));
 
-        assertEquals(etalTime, getCurrentUserTimezoneFromNewOrderPage(newOrderPage));
+        assertEquals(etalTime, CreateNewOrder.getCurrentUserTimezoneFromNewOrderPage(newOrderPage));
         Thread.sleep(1500); //server side wait
         OrderWorkFlow orderWorkFlow = newOrderPage.clickOnPublishButton();
 
@@ -63,13 +61,13 @@ public class  CreateNewOrderTest extends BaseTest {
         order.setOrderPublicDate(orderWorkFlow.getPublichDate());
         order.setOrderStatus(orderWorkFlow.getOrderStatus());
 
-        dateComparator(order, orderWorkFlow);
+        CreateNewOrder.dateComparator(order, orderWorkFlow);
         Assert.assertEquals(orderWorkFlow.getOrderStatus(), "Published");
         Assert.assertTrue(orderWorkFlow.getOrderStatusInfo().contains(props.getProperty("StatusInfo")));
         Assert.assertEquals(order.getOrderName(), orderWorkFlow.getOrderTitle());
         Assert.assertEquals(order.getOrderDetails(), orderWorkFlow.getOrderDescription());
         Assert.assertEquals(order.getOrderVisibility(), orderWorkFlow.orderVisibility.getText());
-        Assert.assertTrue(findUploadedFilesByXPathInPublished(getFileName(props.getProperty("FileForUpload"))).isDisplayed());
+        Assert.assertTrue(newOrderPage.findUploadedFilesByXPathInPublished(getFileName(props.getProperty("FileForUpload"))).isDisplayed());
         Assert.assertEquals(order.getOrderCategoryOfWriting(), orderWorkFlow.getCategory());
 
         Assert.assertEquals(Integer.toString(
@@ -89,13 +87,13 @@ public class  CreateNewOrderTest extends BaseTest {
 
         myOrdersPage.getOrderFromOrdersTable(order.getOrderName()).click();
 
-        dateComparator(order, orderWorkFlow);
+        CreateNewOrder.dateComparator(order, orderWorkFlow);
         Assert.assertEquals(orderWorkFlow.getOrderStatus(), "Published"                                                      );
         Assert.assertTrue(orderWorkFlow.getOrderStatusInfo().contains(props.getProperty("StatusInfo")));
         Assert.assertEquals(order.getOrderName(), orderWorkFlow.getOrderTitle()                                              );
         Assert.assertEquals(order.getOrderDetails(), orderWorkFlow.getOrderDescription());
         Assert.assertEquals(order.getOrderVisibility(), orderWorkFlow.orderVisibility.getText());
-        Assert.assertTrue(findUploadedFilesByXPathInPublished(getFileName(props.getProperty("FileForUpload"))).isDisplayed());
+        Assert.assertTrue(newOrderPage.findUploadedFilesByXPathInPublished(getFileName(props.getProperty("FileForUpload"))).isDisplayed());
         Assert.assertEquals(order.getOrderCategoryOfWriting(), orderWorkFlow.getCategory());
 
         Assert.assertEquals(Integer.toString(

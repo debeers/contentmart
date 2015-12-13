@@ -14,7 +14,7 @@ import java.util.Properties;
 
 import static Actions.General.RegistrationAndLogin.*;
 import static GeneralHelpers.CreateEmailAccountUtill.createNewUserEmail;
-import static GeneralHelpers.EmailListener.getActivationLinkFromTargetMessage;
+import static Actions.General.RegistrationAndLogin.getActivationLinkFromTargetMessage;
 import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
 import static org.testng.Assert.assertEquals;
 
@@ -33,7 +33,7 @@ public class   ClientRegistrationViaLanding extends BaseTest{
         String userNickName  = userEmailAccount.getName();
         String email = userEmailAccount.getEmail();
 
-        String title = registerFromLandingAsClientAndGetTheTitle(
+        String title = registerFromLandingAsClientAndGetPageTitle(
                 driver,
                 props.getProperty("URL"),
                 userNickName,

@@ -1,69 +1,23 @@
 package GeneralHelpers;
 
+import Entities.DBParams;
+
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Properties;
 
 import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
-import static SQLRepo.General.getOrderCategories;
 
 /**
  * Created by DeBeers on 01.12.2015.
  */
 public class DBUtill {
 
-    private String DB_USER;
-    private String DB_DRIVER;
-    private String DB_PASSWORD;
-    private String DB_CONNECTION;
+    public DBParams initDBConnection() throws IOException {
+        Properties props =  propertyXMLoader(System.getProperty("user.dir")
+                + "\\src\\main\\java\\Randomizers\\SettingsXML\\DB_CONNECTION.xml");
 
-    public DBUtill(String DB_USER, String DB_DRIVER, String DB_PASSWORD, String DB_CONNECTION) {
-
-        this.DB_USER = DB_USER;
-        this.DB_DRIVER = DB_DRIVER;
-        this.DB_PASSWORD = DB_PASSWORD;
-        this.DB_CONNECTION = DB_CONNECTION;
-    }
-
-    public DBUtill(){};
-
-    public String getDB_USER() {
-        return DB_USER;
-    }
-
-    public void setDB_USER(String DB_USER) {
-        this.DB_USER = DB_USER;
-    }
-
-    public String getDB_DRIVER() {
-        return DB_DRIVER;
-    }
-
-    public void setDB_DRIVER(String DB_DRIVER) {
-        this.DB_DRIVER = DB_DRIVER;
-    }
-
-    public String getDB_PASSWORD() {
-        return DB_PASSWORD;
-    }
-
-    public void setDB_PASSWORD(String DB_PASSWORD) {
-        this.DB_PASSWORD = DB_PASSWORD;
-    }
-
-    public String getDB_CONNECTION() {
-        return DB_CONNECTION;
-    }
-
-    public void setDB_CONNECTION(String DB_CONNECTION) {
-        this.DB_CONNECTION = DB_CONNECTION;
-    }
-
-    public DBUtill initDB() throws IOException {
-        Properties props =  propertyXMLoader(System.getProperty("user.dir") + "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\DB_CONNECTION.xml");
-
-        return new DBUtill(
+        return new DBParams(
                 props.getProperty("DB_USER"),
                 props.getProperty("DB_DRIVER"),
                 props.getProperty("DB_PASSWORD"),
@@ -78,7 +32,6 @@ public class DBUtill {
 
         return resultSet;
     }
-
 
     public void executeUpdate(String insertTableSQL) throws SQLException, IOException {
 
@@ -110,9 +63,10 @@ public class DBUtill {
 
     public Connection getDBConnection() throws IOException {
 
+        DBParams dbParams = initDBConnection();
         Connection dbConnection = null;
         try {
-            Class.forName(DB_DRIVER);
+            Class.forName(dbParams.getDB_DRIVER());
         } catch (ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -120,9 +74,9 @@ public class DBUtill {
         try {
             dbConnection = DriverManager.getConnection(
 
-                    DB_CONNECTION,
-                    DB_USER,
-                    DB_PASSWORD);
+                    dbParams.getDB_CONNECTION(),
+                    dbParams.getDB_USER(),
+                    dbParams.getDB_PASSWORD());
 
             return dbConnection;
 

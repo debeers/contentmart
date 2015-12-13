@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-import static GeneralHelpers.CreateNewOrderHelper.randomID;
+import static Actions.Client.CreateNewOrder.randomID;
 import static GeneralHelpers.Messages.randomTextGeneratorLength;
 
 /**

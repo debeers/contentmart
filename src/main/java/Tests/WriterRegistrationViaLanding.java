@@ -1,7 +1,6 @@
 package Tests;
 
 import Entities.UserEmailAccount;
-import GeneralHelpers.DBUtill;
 import GeneralHelpers.EmailListener;
 import PageObjects.General.AccountDetailsPage;
 import PageObjects.General.MyOrdersPage;
@@ -13,11 +12,9 @@ import javax.mail.Message;
 import java.util.Properties;
 import static Actions.General.RegistrationAndLogin.*;
 import static GeneralHelpers.CreateEmailAccountUtill.createNewUserEmail;
-import static GeneralHelpers.DBWorker.checkForExitingUserAndDeleteIt;
-import static GeneralHelpers.GeneralHelpers.setRandomUserNickName;
-import static GeneralHelpers.EmailListener.getActivationLinkFromTargetMessage;
+import static GeneralHelpers.Randomizers.setRandomUserNickName;
+import static Actions.General.RegistrationAndLogin.getActivationLinkFromTargetMessage;
 import static GeneralHelpers.PropertiesLoader.*;
-import static SQLRepo.General.checkUserExsistanceByMail;
 import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -35,8 +32,7 @@ public class WriterRegistrationViaLanding extends BaseTest{
         String email = userEmailAccount.getEmail();
         String userNickName  = setRandomUserNickName(props.getProperty("userRole"));
 
-
-        String title = registerFromLandingAsWriter(
+        String title = registerFromLandingAsWriterAndGetPageTitle(
                 driver,
                 props.getProperty("URL"),
                 userNickName,

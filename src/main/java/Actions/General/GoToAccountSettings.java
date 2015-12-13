@@ -54,34 +54,76 @@ public class GoToAccountSettings {
     }
 
 
-    public static void setUserData(UserObject user, AccountDetailsPage accountDetailsPage, String clientCountry) throws InterruptedException {
+    public static void setClientAccountSettings(UserObject user, AccountDetailsPage accountDetailsPage, String clientCountry)
+            throws InterruptedException {
 
-        if($(accountDetailsPage.countryField).is(Condition.enabled)) {
+        Select currency = new Select(accountDetailsPage.currencyField);
+        Select timezone = new Select(accountDetailsPage.userTimeZone);
+        Select country  = new Select(accountDetailsPage.countryField);
 
-            System.out.println("We are in the client account settings NEO");
+        $(accountDetailsPage.countryField).shouldBe(Condition.visible);
+        country.selectByIndex(
+                clientCountry.equalsIgnoreCase("India") ? 102 : new Random().nextInt(country.getOptions().size()));
 
-            Select currency = new Select(accountDetailsPage.currencyField);
-            Select timezone = new Select(accountDetailsPage.userTimeZone);
-            Select country  = new Select(accountDetailsPage.countryField);
+        $(accountDetailsPage.currencyField).shouldBe(Condition.visible);
+        currency.selectByIndex(new Random().nextInt(currency.getOptions().size()));
 
-            $(accountDetailsPage.countryField).shouldBe(Condition.visible);
-            country.selectByIndex(
-                    clientCountry.equalsIgnoreCase("India") ? 102 : new Random().nextInt(country.getOptions().size()));
+        $(accountDetailsPage.userTimeZone).shouldBe(Condition.visible);
+        timezone.selectByIndex(new Random().nextInt(timezone.getOptions().size()));
 
-            $(accountDetailsPage.currencyField).shouldBe(Condition.visible);
-            currency.selectByIndex(new Random().nextInt(currency.getOptions().size()));
+        user.setCurrency(accountDetailsPage.getUserCurrency());
+        System.out.println("Currency: " + accountDetailsPage.getUserCurrency());
 
-            $(accountDetailsPage.userTimeZone).shouldBe(Condition.visible);
-            timezone.selectByIndex(new Random().nextInt(timezone.getOptions().size()));
+        user.setTimeZone(accountDetailsPage.getUserTimeZoneValue());
+        System.out.println("Timezone: " + accountDetailsPage.getUserTimeZoneValue());
 
-            user.setCurrency(accountDetailsPage.getUserCurrency());
-            System.out.println("Currency: " + accountDetailsPage.getUserCurrency());
 
-            user.setTimeZone(accountDetailsPage.getUserTimeZoneValue());
-            System.out.println("Timezone: " + accountDetailsPage.getUserTimeZoneValue());
+        Select state  = new Select(accountDetailsPage.userRegion);
+        Select city   = new Select(accountDetailsPage.userCity);
 
-        }else System.out.println("We are in the writer account settings NEO");
 
+        $(accountDetailsPage.userRegion).shouldBe(Condition.visible);
+        state.selectByIndex(new Random().nextInt(state.getOptions().size()));
+
+        user.setNickname(accountDetailsPage.getUserNickNameFromProfileDropMenu());
+        System.out.println("NickName: " + accountDetailsPage.getUserNickNameFromProfileDropMenu());
+
+        user.setFirstname(accountDetailsPage.setFirstNameField(randomTextGeneratorLength(8)));
+        System.out.println("FirstName: " + accountDetailsPage.getUserFirstName());
+
+        user.setLastname(accountDetailsPage.setLastNameField(randomTextGeneratorLength(8)));
+        System.out.println("LastName: " + accountDetailsPage.getUserLastName());
+
+        user.setPhone(accountDetailsPage.setPhoneField(RandomStringUtils.randomNumeric(10)));
+        System.out.println("Phone: " + accountDetailsPage.getUserPhone());
+
+        user.setPan(accountDetailsPage.setPanField(panGenerator()));
+        System.out.println("PAN: " + accountDetailsPage.getUserPan());
+
+        user.setCountry(accountDetailsPage.getUserCountry());
+        System.out.println("Country: " + accountDetailsPage.getUserCountry());
+
+        user.setAddress(accountDetailsPage.setAddressField(randomTextGeneratorLength(10)));
+        System.out.println("Address: " + accountDetailsPage.getUserAdress());
+
+        user.setZip(accountDetailsPage.setZipField(RandomStringUtils.randomNumeric(6)));
+        System.out.println("ZIP: " + accountDetailsPage.getUserZip());
+
+        accountDetailsPage.userCity.click();
+        Thread.sleep(2000); // server side wait
+        accountDetailsPage.userCity.click();
+        city.selectByIndex(1 + new Random().nextInt(city.getOptions().size() - 1));
+        user.setCity(accountDetailsPage.getUserCity());
+        System.out.println("City: " + accountDetailsPage.getUserCity());
+
+        user.setState(accountDetailsPage.getUserRegion());
+        System.out.println("State: " + accountDetailsPage.getUserRegion());
+
+    }
+
+
+    public static void setWriterAccountSettings(UserObject user, AccountDetailsPage accountDetailsPage)
+            throws InterruptedException {
 
         Select state  = new Select(accountDetailsPage.userRegion);
         Select city   = new Select(accountDetailsPage.userCity);

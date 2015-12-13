@@ -5,7 +5,6 @@ import GeneralHelpers.DBUtill;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import static SQLRepo.General.getAllUserFieldsByMail;
 
@@ -18,7 +17,7 @@ public class UserModelRepo {
 
         DBUtill dbUtill = new DBUtill();
 
-        ResultSet resultSet = dbUtill.initDB()
+        ResultSet resultSet = dbUtill.initDBConnection()
                 .getDBConnection()
                 .createStatement()
                 .executeQuery(getAllUserFieldsByMail(email));

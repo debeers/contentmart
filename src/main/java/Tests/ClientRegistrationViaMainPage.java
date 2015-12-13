@@ -3,7 +3,6 @@ package Tests;
 import Entities.UserEmailAccount;
 import GeneralHelpers.EmailListener;
 import PageObjects.Client.ClientProfilePage;
-import PageObjects.Client.NewOrderPage;
 import PageObjects.General.AccountDetailsPage;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.General.PartnersPage;
@@ -15,8 +14,7 @@ import java.util.Properties;
 
 import static Actions.General.RegistrationAndLogin.*;
 import static GeneralHelpers.CreateEmailAccountUtill.createNewUserEmail;
-import static GeneralHelpers.GeneralHelpers.setRandomUserNickName;
-import static GeneralHelpers.EmailListener.getActivationLinkFromTargetMessage;
+import static Actions.General.RegistrationAndLogin.getActivationLinkFromTargetMessage;
 import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
 import static org.testng.Assert.assertEquals;
 

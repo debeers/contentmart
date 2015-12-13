@@ -1,11 +1,10 @@
 package Entities;
 
-import GeneralHelpers.DBUtill;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.io.IOException;
 
-import static GeneralHelpers.GeneralHelpers.setRandomUserNickName;
+import static GeneralHelpers.Randomizers.setRandomUserNickName;
 
 /**
  * Created by DeBeers on 01.12.2015.
@@ -18,7 +17,7 @@ public class UserEmailAccount {
     public String home;
     public String maildir;
 
-    private final String MAIL_CONNECTION = "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\DB_CONN_MAIL.xml";
+    private final String MAIL_CONNECTION = "\\src\\main\\java\\Randomizers\\SettingsXML\\DB_CONN_MAIL.xml";
 
     public UserEmailAccount(){}
 

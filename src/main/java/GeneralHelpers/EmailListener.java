@@ -104,30 +104,6 @@ return searchTerm;
         return searchCondition;
     }
 
-
-//    private static SearchTerm searchFrom(String fromEmail) {
-//
-//        SearchTerm searchCondition = new SearchTerm() {
-//            @Override
-//            public boolean match(Message message) {
-//                try {
-//                    Address[] fromAddress = message.getFrom();
-//                    if (fromAddress != null && fromAddress.length > 0) {
-//                        for(Address adr : fromAddress){
-//                            if (adr.toString().contains(fromEmail)) {
-//                                return true;
-//                            }
-//                        }
-//                    }
-//                } catch (MessagingException ex) {
-//                    ex.printStackTrace();
-//                }
-//                return false;
-//            }
-//        };
-//        return searchCondition;
-//    }
-
     private static SearchTerm searchFrom(String fromEmail) {
 
         SearchTerm searchCondition = new SearchTerm() {
@@ -240,23 +216,4 @@ return searchTerm;
     }
 
 
-    public  static String getActivationLinkFromTargetMessage(Message message) throws MessagingException, IOException {
-
-        Multipart multipart = (Multipart)message.getContent();
-        for (int i=0; i<multipart.getCount(); i++){
-
-            BodyPart bodyPart = multipart.getBodyPart(i);
-            String s = (String)bodyPart.getContent();
-
-            Pattern p = Pattern.compile("<a[^>]*href=\"(http[s]?:[^\"]*)\".*Activate<\\/a>");
-            Matcher m = p.matcher(s);
-
-            if(m.find()){
-                String url = m.group(1);
-                System.out.println("Regexp : " + url);
-                return url;
-            }
-        }
-        return null;
-    }
 }

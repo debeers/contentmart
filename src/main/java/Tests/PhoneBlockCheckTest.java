@@ -12,7 +12,7 @@ import java.util.Properties;
 import static Actions.General.RegistrationAndLogin.isEvenID;
 import static Actions.General.RegistrationAndLogin.logOut;
 import static Actions.General.RegistrationAndLogin.loginAs;
-import static GeneralHelpers.GeneralHelpers.getSystemTime_AM_PM;
+import static GeneralHelpers.DateTimeUtils.getSystemTime_AM_PM;
 import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
 
 /**

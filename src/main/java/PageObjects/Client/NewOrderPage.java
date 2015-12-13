@@ -1,7 +1,7 @@
 package PageObjects.Client;
 
+import Actions.Client.CreateNewOrder;
 import Entities.OrderObject;
-import GeneralHelpers.CreateNewOrderHelper;
 import GeneralHelpers.DBUtill;
 import PageObjects.General.OrderWorkFlow;
 import PageObjects.General.TopMenuGeneralPage;
@@ -19,14 +19,11 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 
-import static GeneralHelpers.CreateNewOrderHelper.createNewOrderName;
-import static GeneralHelpers.DBWorker.getExpertisesList;
-import static GeneralHelpers.DBWorker.getLanguageList;
-import static GeneralHelpers.GeneralHelpers.uploadFilesByRobot;
-import static GeneralHelpers.GeneralHelpers.findUploadedFilesByXPath;
-import static GeneralHelpers.GeneralHelpers.getFileName;
+import static Actions.Client.CreateNewOrder.createNewOrderName;
+import static Actions.Client.CreateNewOrder.getExpertisesList;
+import static GeneralHelpers.UploadingAndDownloadingFiles.uploadFilesByRobot;
+import static GeneralHelpers.UploadingAndDownloadingFiles.getFileName;
 import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
-import static SQLRepo.General.getUserCurrencyID;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -119,6 +116,16 @@ public class NewOrderPage extends TopMenuGeneralPage {
 
     @FindBy(xpath = ".//div[@class = 'xdsoft_time xdsoft_current']")
     public WebElement currentOrderTime;
+
+    public WebElement findUploadedFilesByXPath(WebElement element, String name) {
+        $(element).shouldHave(text("100%"));
+        return $(By.xpath(".//*[@id='photos']//span[2][contains(text(), '" + name + "')]")).shouldBe(visible);
+    }
+
+    public WebElement findUploadedFilesByXPathInPublished(String name) {
+
+        return $(By.xpath(".//li/a[contains(text(), '" + name + "')]")).shouldBe(visible);
+    }
 
 
     public String setOrderNameField(String orderName) {
@@ -291,16 +298,14 @@ public class NewOrderPage extends TopMenuGeneralPage {
 
         $(deadlineField).shouldBe(visible).click();
         Thread.sleep(2000);
-        driver.findElement(By.xpath(xDateBuilder(CreateNewOrderHelper.getDay()))).click();
+        driver.findElement(By.xpath(xDateBuilder(CreateNewOrder.getDay()))).click();
         currentOrderTime.click();
         orderDetailsField.click();
 
         return $(deadlineField).shouldBe(visible).getAttribute("value");
     }
 
-    public void setOrder(DBUtill dbUtill, OrderObject order, String xmlPath) throws InterruptedException, AWTException, IOException, SQLException {
-
-        Properties props = propertyXMLoader(System.getProperty("user.dir") + xmlPath);
+    public void setOrder(DBUtill dbUtill, OrderObject order, Properties props) throws InterruptedException, AWTException, IOException, SQLException {
 
         System.out.println("cur email");
         order.setOrderName(

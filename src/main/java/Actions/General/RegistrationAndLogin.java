@@ -1,16 +1,25 @@
 package Actions.General;
 
 import Entities.LoginObject;
-import GeneralHelpers.DBWorker;
+import GeneralHelpers.DBUtill;
 import PageObjects.General.*;
 import PageObjects.Landings.ForClientsPage;
 import PageObjects.Landings.ForWritersPage;
 import com.codeborne.selenide.Condition;
 import org.openqa.selenium.WebDriver;
 
-import java.io.File;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Selenide.$;
+import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
+import static org.apache.commons.lang.RandomStringUtils.randomNumeric;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -67,16 +76,13 @@ public class RegistrationAndLogin {
     }
 
 
-    public static String registerAsWriterFromMainPage(WebDriver driver, String nickname, String email, String password) throws Exception {
+    public static String registerAsWriterFromMainPageAndGetPageTitle(WebDriver driver, String nickname, String email, String password) throws Exception {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage(driver);
         loginPage.registrationLinkClick();
+
         RegistrationFormPage registrationFormPage = loginPage.clickOnRegisterAsWriter();
-
-            if(registrationFormPage.getHeader().trim().equals("Register as a Writer"))
-                throw new Exception("Wrong header, probably we are not at required page");
-
         registrationFormPage.register(nickname, email, password);
         $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
 
@@ -84,14 +90,12 @@ public class RegistrationAndLogin {
     }
 
 
-    public static String registerFromLandingAsWriter(WebDriver driver, String URL, String nickname, String email, String password) throws InterruptedException {
+    public static String registerFromLandingAsWriterAndGetPageTitle(WebDriver driver, String URL, String nickname, String email, String password) throws InterruptedException {
 
         ForWritersPage forWritersPage = new ForWritersPage(driver);
         forWritersPage.goToForWritersLanding(URL);
         RegistrationFormPage registrationFormPage = forWritersPage.clickOnRegisterNowButton();
 
-            registrationFormPage.getHeader().trim().equals("Register as a Writer");
-
         registrationFormPage.register(nickname, email, password);
         $(registrationFormPage.successMessageAfterSubmitRegistration).shouldBe(Condition.visible);
 
@@ -99,7 +103,7 @@ public class RegistrationAndLogin {
     }
 
 
-    public static String registerFromLandingAsClientAndGetTheTitle(WebDriver driver, String URL, String nickname, String email, String password) throws InterruptedException {
+    public static String registerFromLandingAsClientAndGetPageTitle(WebDriver driver, String URL, String nickname, String email, String password) throws InterruptedException {
 
         ForClientsPage forClientsPage = new ForClientsPage(driver);
         forClientsPage.goToForClientsLanding(URL);
@@ -130,4 +134,49 @@ public class RegistrationAndLogin {
         return id%2 == 1;
     }
 
+
+    private static String createTestUserName(){
+        return "AutoBot-" + randomNumeric(4) + randomAlphabetic(3);
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public static void checkForExitingUserAndDeleteIt(DBUtill dbUtill, String query, String column, String email) throws SQLException, InterruptedException, IOException {
+        String result = dbUtill.getColumn(query, column);
+        if (result != null ) {
+            if (result.equalsIgnoreCase(email)){
+                deleteCreatedUserFromDB(dbUtill, email);
+            }
+        } else System.out.println("No such user in DB");
+    }
+
+    public static String deleteCreatedUserFromDB(DBUtill dbUtill, String whereEmail) throws SQLException, IOException {
+
+        String mail = randomNumeric(4) + randomAlphabetic(3) + randomNumeric(3) + "@testmail.com' ";
+        dbUtill.executeUpdate(
+                "UPDATE users " +
+                        "SET email = '" + mail +
+                        "WHERE email = '" + whereEmail + "'"
+        );
+        return mail;
+    }
+
+    public  static String getActivationLinkFromTargetMessage(Message message) throws MessagingException, IOException {
+
+        Multipart multipart = (Multipart)message.getContent();
+        for (int i=0; i<multipart.getCount(); i++){
+
+            BodyPart bodyPart = multipart.getBodyPart(i);
+            String s = (String)bodyPart.getContent();
+
+            Pattern p = Pattern.compile("<a[^>]*href=\"(http[s]?:[^\"]*)\".*Activate<\\/a>");
+            Matcher m = p.matcher(s);
+
+            if(m.find()){
+                String url = m.group(1);
+                System.out.println("Regexp : " + url);
+                return url;
+            }
+        }
+        return null;
+    }
 }

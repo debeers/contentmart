@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Random;
 
 import static GeneralHelpers.CustomWaits.$WaitFor;
-import static GeneralHelpers.GeneralHelpers.jsDeleteClasses;
+import static GeneralHelpers.JSWorker.jsDeleteClasses;
 import static com.codeborne.selenide.Selenide.$;
 
 /**
