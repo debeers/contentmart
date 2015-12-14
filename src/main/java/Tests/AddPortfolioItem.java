@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static Actions.Writer.WriterGoToProfilePage.addNewPortfolioItem;
-import static GeneralHelpers.CreateNewOrderHelper.randomID;
+import static Actions.Client.CreateNewOrder.randomID;
 
 
 /**

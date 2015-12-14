@@ -1,6 +1,5 @@
 package Tests;
 
-
 import Entities.GmailCredentials;
 import Entities.LoginObject;
 import com.codeborne.selenide.WebDriverRunner;
@@ -10,16 +9,13 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import ru.stqa.selenium.factory.WebDriverFactory;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-
 
     public static WebDriver driver;
     public static WebDriverWait wait;
@@ -32,7 +28,6 @@ public class BaseTest {
     @Parameters({"URL", "clientLoginParam", "clientPasswordParam", "writerLoginParam", "writerPasswordParam", "mailbox", "mailboxPassword"})
     @BeforeMethod(alwaysRun = true)
     public void setUp(String URL, String clientLoginParam, String clientPasswordParam, String writerLoginParam, String writerPasswordParam, String mailbox, String mailboxPassword) {
-
 
         String TestClassName = this.getClass().getName();
         System.out.println(TestClassName);
@@ -59,7 +54,7 @@ public class BaseTest {
 
 
         driver = WebDriverFactory.getDriver(dc);
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 10);
         driver.manage().window().maximize();
         WebDriverRunner.setWebDriver(driver); // Selenide WebDriverRunner for my custom driver
@@ -74,8 +69,7 @@ public class BaseTest {
             driver.get("https://contentmart.in/exit");
         }
 
-        driver.manage().deleteAllCookies(); //try incognito
-//        Thread.sleep(5000);
+        driver.manage().deleteAllCookies();
         driver.quit();
 
         String verificationErrorString = verificationErrors.toString();
@@ -84,16 +78,3 @@ public class BaseTest {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -36,7 +36,6 @@ public class MyMessagesPage extends TopMenuGeneralPage {
 
 
     public void closeMessageWindowClick() {
-
         closeMessageWindow.click();
     }
 
@@ -47,31 +46,24 @@ public class MyMessagesPage extends TopMenuGeneralPage {
     }
 
     public void sendMessageButtonClick() {
-
         $(sendMessageButton).shouldBe(present).click();
     }
 
     public void sendTextMessage(String message) {
-
         $(messageTextField).shouldBe(visible).sendKeys(message);
         sendMessageButtonClick();
     }
 
     public void sendTextMessageWithFile(String message) {
-
         $(messageTextField).shouldBe(visible).sendKeys(message);
         $(sendMessageButton).shouldBe(exist).click();
     }
 
     public String getFileHref(String filename){
-
        return $(By.xpath("//*[contains(text(),'" + filename + "')]")).shouldBe(visible).getAttribute("href");
     }
 
-
     public MyMessagesPage(WebDriver driver) {
-
         super(driver);
     }
-
 }

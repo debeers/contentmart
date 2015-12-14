@@ -8,9 +8,7 @@ import org.openqa.selenium.support.PageFactory;
  */
 public abstract class BasePageObject implements BasePageObjectInterface{
 
-
     protected static WebDriver driver;
-
 
     public WebDriver getDriver() {
         return driver;

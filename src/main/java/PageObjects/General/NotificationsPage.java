@@ -7,15 +7,6 @@ import org.openqa.selenium.WebDriver;
  */
 public class NotificationsPage extends TopMenuGeneralPage {
 
-
-
-
-
-
-
-
-
-
     public NotificationsPage(WebDriver driver) {
         super(driver);
     }

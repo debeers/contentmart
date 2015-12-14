@@ -1,8 +1,10 @@
 package PageObjects.General;
 
 import PageObjects.BasePageObject;
+import PageObjects.Client.ClientEditProfilePage;
 import PageObjects.Client.NewOrderPage;
 import PageObjects.Writer.WriterEditProfilePage;
+import PageObjects.Writer.WriterProfilePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -79,9 +81,6 @@ public class TopMenuGeneralPage extends BasePageObject {
     @FindBy(xpath = "//div[@class = 'container-navbar']/div[1]")
     public WebElement logoContentMartTopMenu;
 
-
-    //  Methods::
-
     // Drop down profile menu ::
 
     public void clickOnProfileFromTopMenu() {
@@ -96,16 +95,14 @@ public class TopMenuGeneralPage extends BasePageObject {
         );
     }
 
-
-//    public WriterProfilePage clickOnUserProfileFromDropMenu() {
-//
-//        $(userProfileDropMenu).shouldBe(visible).click();
-//        return new WriterProfilePage(driver);
-//    }
+    public MyOrdersPage clickOnMyOrdersFromTopMenu() {
+        $(myOrdersTopMenu).shouldBe(visible).click();
+        return new MyOrdersPage(driver);
+    }
 
     public String getUserNickNameFromProfileDropMenu() {
         clickOnProfileFromTopMenu();
-        return $(userNameFromDropMenu).shouldBe(visible).getText();
+        return $(userNameFromDropMenu).shouldBe(visible).getText().trim();
     }
 
     public NotificationsPage clickOnNotificationsFromDropMenu() {
@@ -114,12 +111,12 @@ public class TopMenuGeneralPage extends BasePageObject {
         return new NotificationsPage(driver);
     }
 
-//    public ClientEditProfilePage clientClickOnEditProfileFromDropMenu() {
-//
-//        $(editProfileDropMenu).shouldBe(visible).click();
-//        return new ClientEditProfilePage(driver);
-//    }
-//
+    public ClientEditProfilePage clientClickOnEditProfileFromDropMenu() {
+
+        $(editProfileDropMenu).shouldBe(visible).click();
+        return new ClientEditProfilePage(driver);
+    }
+
     public WriterEditProfilePage writerClickOnEditProfileFromDropMenu() {
 
         $(editProfileDropMenu).shouldBe(visible).click();
@@ -128,17 +125,14 @@ public class TopMenuGeneralPage extends BasePageObject {
 
     public AccountDetailsPage clickOnAccountSettingsDropMenu() {
 
-        $(accountSettingsDropMenu).shouldBe(visible).click();
+        accountSettingsDropMenu.click();
         return new AccountDetailsPage(driver);
     }
 
-    public LoginPage clickOnLogOutFromDropMenu() {
-
+    public LoginPage clickOnLogOutFromDropMenu() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOf(logOutDropMenu)).click();
         return new LoginPage(driver);
     }
-
-    // Static menu components::
 
     public NewOrderPage clickOnNewOrderFromTopMenu() {
 
@@ -149,19 +143,6 @@ public class TopMenuGeneralPage extends BasePageObject {
         $(clientNewOrderPage.publishButton).shouldBe(present);
         return clientNewOrderPage;
     }
-
-//    public WriterAllOrdersPage clickOnAllOrdersFromTopMenu() {
-//
-//        $(allOrdersTopMenu).shouldBe(visible).click();
-//        WriterAllOrdersPage writerAllOrdersPage = new WriterAllOrdersPage(driver);
-//        return writerAllOrdersPage;
-//    }
-//
-//    public MyOrdersPage clickOnMyOrdersTopMenu() {
-//
-//        $(myOrdersTopMenu).shouldBe(visible).click();
-//        return new MyOrdersPage(driver);
-//    }
 
     public PartnersPage clickOnClientsFromTopMenu() {
 
@@ -174,14 +155,6 @@ public class TopMenuGeneralPage extends BasePageObject {
         $(writersTopMenu).shouldBe(visible).click();
         return new PartnersPage(driver);
     }
-
-//    public BalanceGeneralPage clickOnbalanceFromLeftMenu() {
-//
-//        $(balanceTopMenu).shouldBe(visible).click();
-//        BalanceGeneralPage balanceGeneral = new BalanceGeneralPage(driver);
-//        wait.until(ExpectedConditions.visibilityOf(balanceGeneral.availebleBalance));
-//        return balanceGeneral;
-//    }
 
     public String getBalanceInRupeeFromTopMenu() {
 
@@ -215,12 +188,19 @@ public class TopMenuGeneralPage extends BasePageObject {
         clickOnProfileFromTopMenu();
         return writerClickOnEditProfileFromDropMenu();
     }
-//
-//    public ClientEditProfilePage selectEditClientProfileFromMenu() {
-//
-//        clickOnProfileFromTopMenu();
-//        return clientClickOnEditProfileFromDropMenu();
-//    }
+
+    public WriterProfilePage selectWriterProfileFromMenu() {
+
+        clickOnProfileFromTopMenu();
+        $(userProfileDropMenu).click();
+        return new WriterProfilePage(driver);
+    }
+
+    public ClientEditProfilePage selectEditClientProfileFromMenu() {
+
+        clickOnProfileFromTopMenu();
+        return clientClickOnEditProfileFromDropMenu();
+    }
 
     public AccountDetailsPage selectAccountSettingsFromMenu() {
 
@@ -228,7 +208,7 @@ public class TopMenuGeneralPage extends BasePageObject {
         return clickOnAccountSettingsDropMenu();
     }
 
-    public LoginPage selectLogoutFromMenu() {
+    public LoginPage selectLogoutFromMenu() throws InterruptedException {
 
         clickOnProfileFromTopMenu();
         return clickOnLogOutFromDropMenu();

@@ -5,12 +5,14 @@ import com.codeborne.selenide.Condition;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Random;
 
 import static GeneralHelpers.CustomWaits.$WaitFor;
-import static GeneralHelpers.GeneralHelpers.jsDeleteClasses;
+import static GeneralHelpers.JSWorker.jsDeleteClasses;
 import static com.codeborne.selenide.Selenide.$;
 
 /**
@@ -53,7 +55,7 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
     public WebElement addressField;
 
     @FindBy(id = "region")
-    public WebElement userState;
+    public WebElement userRegion;
 
     @FindBy(id = "city")
     public WebElement userCity;
@@ -84,6 +86,13 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
 
     @FindBy(xpath = ".//div[contains (@class, 'jcrop-holder')]")
     public WebElement signatureSrcHolder;
+
+    @FindBy(xpath = ".//div[@class = 'phone-fixed']/p")
+    public WebElement phoneBlock;
+
+    public String getNumberFromThePhoneBlock(){
+        return phoneBlock.getText();
+    }
 
     @Override
     public URL getImageURL() {
@@ -126,9 +135,56 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
 
     public void uploadNewSignature(String path) throws InterruptedException {
         Thread.sleep(2000);
-        jsDeleteClasses(".//*[@id='signature_image']", driver);
+        jsDeleteClasses(".//*[@email='signature_image']", driver);
         signature.sendKeys(path);
     }
+
+    public String selectCurrency(String setCurrency){
+
+        Select currency = new Select(currencyField);
+
+        if(setCurrency.equalsIgnoreCase("USD")) {
+            currency.selectByIndex(1);
+            return currency.getFirstSelectedOption().getText();
+
+        } else currency.selectByIndex(0);
+            return currency.getFirstSelectedOption().getText();
+    }
+
+    public String selectCountry(String clientCountry){
+        Select country = new Select(countryField);
+
+        country.selectByIndex(
+                clientCountry.equalsIgnoreCase("India") ? 102 :
+                        1 + new Random().nextInt(country.getOptions().size() - 1));
+        return country.getFirstSelectedOption().getText();
+    }
+
+    public String selectTimezone(){
+        Select timezone = new Select(userTimeZone);
+        timezone.selectByIndex(1 + new Random().
+                nextInt(timezone.getOptions().size() - 1));
+        return timezone.getFirstSelectedOption().getText();
+    }
+
+    public String selectRegion(){
+        Select state = new Select(userRegion);
+        state.selectByIndex(1 + new Random().
+                nextInt(state.getOptions().size() - 1));
+        return state.getFirstSelectedOption().getText();
+    }
+
+    public String selectCity(){
+        Select city = new Select(userCity);
+        city.selectByIndex(1 + new Random().
+                nextInt(city.getOptions().size() - 1));
+        return city.getFirstSelectedOption().getText();
+    }
+
+    public void setUserNationality(String nigga){
+
+    }
+
 
     public void clickOnChangePasswordLink() {
 
@@ -137,7 +193,7 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
 
     public String getUserCountry() {
 
-        return $(countryField).shouldBe(Condition.visible).getText();
+        return $(countryField).shouldBe(Condition.visible).getAttribute("value").trim();
     }
 
     public String getUserCurrency() {
@@ -145,8 +201,12 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
         return $(currencyField).shouldBe(Condition.visible).getText();
     }
 
-    public String getUserTimeZone() {
+    public String getUserTimeZoneValue() {
 
+        return $(userTimeZone).shouldBe(Condition.visible).getAttribute("value");
+    }
+
+    public String getUserTimeZoneName(){
         return $(userTimeZone).shouldBe(Condition.visible).getText();
     }
 
@@ -175,9 +235,9 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
         return $(panField).shouldBe(Condition.visible).getAttribute("value");
     }
 
-    public String getUserState() {
+    public String getUserRegion() {
 
-        return $(userState).shouldBe(Condition.visible).getText();
+        return $(userRegion).shouldBe(Condition.visible).getAttribute("value").trim();
     }
 
     public String getUserCity() {
@@ -229,7 +289,7 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
 
     public void setStateField(String state) {
 
-        $(userState).shouldBe(Condition.visible).sendKeys(state);
+        $(userRegion).shouldBe(Condition.visible).sendKeys(state);
     }
 
     public void setCityField(String city) {

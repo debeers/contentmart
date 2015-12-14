@@ -25,6 +25,12 @@ import static com.codeborne.selenide.Selenide.$$;
 public class WriterProfilePage extends TopMenuGeneralPage implements BirthdayDateInterface {
 
 
+    @FindBy(xpath = ".//p[@class = 'user_name']")
+    public WebElement userName;
+
+    @FindBy(xpath = ".//a[contains (text(), 'TAKE THE TEST NOW')]")
+    public WebElement takeTheTestNowButtonInHeader;
+
     @FindBy(xpath = "html/body/div/div[3]/div/div/div/div[2]/div[3]/a")
     public WebElement editProfileButton;
     // Portfolio
@@ -43,6 +49,18 @@ public class WriterProfilePage extends TopMenuGeneralPage implements BirthdayDat
 
     @FindBy(xpath = ".//*[@id='language-box']/p")
     public WebElement linguisticForte;
+
+    @FindBy(xpath = ".//*[@id='expertise-box']/p[2]")
+    public WebElement expertisesDefText;
+
+    @FindBy(xpath = ".//*[@id='category-box']/p[2]")
+    public WebElement categoriesDefText;
+
+    @FindBy(xpath = ".//*[@id='language-box']/p[2]")
+    public WebElement languageDefText;
+
+    @FindBy(xpath = ".//div[2]/h2")
+    public WebElement writerDoesNotHavePortfolioText;
 
     @FindBy(className = "fancybox-wrap fancybox-default fancybox-opened")
     public WebElement portfolioFrame;
@@ -113,7 +131,7 @@ public class WriterProfilePage extends TopMenuGeneralPage implements BirthdayDat
     public WebElement selectMonth() {
         return null;
     }
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     // Languages and Expertises block
 
     public String settetExpertisesClassName = "cell expertises m_b-20";
@@ -141,6 +159,25 @@ public class WriterProfilePage extends TopMenuGeneralPage implements BirthdayDat
         return false;
     }
 
+    public String getUserName(){
+        return $(userName).shouldBe(Condition.visible).getText().trim();
+    }
+
+    public String getLanguageDefText(){
+        return $(languageDefText).shouldBe(Condition.visible).getText().trim();
+    }
+
+    public String getExpertisesDefText(){
+        return $(expertisesDefText).shouldBe(Condition.visible).getText().trim();
+    }
+
+    public String getCategoriesDefText(){
+        return $(categoriesDefText).shouldBe(Condition.visible).getText().trim();
+    }
+
+    public String getWriterDoesNotHavePortfolioText(){
+        return $(writerDoesNotHavePortfolioText).shouldBe(Condition.visible).getText().trim();
+    }
 
     public void openAddedPortfolioItem(WebDriver driver, String header) throws InterruptedException {
 
@@ -174,7 +211,6 @@ public class WriterProfilePage extends TopMenuGeneralPage implements BirthdayDat
     }
 
     public String getPortfolioItemText() {
-
         return $(portfolioItemText).shouldBe(Condition.visible).getText();
     }
 
@@ -318,5 +354,4 @@ public class WriterProfilePage extends TopMenuGeneralPage implements BirthdayDat
         }
         return false;
     }
-
 }

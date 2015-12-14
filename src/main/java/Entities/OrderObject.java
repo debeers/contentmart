@@ -1,7 +1,8 @@
 package Entities;
 
-public class OrderObject {
+import java.util.List;
 
+public class OrderObject {
 
     private String timezone                    = "";
     private String orderName                   = "";
@@ -13,7 +14,7 @@ public class OrderObject {
     private String orderPublicDate             = "";
     private String orderRupeePrice             = "";
     private String orderVisibility             = "";
-    private String orderDollarPrice            = "";
+    private String orderTotalPrice             = "";
     private String orderValueInRupee           = "";
     private String orderWordsRequire           = "";
     private String totalBalanceBefore          = "";
@@ -22,27 +23,29 @@ public class OrderObject {
     private String orderCategoryOfWriting      = "";
     private String totalBalanceAfterBlocking   = "";
     private String totalBalanceAfterUnBlocking = "";
-
-
-
-
+    private List<String> orderAvailebleExpertises  ;
+    private List<String> orderAvailebleCategories  ;
+    private List<String> orderAvailebleLanguages   ;
+    private List<String> orderChosenExpertise      ;
 
     public OrderObject() {
 
     }
 
-    public OrderObject(String orderName, String orderDetails, String orderWordsRequire, String orderDollarPrice) {
+    public OrderObject(String orderName, String orderDetails, String orderWordsRequire, String orderTotalPrice) {
 
         this.orderName = orderName;
         this.orderDetails = orderDetails;
         this.orderWordsRequire = orderWordsRequire;
-        this.orderDollarPrice = orderDollarPrice;
+        this.orderTotalPrice = orderTotalPrice;
     }
 
     public OrderObject(String totalBalanceBefore, String totalBalanceAfterBlocking, String totalBalanceAfterUnBlocking, String orderName,
-                       String orderDetails, String orderWordsRequire, String orderDollarPrice, String orderRupeePrice, String orderSystemID,
+                       String orderDetails, String orderWordsRequire, String orderTotalPrice, String orderRupeePrice, String orderSystemID,
                        String orderStatus, String orderPublicDate, String orderCategoryOfWriting, String orderDeadLine, String orderVisibility,
-                       String orderValueInRupee, String orderValueInDollars, String timezone, String orderLanguage, String orderArticlesQuantity) {
+                       String orderValueInRupee, String orderValueInDollars, String timezone, String orderLanguage, String orderArticlesQuantity,
+                       List<String> orderAvailebleExpertises, List<String> orderAvailebleCategories, List<String> orderAvailebleLanguages,
+                       List<String> orderChosenExpertise) {
 
         this.timezone                    = timezone;
         this.orderName                   = orderName;
@@ -54,7 +57,7 @@ public class OrderObject {
         this.orderRupeePrice             = orderRupeePrice;
         this.orderVisibility             = orderVisibility;
         this.orderPublicDate             = orderPublicDate;
-        this.orderDollarPrice            = orderDollarPrice;
+        this.orderTotalPrice             = orderTotalPrice;
         this.orderWordsRequire           = orderWordsRequire;
         this.orderValueInRupee           = orderValueInRupee;
         this.totalBalanceBefore          = totalBalanceBefore;
@@ -63,7 +66,19 @@ public class OrderObject {
         this.orderCategoryOfWriting      = orderCategoryOfWriting;
         this.totalBalanceAfterBlocking   = totalBalanceAfterBlocking;
         this.totalBalanceAfterUnBlocking = totalBalanceAfterUnBlocking;
+        this.orderAvailebleExpertises    = orderAvailebleExpertises;
+        this.orderAvailebleLanguages     = orderAvailebleLanguages;
+        this.orderAvailebleCategories    = orderAvailebleCategories;
+        this.orderChosenExpertise        = orderChosenExpertise;
+    }
 
+
+    public List<String> getOrderChosenExpertise() {
+        return orderChosenExpertise;
+    }
+
+    public void setOrderChosenExpertise(List<String> orderChosenExpertise) {
+        this.orderChosenExpertise = orderChosenExpertise;
     }
 
     public String getOrderArticlesQuantity(){
@@ -74,6 +89,29 @@ public class OrderObject {
         this.orderArticlesQuantity = orderArticlesQuantity;
     }
 
+    public List<String> getOrderAvailebleExpertises() {
+        return orderAvailebleExpertises;
+    }
+
+    public void setOrderAvailebleExpertises(List<String> orderExpertises) {
+        this.orderAvailebleExpertises = orderExpertises;
+    }
+
+    public List<String> getOrderAvailebleCategories() {
+        return orderAvailebleCategories;
+    }
+
+    public void setOrderAvailebleCategories(List<String> orderAvailebleCategories) {
+        this.orderAvailebleCategories = orderAvailebleCategories;
+    }
+
+    public List<String> getOrderAvailebleLanguages() {
+        return orderAvailebleLanguages;
+    }
+
+    public void setOrderAvailebleLanguages(List<String> orderAvailebleLanguages) {
+        this.orderAvailebleLanguages = orderAvailebleLanguages;
+    }
 
     public String getOrderLanguage(){
         return orderLanguage;
@@ -96,9 +134,9 @@ public class OrderObject {
         return totalBalanceBefore;
     }
 
-    public String getOrderDollarPrice() {
+    public String getOrderTotalPrice() {
 
-        return orderDollarPrice;
+        return orderTotalPrice;
     }
 
     public String getOrderCategoryOfWriting(){
@@ -109,9 +147,9 @@ public class OrderObject {
         this.orderCategoryOfWriting = orderCategoryOfWriting;
     }
 
-    public void setOrderDollarPrice(String orderDollarPrice) {
+    public void setOrderTotalPrice(String orderTotalPrice) {
 
-        this.orderDollarPrice = orderDollarPrice;
+        this.orderTotalPrice = orderTotalPrice;
     }
 
     public void setTotalBalanceBefore(String totalBalanceBefore) {
