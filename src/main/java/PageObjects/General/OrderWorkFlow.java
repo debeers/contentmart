@@ -1,8 +1,13 @@
 package PageObjects.General;
 
-import com.codeborne.selenide.Condition;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -10,9 +15,9 @@ import static com.codeborne.selenide.Selenide.$;
 /**
  * Created by DeBeers on 19.11.2015.
  */
-public class OrderWorkFlow {
+public class OrderWorkFlow extends TopMenuGeneralPage{
 
-    @FindBy(xpath = ".//span[contains(@class, 'name tooltip-item')]")
+    @FindBy(xpath = ".//span[@class = 'name tooltip-item']")
     public WebElement statusLable;
 
     @FindBy(xpath = ".//div[contains(@class, 'order-status-info')]")
@@ -40,7 +45,11 @@ public class OrderWorkFlow {
     public WebElement orderPricePerOrderInUSD;
 
     @FindBy(xpath = ".//span[@class = 'price-per-word small-text']//span[@class = 'price small-text']")
+    public WebElement pricePerWord;
+
+    @FindBy(xpath = ".//div[@class ='item item-words d_in']/div[@class ='d_in']/p")
     public WebElement orderWordsCount;
+
 
     @FindBy(xpath = ".//span[@class = 'price-per-word small-text']//span[@class = 'price-usd']")
     public WebElement orderPricePerWordInUSD;
@@ -59,6 +68,12 @@ public class OrderWorkFlow {
 
     @FindBy(xpath = ".//p[contains(text(), 'Shared')]/following-sibling::div[@class = 'bold']")
     public WebElement orderVisibility;
+
+    @FindBy(xpath = ".//p[@class = 'description cell']")
+    public WebElement getOrderDescriptionField;
+
+    @FindBy(xpath = ".//div[@class = 'item item-words d_in']//div[@class = 'small-text']")
+    public WebElement getArticlesCount;
 
 //bids
 
@@ -104,20 +119,33 @@ public class OrderWorkFlow {
     public WebElement publishButton;
 
 
-
-    public String getOrderStatus(){
-       return  $(statusLable).shouldBe(visible).getText();
+    public String getArticlesCount(){
+        return $(getArticlesCount).shouldBe(visible).getText().substring(0, 1);
     }
 
-    public String getOrderStatusInfo(){
+    public String getTotalWordsCount(){
+        String beg = $(orderWordsCount).shouldBe(visible).getText();
+        String res = beg.substring(beg.indexOf(""), beg.lastIndexOf(" "));
+        return res;
+    }
+
+    public String getOrderDescription() {
+        return $(orderDescriptionField).shouldBe(visible).getText();
+    }
+
+    public String getOrderStatus() {
+        return $(statusLable).shouldBe(visible).getText();
+    }
+
+    public String getOrderStatusInfo() {
         return $(orderStatusInfo).shouldBe(visible).getText();
     }
 
-    public String getOrderTitle(){
-        return $(orderTitle).shouldBe(visible).getText();
+    public String getOrderTitle() {
+        return orderTitle.getText();
     }
 
-    public String getPublichDate(){
+    public String getPublichDate() {
         return $(publicDate).shouldBe(visible).getText();
     }
 
@@ -142,15 +170,40 @@ public class OrderWorkFlow {
     }
 
     public String getTotalOrderWordsRequired(){
-        return $(orderWordsCount).shouldBe(visible).getText();
+        return $(pricePerWord).shouldBe(visible).getText();
     }
 
     public String getCategory(){
         return $(chosenCategory).shouldBe(visible).getText();
     }
 
-    public String getExpertises(){
-        return $(chosenExpertises).shouldBe(visible).getText();
+    public List<String> getExpertises(){
+
+        List<String> exp = new ArrayList<>();
+        String res = $(chosenExpertises).shouldBe(visible).getText();
+
+        Pattern p = Pattern.compile("([^,]*)");
+        Matcher m = p.matcher(res);
+
+        while(m.find()){
+
+            int i = 0;
+            while (i < m.groupCount()){
+                exp.add(m.group(i).trim());
+                i++;
+            }
+
+            for (String str : exp){
+                System.out.println("====>>>>" + str);
+            }
+        }
+        return exp;
+    }
+
+    public static Boolean compareExpertises(List<String> expFromDb, List<String> actualExpertises){
+        if(actualExpertises.containsAll(expFromDb)){
+            return true;
+        }else return false;
     }
 
     public String getSharingStatus(){
@@ -169,7 +222,9 @@ public class OrderWorkFlow {
         $(publishButton).shouldBe(visible).click();
     }
 
+    public OrderWorkFlow(WebDriver driver) {
 
-
+        super(driver);
+    }
 
 }

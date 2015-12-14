@@ -1,6 +1,5 @@
 package Tests;
 
-
 import Entities.GmailCredentials;
 import Entities.LoginObject;
 import com.codeborne.selenide.WebDriverRunner;
@@ -20,7 +19,6 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
-
     public static WebDriver driver;
     public static WebDriverWait wait;
     public static String baseUrl;
@@ -32,7 +30,6 @@ public class BaseTest {
     @Parameters({"URL", "clientLoginParam", "clientPasswordParam", "writerLoginParam", "writerPasswordParam", "mailbox", "mailboxPassword"})
     @BeforeMethod(alwaysRun = true)
     public void setUp(String URL, String clientLoginParam, String clientPasswordParam, String writerLoginParam, String writerPasswordParam, String mailbox, String mailboxPassword) {
-
 
         String TestClassName = this.getClass().getName();
         System.out.println(TestClassName);
@@ -74,8 +71,7 @@ public class BaseTest {
             driver.get("https://contentmart.in/exit");
         }
 
-        driver.manage().deleteAllCookies(); //try incognito
-//        Thread.sleep(5000);
+        driver.manage().deleteAllCookies();
         driver.quit();
 
         String verificationErrorString = verificationErrors.toString();
@@ -84,16 +80,3 @@ public class BaseTest {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

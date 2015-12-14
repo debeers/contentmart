@@ -1,0 +1,12 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <!--Test Data -->
+    <entry key="evenUserLogin">clientbot-8615oyq@dev.contentmart.in</entry>
+    <entry key="evenUserPassword">7777777</entry>
+
+    <!--Asserts -->
+    <entry key="helpBlock_10_19">call our toll free no.</entry>
+    <entry key="helpBlock_19_10">Leave a missed call. We will get back soon</entry>
+
+</properties>

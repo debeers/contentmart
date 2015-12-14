@@ -1,0 +1,23 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <!--Test Data -->
+
+    <entry key="OrderName">Automation test order ID: </entry>
+    <entry key="OrderDetails">Intel introduced the Core i7 name with the Nehalem-based Bloomfield Quad-core processor in late 2008.</entry>
+    <entry key="CategoriesOfWriting">Technical writing</entry>
+    <entry key="Expertises">all</entry>
+    <entry key="Language">English</entry>
+    <entry key="PricePerWordOrPerOrder">word</entry>
+    <entry key="PriceInUSD">1.2</entry>
+    <entry key="PriceInRupee">12</entry>
+    <entry key="ArticlesQuantity">4</entry>
+    <entry key="WordsRequired">22</entry>
+    <entry key="VisibilityForAll">all</entry>
+    <entry key="VisibilityForFavourites">favourite</entry>
+    <entry key="VisibilityForSpec">spec</entry>
+    <entry key="FileForUpload">\src\main\java\Resources\DMX.jpg</entry>
+    <entry key="UserEmail">debeers1989@gmail.com</entry>
+    <entry key="StatusInfo">Your order is published now.</entry>
+
+</properties>

@@ -1,0 +1,31 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <!--Test Data -->
+
+    <entry key="userRole">client</entry>
+    <entry key="userPassword">7777777</entry>
+    <entry key="UserEmailAccount">info@contentmart.in</entry>
+    <entry key="subject">Welcome to ContentMart.in!</entry>
+    <entry key="URL">https://dev.contentmart.in/forclients</entry>
+
+    <!--Test email data -->
+
+    <entry key="Mail To">mim@dev.contentmart.in</entry>
+    <entry key="Mail From">mim@dev.contentmart.in</entry>
+    <entry key="Mail Subject">test message</entry>
+    <entry key="Mail text">Test message from user to activate this fucking UserEmailAccount</entry>
+    <entry key="SMTP Port">587</entry>
+    <entry key="SMTP Host">dev.contentmart.in</entry>
+
+    <!--Asserts -->
+    <entry key="UserCity">Kiev</entry>
+    <entry key="UserCountry">43</entry>
+    <entry key="UserState">2931</entry>
+    <entry key="UserTimeZone">267</entry>
+
+    <entry key="MyOrdersTitle">My Orders</entry>
+    <entry key="Post an order">Post an order</entry>
+    <entry key="registrationTitle">Register successful | ContentMart</entry>
+
+</properties>

@@ -19,11 +19,12 @@ public class ChangeWriterDetails extends BaseTest {
     public void ChangeUserDetails() throws Exception {
 
         UserObject user = new UserObject();
+        String country = "Some";
 
         MyOrdersPage myOrdersPage = loginAs(driver, writerLogin);
         myOrdersPage.clickOnProfileFromTopMenu();
         AccountDetailsPage accountDetailsPage = myOrdersPage.clickOnAccountSettingsDropMenu();
-        setUserData(user, accountDetailsPage);
+        setUserData(user, accountDetailsPage, country);
         accountDetailsPage.clickOnSaveChangesButton();
         driver.navigate().refresh();
         Thread.sleep(3000); //server side wait
@@ -32,7 +33,7 @@ public class ChangeWriterDetails extends BaseTest {
         Assert.assertEquals(accountDetailsPage.getUserLastName(), user.getLastname());
         Assert.assertEquals(accountDetailsPage.getUserPhone(), "+91-"+user.getPhone());
         Assert.assertEquals(accountDetailsPage.getUserPan(), user.getPan());
-        Assert.assertEquals(accountDetailsPage.getUserState(), user.getState());
+        Assert.assertEquals(accountDetailsPage.getUserRegion(), user.getState());
         Assert.assertEquals(accountDetailsPage.getUserCity(), user.getCity());
         Assert.assertEquals(accountDetailsPage.getUserAdress(), user.getAddress());
         Assert.assertEquals(accountDetailsPage.getUserZip(), user.getZip());

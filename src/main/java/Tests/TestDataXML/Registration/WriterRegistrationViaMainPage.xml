@@ -1,0 +1,26 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+    <!--Test Data -->
+
+    <entry key="userRole">writer</entry>
+    <entry key="userPassword">7777777</entry>
+    <entry key="UserEmailAccount">info@contentmart.in</entry>
+    <entry key="subject">Welcome to ContentMart.in</entry>
+    <entry key="userEmail">contentmartmai@gmail.com</entry>
+    <entry key="MyOrdersTitle">My Orders | ContentMart</entry>
+    <entry key="registrationTitle">Register successful | ContentMart</entry>
+    <entry key="URL">https://dev.contentmart.in/forwriters</entry>
+
+    <!--Asserts -->
+    <entry key="UserCountry">1</entry>
+    <entry key="UserTimeZone">321</entry>
+
+    <entry key="User does not know any language">User does not know any language.</entry>
+    <entry key="User does not have portfolio yet"> does not have portfolio yet :(</entry>
+    <entry key="User does not have any expertises">User does not have any expertises.</entry>
+    <entry key="User does not selected any writing categories">User does not selected any writing categories.</entry>
+
+</properties>
+
+

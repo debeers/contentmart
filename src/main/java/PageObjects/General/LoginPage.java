@@ -140,7 +140,5 @@ public class LoginPage extends BasePageObject {
 
     public LoginPage(WebDriver driver) {
         super(driver);
-
     }
-
 }

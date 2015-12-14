@@ -6,7 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static Actions.Writer.WriterGoToProfilePage.addNewPortfolioItem;
-import static GeneralHelpers.CreateNewOrderHelper.randomID;
+import static Actions.Client.CreateNewOrder.randomID;
 
 /**
  * Created by CMG_TEST on 12.10.2015.
@@ -24,7 +24,5 @@ public class DeletePortfolioItem extends BaseTest {
 
         writerProfilePage.clickOnDeletePortfolioItemButton(title);
         Assert.assertFalse(writerProfilePage.findPortfolioItem(title));
-
     }
-
 }

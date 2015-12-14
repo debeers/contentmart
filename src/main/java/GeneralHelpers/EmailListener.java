@@ -1,8 +1,9 @@
 package GeneralHelpers;
 
-import Entities.GmailCredentials;
+import Entities.UserEmailAccount;
 import com.sun.mail.imap.IMAPFolder;
 import com.sun.mail.util.BASE64DecoderStream;
+
 
 import javax.mail.*;
 import javax.mail.search.AndTerm;
@@ -12,26 +13,28 @@ import java.io.*;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by DeBeers on 06.11.2015.
  */
-public class GmailListener {
+public class EmailListener {
 
     private IMAPFolder imapFolder;
-    private static final String ACTIVATION_LINK_PATTERN_BEGIN = "https://dev.contentmart.in/registration/activate_account/";
-    private static final String ACTIVATION_LINK_PATTERN_END = ">";
     public  Message message;
+    private Boolean isSeen = false;
+    private int timeToWait = 600;
 
+    public Message getTargetEmail(String subject, String fromEmail, UserEmailAccount email) throws Exception {
 
-    public Message startListening(GmailCredentials gmailCredentials, String subject, String fromEmail, Boolean isSeen, int timeToWait) throws Exception {
-
-        IMAPFolder inbox = setup(gmailCredentials);
+        System.out.println("Start listen   ::::::::   :::::::   :::::::   :::::::");
+        System.out.println("setup data::::: mail " + email.getEmail() +" password:::::"+ email.getPassword());
+        IMAPFolder inbox = setup(email.getEmail(), email.getPassword());
         inbox.open(Folder.READ_WRITE);
         long startTime = TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS);
 
         while(startTime - TimeUnit.SECONDS.convert(System.nanoTime(), TimeUnit.NANOSECONDS) < timeToWait){
-            System.out.println("listening idle...");
             inbox.idle(true);
             if (getTargetMessage(inbox, subject, fromEmail, isSeen) != null){
 
@@ -41,7 +44,6 @@ public class GmailListener {
                 return message;
             }
         }
-
         inbox.close(true);
         return null;
     }
@@ -60,16 +62,15 @@ public class GmailListener {
     }
 
 
-    private  IMAPFolder setup(GmailCredentials gmailCredentials) throws MessagingException{
+    public IMAPFolder setup(String userMail, String password) throws MessagingException{
 
         Properties props = new Properties();
-        props.setProperty("mail.store.protocol", "imaps");
+        props.setProperty("mail.store.protocol", "imap");
         Session session = Session.getInstance(props, null);
         Store store = session.getStore();
-
-        store.connect("imap.googlemail.com", 993, gmailCredentials.getMailbox(), gmailCredentials.getPassword());
+        System.out.println("mail =====>>>" + userMail);
+        store.connect("dev.contentmart.in", 143, userMail, password);
         return imapFolder = (IMAPFolder) store.getFolder("INBOX");
-
     }
 
 
@@ -79,9 +80,9 @@ public class GmailListener {
         FlagTerm isSeenFlag = new FlagTerm(seen, isSeen);
 
         SearchTerm searchTerm = new AndTerm(isSeenFlag, searchSubject(subject));
-        SearchTerm searchTermCombined = new AndTerm(searchTerm, searchFrom(fromEmail));
-
-        return searchTermCombined;
+       // SearchTerm searchTermCombined = new AndTerm(searchTerm, searchFrom(fromEmail));
+return searchTerm;
+       // return searchTermCombined;
     }
 
 
@@ -103,31 +104,28 @@ public class GmailListener {
         return searchCondition;
     }
 
-
     private static SearchTerm searchFrom(String fromEmail) {
 
         SearchTerm searchCondition = new SearchTerm() {
             @Override
             public boolean match(Message message) {
                 try {
-                    Address[] fromAddress = message.getFrom();
-                    if (fromAddress != null && fromAddress.length > 0) {
-                        if (fromAddress[0].toString().contains(fromEmail)) {
-                            return true;
-                        }
+                    if (message.getFrom() != null ) {
+                            if (message.getFrom().toString().contains(fromEmail)) {
+                                return true;
+                            }else return false;
                     }
                 } catch (MessagingException ex) {
                     ex.printStackTrace();
                 }
-
                 return false;
             }
         };
         return searchCondition;
     }
 
-
     public  void writeEnvelope(Message message) throws Exception {
+
         System.out.println("This is the message envelope");
         System.out.println("---------------------------");
         Address[] adress;
@@ -147,11 +145,11 @@ public class GmailListener {
         // SUBJECT
         if (message.getSubject() != null)
             System.out.println("SUBJECT: " + message.getSubject());
-
     }
 
 
     public  void writePart(Part messagePart) throws Exception {
+
         if (messagePart instanceof Message)
 
             writeEnvelope((Message) messagePart);
@@ -215,27 +213,7 @@ public class GmailListener {
                 System.out.println(messagePartContent.toString());
             }
         }
-
     }
 
-
-    public  static String getActivationLinkFromTargetMessage(Message message) throws MessagingException, IOException {
-
-        String res = "";
-
-        Multipart multipart = (Multipart)message.getContent();
-        for (int i=0; i<multipart.getCount(); i++){
-
-            BodyPart bodyPart = multipart.getBodyPart(i);
-            String s = (String)bodyPart.getContent();
-            if(s.contains(ACTIVATION_LINK_PATTERN_BEGIN)){
-                res = s;
-                return res.substring(res.indexOf(ACTIVATION_LINK_PATTERN_BEGIN), res.lastIndexOf(ACTIVATION_LINK_PATTERN_END));
-            }
-        }
-
-        return null;
-
-    }
 
 }

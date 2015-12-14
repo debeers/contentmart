@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.HashSet;
 
-import static GeneralHelpers.GeneralHelpers.isFileExists;
+import static GeneralHelpers.UploadingAndDownloadingFiles.isFileExists;
 import static java.lang.System.out;
 
 /**
@@ -110,5 +110,4 @@ public class CustomWaits extends BaseTest {
 
         return webElement;
     }
-
 }
