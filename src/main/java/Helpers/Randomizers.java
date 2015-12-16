@@ -16,14 +16,6 @@ public class Randomizers {
         } else return "ClientBOT-" + DateTimeUtils.getTimestamp();
     }
 
-    public static String randomID() {
-
-        int id = (int) (Math.random() * 1000);
-        String str = String.valueOf(id);
-
-        return str;
-    }
-
     public static String createRandomUserEmail(){
         return  DateTimeUtils.getTimestamp() + "@testmail.com' ";
     }
