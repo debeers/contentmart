@@ -13,8 +13,7 @@ import static org.testng.Assert.assertTrue;
  */
 public class EmailNotificationsSaving extends BaseTest {
 
-
-    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
+    @Test
     public void Notifications() throws InterruptedException {
 
         AccountDetailsPage accountDetailsPage = GoToAccountSettings.goToEditProfile(driver, clientLogin);

@@ -1,4 +1,4 @@
-package GeneralHelpers;
+package Helpers;
 
 import PageObjects.BirthdayDateInterface;
 import PageObjects.PageObjectWithImages;
@@ -21,8 +21,7 @@ import java.util.Random;
 /**
  * Created by DeBeers on 22.10.2015.
  */
-public class ProfileHelper {
-
+public class ProfileHelper { // I know that this class looks like treshholder. But it contains all methods for test user Profile. I`ll delete this class and separate all the methods for them classes when test will be done.
 
     public static GregorianCalendar userSelectDateOfBirth(BirthdayDateInterface page) {
 

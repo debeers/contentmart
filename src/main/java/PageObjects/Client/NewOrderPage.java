@@ -1,8 +1,8 @@
 package PageObjects.Client;
 
-import Actions.Client.CreateNewOrder;
 import Entities.OrderObject;
-import GeneralHelpers.DBUtill;
+import Helpers.DBUtill;
+import Helpers.DateTimeUtils;
 import PageObjects.General.OrderWorkFlow;
 import PageObjects.General.TopMenuGeneralPage;
 import org.openqa.selenium.By;
@@ -19,11 +19,10 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 
-import static Actions.Client.CreateNewOrder.createNewOrderName;
+import static Helpers.Randomizers.createNewOrderName;
 import static Actions.Client.CreateNewOrder.getExpertisesList;
-import static GeneralHelpers.UploadingAndDownloadingFiles.uploadFilesByRobot;
-import static GeneralHelpers.UploadingAndDownloadingFiles.getFileName;
-import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
+import static Helpers.UploadingAndDownloadingFiles.uploadFilesByRobot;
+import static Helpers.UploadingAndDownloadingFiles.getFileName;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -298,16 +297,15 @@ public class NewOrderPage extends TopMenuGeneralPage {
 
         $(deadlineField).shouldBe(visible).click();
         Thread.sleep(2000);
-        driver.findElement(By.xpath(xDateBuilder(CreateNewOrder.getDay()))).click();
+        driver.findElement(By.xpath(xDateBuilder(DateTimeUtils.getDay()))).click();
         currentOrderTime.click();
         orderDetailsField.click();
 
         return $(deadlineField).shouldBe(visible).getAttribute("value");
     }
 
-    public void setOrder(DBUtill dbUtill, OrderObject order, Properties props) throws InterruptedException, AWTException, IOException, SQLException {
+    public void setOrder(OrderObject order, Properties props) throws InterruptedException, AWTException, IOException, SQLException {
 
-        System.out.println("cur email");
         order.setOrderName(
                 setOrderNameField(
                         createNewOrderName())
@@ -338,7 +336,7 @@ public class NewOrderPage extends TopMenuGeneralPage {
         );
 
         order.setOrderAvailebleExpertises(
-                getExpertisesList(dbUtill));
+                getExpertisesList());
 
 
         chooseExpertise(

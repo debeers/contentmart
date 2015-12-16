@@ -12,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static GeneralHelpers.CustomWaits.$WaitFor;
+import static Helpers.CustomWaits.$WaitFor;
 import static Tests.BaseTest.wait;
 import static com.codeborne.selenide.Condition.present;
 import static com.codeborne.selenide.Condition.visible;

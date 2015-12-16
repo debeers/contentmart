@@ -2,7 +2,6 @@ package Tests;
 
 import Actions.Client.CreateNewOrder;
 import Entities.OrderObject;
-import GeneralHelpers.DBUtill;
 import PageObjects.Client.NewOrderPage;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.General.OrderWorkFlow;
@@ -17,41 +16,42 @@ import java.util.*;
 import static Actions.Client.CreateNewOrder.setUserCurrencyToRupee;
 import static Actions.General.RegistrationAndLogin.logOut;
 import static Actions.General.RegistrationAndLogin.loginAs;
-import static GeneralHelpers.DateTimeUtils.getEtalonTimezone;
-import static GeneralHelpers.DateTimeUtils.getUserTimezoneName;
-import static GeneralHelpers.UploadingAndDownloadingFiles.getFileName;
-import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
+import static Helpers.DateTimeUtils.getEtalonTimezone;
+import static Helpers.DateTimeUtils.getUserTimezoneName;
+import static Helpers.UploadingAndDownloadingFiles.getFileName;
+import static Helpers.PropertiesLoader.propertyXMLoader;
 import static PageObjects.Client.NewOrderPage.checkForWordsRequired;
 import static PageObjects.General.OrderWorkFlow.compareExpertises;
+import static Repository.UserModelRepo.getUserCurrencyID;
 import static junit.framework.Assert.*;
 
 public class  CreateNewOrderTest extends BaseTest {
 
-    @Test(groups={"Fast_And_Furious_Smoke_1.0"})
+    @Test
     public void CreateNewOrderTest() throws InterruptedException, IOException, AWTException, SQLException {
 
         Properties props  = propertyXMLoader(System.getProperty("user.dir") +
                 "\\src\\main\\java\\Tests\\TestDataXML\\CreateNewOrder\\OrderData.xml");
-
+        System.out.println(getUserCurrencyID("debeers1989@gmail.com"));
         OrderObject order = new OrderObject();
-        DBUtill dbUtill   = new DBUtill();
 
-        setUserCurrencyToRupee(dbUtill, props);
+
+        setUserCurrencyToRupee(props);
         String etalTime = getEtalonTimezone(
-                getUserTimezoneName(dbUtill, props.getProperty("UserEmail")));
+                getUserTimezoneName(props.getProperty("UserEmail")));
 
         MyOrdersPage myOrdersPage = loginAs(driver, clientLogin);
         NewOrderPage newOrderPage = myOrdersPage.clickOnNewOrderFromTopMenu();
-        newOrderPage.setOrder(dbUtill, order, props);
+        newOrderPage.setOrder(order, props);
 
         assertEquals(CreateNewOrder.checkForTotalPrice(
 
                 order.getOrderValueInRupee(),
                 order.getOrderWordsRequired(),
                 order.getOrderArticlesQuantity(),
-                props.getProperty("PricePerWordOrPerOrder")
-        ),
-                Double.parseDouble(newOrderPage.getOrderTotalPriceValue()));
+                props.getProperty("PricePerWordOrPerOrder")),
+                Double.parseDouble(newOrderPage.getOrderTotalPriceValue())
+        );
 
         assertEquals(etalTime, CreateNewOrder.getCurrentUserTimezoneFromNewOrderPage(newOrderPage));
         Thread.sleep(1500); //server side wait
@@ -74,7 +74,8 @@ public class  CreateNewOrderTest extends BaseTest {
                         checkForWordsRequired(
                                 props.getProperty("WordsRequired"),
                                 props.getProperty("ArticlesQuantity"))),
-                orderWorkFlow.getTotalWordsCount());
+                orderWorkFlow.getTotalWordsCount()
+        );
 
         Assert.assertEquals(order.getOrderArticlesQuantity(), orderWorkFlow.getArticlesCount());
         Assert.assertTrue(compareExpertises(order.getOrderAvailebleExpertises(), orderWorkFlow.getExpertises()));

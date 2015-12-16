@@ -1,4 +1,4 @@
-package GeneralHelpers;
+package Helpers;
 
 import Entities.UserEmailAccount;
 import com.sun.mail.imap.IMAPFolder;
@@ -13,8 +13,6 @@ import java.io.*;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by DeBeers on 06.11.2015.
@@ -78,11 +76,9 @@ public class EmailListener {
 
         Flags seen = new Flags(Flags.Flag.SEEN);
         FlagTerm isSeenFlag = new FlagTerm(seen, isSeen);
-
         SearchTerm searchTerm = new AndTerm(isSeenFlag, searchSubject(subject));
-       // SearchTerm searchTermCombined = new AndTerm(searchTerm, searchFrom(fromEmail));
-return searchTerm;
-       // return searchTermCombined;
+
+        return searchTerm;
     }
 
 
@@ -104,25 +100,6 @@ return searchTerm;
         return searchCondition;
     }
 
-    private static SearchTerm searchFrom(String fromEmail) {
-
-        SearchTerm searchCondition = new SearchTerm() {
-            @Override
-            public boolean match(Message message) {
-                try {
-                    if (message.getFrom() != null ) {
-                            if (message.getFrom().toString().contains(fromEmail)) {
-                                return true;
-                            }else return false;
-                    }
-                } catch (MessagingException ex) {
-                    ex.printStackTrace();
-                }
-                return false;
-            }
-        };
-        return searchCondition;
-    }
 
     public  void writeEnvelope(Message message) throws Exception {
 
@@ -214,6 +191,4 @@ return searchTerm;
             }
         }
     }
-
-
 }

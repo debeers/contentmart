@@ -13,7 +13,7 @@ public class ClientLandingPage {
 
 
 
-    @FindBy(xpath = ".//div[@class = 'box-in']/a[contains(text(), 'Register as a Client')]")
+    @FindBy(xpath = ".//div[@class = 'box-in']/a[contains(text(), 'Registry as a Client')]")
     public WebElement registerAsClientButtonTop;
 
     @FindBy(xpath = ".//*[@id='nick_name']")

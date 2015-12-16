@@ -4,7 +4,7 @@
 <suite name="Contentmart.in smoke test suite" >
 
     <listeners>
-    <listener class-name="GeneralHelpers.RetryListener"/>
+    <listener class-name="Helpers.RetryListener"/>
     </listeners>
 
     <!--Credentials: -->
@@ -27,17 +27,19 @@
 
     <test name="Fast_And_Furious_Smoke_1.0">
         <classes>
-            <class name="Tests.PhoneBlockCheckTest"/>
-            <class name="Tests.CreateNewOrderTest"/>
-            <class name="Tests.ClientRegistrationViaMainPage"/>
-            <class name="Tests.WriterRegistrationViaMainPage"/>
-            <class name="Tests.WriterRegistrationViaLanding"/>
-            <class name="Tests.AddPortfolioItem"/>
-            <class name="Tests.ChangeClientDetails"/>
-            <class name="Tests.ChangeWriterDetails"/>
-            <class name="Tests.DeletePortfolioItem"/>
-            <class name="Tests.EditPortfolioItem"/>
-            <class name="Tests.LoginLogoutTest"/>
-        </classes>
-    </test>
-</suite>
+
+              <class name="Tests.ChangeClientDetails"/>
+              <class name="Tests.PhoneBlockCheckTest"/>
+              <class name="Tests.CreateNewOrderTest"/>
+              <class name="Tests.ClientRegistrationViaMainPage"/>
+              <class name="Tests.WriterRegistrationViaMainPage"/>
+              <class name="Tests.WriterRegistrationViaLanding"/>
+              <class name="Tests.AddPortfolioItem"/>
+              <class name="Tests.ChangeWriterDetails"/>
+              <class name="Tests.DeletePortfolioItem"/>
+              <class name="Tests.EditPortfolioItem"/>
+              <class name="Tests.LoginLogoutTest"/>
+
+          </classes>
+      </test>
+  </suite>

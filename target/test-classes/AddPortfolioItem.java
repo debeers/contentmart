@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static Actions.Writer.WriterGoToProfilePage.addNewPortfolioItem;
-import static GeneralHelpers.CreateNewOrderHelper.randomID;
+import static Helpers.Randomizers.randomID;
 
 
 /**
@@ -15,8 +15,7 @@ import static GeneralHelpers.CreateNewOrderHelper.randomID;
  */
 public class AddPortfolioItem extends BaseTest {
 
-
-    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
+    @Test
     public void AddPortfolioItemTest() throws InterruptedException {
 
         String title = "New automation item: " + randomID();

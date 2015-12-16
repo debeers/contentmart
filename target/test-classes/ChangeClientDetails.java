@@ -6,7 +6,8 @@ import PageObjects.General.MyOrdersPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static Actions.General.GoToAccountSettings.setUserData;
+import static Actions.General.GoToAccountSettings.setClientAccountSettings;
+import static Actions.General.GoToAccountSettings.setWriterAccountSettings;
 import static Actions.General.RegistrationAndLogin.loginAs;
 
 /**
@@ -14,8 +15,7 @@ import static Actions.General.RegistrationAndLogin.loginAs;
  */
 public class ChangeClientDetails extends BaseTest {
 
-
-    @Test(groups={"Fast_And_Furious_Smoke_1.0"})
+    @Test
     public void ChangeClientDetails() throws Exception {
 
         UserObject user = new UserObject();
@@ -24,7 +24,7 @@ public class ChangeClientDetails extends BaseTest {
         MyOrdersPage myOrdersPage = loginAs(driver, clientLogin);
         myOrdersPage.clickOnProfileFromTopMenu();
         AccountDetailsPage accountDetailsPage = myOrdersPage.clickOnAccountSettingsDropMenu();
-        setUserData(user, accountDetailsPage, country);
+        setClientAccountSettings(user, accountDetailsPage, country);
         accountDetailsPage.clickOnSaveChangesButton();
         driver.navigate().refresh();
         Thread.sleep(3000); //server side wait
@@ -37,7 +37,5 @@ public class ChangeClientDetails extends BaseTest {
         Assert.assertEquals(accountDetailsPage.getUserCity(), user.getCity());
         Assert.assertEquals(accountDetailsPage.getUserAdress(), user.getAddress());
         Assert.assertEquals(accountDetailsPage.getUserZip(), user.getZip());
-
     }
-
 }

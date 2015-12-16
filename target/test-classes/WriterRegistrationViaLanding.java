@@ -1,8 +1,7 @@
 package Tests;
 
 import Entities.UserEmailAccount;
-import GeneralHelpers.DBUtill;
-import GeneralHelpers.EmailListener;
+import Helpers.EmailListener;
 import PageObjects.General.AccountDetailsPage;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.General.PartnersPage;
@@ -12,12 +11,10 @@ import org.testng.annotations.Test;
 import javax.mail.Message;
 import java.util.Properties;
 import static Actions.General.RegistrationAndLogin.*;
-import static GeneralHelpers.CreateEmailAccountUtill.createNewUserEmail;
-import static GeneralHelpers.DBWorker.checkForExitingUserAndDeleteIt;
-import static GeneralHelpers.GeneralHelpers.setRandomUserNickName;
-import static GeneralHelpers.EmailListener.getActivationLinkFromTargetMessage;
-import static GeneralHelpers.PropertiesLoader.*;
-import static SQLRepo.General.checkUserExsistanceByMail;
+import static Helpers.CreateEmailAccountUtill.createNewUserEmail;
+import static Helpers.Randomizers.setRandomUserNickName;
+import static Actions.General.RegistrationAndLogin.getActivationLinkFromRegistrationLetter;
+import static Helpers.PropertiesLoader.*;
 import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
@@ -25,7 +22,7 @@ import static org.testng.Assert.assertTrue;
 
 public class WriterRegistrationViaLanding extends BaseTest{
 
-    @Test(groups={"Fast_And_Furious_Smoke_1.0"})
+    @Test
     public void WriterRegistrationViaLanding() throws Exception {
 
         Properties props = propertyXMLoader(System.getProperty("user.dir") +
@@ -35,8 +32,7 @@ public class WriterRegistrationViaLanding extends BaseTest{
         String email = userEmailAccount.getEmail();
         String userNickName  = setRandomUserNickName(props.getProperty("userRole"));
 
-
-        String title = registerFromLandingAsWriter(
+        String title = registerFromLandingAsWriterAndGetPageTitle(
                 driver,
                 props.getProperty("URL"),
                 userNickName,
@@ -54,7 +50,7 @@ public class WriterRegistrationViaLanding extends BaseTest{
                 );
 
         MyOrdersPage myOrdersPage = activateUserAccount(
-                driver, getActivationLinkFromTargetMessage(targetMessage),
+                driver, getActivationLinkFromRegistrationLetter(targetMessage),
                 props.getProperty("MyOrdersTitle"));
 
         assertTrue($(myOrdersPage.takeTheTestNowButton).isDisplayed());

@@ -1,4 +1,4 @@
-package GeneralHelpers;
+package Helpers;
 
 import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
@@ -12,7 +12,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
 /**

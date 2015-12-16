@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-import static Actions.Client.CreateNewOrder.randomID;
-import static GeneralHelpers.Messages.randomTextGeneratorLength;
+import static Helpers.DateTimeUtils.getTimestamp;
+import static Helpers.Randomizers.randomTextGeneratorLength;
 
 /**
  * Created by DeBeers on 04.10.2015.
@@ -27,7 +27,7 @@ public class WriterGoToProfilePage {
 
 
     public static String createTitleForPortfolioItem(){
-        return "New automation portfolio item: " + randomID();
+        return "New automation portfolio item: " + getTimestamp();
     }
 
 

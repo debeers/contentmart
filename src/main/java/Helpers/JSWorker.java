@@ -1,4 +1,4 @@
-package GeneralHelpers;
+package Helpers;
 
 import org.openqa.selenium.*;
 

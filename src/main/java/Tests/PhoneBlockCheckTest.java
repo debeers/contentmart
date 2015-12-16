@@ -9,18 +9,18 @@ import org.testng.annotations.Test;
 
 import java.util.Properties;
 
-import static Actions.General.RegistrationAndLogin.isEvenID;
+import static Actions.General.RegistrationAndLogin.isUserHaveEvenID;
 import static Actions.General.RegistrationAndLogin.logOut;
 import static Actions.General.RegistrationAndLogin.loginAs;
-import static GeneralHelpers.DateTimeUtils.getSystemTime_AM_PM;
-import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
+import static Helpers.DateTimeUtils.getSystemTime_AM_PM;
+import static Helpers.PropertiesLoader.propertyXMLoader;
 
 /**
  * Created by DeBeers on 30.11.2015.
  */
 public class PhoneBlockCheckTest extends BaseTest{
 
-    @Test(groups={"Fast_And_Furious_Smoke_1.0"})
+    @Test
     public void PhoneBlockCheckTest() throws Exception {
 
         Properties props = propertyXMLoader(System.getProperty("user.dir") +
@@ -30,9 +30,9 @@ public class PhoneBlockCheckTest extends BaseTest{
 
         LoginObject evenUser = new LoginObject(props.getProperty("evenUserLogin"), props.getProperty("evenUserPassword"));
         MyOrdersPage myOrdersPage = loginAs(driver, evenUser);
-        System.out.println("user email is : " + user.getUserId());
+        System.out.println("user id is : " + user.getUserId());
 
-        if (isEvenID(user.getUserId())) {
+        if (isUserHaveEvenID(user.getUserId())) {
 
             int hours = Integer.parseInt(getSystemTime_AM_PM().substring(0, 2));
             if( (hours >= 10 && getSystemTime_AM_PM().substring(6, 8).equalsIgnoreCase("AM")) ||

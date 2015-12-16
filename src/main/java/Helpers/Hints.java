@@ -1,4 +1,4 @@
-package GeneralHelpers;
+package Helpers;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.openqa.selenium.WebElement;

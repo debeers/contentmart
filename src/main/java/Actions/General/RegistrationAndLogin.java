@@ -1,7 +1,7 @@
 package Actions.General;
 
 import Entities.LoginObject;
-import GeneralHelpers.DBUtill;
+import Helpers.DBUtill;
 import PageObjects.General.*;
 import PageObjects.Landings.ForClientsPage;
 import PageObjects.Landings.ForWritersPage;
@@ -113,7 +113,6 @@ public class RegistrationAndLogin {
         return driver.getTitle();
     }
 
-
     public static MyOrdersPage activateUserAccount(WebDriver driver, String activLink, String title) throws InterruptedException {
 
         driver.get(activLink);
@@ -121,7 +120,7 @@ public class RegistrationAndLogin {
         try{
             driver.getTitle().equalsIgnoreCase(title);
 
-        }catch (Exception e){
+        }catch (Exception e){ //sometimes, something goes wrong and driver for some reasons can`t get activLink from first time, so I deside to give a second chance to get it
             System.out.println("For some reasons driver can`t open activation link, we gonna try it one more time after timeout");
             Thread.sleep(5000);
             driver.get(activLink);
@@ -129,38 +128,11 @@ public class RegistrationAndLogin {
         return myOrdersPage;
     }
 
-
-    public static Boolean isEvenID(int id){
+    public static Boolean isUserHaveEvenID(int id){
         return id%2 == 1;
     }
 
-
-    private static String createTestUserName(){
-        return "AutoBot-" + randomNumeric(4) + randomAlphabetic(3);
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    public static void checkForExitingUserAndDeleteIt(DBUtill dbUtill, String query, String column, String email) throws SQLException, InterruptedException, IOException {
-        String result = dbUtill.getColumn(query, column);
-        if (result != null ) {
-            if (result.equalsIgnoreCase(email)){
-                deleteCreatedUserFromDB(dbUtill, email);
-            }
-        } else System.out.println("No such user in DB");
-    }
-
-    public static String deleteCreatedUserFromDB(DBUtill dbUtill, String whereEmail) throws SQLException, IOException {
-
-        String mail = randomNumeric(4) + randomAlphabetic(3) + randomNumeric(3) + "@testmail.com' ";
-        dbUtill.executeUpdate(
-                "UPDATE users " +
-                        "SET email = '" + mail +
-                        "WHERE email = '" + whereEmail + "'"
-        );
-        return mail;
-    }
-
-    public  static String getActivationLinkFromTargetMessage(Message message) throws MessagingException, IOException {
+    public  static String getActivationLinkFromRegistrationLetter(Message message) throws MessagingException, IOException {
 
         Multipart multipart = (Multipart)message.getContent();
         for (int i=0; i<multipart.getCount(); i++){

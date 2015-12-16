@@ -1,8 +1,6 @@
-package GeneralHelpers;
+package Helpers;
 
 import Entities.UserEmailAccount;
-
-import java.io.IOException;
 
 /**
  * Created by DeBeers on 10.12.2015.

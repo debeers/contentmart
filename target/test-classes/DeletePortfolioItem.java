@@ -6,15 +6,14 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static Actions.Writer.WriterGoToProfilePage.addNewPortfolioItem;
-import static GeneralHelpers.CreateNewOrderHelper.randomID;
+import static Helpers.Randomizers.randomID;
 
 /**
  * Created by CMG_TEST on 12.10.2015.
  */
 public class DeletePortfolioItem extends BaseTest {
-
-
-    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
+    
+    @Test
     public void DeletePortfolioItem() throws Exception {
 
         String title = "New automation item: " + randomID();

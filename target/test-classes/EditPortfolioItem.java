@@ -13,8 +13,7 @@ import static org.testng.Assert.assertTrue;
  */
 public class EditPortfolioItem extends BaseTest {
 
-
-    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
+    @Test
     public void EditPortfolioItem() throws InterruptedException {
 
         String title = createTitleForPortfolioItem();

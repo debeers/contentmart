@@ -1,7 +1,7 @@
 package Tests;
 
 import Entities.UserEmailAccount;
-import GeneralHelpers.EmailListener;
+import Helpers.EmailListener;
 import PageObjects.Client.ClientProfilePage;
 import PageObjects.General.AccountDetailsPage;
 import PageObjects.General.MyOrdersPage;
@@ -13,9 +13,9 @@ import javax.mail.Message;
 import java.util.Properties;
 
 import static Actions.General.RegistrationAndLogin.*;
-import static GeneralHelpers.CreateEmailAccountUtill.createNewUserEmail;
-import static GeneralHelpers.EmailListener.getActivationLinkFromTargetMessage;
-import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
+import static Helpers.CreateEmailAccountUtill.createNewUserEmail;
+import static Actions.General.RegistrationAndLogin.getActivationLinkFromRegistrationLetter;
+import static Helpers.PropertiesLoader.propertyXMLoader;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -23,7 +23,7 @@ import static org.testng.Assert.assertEquals;
  */
 public class   ClientRegistrationViaLanding extends BaseTest{
 
-    @Test(groups={"Fast_And_Furious_Smoke_1.0"})
+    @Test
     public void ClientRegistrationViaLanding() throws Exception {
 
         Properties props  = propertyXMLoader(System.getProperty("user.dir") +
@@ -33,7 +33,7 @@ public class   ClientRegistrationViaLanding extends BaseTest{
         String userNickName  = userEmailAccount.getName();
         String email = userEmailAccount.getEmail();
 
-        String title = registerFromLandingAsClientAndGetTheTitle(
+        String title = registerFromLandingAsClientAndGetPageTitle(
                 driver,
                 props.getProperty("URL"),
                 userNickName,
@@ -50,7 +50,7 @@ public class   ClientRegistrationViaLanding extends BaseTest{
                 );
 
         MyOrdersPage myOrdersPage = activateUserAccount(
-                driver, getActivationLinkFromTargetMessage(targetMessage),
+                driver, getActivationLinkFromRegistrationLetter(targetMessage),
                 props.getProperty("MyOrdersTitle"));
 
         Assert.assertEquals(myOrdersPage.getPostAnOrderElementText(), props.getProperty("Post an order"));

@@ -11,8 +11,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Random;
 
-import static GeneralHelpers.CustomWaits.$WaitFor;
-import static GeneralHelpers.JSWorker.jsDeleteClasses;
+import static Helpers.CustomWaits.$WaitFor;
+import static Helpers.JSWorker.jsDeleteClasses;
 import static com.codeborne.selenide.Selenide.$;
 
 /**
@@ -276,7 +276,7 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
         $(phoneField).shouldBe(Condition.visible).clear();
         $(phoneField).shouldBe(Condition.visible).sendKeys(phone);
 
-        return phone;
+        return "+91-"+phone;
     }
 
     public String setPanField(String pan) {

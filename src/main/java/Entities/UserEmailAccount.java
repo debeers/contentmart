@@ -4,7 +4,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import java.io.IOException;
 
-import static GeneralHelpers.Randomizers.setRandomUserNickName;
+import static Helpers.Randomizers.setRandomUserNickName;
+import static Repository.UserEmailAccountRepo.getUserEmailAccountHomeDir;
+import static Repository.UserEmailAccountRepo.getUserEmailAccountMailDir;
 
 /**
  * Created by DeBeers on 01.12.2015.
@@ -16,8 +18,6 @@ public class UserEmailAccount {
     public String password;
     public String home;
     public String maildir;
-
-    private final String MAIL_CONNECTION = "\\src\\main\\java\\Randomizers\\SettingsXML\\DB_CONN_MAIL.xml";
 
     public UserEmailAccount(){}
 
@@ -46,22 +46,6 @@ public class UserEmailAccount {
         );
 
         return UserEmailAccount;
-    }
-
-    private String getUserEmailAccountEmail(String password){
-        return "SELECT email FROM users WHERE clear = '" + password + "'";
-    }
-
-    private String getUserEmailAccountPassword(String email){
-        return "SELECT clear FROM users WHERE email = '" + email + "'";
-    }
-
-    private String getUserEmailAccountHomeDir(String email){
-        return "SELECT home FROM users WHERE email = '" + email + "'";
-    }
-
-    private String getUserEmailAccountMailDir(String email){
-        return "SELECT maildir FROM users WHERE email = '" + email + "'";
     }
 
     public String getName() {

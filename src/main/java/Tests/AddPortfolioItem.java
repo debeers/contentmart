@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static Actions.Writer.WriterGoToProfilePage.addNewPortfolioItem;
-import static Actions.Client.CreateNewOrder.randomID;
+import static Actions.Writer.WriterGoToProfilePage.createTitleForPortfolioItem;
 
 
 /**
@@ -15,11 +15,10 @@ import static Actions.Client.CreateNewOrder.randomID;
  */
 public class AddPortfolioItem extends BaseTest {
 
-
-    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
+    @Test
     public void AddPortfolioItemTest() throws InterruptedException {
 
-        String title = "New automation item: " + randomID();
+        String title = createTitleForPortfolioItem();
 
         WriterProfilePage writerProfilePage = WriterGoToProfilePage.goToMyProfile(driver, writerLogin);
         addNewPortfolioItem(writerProfilePage, title, 55);

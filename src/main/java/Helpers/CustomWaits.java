@@ -1,4 +1,4 @@
-package GeneralHelpers;
+package Helpers;
 
 import PageObjects.Client.NewOrderPage;
 import Tests.BaseTest;
@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.HashSet;
 
-import static GeneralHelpers.UploadingAndDownloadingFiles.isFileExists;
+import static Helpers.UploadingAndDownloadingFiles.isFileExists;
 import static java.lang.System.out;
 
 /**

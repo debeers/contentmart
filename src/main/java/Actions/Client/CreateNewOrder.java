@@ -1,11 +1,13 @@
 package Actions.Client;
 
+import Entities.LoginObject;
 import Entities.OrderObject;
-import GeneralHelpers.DBUtill;
+import Helpers.DBUtill;
 import PageObjects.Client.NewOrderPage;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.General.OrderWorkFlow;
-import SQLRepo.General;
+import Repository.UserModelRepo;
+import Repository.OrderRepo;
 import org.openqa.selenium.WebDriver;
 
 import java.awt.*;
@@ -14,8 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
-import static SQLRepo.General.*;
+import static Actions.General.RegistrationAndLogin.loginAs;
 import static junit.framework.Assert.assertEquals;
 
 
@@ -24,18 +25,17 @@ import static junit.framework.Assert.assertEquals;
  */
 public class CreateNewOrder {
 
-    public static OrderWorkFlow clientGoToCreateNewOrder(WebDriver driver, MyOrdersPage myOrdersPage,
-                                                         String orderDataParameters, Properties properties)
+    public static OrderWorkFlow clientGoToCreateNewOrder(WebDriver driver,
+                                                         LoginObject clientLogin, Properties props)
             throws InterruptedException, IOException, SQLException, AWTException {
 
-        String orderData  = orderDataParameters;
-        Properties props  = propertyXMLoader(System.getProperty("user.dir") + properties);
         OrderObject order = new OrderObject();
-        DBUtill dbUtill   = new DBUtill().initDBConnection();
 
-        setUserCurrencyToRupee(dbUtill, props);
+        setUserCurrencyToRupee(props);
+
+        MyOrdersPage myOrdersPage = loginAs(driver, clientLogin);
         NewOrderPage newOrderPage = myOrdersPage.clickOnNewOrderFromTopMenu();
-        newOrderPage.setOrder(dbUtill, order, orderData);
+        newOrderPage.setOrder(order, props);
         OrderWorkFlow orderWorkFlow = newOrderPage.clickOnPublishButton();
         Thread.sleep(1500); //server side wait
 
@@ -46,18 +46,17 @@ public class CreateNewOrder {
         return new OrderWorkFlow(driver);
     }
 
-    public static void setUserCurrencyToRupee(DBUtill dbUtill, Properties props) throws IOException, SQLException {
-        if(dbUtill.getColumn(
-                getUserCurrencyID(
-                        props.getProperty("UserEmail")), "currency_id") != null){
-            setUserCurrencyToUSD(dbUtill, "debeers1989@gmail.com");
+    public static void setUserCurrencyToRupee(Properties props) throws IOException, SQLException {
+        if(UserModelRepo.getUserCurrencyID(
+                        props.getProperty("UserEmail")) != null){
+            setUserCurrencyToUSD(props.getProperty("UserEmail"));
         }
     }
 
-    public static java.util.List<String> getExpertisesList(DBUtill dbUtill) throws IOException, SQLException {
+    public static java.util.List<String> getExpertisesList() throws IOException, SQLException {
 
         java.util.List<String> orderExpertise = new ArrayList<>();
-        ResultSet res = dbUtill.getResultSet(getOrderExpertises());
+        ResultSet res = OrderRepo.getOrderExpertises();
         while(res.next()){
             orderExpertise.add(res.getString("NAME"));
             System.out.println(res.getString("NAME"));
@@ -65,67 +64,29 @@ public class CreateNewOrder {
         return orderExpertise;
     }
 
-    public static java.util.List<String> getLanguageList(DBUtill dbUtill) throws IOException, SQLException {
+    public static java.util.List<String> getLanguageList() throws IOException, SQLException {
 
         java.util.List<String> orderLanguages = new ArrayList<>();
-        ResultSet res = dbUtill.getResultSet(getOrderLanguages());
+        ResultSet res = OrderRepo.getOrderLanguages();
         while(res.next()){
             orderLanguages.add(res.getString("name"));
         }
         return orderLanguages;
     }
 
-    public static java.util.List<String> getCategoriesList(DBUtill dbUtill) throws IOException, SQLException {
+    public static java.util.List<String> getCategoriesList() throws IOException, SQLException {
 
         java.util.List<String> orderCategories = new ArrayList<>();
-        ResultSet res = dbUtill.getResultSet(getOrderCategories());
+        ResultSet res = OrderRepo.getOrderCategories();
         while(res.next()){
             orderCategories.add(res.getString("name"));
         }
         return orderCategories;
     }
 
-    public static void setUserCurrencyToUSD(DBUtill dbUtill, String mail) throws IOException, SQLException {
-         dbUtill.executeUpdate(General.setUserCurrencyToRupee(mail));
-    }
-
-    public static String randomID() {
-
-        int id = (int) (Math.random() * 1000);
-        String str = String.valueOf(id);
-
-        return str;
-    }
-
-    public static String getDay() {
-
-        Calendar calendar = Calendar.getInstance();
-        int i = calendar.get(Calendar.DAY_OF_MONTH);
-        if (i == 30 || i == 31) {
-            i = 2;
-        } else if (i <= 29) {
-            i += 1;
-        }
-        return Integer.toString(i);
-    }
-
-    public static String createNewOrderName(){
-        return "Automation order ID: " + randomID();
-    }
-
-    public static Boolean checkForINRcorrection(DBUtill dbUtill, String usd, String rupee) {
-
-        double currate = Double.parseDouble(
-                dbUtill.getColumn(
-                        getLastUpdatedCurrencyRate(), "value").substring(0, 5));
-
-        int us = Integer.parseInt(usd);
-        double ruup = Double.parseDouble(rupee);
-
-        if (currate * us == ruup) {
-            return true;
-        }
-        return false;
+    public static void setUserCurrencyToUSD(String mail) throws IOException, SQLException {
+        DBUtill dbUtill = new DBUtill();
+         dbUtill.executeUpdate(UserModelRepo.setUserCurrencyToRupee(mail));
     }
 
     public static String getSettedOrderValue(OrderObject orderObject ){

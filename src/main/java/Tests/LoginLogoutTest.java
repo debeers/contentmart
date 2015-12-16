@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.Properties;
 
-import static GeneralHelpers.PropertiesLoader.propertyXMLoader;
+import static Helpers.PropertiesLoader.propertyXMLoader;
 import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertEquals;
 
@@ -22,7 +22,7 @@ public class LoginLogoutTest extends BaseTest{
         return props;
     }
 
-    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
+    @Test
     public void positive_Client_Login_LogOut() throws InterruptedException, IOException {
 
         LoginPage loginPage = new LoginPage(driver);

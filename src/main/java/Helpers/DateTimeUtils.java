@@ -1,14 +1,15 @@
-package GeneralHelpers;
+package Helpers;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
-import static SQLRepo.General.getUserTimezoneNameByMail;
-import static SQLRepo.General.getUserTimezoneViewNameByMail;
+import static Repository.UserModelRepo.getUserTimezoneNameByMail;
+import static Repository.UserModelRepo.getUserTimezoneViewNameByMail;
 
 /**
  * Created by DeBeers on 03.12.2015.
@@ -24,13 +25,12 @@ public class DateTimeUtils {
         return"(UTC " + name + ")";
     }
 
-    public static String getUserTimezoneName(DBUtill dbUtill, String email){
-
-        return dbUtill.getColumn(getUserTimezoneNameByMail(email), "name");
+    public static String getUserTimezoneName(String email){
+         return getUserTimezoneNameByMail(email);
     }
 
-    public static String getUserTimezoneViewName(DBUtill dbUtill, String email){
-
+    public static String getUserTimezoneViewName(String email){
+        DBUtill dbUtill = new DBUtill();
         return dbUtill.getColumn(getUserTimezoneViewNameByMail(email), "view_name");
     }
 
@@ -44,5 +44,21 @@ public class DateTimeUtils {
 
     public static String getSystemTime_AM_PM() {
         return new SimpleDateFormat("hh:mm a").format(Calendar.getInstance().getTime());
+    }
+
+    public static String getDay() {
+
+        Calendar calendar = Calendar.getInstance();
+        int i = calendar.get(Calendar.DAY_OF_MONTH);
+        if (i == 30 || i == 31) {
+            i = 2;
+        } else if (i <= 29) {
+            i += 1;
+        }
+        return Integer.toString(i);
+    }
+
+    public static String getTimestamp(){
+        return new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
     }
 }
