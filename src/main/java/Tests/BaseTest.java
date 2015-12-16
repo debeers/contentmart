@@ -34,32 +34,12 @@ public class BaseTest {
     public static java.sql.Connection jdbcConnection;
 
 
-//    @BeforeSuite(alwaysRun = true)
-//    public void preCondition() throws IOException, ClassNotFoundException, SQLException {
-//
-//        Properties props =  propertyXMLoader(System.getProperty("user.dir") + "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\DB_CONNECTION.xml");
-//        Class.forName(props.getProperty("DB_DRIVER"));
-//
-//        jdbcConnection = DriverManager.getConnection(
-//                props.getProperty("DB_CONNECTION"),
-//                props.getProperty("DB_USER"),
-//                props.getProperty("DB_PASSWORD")
-//        );
-//
-//        Registry.set("dbConnection", jdbcConnection);
-//
-//    }
+    @BeforeSuite(alwaysRun = true)
+    public void preCondition() throws IOException, ClassNotFoundException, SQLException {
 
-    @Parameters({"URL", "clientLoginParam", "clientPasswordParam", "writerLoginParam", "writerPasswordParam", "mailbox", "mailboxPassword"})
-    @BeforeMethod(alwaysRun = true)
-    public void setUp(String URL, String clientLoginParam, String clientPasswordParam, String writerLoginParam, String writerPasswordParam, String mailbox, String mailboxPassword) throws ClassNotFoundException, IOException, SQLException {
+        Properties props =  propertyXMLoader(System.getProperty("user.dir") +
+                "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\DB_CONNECTION.xml");
 
-        String TestClassName = this.getClass().getName();
-        System.out.println(TestClassName);
-
-
-        Properties props =  propertyXMLoader(System.getProperty("user.dir")
-                + "\\src\\main\\java\\Helpers\\SettingsXML\\DB_CONNECTION.xml");
         Class.forName(props.getProperty("DB_DRIVER"));
 
         jdbcConnection = DriverManager.getConnection(
@@ -70,6 +50,14 @@ public class BaseTest {
 
         Registry.set("dbConnection", jdbcConnection);
 
+    }
+
+    @Parameters({"URL", "clientLoginParam", "clientPasswordParam", "writerLoginParam", "writerPasswordParam", "mailbox", "mailboxPassword"})
+    @BeforeMethod(alwaysRun = true)
+    public void setUp(String URL, String clientLoginParam, String clientPasswordParam, String writerLoginParam, String writerPasswordParam, String mailbox, String mailboxPassword) throws ClassNotFoundException, IOException, SQLException {
+
+        String TestClassName = this.getClass().getName();
+        System.out.println(TestClassName);
 
         clientLogin      = new LoginObject(clientLoginParam, clientPasswordParam);
         writerLogin      = new LoginObject(writerLoginParam, writerPasswordParam);
