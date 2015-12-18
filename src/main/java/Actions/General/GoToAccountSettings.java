@@ -13,8 +13,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.Random;
 
-import static Helpers.CustomWaits.$WaitFor;
-import static Helpers.Randomizers.randomTextGeneratorLength;
+import static Utilities.CustomWaits.$WaitFor;
+import static Utilities.Randomizers.randomTextGeneratorLength;
 import static Tests.BaseTest.driver;
 import static com.codeborne.selenide.Selenide.$;
 

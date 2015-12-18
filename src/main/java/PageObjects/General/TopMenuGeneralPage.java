@@ -3,6 +3,7 @@ package PageObjects.General;
 import PageObjects.BasePageObject;
 import PageObjects.Client.ClientEditProfilePage;
 import PageObjects.Client.NewOrderPage;
+import PageObjects.Writer.AllOrdersPage;
 import PageObjects.Writer.WriterEditProfilePage;
 import PageObjects.Writer.WriterProfilePage;
 import org.openqa.selenium.WebDriver;
@@ -12,7 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static Helpers.CustomWaits.$WaitFor;
+import static Utilities.CustomWaits.$WaitFor;
 import static Tests.BaseTest.wait;
 import static com.codeborne.selenide.Condition.present;
 import static com.codeborne.selenide.Condition.visible;
@@ -82,6 +83,11 @@ public class TopMenuGeneralPage extends BasePageObject {
     public WebElement logoContentMartTopMenu;
 
     // Drop down profile menu ::
+
+    public AllOrdersPage clickOnAllOrdersFromTopMenu(){
+        $(allOrdersTopMenu).shouldBe(visible).click();
+        return new AllOrdersPage(driver);
+    }
 
     public void clickOnProfileFromTopMenu() {
 

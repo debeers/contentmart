@@ -9,7 +9,4 @@ public interface BasePageObjectInterface {
 
     public WebDriver getDriver();
 
-    default public String getName(String name){
-        return name;
-    }
 }

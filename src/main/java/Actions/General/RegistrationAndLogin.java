@@ -1,7 +1,6 @@
 package Actions.General;
 
 import Entities.LoginObject;
-import Helpers.DBUtill;
 import PageObjects.General.*;
 import PageObjects.Landings.ForClientsPage;
 import PageObjects.Landings.ForWritersPage;
@@ -13,13 +12,10 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Selenide.$;
-import static org.apache.commons.lang.RandomStringUtils.randomAlphabetic;
-import static org.apache.commons.lang.RandomStringUtils.randomNumeric;
 import static org.testng.Assert.assertEquals;
 
 /**
@@ -132,23 +128,4 @@ public class RegistrationAndLogin {
         return id%2 == 1;
     }
 
-    public  static String getActivationLinkFromRegistrationLetter(Message message) throws MessagingException, IOException {
-
-        Multipart multipart = (Multipart)message.getContent();
-        for (int i=0; i<multipart.getCount(); i++){
-
-            BodyPart bodyPart = multipart.getBodyPart(i);
-            String s = (String)bodyPart.getContent();
-
-            Pattern p = Pattern.compile("<a[^>]*href=\"(http[s]?:[^\"]*)\".*Activate<\\/a>");
-            Matcher m = p.matcher(s);
-
-            if(m.find()){
-                String url = m.group(1);
-                System.out.println("Regexp : " + url);
-                return url;
-            }
-        }
-        return null;
-    }
 }

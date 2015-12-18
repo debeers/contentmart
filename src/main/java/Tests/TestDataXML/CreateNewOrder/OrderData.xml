@@ -16,7 +16,7 @@
     <entry key="VisibilityForAll">all</entry>
     <entry key="VisibilityForFavourites">favourite</entry>
     <entry key="VisibilityForSpec">spec</entry>
-    <entry key="FileForUpload">\src\main\java\Resources\DMX.jpg</entry>
+    <entry key="FileForUpload">\src\main\java\resources\DMX.jpg</entry>
     <entry key="UserEmail">debeers1989@gmail.com</entry>
     <entry key="StatusInfo">Your order is published now.</entry>
 

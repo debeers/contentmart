@@ -2,7 +2,8 @@ package Tests;
 
 import Entities.GmailCredentials;
 import Entities.LoginObject;
-import Helpers.Registry;
+import Entities.Registry;
+import Helpers.DBconnection;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -34,10 +35,18 @@ public class BaseTest {
     public static java.sql.Connection jdbcConnection;
 
 
-//    @BeforeSuite(alwaysRun = true)
-//    public void preCondition() throws IOException, ClassNotFoundException, SQLException {
-//
-//        Properties props =  propertyXMLoader(System.getProperty("user.dir") + "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\DB_CONNECTION.xml");
+    @BeforeSuite(alwaysRun = true)
+    public void preCondition() throws IOException, ClassNotFoundException, SQLException {
+
+                Properties props =  propertyXMLoader(System.getProperty("user.dir") +
+                "\\src\\main\\java\\Helpers\\SettingsXML\\DB_CONNECTION.xml");
+
+        jdbcConnection = new DBconnection().initDBConnection(props);
+        Registry.set("dbConnection", jdbcConnection);
+//        Properties props =  propertyXMLoader(System.getProperty("user.dir") +
+//                "\\src\\main\\java\\Helpers\\SettingsXML\\DB_CONNECTION.xml");
+//      //  "/src/main/java/Helpers/SettingsXML/DB_CONNECTION.xml");
+//        System.out.println("xml found=======================================");
 //        Class.forName(props.getProperty("DB_DRIVER"));
 //
 //        jdbcConnection = DriverManager.getConnection(
@@ -47,8 +56,8 @@ public class BaseTest {
 //        );
 //
 //        Registry.set("dbConnection", jdbcConnection);
-//
-//    }
+//        System.out.println("xml loaded=======================================");
+    }
 
     @Parameters({"URL", "clientLoginParam", "clientPasswordParam", "writerLoginParam", "writerPasswordParam", "mailbox", "mailboxPassword"})
     @BeforeMethod(alwaysRun = true)
@@ -56,20 +65,6 @@ public class BaseTest {
 
         String TestClassName = this.getClass().getName();
         System.out.println(TestClassName);
-
-
-        Properties props =  propertyXMLoader(System.getProperty("user.dir")
-                + "\\src\\main\\java\\Helpers\\SettingsXML\\DB_CONNECTION.xml");
-        Class.forName(props.getProperty("DB_DRIVER"));
-
-        jdbcConnection = DriverManager.getConnection(
-                props.getProperty("DB_CONNECTION"),
-                props.getProperty("DB_USER"),
-                props.getProperty("DB_PASSWORD")
-        );
-
-        Registry.set("dbConnection", jdbcConnection);
-
 
         clientLogin      = new LoginObject(clientLoginParam, clientPasswordParam);
         writerLogin      = new LoginObject(writerLoginParam, writerPasswordParam);
@@ -91,13 +86,11 @@ public class BaseTest {
         dc.setJavascriptEnabled(true);
         dc.setCapability(FirefoxDriver.PROFILE, fProfile);
 
-
         driver = WebDriverFactory.getDriver(dc);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 10);
         driver.manage().window().maximize();
         WebDriverRunner.setWebDriver(driver); // Selenide WebDriverRunner for my custom driver
-
     }
 
 

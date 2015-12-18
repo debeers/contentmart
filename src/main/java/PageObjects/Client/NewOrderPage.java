@@ -1,8 +1,6 @@
 package PageObjects.Client;
 
 import Entities.OrderObject;
-import Helpers.DBUtill;
-import Helpers.DateTimeUtils;
 import PageObjects.General.OrderWorkFlow;
 import PageObjects.General.TopMenuGeneralPage;
 import org.openqa.selenium.By;
@@ -19,10 +17,11 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 
-import static Helpers.Randomizers.createNewOrderName;
+import static Utilities.Randomizers.createNewOrderName;
 import static Actions.Client.CreateNewOrder.getExpertisesList;
-import static Helpers.UploadingAndDownloadingFiles.uploadFilesByRobot;
-import static Helpers.UploadingAndDownloadingFiles.getFileName;
+import static Utilities.Randomizers.setRandomDeadline;
+import static Utilities.UploadingAndDownloadingFiles.uploadFilesByRobot;
+import static Utilities.UploadingAndDownloadingFiles.getFileName;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -293,17 +292,6 @@ public class NewOrderPage extends TopMenuGeneralPage {
         return  new OrderWorkFlow(driver);
     }
 
-    public String setRandomDeadline() throws InterruptedException {
-
-        $(deadlineField).shouldBe(visible).click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath(xDateBuilder(DateTimeUtils.getDay()))).click();
-        currentOrderTime.click();
-        orderDetailsField.click();
-
-        return $(deadlineField).shouldBe(visible).getAttribute("value");
-    }
-
     public void setOrder(OrderObject order, Properties props) throws InterruptedException, AWTException, IOException, SQLException {
 
         order.setOrderName(
@@ -327,7 +315,7 @@ public class NewOrderPage extends TopMenuGeneralPage {
         );
 
         order.setOrderDeadLine(
-                setRandomDeadline()
+                setRandomDeadline(driver)
         );
 
         order.setOrderCategoryOfWriting(

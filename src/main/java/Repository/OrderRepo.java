@@ -1,6 +1,6 @@
 package Repository;
 
-import Helpers.DBUtill;
+import Utilities.DBUtill;
 
 import java.io.IOException;
 import java.sql.ResultSet;

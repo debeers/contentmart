@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.Properties;
 
-import static Helpers.PropertiesLoader.propertyXMLoader;
+import static Utilities.PropertiesLoader.propertyXMLoader;
 import static com.codeborne.selenide.Selenide.$;
 import static org.testng.Assert.assertEquals;
 
@@ -23,7 +23,7 @@ public class LoginLogoutTest extends BaseTest{
     }
 
     @Test
-    public void positive_Client_Login_LogOut() throws InterruptedException, IOException {
+    public void positive_Client_Login_LogOut_Test() throws InterruptedException, IOException {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage(driver);
@@ -42,8 +42,8 @@ public class LoginLogoutTest extends BaseTest{
     }
 
 
-    @Test(groups = {"Fast_And_Furious_Smoke_1.0"})
-    public void positive_Writer_Login_LogOut() throws InterruptedException, IOException {
+    @Test
+    public void positive_Writer_Login_LogOut_Test() throws InterruptedException, IOException {
 
         LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage(driver);

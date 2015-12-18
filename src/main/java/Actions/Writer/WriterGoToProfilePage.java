@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.List;
 
-import static Helpers.DateTimeUtils.getTimestamp;
-import static Helpers.Randomizers.randomTextGeneratorLength;
+import static Utilities.DateTimeUtils.getTimestamp;
+import static Utilities.Randomizers.randomTextGeneratorLength;
 
 /**
  * Created by DeBeers on 04.10.2015.

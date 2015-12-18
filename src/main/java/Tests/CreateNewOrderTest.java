@@ -16,10 +16,10 @@ import java.util.*;
 import static Actions.Client.CreateNewOrder.setUserCurrencyToRupee;
 import static Actions.General.RegistrationAndLogin.logOut;
 import static Actions.General.RegistrationAndLogin.loginAs;
-import static Helpers.DateTimeUtils.getEtalonTimezone;
-import static Helpers.DateTimeUtils.getUserTimezoneName;
-import static Helpers.UploadingAndDownloadingFiles.getFileName;
-import static Helpers.PropertiesLoader.propertyXMLoader;
+import static Utilities.DateTimeUtils.getEtalonTimezone;
+import static Utilities.DateTimeUtils.getUserTimezoneName;
+import static Utilities.UploadingAndDownloadingFiles.getFileName;
+import static Utilities.PropertiesLoader.propertyXMLoader;
 import static PageObjects.Client.NewOrderPage.checkForWordsRequired;
 import static PageObjects.General.OrderWorkFlow.compareExpertises;
 import static Repository.UserModelRepo.getUserCurrencyID;
@@ -28,7 +28,7 @@ import static junit.framework.Assert.*;
 public class  CreateNewOrderTest extends BaseTest {
 
     @Test
-    public void CreateNewOrderTest() throws InterruptedException, IOException, AWTException, SQLException {
+    public void CreateNewOrderTest_Test() throws InterruptedException, IOException, AWTException, SQLException {
 
         Properties props  = propertyXMLoader(System.getProperty("user.dir") +
                 "\\src\\main\\java\\Tests\\TestDataXML\\CreateNewOrder\\OrderData.xml");

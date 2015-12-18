@@ -2,7 +2,7 @@ package Actions.Client;
 
 import Entities.LoginObject;
 import Entities.OrderObject;
-import Helpers.DBUtill;
+import Utilities.DBUtill;
 import PageObjects.Client.NewOrderPage;
 import PageObjects.General.MyOrdersPage;
 import PageObjects.General.OrderWorkFlow;
@@ -25,7 +25,7 @@ import static junit.framework.Assert.assertEquals;
  */
 public class CreateNewOrder {
 
-    public static OrderWorkFlow clientGoToCreateNewOrder(WebDriver driver,
+    public static OrderObject clientGoToCreateNewOrder(WebDriver driver,
                                                          LoginObject clientLogin, Properties props)
             throws InterruptedException, IOException, SQLException, AWTException {
 
@@ -43,7 +43,7 @@ public class CreateNewOrder {
         order.setOrderPublicDate(orderWorkFlow.getPublichDate());
         order.setOrderStatus(orderWorkFlow.getOrderStatus());
 
-        return new OrderWorkFlow(driver);
+        return order;
     }
 
     public static void setUserCurrencyToRupee(Properties props) throws IOException, SQLException {

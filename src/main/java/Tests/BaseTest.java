@@ -2,7 +2,8 @@ package Tests;
 
 import Entities.GmailCredentials;
 import Entities.LoginObject;
-import Entities.Registry;
+import Registry.Registry;
+import Utilities.DBconnection;
 import com.codeborne.selenide.WebDriverRunner;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -15,12 +16,11 @@ import ru.stqa.selenium.factory.WebDriverFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import static Helpers.PropertiesLoader.propertyXMLoader;
+import static Utilities.PropertiesLoader.propertyXMLoader;
 
 public class BaseTest {
 
@@ -37,24 +37,18 @@ public class BaseTest {
     @BeforeSuite(alwaysRun = true)
     public void preCondition() throws IOException, ClassNotFoundException, SQLException {
 
-        Properties props =  propertyXMLoader(System.getProperty("user.dir") +
-                "\\src\\main\\java\\GeneralHelpers\\SettingsXML\\DB_CONNECTION.xml");
+                Properties props =  propertyXMLoader(System.getProperty("user.dir") +
+                "/src/main/java/Utilities/SettingsXML/DB_CONNECTION.xml");
 
-        Class.forName(props.getProperty("DB_DRIVER"));
-
-        jdbcConnection = DriverManager.getConnection(
-                props.getProperty("DB_CONNECTION"),
-                props.getProperty("DB_USER"),
-                props.getProperty("DB_PASSWORD")
-        );
-
+      //  "\\src\\main\\java\\Helpers\\SettingsXML\\DB_CONNECTION.xml"); For Mustdie
+        jdbcConnection = new DBconnection().initDBConnection(props);
         Registry.set("dbConnection", jdbcConnection);
-
     }
 
     @Parameters({"URL", "clientLoginParam", "clientPasswordParam", "writerLoginParam", "writerPasswordParam", "mailbox", "mailboxPassword"})
     @BeforeMethod(alwaysRun = true)
-    public void setUp(String URL, String clientLoginParam, String clientPasswordParam, String writerLoginParam, String writerPasswordParam, String mailbox, String mailboxPassword) throws ClassNotFoundException, IOException, SQLException {
+    public void setUp(String URL, String clientLoginParam, String clientPasswordParam, String writerLoginParam,
+                      String writerPasswordParam, String mailbox, String mailboxPassword) throws ClassNotFoundException, IOException, SQLException {
 
         String TestClassName = this.getClass().getName();
         System.out.println(TestClassName);
@@ -79,13 +73,11 @@ public class BaseTest {
         dc.setJavascriptEnabled(true);
         dc.setCapability(FirefoxDriver.PROFILE, fProfile);
 
-
         driver = WebDriverFactory.getDriver(dc);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 10);
         driver.manage().window().maximize();
         WebDriverRunner.setWebDriver(driver); // Selenide WebDriverRunner for my custom driver
-
     }
 
 

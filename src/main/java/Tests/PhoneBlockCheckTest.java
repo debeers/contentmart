@@ -12,8 +12,8 @@ import java.util.Properties;
 import static Actions.General.RegistrationAndLogin.isUserHaveEvenID;
 import static Actions.General.RegistrationAndLogin.logOut;
 import static Actions.General.RegistrationAndLogin.loginAs;
-import static Helpers.DateTimeUtils.getSystemTime_AM_PM;
-import static Helpers.PropertiesLoader.propertyXMLoader;
+import static Utilities.DateTimeUtils.getSystemTime_AM_PM;
+import static Utilities.PropertiesLoader.propertyXMLoader;
 
 /**
  * Created by DeBeers on 30.11.2015.
@@ -21,7 +21,7 @@ import static Helpers.PropertiesLoader.propertyXMLoader;
 public class PhoneBlockCheckTest extends BaseTest{
 
     @Test
-    public void PhoneBlockCheckTest() throws Exception {
+    public void PhoneBlockCheckTest_Test() throws Exception {
 
         Properties props = propertyXMLoader(System.getProperty("user.dir") +
                 "\\src\\main\\java\\tests\\TestDataXML\\Registration\\PhoneBlockCheck.xml");

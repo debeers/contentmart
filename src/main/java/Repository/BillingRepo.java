@@ -1,6 +1,6 @@
 package Repository;
 
-import Helpers.DBUtill;
+import Utilities.DBUtill;
 
 /**
  * Created by DeBeers on 16.12.2015.

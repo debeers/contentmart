@@ -11,8 +11,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Random;
 
-import static Helpers.CustomWaits.$WaitFor;
-import static Helpers.JSWorker.jsDeleteClasses;
+import static Utilities.CustomWaits.$WaitFor;
+import static Utilities.JSWorker.jsDeleteClasses;
 import static com.codeborne.selenide.Selenide.$;
 
 /**
@@ -120,7 +120,6 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
         return signatureSrc;
     }
 
-
     public EmailNotificationsPage clickOnEmailNotificationsLink(WebDriver driver) {
 
         $WaitFor(emailNotificationsLink).click();
@@ -181,28 +180,20 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
         return city.getFirstSelectedOption().getText();
     }
 
-    public void setUserNationality(String nigga){
-
-    }
-
-
     public void clickOnChangePasswordLink() {
 
         $WaitFor(changePasswordLink).click();
     }
 
     public String getUserCountry() {
-
         return $(countryField).shouldBe(Condition.visible).getAttribute("value").trim();
     }
 
     public String getUserCurrency() {
-
         return $(currencyField).shouldBe(Condition.visible).getText();
     }
 
     public String getUserTimeZoneValue() {
-
         return $(userTimeZone).shouldBe(Condition.visible).getAttribute("value");
     }
 
@@ -211,52 +202,42 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
     }
 
     public String getUserNickNameFromProfileDropMenu() {
-
         return $(nickNameField).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserFirstName() {
-
         return $(firstNameField).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserLastName() {
-
         return $(lastNameField).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserPhone() {
-
         return $(phoneField).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserPan() {
-
         return $(panField).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserRegion() {
-
         return $(userRegion).shouldBe(Condition.visible).getAttribute("value").trim();
     }
 
     public String getUserCity() {
-
         return $(userCity).shouldBe(Condition.visible).getText();
     }
 
     public String getUserAdress() {
-
         return $(addressField).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String getUserZip() {
-
         return $(userZip).shouldBe(Condition.visible).getAttribute("value");
     }
 
     public String setFirstNameField(String firstName) throws InterruptedException {
-
         $(firstNameField).shouldBe(Condition.visible).clear();
         Thread.sleep(2000);
         $(firstNameField).shouldBe(Condition.visible).sendKeys(firstName);
@@ -265,14 +246,12 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
     }
 
     public String setLastNameField(String lastName) {
-
         $(lastNameField).shouldBe(Condition.visible).clear();
         $(lastNameField).shouldBe(Condition.visible).sendKeys(lastName);
         return lastName;
     }
 
     public String setPhoneField(String phone) throws InterruptedException {
-
         $(phoneField).shouldBe(Condition.visible).clear();
         $(phoneField).shouldBe(Condition.visible).sendKeys(phone);
 
@@ -280,7 +259,6 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
     }
 
     public String setPanField(String pan) {
-
         $(panField).shouldBe(Condition.visible).clear();
         $(panField).shouldBe(Condition.visible).sendKeys(pan);
 
@@ -288,17 +266,14 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
     }
 
     public void setStateField(String state) {
-
         $(userRegion).shouldBe(Condition.visible).sendKeys(state);
     }
 
     public void setCityField(String city) {
-
         $(userCity).shouldBe(Condition.visible).sendKeys(city);
     }
 
     public String setAddressField(String address) {
-
         $(addressField).shouldBe(Condition.visible).clear();
         $(addressField).shouldBe(Condition.visible).sendKeys(address);
 
@@ -306,7 +281,6 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
     }
 
     public String setZipField(String zip) {
-
         $(userZip).shouldBe(Condition.visible).clear();
         $(userZip).shouldBe(Condition.visible).sendKeys(zip);
 
@@ -314,13 +288,11 @@ public class AccountDetailsPage extends TopMenuGeneralPage implements PageObject
     }
 
     public void clickOnSaveChangesButton() throws InterruptedException {
-
         $(saveChangesButton).shouldBe(Condition.visible).click();
         $(successSavedChangesMsg).should(Condition.appear);
     }
 
     public AccountDetailsPage(WebDriver driver) {
-
         super(driver);
     }
 

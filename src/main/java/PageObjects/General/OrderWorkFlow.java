@@ -3,12 +3,14 @@ package PageObjects.General;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static Utilities.Randomizers.setRandomDeadline;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -118,6 +120,68 @@ public class OrderWorkFlow extends TopMenuGeneralPage{
     @FindBy(xpath = ".//a[contains(text(), 'Publish')]")
     public WebElement publishButton;
 
+    @FindBy(xpath = ".//*[@id='description']")
+    public WebElement bidDescriptionField;
+
+    @FindBy(xpath = ".//*[@id='leave-an-offer']")
+    public WebElement leaveAnOfferButton;
+
+    @FindBy(xpath = ".//*[@id='suggest_price']")
+    public WebElement suggestYourPriceCheckBox;
+
+    @FindBy(xpath = ".//*[@id='suggest_date_deadline']")
+    public WebElement suggestYourDeadLineCheckBox;
+
+    @FindBy(xpath = ".//*[@id='price_with_sel']")
+    public WebElement suggestedPriceField;
+
+    @FindBy(xpath = ".//*[@id='order_prise_select']")
+    public WebElement pricePerSelect;
+
+
+    public OrderWorkFlow setDesiredDeadline(OrderWorkFlow orderWorkflow) throws InterruptedException {
+        clickOnSuggestYourDeadlineCheckBox();
+        setRandomDeadline(driver);
+        return orderWorkflow;
+    }
+
+    public void selectPricePerWhat(String perWhat){
+        Select select = new Select(pricePerSelect);
+        if(perWhat.equalsIgnoreCase("word")){
+            select.selectByValue("2");
+        }else select.selectByValue("1");
+    }
+
+    public OrderWorkFlow setDesiredPrice(String price, String perWhat, OrderWorkFlow orderWorkflow){
+        clickOnSuggestYourPriceCheckbox();
+        selectPricePerWhat(perWhat);
+        clickOnSuggestYourPriceCheckbox();
+        setWritersPrice(price);
+        return orderWorkflow;
+    }
+
+    public void setWritersPrice(String price){
+        $(suggestedPriceField).shouldBe(visible).clear();
+        $(suggestedPriceField).shouldBe(visible).sendKeys(price);
+    }
+
+    public void clickOnSuggestYourDeadlineCheckBox(){
+        $(suggestYourDeadLineCheckBox).shouldBe(visible).click();
+    }
+
+    public void clickOnSuggestYourPriceCheckbox(){
+        $(suggestYourPriceCheckBox).shouldBe(visible).click();
+    }
+
+    public OrderWorkFlow leaveBidDescription(String description,OrderWorkFlow orderWorkflow){
+        $(bidDescriptionField).shouldBe(visible).sendKeys(description);
+        return orderWorkflow;
+    }
+
+    public OrderWorkFlow clickOnLeaveAnOfferBidButton(OrderWorkFlow orderWorkflow){
+        $(leaveAnOfferButton).shouldBe(visible).click();
+        return orderWorkflow;
+    }
 
     public String getArticlesCount(){
         return $(getArticlesCount).shouldBe(visible).getText().substring(0, 1);
@@ -210,8 +274,9 @@ public class OrderWorkFlow extends TopMenuGeneralPage{
         return $(orderVisibility).shouldBe(visible).getText();
     }
 
-    public void clickOnEditOrderButton(){
+    public OrderWorkFlow clickOnEditOrderButton(){
         $(editOrder).shouldBe(visible).click();
+        return new OrderWorkFlow(driver);
     }
 
     public void clickOnCloseOrderButton(){

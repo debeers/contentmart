@@ -1,0 +1,12 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <!--Test Data -->
+
+    <entry key="Desired Price">5</entry>
+    <entry key="Per Word">mim@dev.contentmart.in</entry>
+    <entry key="Description for Offer">test message</entry>
+    <entry key="Mail text">Test message from user to activate this fucking UserEmailAccount</entry>
+    <entry key="SMTP Port">587</entry>
+    <entry key="SMTP Host">dev.contentmart.in</entry>
+
+</properties>

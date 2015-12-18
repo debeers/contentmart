@@ -4,7 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import java.io.IOException;
 
-import static Helpers.Randomizers.setRandomUserNickName;
+import static Utilities.Randomizers.setRandomUserNickName;
 import static Repository.UserEmailAccountRepo.getUserEmailAccountHomeDir;
 import static Repository.UserEmailAccountRepo.getUserEmailAccountMailDir;
 

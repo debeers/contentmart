@@ -1,13 +1,13 @@
 package Repository;
 
 import Entities.UserModel;
-import Helpers.DBUtill;
+import Utilities.DBUtill;
 
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static Helpers.Randomizers.createRandomUserEmail;
+import static Utilities.Randomizers.createRandomUserEmail;
 
 /**
  * Created by DeBeers on 02.12.2015.

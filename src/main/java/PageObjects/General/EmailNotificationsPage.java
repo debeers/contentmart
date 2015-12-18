@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
-import static Helpers.CustomWaits.$WaitFor;
+import static Utilities.CustomWaits.$WaitFor;
 import static com.codeborne.selenide.Selenide.$;
 
 public class EmailNotificationsPage extends TopMenuGeneralPage {
