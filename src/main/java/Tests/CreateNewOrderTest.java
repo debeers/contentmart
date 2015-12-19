@@ -31,7 +31,7 @@ public class  CreateNewOrderTest extends BaseTest {
     public void CreateNewOrderTest_Test() throws InterruptedException, IOException, AWTException, SQLException {
 
         Properties props  = propertyXMLoader(System.getProperty("user.dir") +
-                "\\src\\main\\java\\Tests\\TestDataXML\\CreateNewOrder\\OrderData.xml");
+                "/src/main/java/Tests/TestDataXML/CreateNewOrder/OrderData.xml");
         System.out.println(getUserCurrencyID("debeers1989@gmail.com"));
         OrderObject order = new OrderObject();
 
