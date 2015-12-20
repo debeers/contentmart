@@ -18,7 +18,7 @@ public class LoginLogoutTest extends BaseTest{
 
     private static Properties props() throws IOException {
         Properties props =  propertyXMLoader(System.getProperty("user.dir") +
-                "\\src\\main\\java\\Tests\\TestDataXML\\Login\\Login_Logout.xml");
+                "/src/main/java/Tests/TestDataXML/Login/Login_Logout.xml");
         return props;
     }
 

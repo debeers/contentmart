@@ -35,16 +35,16 @@ public class BaseTest {
     public static java.sql.Connection jdbcConnection;
 
 
-    @BeforeSuite(alwaysRun = true)
-    public void preCondition() throws IOException, ClassNotFoundException, SQLException {
-
-                Properties props =  propertyXMLoader(System.getProperty("user.dir") +
-                "/src/main/java/Utilities/SettingsXML/DB_CONNECTION.xml");
-
-      //  "\\src\\main\\java\\Helpers\\SettingsXML\\DB_CONNECTION.xml"); For Mustdie
-        jdbcConnection = new DBconnection().initDBConnection(props);
-        Registry.set("dbConnection", jdbcConnection);
-    }
+//    @BeforeSuite(alwaysRun = true)
+//    public void preCondition() throws IOException, ClassNotFoundException, SQLException {
+//
+//                Properties props =  propertyXMLoader(System.getProperty("user.dir") +
+//                "/src/main/java/Utilities/SettingsXML/DB_CONNECTION.xml");
+//
+//      //  "\\src\\main\\java\\Helpers\\SettingsXML\\DB_CONNECTION.xml"); For Mustdie
+//        jdbcConnection = new DBconnection().initDBConnection(props);
+//        Registry.set("dbConnection", jdbcConnection);
+//    }
 
     @Parameters({"URL", "clientLoginParam", "clientPasswordParam", "writerLoginParam", "writerPasswordParam", "mailbox", "mailboxPassword"})
     @BeforeMethod(alwaysRun = true)
@@ -60,14 +60,14 @@ public class BaseTest {
 
         baseUrl = URL;
 
-
-        // Setup firefox binary to start in Xvfb
-        String Xport = System.getProperty(
-                "lmportal.xvfb.id", ":98");
-        final File firefoxPath = new File(System.getProperty(
-                "lmportal.deploy.firefox.path", "/usr/bin/firefox"));
-        FirefoxBinary firefoxBinary = new FirefoxBinary(firefoxPath);
-        firefoxBinary.setEnvironmentProperty("DISPLAY", Xport);
+//
+//        // Setup firefox binary to start in Xvfb
+//        String Xport = System.getProperty(
+//                "lmportal.xvfb.id", ":98");
+//        final File firefoxPath = new File(System.getProperty(
+//                "lmportal.deploy.firefox.path", "/usr/bin/firefox"));
+//        FirefoxBinary firefoxBinary = new FirefoxBinary(firefoxPath);
+//        firefoxBinary.setEnvironmentProperty("DISPLAY", Xport);
 
         String path = System.getProperty("user.dir") + "\\src\\main\\java\\Downloaded_Files";
         File downloadDir = new File(path);
@@ -79,12 +79,12 @@ public class BaseTest {
         fProfile.setPreference("browser.helperApps.alwaysAsk.force", false);
         fProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", "text/plain");
 
-//        DesiredCapabilities dc = DesiredCapabilities.firefox();
-//        dc.setJavascriptEnabled(true);
-//        dc.setCapability(FirefoxDriver.PROFILE, fProfile);
+        DesiredCapabilities dc = DesiredCapabilities.firefox();
+        dc.setJavascriptEnabled(true);
+        dc.setCapability(FirefoxDriver.PROFILE, fProfile);
 
-       // driver = WebDriverFactory.getDriver(dc);
-        driver = new FirefoxDriver(firefoxBinary, null);
+        driver = WebDriverFactory.getDriver(dc);
+      //  driver = new FirefoxDriver(firefoxBinary, null);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 10);
         driver.manage().window().maximize();
