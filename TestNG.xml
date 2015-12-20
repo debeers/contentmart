@@ -23,15 +23,15 @@
 
     <test name="Fast_And_Furious_Smoke_1.0">
         <classes>
-            <class name="Tests.CreateNewOrderTest"/>
-            <class name="Tests.ChangeWriterDetailsTest"/>
-            <class name="Tests.EditPortfolioItemTest"/>
+            <class name="Tests.LoginLogoutTest"/>
+
             <!--  <class name="Tests.DeletePortfolioItemTest"/>
               <class name="Tests.AddPortfolioItemTest"/>
               <class name="Tests.ChangeClientDetailsTest"/>
+            <class name="Tests.CreateNewOrderTest"/>
+            <class name="Tests.ChangeWriterDetailsTest"/>
 
-              <class name="Tests.LoginLogoutTest"/>
-
+            <class name="Tests.EditPortfolioItemTest"/>
                <class name="Tests.PhoneBlockCheckTest"/>
 
                <class name="Tests.ClientRegistrationViaMainPageTestTest"/>
