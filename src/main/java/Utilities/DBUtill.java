@@ -65,7 +65,7 @@ public class DBUtill {
             ResultSet rs = statement.executeQuery(query);
 
             while (rs.next()) {
-                System.out.println(rs.getString(column));
+                System.out.println("get column result: " + rs.getString(column));
                 return rs.getString(column);
             }
             connection.close();
